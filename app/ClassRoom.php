@@ -12,5 +12,8 @@ class ClassRoom extends Model
     protected $table = 'classes';
 
     
-    
+    public function subjects(){
+
+        return $this->hasMany('App\Subject','class_id');
+    }
 }
