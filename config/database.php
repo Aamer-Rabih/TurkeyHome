@@ -87,6 +87,16 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'testing' => [
+            'driver' => 'mysql',
+            'host' =>'127.0.0.1',
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'school_testing',
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            
+        ]
+
     ],
 
     /*
@@ -137,5 +147,9 @@ return [
         ],
 
     ],
+    /**
+     * Testing Database 
+     */
+   
 
 ];
