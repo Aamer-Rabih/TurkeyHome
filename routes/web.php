@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/classes','ClassesController@index');
+Route::get('/classes','ClassRoom\ClassesController@index');

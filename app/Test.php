@@ -24,7 +24,7 @@ class Test extends Model
     //Subjects belonging to this Test 
     public function subjects(){
 
-        return $this->belongsToMany('App\Test','subject_test');
+        return $this->belongsToMany('App\Subject','subject_test');
     }
 
     //Attachments belonging to this Test 

@@ -19,7 +19,7 @@ class Role extends Model
 
     //Users belonging to This Role 
 
-    public function roles(){
+    public function users(){
 
         return $this->belongsToMany('App\User','role_user')
         ->withTimestamps();

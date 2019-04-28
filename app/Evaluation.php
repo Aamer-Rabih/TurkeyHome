@@ -18,7 +18,7 @@ class Evaluation extends Model
     }
 
 
-    //Evaluating Lesson
+    //Evaluating Student
     public function student(){
 
         return $this->belongsTo('App\Student');

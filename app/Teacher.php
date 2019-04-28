@@ -48,7 +48,7 @@ class Teacher extends User
      */
     public function courses(){
 
-        return $this->belongsToMany('App\Teacher','course_teacher','teacher_id','course_id')
+        return $this->belongsToMany('App\Course','course_teacher','teacher_id','course_id')
             ->withTimestamps();
     }
 
