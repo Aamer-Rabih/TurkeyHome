@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCoursesTable extends Migration
+class CreateCourseLessonTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,25 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('course_lesson', function (Blueprint $table) {
             $table->engine = 'InnoDB' ;
             $table->collation = 'utf16_general_ci';
             $table->charset = 'utf16';
             $table->increments('id');
-            $table->string('title',100)->unique();
-            $table->boolean('active')->default(true);
+            $table->unsignedInteger('course_id');
+            $table->unsignedInteger('lesson_id');
             $table->timestamps();
+
+
+            //Build the Foreign Key constraints
+            $table->foreign('course_id')
+                ->references('id')
+                ->on('courses');
+                
+            $table->foreign('lesson_id')
+                ->references('id')
+                ->on('lessons');
+
         });
     }
 
@@ -31,6 +42,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('course_lesson');
     }
 }

@@ -24,5 +24,31 @@ class Subject extends Model
     }
 
 
+    /**
+     * Lessons belonging to this subject
+     */
+    public function lessons(){
+
+        return $this->belongsToMany('App\Lesson','lesson_subject')
+        ->withTimestamps();
+        
+    }
+
+    /**
+     * Tests belonging to this subject
+     */
+    public function tests(){
+
+        return $this->belongsToMany('App\Test','subject_test');
+    }
+
+    /**
+     * Teachers who teaching this subject
+     */
+    public function teachers(){
+
+        return $this->belongsToMany('App\Teacher','subject_teacher')
+                ->withTimestamps();
+    }
 
 }

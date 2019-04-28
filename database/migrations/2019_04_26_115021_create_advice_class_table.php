@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateAdviceClassTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,24 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('advice_class', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->collation = 'utf16_general_ci';
             $table->charset = 'utf16';
             $table->increments('id');
-            $table->string('tc',15)->unique();
-            $table->string('username')->unique();
-            $table->string('full_name');
-            $table->string('email')->unique();
-            $table->string('phone')->unique();
-            $table->boolean('active')->default(true);
-            $table->string('password');
-            $table->rememberToken();
+            $table->unsignedInteger('advice_id');
+            $table->unsignedInteger('class_id');
             $table->timestamps();
+
+            //ForeignKey Build 
+            $table->foreign('advice_id')
+                ->references('id')
+                ->on('advices');
+            
+            $table->foreign('class_id')
+                ->references('id')
+                ->on('classes');
+            
         });
     }
 
@@ -37,6 +41,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('advice_class');
     }
 }

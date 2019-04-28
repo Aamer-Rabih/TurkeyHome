@@ -15,6 +15,8 @@ class CreateUnitsTable extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->engine = 'InnoDB';
+            $table->collation = 'utf16_general_ci';
+            $table->charset = 'utf16';
             $table->increments('id');
             $table->string('title',100);
             $table->boolean('active')->default(true);

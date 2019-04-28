@@ -15,6 +15,8 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->engine = 'InnoDB' ; 
+            $table->collation = 'utf16_general_ci';
+            $table->charset = 'utf16';
             $table->increments('id');
             $table->string('name',100);
             $table->boolean('downloable')->default(true);

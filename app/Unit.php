@@ -14,4 +14,16 @@ class Unit extends Model
 
         return $this->belongsTo('App\Subject');
     }
+
+
+    /**
+     * Fetch the lessons that belongs to this unit
+     */
+    public function lessons(){
+
+        return $this->belongsToMany('App\Lesson','lesson_unit')
+        ->withPivot('lesson_order')
+        ->withTimestamps(); 
+        
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCoursesTable extends Migration
+class CreateStudentThanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
-            $table->engine = 'InnoDB' ;
+        Schema::create('student_thanks', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->collation = 'utf16_general_ci';
             $table->charset = 'utf16';
             $table->increments('id');
-            $table->string('title',100)->unique();
-            $table->boolean('active')->default(true);
+            $table->string('type',30);
+            $table->string('src',500)->unique();
+            $table->text('content')->nullable();
+            $table->integer('order')->unsigned()->unique();
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('student_thanks');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCoursesTable extends Migration
+class CreateWhatsappLinksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
-            $table->engine = 'InnoDB' ;
+        Schema::create('whatsapp_links', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->collation = 'utf16_general_ci';
             $table->charset = 'utf16';
             $table->increments('id');
-            $table->string('title',100)->unique();
-            $table->boolean('active')->default(true);
+            $table->string('url',500)->unique();
+            $table->unsignedInteger('linkable_id');
+            $table->string('linkable_type');
+            $table->integer('order');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('whatsapp_links');
     }
 }
