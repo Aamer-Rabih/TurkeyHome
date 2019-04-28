@@ -77,4 +77,23 @@ class ClassRoom extends Model
         return $this->belongsToMany('App\ClassRoom','class_student','class_id','student_id')
                     ->withTimestamps();
     }
+
+
+    //Operations Method 
+    //make the Class Free
+    public function free(){
+
+        $this->free = true ; 
+
+        return $this ; 
+    }
+
+
+    //Make The Class Priced 
+    public function priced(){
+
+        $this->free = false ;
+
+        return $this ; 
+    }
 }
