@@ -19,7 +19,7 @@ class CreateStudentThanksTable extends Migration
             $table->charset = 'utf16';
             $table->increments('id');
             $table->string('type',30);
-            $table->string('src',500)->unique();
+            $table->string('src')->unique();
             $table->text('content')->nullable();
             $table->integer('order')->unsigned()->unique();
             $table->timestamps();

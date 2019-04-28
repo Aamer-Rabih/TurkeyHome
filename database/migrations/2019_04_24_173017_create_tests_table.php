@@ -23,7 +23,7 @@ class CreateTestsTable extends Migration
             $table->integer('sub_test');
             $table->boolean('active')->default(true);
             $table->string('type',30);
-            $table->string('src',500)->unique();
+            $table->string('src')->unique();
             $table->timestamps();
         });
     }

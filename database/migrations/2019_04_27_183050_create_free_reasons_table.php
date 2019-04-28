@@ -18,7 +18,7 @@ class CreateFreeReasonsTable extends Migration
             $table->collation = 'utf16_general_ci';
             $table->charset = 'utf16';
             $table->increments('id');
-            $table->string('text',500)->unique();
+            $table->string('text')->unique();
             $table->timestamps();
         });
     }

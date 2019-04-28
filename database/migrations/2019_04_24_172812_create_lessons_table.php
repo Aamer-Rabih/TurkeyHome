@@ -21,7 +21,7 @@ class CreateLessonsTable extends Migration
             $table->string('title',100);
             $table->boolean('active')->default(true);
             $table->string('type',30);
-            $table->string('src',500)->unique();
+            $table->string('src')->unique();
             $table->text('intro')->nullable();
             $table->timestamps();
         });

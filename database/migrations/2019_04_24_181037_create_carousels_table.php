@@ -18,7 +18,7 @@ class CreateCarouselsTable extends Migration
             $table->collation = 'utf16_general_ci';
             $table->charset = 'utf16';
             $table->increments('id');
-            $table->string('src',500)->unique();
+            $table->string('src')->unique();
             $table->integer('order')->unsigned()->unique();
             $table->timestamps();
         });

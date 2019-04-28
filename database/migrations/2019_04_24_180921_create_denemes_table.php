@@ -22,7 +22,7 @@ class CreateDenemesTable extends Migration
             $table->integer('term')->unsigned();
             $table->boolean('active')->default(true);
             $table->string('type',30);
-            $table->string('src',500)->unique();
+            $table->string('src')->unique();
             $table->unsignedInteger('class_id');
             $table->timestamps();
 

@@ -19,9 +19,9 @@ class CreateShowLessonsTable extends Migration
             $table->charset = 'utf16';
             $table->increments('id');
             
-            $table->string('title',300)->unique();
+            $table->string('title')->unique();
             $table->integer('order')->unsigned()->nullable();
-            $table->string('src',500)->unique();
+            $table->string('src')->unique();
             $table->timestamps();
         });
     }

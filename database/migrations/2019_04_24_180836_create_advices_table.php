@@ -20,7 +20,7 @@ class CreateAdvicesTable extends Migration
             $table->increments('id');
             $table->string('title',100)->unique();
             $table->string('type',30);
-            $table->string('src',500)->unique();
+            $table->string('src')->unique();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

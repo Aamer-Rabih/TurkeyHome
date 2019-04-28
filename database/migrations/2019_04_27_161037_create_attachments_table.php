@@ -18,8 +18,8 @@ class CreateAttachmentsTable extends Migration
             $table->collation = 'utf16_general_ci';
             $table->charset = 'utf16';
             $table->increments('id');
-            $table->string('name',200)->unique();
-            $table->string('src',500);
+            $table->string('name')->unique();
+            $table->string('src');
             $table->string('type',30);
             $table->integer('attachmentable_id')->unsigned();
             $table->string('attachmentable_type');
