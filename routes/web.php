@@ -14,7 +14,7 @@
 
 Route::get('welcome',function(){
 
-    return view('welcome.blade.php');
+    return view('welcome');
 });
 /**
  * Class Operatrions
