@@ -12,6 +12,7 @@ class Course extends Model
     ];
 
 
+
     /**
      * Lessons belongs to this course
      */
@@ -55,5 +56,21 @@ class Course extends Model
 
         return $this->belongsToMany('App\Student','course_student','course_id','student_id')
                 ->withTimestamps();
+    }
+
+
+    //Operations On Courses 
+    public function makeActive(){
+
+        $this->active = true ; 
+        
+        
+    }
+
+    //Deactivate A Course 
+    public function makeInactive(){
+
+        $this->active = false ; 
+       
     }
 }
