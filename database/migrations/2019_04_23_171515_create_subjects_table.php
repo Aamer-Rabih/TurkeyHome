@@ -20,6 +20,7 @@ class CreateSubjectsTable extends Migration
             $table->increments('id');
             $table->string('name',100);
             $table->boolean('downloable')->default(true);
+            $table->boolean('active')->default(true);
             $table->integer('units_num')->unsigned()->default(0);
             $table->integer('class_id')->unsigned();
             $table->timestamps();

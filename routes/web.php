@@ -97,3 +97,51 @@ Route::post('courses/{course}/activate','Course\CoursesController@activate')
 //Deactivate A Course 
 Route::post('courses/{course}/deactivate','Course\CoursesController@deactivate')
     ->name('course.deactivate');
+/**
+ * Subjects Operations 
+ */
+
+//Show All Subjects 
+Route::get('subjects','Subject\SubjectsController@index')
+->name('subject.index');
+
+
+//Show The Form to Create A New Subject 
+
+Route::get('subjects/create','Subject\SubjectsController@create')
+    ->name('subject.index');
+
+
+//Show A Single Subject 
+Route::get('classes/{class}/subjects/{subject}','Subject\SubjectsController@show')
+->name('subject.show');
+
+//Edit A Subject 
+Route::get('classes/{class}/subjects/{subject}','Subject\SubjectsController@edit')
+->name('subject.edit');
+
+//Store A Subject 
+Route::post('subjects','Subject\SubjectsController@store')
+->name('subject.store');
+
+//Update A Subject 
+Route::patch('classes/{class}/subjects/{subject}','Subject\SubjectsController@update')
+->name('subject.update');
+
+
+//Delete A Subject 
+
+Route::delete('subjects/{subject}','Subject\SubjectsController@destroy')
+->name('subject.destroy');
+
+
+//Activate A Subject
+
+Route::post('subject/{subject}/activate','Subject\SubjectsController@activate');
+
+
+
+//Deactivate A Subject 
+Route::post('subjects/{subject}/deactivate','Subject\SubjectsController@deactivate');
+
+
