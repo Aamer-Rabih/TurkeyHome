@@ -25,7 +25,7 @@ class ClassesController extends Controller
             return $classes ; 
         }
 
-        return $classes ; 
+        return view('admin.classes.index')->withClasses($classes)  ; 
 
         //TODO FrontEn Developer 
         //Load admin.classes.index view with $classes 
@@ -56,14 +56,14 @@ class ClassesController extends Controller
         //Validate Data 
         $request->validate([
             'name' => 'required|max:100|unique:classes',
-            'free' => boolean
+            'free' => 'boolean'
         ]);
 
         //Store Data 
 
        $newClass = ClassRoom::create([
             'name' => $request->name,
-            'free' => $request->free ?: false
+            'free' => $request->free
         ]); 
 
         if(request()->wantsJson()){
@@ -120,16 +120,14 @@ class ClassesController extends Controller
     public function update(Request $request, ClassRoom $class)
     {
         $request->validate([
-            'name' => 'required|max:100' 
-        
+            'name' => 'required|max:100', 
+            'free' => 'boolean'
         ]);
 
-        $class->name = $request->name ; 
-
         if($request->has('free')){
-            $class->free = true ; 
+            $class->free = $request->free ; 
         }else {
-            $class->free = false ; 
+            $class->free = $class->free ; 
         }   
 
         $class->save();
@@ -149,7 +147,6 @@ class ClassesController extends Controller
     {
 
         $class->delete();
-
        
         return redirect()->route('class.index')
                 ->with('success','تم حذف الصف بنجاح');

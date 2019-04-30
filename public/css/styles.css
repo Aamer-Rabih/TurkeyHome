@@ -111,7 +111,7 @@ div.card {
   color: #fff;
 }
 
-div.card:hover {
+div.cardEnemy:hover {
 	font-size: 20px;
 	width: 110%;
 	opacity: 1;
@@ -154,15 +154,19 @@ div.card p:hover{
 	margin-bottom: 30px;
 }
 
-.col-lg-3, .col-lg-6, .col-lg-8 {
+.col-lg-3, .col-lg-6, .col-lg-8, .col-lg-12 {
 	float: right;
 }
 
-.form-group, .checkbox {
+.form-group, .checkbox , .radioG {
 	text-align: right;
 	color: #777;
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 10px;
+}
+
+.radioG {
+	margin-bottom: 20px;
 }
 
 .form-group input, .form-group select {
@@ -204,7 +208,7 @@ div.card p:hover{
 
 /* bootsrap overrite */
 
-.checkbox label {
+.checkbox label , .radioG label {
 	margin-right: 20px;
 }
 
@@ -231,4 +235,16 @@ div.card p:hover{
 }
 .table-bordered>thead>tr>th {
     border-bottom-width: 3px;
+}
+
+.myhover:hover {
+	font-size: 16px;
+}
+
+.BP {
+	padding: 5px 30px 0px 30px;
+}
+
+.header-card {
+	text-align: right;
 }
