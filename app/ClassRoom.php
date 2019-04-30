@@ -11,6 +11,8 @@ class ClassRoom extends Model
 
     protected $table = 'classes';
 
+    //Eager Loading Default 
+
     /**
      * Subjects belonging to this Class 
     */   

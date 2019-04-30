@@ -65,7 +65,7 @@ class ClassesTableSeeder extends Seeder
                 'name' => 'الصف الثاني عشر', 
                 'free' => false
             ]
-            ];
+        ];
 
 
             foreach($data as $class){

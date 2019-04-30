@@ -9,10 +9,13 @@ class Subject extends Model
     //Mass Assignment Exception 
     protected $fillable = ['name','downloable','units_nums','class_id'];
 
+    //Eager Loading Default 
+    protected $with = ['class' , 'units'];
+     
   
 
     //A Subject belongs to one Class 
-    public function classroom(){
+    public function class(){
 
         return $this->belongsTo('App\ClassRoom','class_id');
     }
