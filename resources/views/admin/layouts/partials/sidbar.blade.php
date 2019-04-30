@@ -1,6 +1,3 @@
-@extends('master')
-
-@section('sidbar')
 
  	<div id="side-section">
       <ul id="side">
@@ -15,4 +12,3 @@
       </ul>
     </div>
 
-@stop    

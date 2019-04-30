@@ -1,42 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>{{$class->name}}</h1>
-<form action="{{route('class.update',['class' => $class->id])}}" method="POST">
-    {{csrf_field()}}
-    {{method_field("PATCH")}}
-    <input type="text" name="name" value="{{$class->name}}">
-    <input type="checkbox" name="free" checked={{$class->free}}>
+@extends('admin.layouts.master')
 
-    <br>
-    <button>عدل الصف</button>
-</form>
+@section('content')
 
-<h2>حذف الصف</h2>
-<form action="{{route('class.destroy', ['class' => $class->id])}}" method="POST">
-    {{csrf_field()}}
-    {{method_field("DELETE")}}
-    <button>حذف الصف</button>
-</form>
+<?php $array= ["الصف الأول","الصف الثاني", "الصف الثالث", "الصف الرابع",
+                                    "الصف الخامس", "الصف السادس","الصف السابع","الصف الثامن",
+                                     "الصف التاسع", "الصف العاشر", "الصف الحادي عشر" , "الباكالوريا"];
+                    $freeArray= [ true =>"مجاني", false => "غير مجاني"];
+                ?>
 
-<h3>تعديل الصف</h3>
+    <div id="content">
 
-@if($class->free)
-<form action="{{route('class.priced', ['class' => $class->id])}}" method="POST">
-        {{csrf_field()}}
-           <button> اجعل الصف مدفوع</button>
-    </form>
-@else
-<form action="{{route('class.free', ['class' => $class->id])}}" method="POST">
-    {{csrf_field()}}
-    <button>اجعل الصف مجاني</button>
-</form>
-@endif
-</body>
-</html>
+      <div class="content-header">
+        <h1>
+          داش بورد
+          <small>لوحة التحكم</small>
+        </h1>
+      </div>
+
+        <div class="row">
+          <div class="card-deck">
+            <div class="col-lg-6">
+              <div class="card color-grey">
+                <div class="card-header">تعديل صف</div>
+                <div class="card-body">
+
+                  <form action="{{ route('class.update', $class) }}" method="POST">
+                    <div class="form-group">
+                        {!! csrf_field() !!}
+                        <input type="hidden" name="_method" value="PATCH">
+                      
+                        <label for="email">اسم الصف:</label>
+                       <select class="form-control" id="classRoom" name="name">
+                           @foreach($array as $name)
+                           @if($class->name === $name)
+                           <option value="{{$name}}" selected>{{$name}}</option>
+                           @else
+                           @endif
+                           <option value="{{$name}}" >{{$name}}</option>
+                           @endforeach
+                          
+                        </select>
+                    </div>
+                    
+                    <div class="radioG">
+                        <h5>مجانية الصف :</h5>
+                        @foreach($freeArray as $k=>$item)
+                        @if($class->free === $k)
+                        <div class="radio">
+                        <input type="radio" name="free" value="{{$k}}" checked>
+                        <label>{{$item}}</label>
+                        </div>
+                        @else
+                        <div class="radio">
+                        <input type="radio" name="free" value="{{$k}}" >
+                        <label>{{$item}}</label>
+                        </div>
+                        @endif
+                        @endforeach
+                    </div>
+
+                    <button type="submit" class="btn btn-success myhover">تعديل</button>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+    </div>
+
+@endsection

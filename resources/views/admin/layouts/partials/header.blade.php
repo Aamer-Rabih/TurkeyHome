@@ -1,6 +1,3 @@
-@extends('master')
-
-@section('header')
 
 	<header>
       <nav id="header-nav" class="navbar navbar-default">
@@ -14,4 +11,3 @@
       </nav>
     </header>
 
-@stop
