@@ -10,9 +10,9 @@ class Subject extends Model
     protected $fillable = ['name','downloable','units_nums','class_id'];
 
     //Eager Loading Default 
-    protected $with = ['class'];
+    protected $with = ['class'] ; 
+  
 
-    protected $withCount = ['units'];
      
   
 

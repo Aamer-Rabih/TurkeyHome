@@ -15,8 +15,8 @@ class CreateWhatsapplinkStudentTable extends Migration
     {
         Schema::create('whatsapplink_student', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->collation = 'utf16_general_ci';
-            $table->charset = 'utf16';
+            $table->collation = 'utf8_general_ci';
+            $table->charset = 'utf8';
             $table->increments('id');
             $table->unsignedInteger('whatsapplink_id');
             $table->unsignedInteger('student_id');

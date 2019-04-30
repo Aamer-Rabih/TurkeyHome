@@ -16,18 +16,20 @@ class SubjectsController extends Controller
      */
     public function index()
     {
-            $subjectsQuery = Subject::latest(); 
+        //Fetch all the subjects from teh database 
+        $subjectsQuery = Subject::latest(); 
 
-            if(request()->has('take')){
+        //handle parameter limit 
+        if(request()->has('take')){
 
-                $subjectsQuery->take(request('take')); 
-            }
+            $subjectsQuery->take(request()->take) ; 
+        }
 
-            $subjects = $subjectsQuery->get();
+        $subjects = $subjectsQuery->get(); 
 
-            
+        //return view with subjects passed 
 
-        return view('admin.subjects.index', compact('subjects')); 
+        return view('admin.subjects.index', compact('subjects'));
     }
 
     /**
@@ -37,63 +39,36 @@ class SubjectsController extends Controller
      */
     public function create()
     {
-        //Fetch All Classes From the database and pass them to the form 
-        //of creation a subject 
+        //Fetch Classes to pass them to dropdown box 
+
         $classes = ClassRoom::all();
 
-
-        return view('admin.subjects.index', compact('classes')); 
-
-
+        return view('admin.subjects.create', compact('classes'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Subject in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //validate Data 
-        $request->validate([
-
-            'name' => 'required|max:200', 
-            'downloable' => 'boolean' , 
-            'active' => 'boolean'
-        ]);
-
-        //Prepare Data to store 
-        $attributes['name'] = $request->name ; 
-
-        $attributes['downloable'] = $request->downloable ? true : false ; 
-
-        $attributes['active'] = $request->active ? true : false ; 
-
-        $class_id = $request->class_id ;
         
-        //Fetch the selected class 
-        $class = ClassRoom::find($class_id); 
-
-        //Persist Data to the database 
-        $subject = $class->add($attributes);
-
-        //Return redirect with Flash Message 
-
-        return redirect()
-            ->route('subject.show',['subject' => $subject->id])
-            ->with('success','تم إنشاء المادة الدراسية بنجاح');
+        dd($request->class_id);
     }
 
     /**
-     * Display the specified Subject.
+     * Display the specified resource.
      *
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function show(ClassRoom $class,Subject $subject)
+    public function show(Subject $subject)
     {
+        
 
+        //Return a view with Subejct Model 
         return view('admin.subjects.show', compact('subject'));
     }
 
@@ -103,13 +78,9 @@ class SubjectsController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClassRoom $class,Subject $subject)
+    public function edit(Subject $subject)
     {
-        
-        //Pass Subjects to The Form 
-        $classes = ClassRoom::all(); 
-
-        return view('admin.subjects.edit' , compact('subject','classes'));
+        //
     }
 
     /**
@@ -119,31 +90,9 @@ class SubjectsController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,ClassRoom $class, Subject $subject)
+    public function update(Request $request, Subject $subject)
     {
-        //validate Data 
-        $request->validate([
-            'name' => 'required|max:200', 
-            'class_id' => 'required|integer',
-            'downloable' => 'boolean', 
-            'active' => 'boolean'
-        ]);
-
-        //Prepare Data 
-            $subject->name = $request->name ; 
-            $subject->class_id = $request->class_id ; 
-            
-
-            $subject->downloable = $request->downloable ? true : false ; 
-            $subject->active = $request->active ? true : false ; 
-
-        //Update Data 
-        
-        $subject->save();
-
-
-        //return redirect Response with Session Message
-        return redirect()->route('subject.show',['subject' => $subject->id]); 
+        //
     }
 
     /**
@@ -156,35 +105,9 @@ class SubjectsController extends Controller
     {
         $subject->delete();
 
-        return redirect()->route('subject.index',['subject' => $subject->id])
-        ->with('success','تم حذف المادة الدراسية بنجاح'); 
 
-        
-    }
-
-
-    //Action to activate A Subject 
-    public function activate(Subject $subject){
-
-        $subject->activate();
-        $subject->save();
-
-
-        return redirect()->route('subject.show', ['subject' => $subject->id  ])
-        ->with('success', 'تم تفعيل المادة الدراسية بنجاح'); 
-
-    }
-
-
-    //Action to deactivate A Subject 
-    public function deactivate(Subject $subject){
-        $subject->deactivate();
-
-        $subject->save();
-
-
-        return redirect()->route('subject.show',['class' => $subject->class->id])
-        ->with('success','تم إلغاء تفعيل المادة الدراسية بنجاح') ;
+        return redirect()->route('subject.index')
+                ->with('success','تم حذف المادة الدراسية بنجاح');
 
     }
 }

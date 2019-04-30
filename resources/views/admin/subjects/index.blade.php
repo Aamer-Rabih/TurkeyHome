@@ -20,20 +20,20 @@
         </thead>
         <tbody>
             @foreach($subjects as $subject)
-            <tr>
-            <td><a href="subjects/{{$subject->id}}">{{$subject->name}}</a></td>
-            <td> {{$subject->active ? 'Yes' : 'No'}}</td>
-            <td>{{$subject->downloable ? 'Yes' : 'No'}}</td>
-            <td><a href="{{route('class.show',['class' => $subject->class->id])}}">{{$subject->class->name}}</a></td>
-            <td>{{$subject->units_count
-            }}</td>
-            <td><form action="subjects/{{$subject->id}}" method="POST">
-                {{csrf_field()}}
-                {{method_field('DELETE')}}
-                <button>حذف المادة</button></form>
-            </td>
-            </tr>
-
+                <tr>
+                <td><a href="{{route('subject.show', ['subject' => $subject->id])}}">{{$subject->name}}</a></td>
+                <td>{{$subject->active ? 'نعم' : 'لا'}}</td>
+                <td>{{$subject->downloable? 'نعم' : 'لا'}}</td>
+                <td><a href="{{route('class.show',['class' => $subject->class->id])}}">{{$subject->class->name}}</a></td>
+                <td>{{$subject->units->count()}}</td>
+                <td>
+                <form action="{{route('subject.destroy', ['subject' => $subject->id])}}" method="POST">
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+                        <button>حذف المادة</button>
+                    </form>
+                </td>
+                </tr>
             @endforeach
         </tbody>
     </table>

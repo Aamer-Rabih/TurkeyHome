@@ -15,8 +15,8 @@ class CreateFreereasonStudentTable extends Migration
     {
         Schema::create('freereason_student', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->collation = 'utf16_general_ci';
-            $table->charset = 'utf16';
+            $table->collation = 'utf8_general_ci';
+            $table->charset = 'utf8';
             $table->increments('id');
             $table->unsignedInteger('freereason_id');
             $table->unsignedInteger('student_id');

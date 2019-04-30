@@ -15,8 +15,8 @@ class CreateStudentThanksTable extends Migration
     {
         Schema::create('student_thanks', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->collation = 'utf16_general_ci';
-            $table->charset = 'utf16';
+            $table->collation = 'utf8_general_ci';
+            $table->charset = 'utf8';
             $table->increments('id');
             $table->string('type',30);
             $table->string('src')->unique();

@@ -15,8 +15,8 @@ class CreateAdviceCourseTable extends Migration
     {
         Schema::create('advice_course', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->collation = 'utf16_general_ci';
-            $table->charset = 'utf16';
+            $table->collation = 'utf8_general_ci';
+            $table->charset = 'utf8';
             $table->increments('id');
             $table->unsignedInteger('advice_id');
             $table->unsignedInteger('course_id');

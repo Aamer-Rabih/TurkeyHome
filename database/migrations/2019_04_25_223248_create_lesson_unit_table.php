@@ -15,8 +15,8 @@ class CreateLessonUnitTable extends Migration
     {
         Schema::create('lesson_unit', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->collation = 'utf16_general_ci';
-            $table->charset = 'utf16';
+            $table->collation = 'utf8_general_ci';
+            $table->charset = 'utf8';
             $table->increments('id');
             $table->unsignedInteger('unit_id');
             $table->unsignedInteger('lesson_id');

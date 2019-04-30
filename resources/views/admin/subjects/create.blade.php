@@ -6,46 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-    <div>
-
-    <form action="{{route('subject.store')}}" method="POST">
+<body align="right">
+    <h2>إنشاء مادة جديدة</h2>
+<form action="{{route('subject.store')}}" method="POST">
         {{csrf_field()}}
         <input type="text" name="name"  />
         <br>
-    
+        <br>
         <label > 
+            
+            <input type="radio" name="downloable" value="1" checked>
             قابل للتحميل
-            <input type="radio" name="downloable" value="1">
         </label>
 
         <label >
-            غير قابل للتحميل
+            
             <input type="radio" name="downloable" value="0">
+            غير قابل للتحميل
         </label>
 
 
         <br>
+        <br>
         <label>
+                
+                <input type="radio" name="active" value="1" checked>
                 فعال
-                <input type="radio" name="active" value="1">
         </label>
 
         <label>
-                غير فعال
+              
                 <input type="radio" name="active" value="0">
+                غير فعال
         </label>
 
+        <br/>
+        <br>
         
         
-        <label >الصف:</label>
         <select name="class_id" id="">
             @foreach($classes as $class)
-        <option value="{{$class->id}}">$class->name</option>
+        <option value="{{$class->id}}">{{$class->name}}</option>
             @endforeach
         </select>
+        <label >:الصف</label>
+        <br>
+        <br>
         <button>إنشاء المادة الدرسية</button>
     </form>
-    </div>
+
 </body>
 </html>

@@ -8,5 +8,22 @@
 </head>
 <body>
 <h1>{{$subject->name}}</h1>
+<table border="1">
+
+    <thead>
+    <th>Unit Name</th>
+    <th>Active</th>
+    </thead>
+
+    <tbody>
+        @foreach($subject->units as $unit)
+        <tr>
+        <td>{{$unit->title}}</td>
+        <td>{{$unit->active ? 'نعم' : 'لا'}}</td>
+        </tr>
+
+        @endforeach
+    </tbody>
+</table>
 </body>
 </html>

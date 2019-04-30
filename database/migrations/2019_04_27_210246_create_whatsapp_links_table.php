@@ -15,8 +15,8 @@ class CreateWhatsappLinksTable extends Migration
     {
         Schema::create('whatsapp_links', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->collation = 'utf16_general_ci';
-            $table->charset = 'utf16';
+            $table->collation = 'utf8_general_ci';
+            $table->charset = 'utf8';
             $table->increments('id');
             $table->string('url')->unique();
             $table->unsignedInteger('linkable_id');

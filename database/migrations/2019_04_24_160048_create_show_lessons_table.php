@@ -15,8 +15,8 @@ class CreateShowLessonsTable extends Migration
     {
         Schema::create('show_lessons', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->collation = 'utf16_general_ci';
-            $table->charset = 'utf16';
+            $table->collation = 'utf8_general_ci';
+            $table->charset = 'utf8';
             $table->increments('id');
             
             $table->string('title')->unique();

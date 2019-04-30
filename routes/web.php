@@ -111,46 +111,24 @@ Route::get('subjects','Subject\SubjectsController@index')
 ->name('subject.index');
 
 
-//Show The form to create a new subject 
-
+//Show The Form to Create A New Subject 
 Route::get('subjects/create','Subject\SubjectsController@create')
     ->name('subject.create');
-
 
 //Show A Single Subject 
 Route::get('subjects/{subject}','Subject\SubjectsController@show')
 ->name('subject.show');
 
-//Edit A Subject 
-Route::get('classes/{class}/subjects/{subject}','Subject\SubjectsController@edit')
-->name('subject.edit');
 
-//Store A Subject 
+//DELETE A Subject 
+Route::delete('subjects/{subject}','Subject\SubjectsController@destroy')
+    ->name('subject.destroy');
+
+
+
+//Store Subject 
 Route::post('subjects','Subject\SubjectsController@store')
 ->name('subject.store');
-
-//Update A Subject 
-Route::patch('classes/{class}/subjects/{subject}','Subject\SubjectsController@update')
-->name('subject.update');
-
-
-//Delete A Subject 
-
-Route::delete('subjects/{subject}','Subject\SubjectsController@destroy')
-->name('subject.destroy');
-
-
-//Activate A Subject
-
-Route::post('subject/{subject}/activate','Subject\SubjectsController@activate')
-->name('subject.activate');
-
-
-//Deactivate A Subject 
-Route::post('subjects/{subject}/deactivate','Subject\SubjectsController@deactivate')
-->name('subject.deactivate');
-
-
 
 
 
