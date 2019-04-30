@@ -39,27 +39,27 @@ class SubjectsTableSeeder extends Seeder
 
         
         //From Class 1 to 9 
-        $math = 'الرياضيات';
+        $math = "الرياضيات";
 
         $this->fillClass(1,9,$math);
 
         //From Class 1 to 12 
-        $science = 'علم الأحياء';
+        $science = "علم الأحياء";
 
         $this->fillClass(1 , 12 , $science); 
 
         //Programming from class 7 to 12 
-        $programming = 'البرمجة'; 
+        $programming = "البرمجة"; 
 
         $this->fillClass(7,12 , $programming);
 
 
         //Aljebra from class 10 to 12
-        $algebra = 'الجبر'; 
+        $algebra = "الجبر"; 
         $this->fillClass(10 , 12,$algebra); 
 
         //Physics from Class 5 to 12 
-        $physics = 'الفيزياء' ; 
+        $physics = "الفيزياء" ; 
 
         $this->fillClass(5 , 12,$physics); 
 

@@ -23,6 +23,7 @@ class UnitsTableSeeder extends Seeder
      */
     public function run()
     {
+        Unit::truncate();
         //Seeding Data 
         $units = [
             'الوحدة الأولى', 

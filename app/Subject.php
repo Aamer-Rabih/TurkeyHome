@@ -10,7 +10,9 @@ class Subject extends Model
     protected $fillable = ['name','downloable','units_nums','class_id'];
 
     //Eager Loading Default 
-    protected $with = ['class' , 'units'];
+    protected $with = ['class'];
+
+    protected $withCount = ['units'];
      
   
 
@@ -52,6 +54,21 @@ class Subject extends Model
 
         return $this->belongsToMany('App\Teacher','subject_teacher')
                 ->withTimestamps();
+    }
+
+
+    /**Model Operations */
+
+    //activate A Subject 
+    public function activate(){
+
+        $this->active = true ; 
+    }
+
+    //deactivate A Subject 
+    public function deactivate(){
+
+        $this->active = true ; 
     }
 
 }

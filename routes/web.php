@@ -111,14 +111,14 @@ Route::get('subjects','Subject\SubjectsController@index')
 ->name('subject.index');
 
 
-//Show The Form to Create A New Subject 
+//Show The form to create a new subject 
 
 Route::get('subjects/create','Subject\SubjectsController@create')
-    ->name('subject.index');
+    ->name('subject.create');
 
 
 //Show A Single Subject 
-Route::get('classes/{class}/subjects/{subject}','Subject\SubjectsController@show')
+Route::get('subjects/{subject}','Subject\SubjectsController@show')
 ->name('subject.show');
 
 //Edit A Subject 
@@ -142,11 +142,16 @@ Route::delete('subjects/{subject}','Subject\SubjectsController@destroy')
 
 //Activate A Subject
 
-Route::post('subject/{subject}/activate','Subject\SubjectsController@activate');
-
+Route::post('subject/{subject}/activate','Subject\SubjectsController@activate')
+->name('subject.activate');
 
 
 //Deactivate A Subject 
-Route::post('subjects/{subject}/deactivate','Subject\SubjectsController@deactivate');
+Route::post('subjects/{subject}/deactivate','Subject\SubjectsController@deactivate')
+->name('subject.deactivate');
+
+
+
+
 
 

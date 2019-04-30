@@ -98,4 +98,12 @@ class ClassRoom extends Model
 
         return $this ; 
     }
+
+
+    //Add A Subject for the Class 
+    public function add($subject){
+
+        $this->subjects()->create($subject);
+        
+    }
 }
