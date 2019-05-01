@@ -68,7 +68,7 @@ class Subject extends Model
     //deactivate A Subject 
     public function deactivate(){
 
-        $this->active = true ; 
+        $this->active = false ; 
     }
 
 }

@@ -13,32 +13,24 @@
         <input type="text" name="name"  />
         <br>
         <br>
-        <label > 
-            
-            <input type="radio" name="downloable" value="1" checked>
-            قابل للتحميل
-        </label>
-
-        <label >
-            
-            <input type="radio" name="downloable" value="0">
-            غير قابل للتحميل
-        </label>
+       
+ 
+            <input type="checkbox" name="downloable" checked>
+            <label>
+                    :الدروس قابلة للتحميل
+            </label>
+         
 
 
         <br>
         <br>
-        <label>
+        
                 
-                <input type="radio" name="active" value="1" checked>
-                فعال
-        </label>
+                <input type="checkbox" name="active" checked>
+                <label> :فعال
+                    </label>
+         
 
-        <label>
-              
-                <input type="radio" name="active" value="0">
-                غير فعال
-        </label>
 
         <br/>
         <br>
@@ -46,7 +38,7 @@
         
         <select name="class_id" id="">
             @foreach($classes as $class)
-        <option value="{{$class->id}}">{{$class->name}}</option>
+        <option value="{{$class->id}}" {{$selectedclass == $class->id ? 'selected' : ''}}>{{$class->name}}</option>
             @endforeach
         </select>
         <label >:الصف</label>

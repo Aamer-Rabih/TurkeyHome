@@ -37,13 +37,14 @@ class SubjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //Fetch Classes to pass them to dropdown box 
 
+        $selectedclass = $request->has('selectedclass') ? $request->selectedclass: null ; 
         $classes = ClassRoom::all();
 
-        return view('admin.subjects.create', compact('classes'));
+        return view('admin.subjects.create', compact('classes' , 'selectedclass'));
     }
 
     /**
@@ -55,7 +56,28 @@ class SubjectsController extends Controller
     public function store(Request $request)
     {
         
-        dd($request->class_id);
+        //Validate Data 
+        $request->validate([
+            'name' => 'required|max:200', 
+            'class_id' => 'required'
+        ]);
+
+
+        //Prepare Data to persist 
+        $attributes['name'] = $request->name ; 
+        $attributes['downloable'] = $request->downloable ? true : false ; 
+
+        $attributes['acitve'] = $request->active ? true : false ; 
+
+        $attributes['class_id'] = $request->class_id ;
+
+        //Persist Data in the database 
+       $subject =  Subject::create($attributes);
+
+        //Redirect to the Subject Page
+        return redirect()
+               ->route('subject.show', ['subject' => $subject->id])
+               ->with('success','تم  إنشاء المادة الدراسية بنجاح');
     }
 
     /**
@@ -80,7 +102,10 @@ class SubjectsController extends Controller
      */
     public function edit(Subject $subject)
     {
-        //
+        //Fetch All Classes 
+        $classes = ClassRoom::all();
+
+        return view('admin.subjects.edit', compact('subject', 'classes'));
     }
 
     /**
@@ -92,11 +117,33 @@ class SubjectsController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:200',
+            'class_id' => 'required|integer'
+        ]);
+
+
+        //Prepare Data
+            $subject->name = $request->name ;
+
+            $subject->class_id = $request->class_id ; 
+
+            $subject->active = $request->active ? true : false ; 
+
+            $subject->downloable = $request->downloable ? true : false ; 
+
+        //Persist Data 
+
+        $subject->save();
+
+        //Redirect with Status 
+        return redirect()
+               ->route('subject.show',['subject' => $subject->id])
+               ->with('success', 'تم تعديل المادة الدراسية بنجاح');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Subject from storage.
      *
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
@@ -110,4 +157,40 @@ class SubjectsController extends Controller
                 ->with('success','تم حذف المادة الدراسية بنجاح');
 
     }
+
+    /**
+     * Activate A Subject
+     *  @param \App\Subject $subject
+     *  @return \Illuminate\Http\Response 
+     */
+    public function activate(Subject $subject){
+
+        $subject->activate();
+
+        $subject->save();
+
+        return redirect()
+                ->route('subject.show', ['subject' => $subject->id])
+                ->with('success','تم تفعبل المادة بنجاح');
+
+    }
+
+
+    /**
+     * Deactivate A Subject 
+     * 
+     * @param \App\Subject $subject 
+     * @return \Illuminate\Http\Response 
+     */
+    public function deactivate(Subject $subject){
+
+        $subject->deactivate(); 
+
+        $subject->save();
+        
+        return redirect()
+                ->route('subject.show', ['subject'])
+                ->with('success','تم إلغاء تفعيل المادة بنجاح');
+    }
+
 }

@@ -131,5 +131,26 @@ Route::post('subjects','Subject\SubjectsController@store')
 ->name('subject.store');
 
 
+//Edit A Subject 
+Route::get('subjects/{subject}/edit','Subject\SubjectsController@edit')
+->name('subject.edit');
+
+
+//Update A Subject 
+Route::put('subjects/{subject}','Subject\SubjectsController@update')
+->name('subject.update');
+
+
+//Activate A Subject 
+Route::post('subjects/{subject}/activate','Subject\SubjectsController@activate')
+->name('subject.activate');
+
+
+
+//Deactivate A Subject 
+Route::post('subjects/{subject}/deactivate','Subject\SubjectsController@deactivate')
+->name('subject.deactivate');
+
+
 
 
