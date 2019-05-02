@@ -66,16 +66,24 @@
 
                     <div dir="rtl" class="subject-list">
                         <h4>اختيار المادة :</h4>
+                        <ul class="list-group">
                         @foreach($classes as $class)
-                            <h5>{{$class->name}}</h5>
+                            <li class="list-group-item"><h5>{{$class->name}}</h5>
+                              <ul class="list-group">
                             @foreach($class->subjects as $subject)
+                               <li class="list-group-item" {{$unit->subject->id == $subject->id ? 'style="background-color:#AAA;"' : ''}}>
                                 <div >
                                 <input type="radio" name="subject_id" value="{{$subject->id}}" {{$subject->id == $unit->subject->id ? 'checked' :'' }}>
                                 <label class="subject-name">{{$subject->name}}</label>
+                              </div>
+                               </li>
                             @endforeach
-                        </div>
+                          </ul>
+                            </li>
+                        
 
                         @endforeach
+                      </ul>
                     </div>
                     <hr>
                     <div class="card-footer">
