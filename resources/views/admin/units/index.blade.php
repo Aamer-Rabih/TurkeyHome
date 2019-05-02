@@ -1,47 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body >
-    <h1 style="text-align: right">الوحدات الدرسيّة</h1>
-    <table border="1" style="border: 1px solid #555;background:#DDD;margin-left:75%" dir="rtl">
-        <thead>
-            <tr>
-                <th>اسم الوحدة الدراسية</th>
-                <th>مفعلة</th>
-                <th>المادة</th>
-                <th>الصف</th>
-                <th>عدد الدروس</th>
-                <th>عرض</th>
-                <th>تعديل</th>
-                <th>حذف</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($units as $unit)
-                <tr>
-                <td><a href="{{route('unit.show', ['unit' => $unit->id])}}">{{$unit->title}}</a></td>
-                <td>{{$unit->active}}</td>
-                <td><a href="{{route('subject.show',['subject' => $unit->subject->id])}}">{{$unit->subject->name}}</a></td>
-                <td><a href="{{route('class.show',['class' => $unit->subject->class->id])}}">{{$unit->subject->class->name}}</a></td>
-                <td>{{$unit->lessons->count()}}</td>
-                <td>عرض</td>
-                <td><a href="{{route('unit.edit', ['unit' => $unit->id])}}">تعديل</a></td>
-                <td> 
-                <form action="{{route('unit.destroy', ['unit' => $unit->id])}}" method="POST">
-                    {{csrf_field()}}
-                    {{method_field('DELETE')}}
-                    <button>حذف الوحدة الدرسية</button>
-                </form>
-                </td>
-                </tr>
+@extends('admin.layouts.master')
 
-            @endforeach
-        </tbody>
-    </table>
-</body>
-</html>
+@section('content')
+    <div id="content">
+      <div class="content-header">
+        <h1>
+            <small>إدارة الوحدات الدرسية</small>
+             
+        </h1>
+      </div>
+
+
+        <div class="row">
+          <div class="card-deck">
+            
+            <div class="col-lg-3">
+              <a href="units/create" class="btn btn-success myhover BP" role="button">إضافة وحدة درسية<div><i class="material-icons" style="font-size:16px">add_box</i></div></a>
+            </div>
+            
+          </div>
+        </div>
+
+        <div id="table" class="row">
+          <div class="col-lg-8">
+            <div class="card table-cards color-grey">
+              <div class="card-body">
+                <table class="table table-bordered table-hover table-width">
+                  <thead>
+                    <tr> 
+                      <th>الوحدة الدرسية</th>
+                      <th>مفعلة</th>
+                      <th>المادة الدراسية</th>
+                      <th>الصف</th>
+                      <th>عرض</th>
+                      <th>تعديل</th>
+                      <th>حذف</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($units as $unit)
+                    <tr>
+                      <td>{{$unit->title}}</td>
+                      @if($unit->active)
+                      <td><i class="fa fa-check-circle" aria-hidden="true" style="font-size:18px;color:#5cb85c"></i></td>
+                      @else
+                      <td><i class="fa fa-times-circle" aria-hidden="true" style="font-size:18px;color:#dd4b39"></i></td>
+                      @endif
+                      <td>
+                      <a href="{{route('subject.show',['subject' =>$unit->subject->id ])}}"> {{$unit->subject->name}}</a>
+                      </td>
+                      <td>
+                      <a href="{{route('class.show', ['class' =>$unit->subject->class->id ])}}">{{$unit->subject->class->name}}
+                            </a>
+                      </td>
+                      <td>
+                        <div class="operations update">
+                        <a href="{{route('unit.show',['unit' => $unit->id])}}"><i class="fa fa-eye" style="font-size:18px;color:#5c958c"></i></a>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="operations update">
+                        <a href="{{route('unit.edit',['unit' => $unit->id])}}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="operations delete">
+                        <form action="{{route('unit.destroy',['unit' => $unit->id])}}" id="deleteForm" method="POST">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <a href="#" onclick="document.getElementById('deleteForm').submit();">
+                              <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
+                            </a>
+
+                          </form>
+                          
+                        </div>
+                      </td>
+
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    @endsection

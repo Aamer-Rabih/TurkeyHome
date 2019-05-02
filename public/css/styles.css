@@ -223,7 +223,7 @@ div.card p:hover{
     border-bottom: 2px solid #ccc;
     margin-bottom: 20px;
 }
-.form-control {
+.form-control.select {
 	appearance:none;
 	-webkit-appearance:none;
 	-moz-appearance:none;

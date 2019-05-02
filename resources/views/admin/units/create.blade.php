@@ -1,34 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body dir="rtl" align="right">
-    
-<form action="{{route('unit.store')}}" method="POST">
-        {{csrf_field()}}
-        <div>اسم الوحدة الدرسية: <br>
-        <input type="text" name="title" />
-        </div>
-        <div>
-            مفعلة:
-            <input type="checkbox" name="active" >
-        </div>
-        <div>
-            المادة:
-            <select  name="subject_id" >
-                @foreach($class->subjects as $subject)
-            <option value="{{$subject->id}}">{{$subject->name}}</option>
+@extends('admin.layouts.master')
 
-                @endforeach
-            </select>
-        </div>
-        <br><br>
-        <button>إنشاء الوحدةالدرسية</button>
-    </form>
+@section('content')
 
-</body>
-</html>
+<div id="content">
+      <div class="content-header">
+        <h1>
+          <small>إدارةالوحدات الدرسية</small>
+        </h1>
+      </div>
+
+
+        <div class="row">
+          <div class="card-deck">
+            
+            <div class="col-lg-6">
+              <div class="card color-grey">
+                <div class="card-body">
+                  <div class="card-header">إضافة وحدة</div>
+
+                  <form action="{{route('unit.store')}}" method="POST">
+                      {!! csrf_field() !!}
+                    <div class="form-group">
+                      <label for="classRoom"><h5>اسم الوحدة:</h5></label>
+                        <input class="form-control" type="text" name="title" id="title" >
+                        @if($errors->has('title'))
+                    <span class="text-danger">*{{$errors->first('title')}}</span>
+                        @endif
+                    </div>
+                    
+                    <div class="radioG">
+                        <h5>فعالية الوحدة الدرسية :</h5>
+                        <div class="radio">
+                        <input type="radio" name="active" value="1" checked>
+                        <label>فعالة</label>
+                        </div>
+                        <div class="radio">
+                        <input type="radio" name="active" value="0">
+                        <label>غير فعالة</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="subject"><h5>المادة:</h5></label>
+                              <select class="form-control select" id="subject" name="subject_id">
+                                <option selected value="0">--اختر المادة--</option>
+                                @foreach($class->subjects as $subject)
+                              <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                @endforeach
+                              </select>
+                              @if($errors->has('subejct_id'))
+                            <span class="text-danger">{{$errors->first('subject_id')}}</span>
+                              @endif
+                          </div>
+                          
+
+                    <button type="submit" class="btn btn-success ">إضافة</button>
+                    <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+    </div>
+
+@endsection
