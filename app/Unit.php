@@ -29,4 +29,19 @@ class Unit extends Model
         ->withTimestamps(); 
         
     }
+
+
+    //Units Operations 
+    //activate unit 
+    public function activate(){
+
+
+        $this->active = true ;
+    }
+
+    //deactivate Unit 
+    public function deactivate(){
+
+        $this->active = false ; 
+    }
 }

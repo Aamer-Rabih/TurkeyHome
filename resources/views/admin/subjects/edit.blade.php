@@ -17,11 +17,11 @@
 
         <span>هل الدروس قابلة للتحميل</span>&nbsp;&nbsp;
         <input type="radio" name="downloable" value="1" {{$subject->downloable ? 'checked' : ''}}>
-        <input type="radio" name="downloable" value="0" {{$subject->downloable ? 'checked' : ''}}>
+        <input type="radio" name="downloable" value="0" {{!$subject->downloable ? 'checked' : ''}}>
         <br>
         <span>:المادة فعالة</span>
         <input type="radio"  name="active" value="1" {{$subject->active ? 'checked' : ''}}>
-        <input type="radio" name="active" value="0" {{$subject->active ? 'checked' :'' }}>
+        <input type="radio" name="active" value="0" {{!$subject->active ? 'checked' :'' }}>
         <br>
         <select name="class_id" id="">
             @foreach($classes as $class)

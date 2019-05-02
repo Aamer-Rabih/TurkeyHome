@@ -35,15 +35,21 @@
         <br/>
         <br>
         
+        @if(request()->filled('selectedclass'))
+                <input type="hidden" value="{{request()->input('selectedclass')}}" name="class_id">
+        @else 
+
+        <select name="class_id" >
+                @foreach($classes as $class)
+            <option value="{{$class->id}}" {{$selectedclass == $class->id ? 'selected' : ''}}>{{$class->name}}</option>
+                @endforeach
+            </select>
+            <label >:الصف</label>
+            <br>
+            <br>
+
+        @endif
         
-        <select name="class_id" id="">
-            @foreach($classes as $class)
-        <option value="{{$class->id}}" {{$selectedclass == $class->id ? 'selected' : ''}}>{{$class->name}}</option>
-            @endforeach
-        </select>
-        <label >:الصف</label>
-        <br>
-        <br>
         <button>إنشاء المادة الدرسية</button>
     </form>
 
