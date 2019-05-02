@@ -39,6 +39,8 @@
                         <label>غير فعالة</label>
                         </div>
                     </div>
+
+                   
                     <div class="form-group">
                             <label for="subject"><h5>المادة:</h5></label>
                               <select class="form-control select" id="subject" name="subject_id">
@@ -52,7 +54,7 @@
                               @endif
                           </div>
                           
-
+        
                     <button type="submit" class="btn btn-success ">إضافة</button>
                     <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
 

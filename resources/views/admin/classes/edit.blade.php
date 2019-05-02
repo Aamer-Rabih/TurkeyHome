@@ -2,18 +2,12 @@
 
 @section('content')
 
-<?php $array= ["الصف الأول","الصف الثاني", "الصف الثالث", "الصف الرابع",
-                                    "الصف الخامس", "الصف السادس","الصف السابع","الصف الثامن",
-                                     "الصف التاسع", "الصف العاشر", "الصف الحادي عشر" , "الباكالوريا"];
-                    $freeArray= [ true =>"مجاني", false => "غير مجاني"];
-                ?>
 
     <div id="content">
 
       <div class="content-header">
         <h1>
-          داش بورد
-          <small>لوحة التحكم</small>
+          <small>إدارة الصفوف</small>
         </h1>
       </div>
 
@@ -29,34 +23,25 @@
                         {!! csrf_field() !!}
                         <input type="hidden" name="_method" value="PATCH">
                       
-                        <label for="email">اسم الصف:</label>
-                       <select class="form-control" id="classRoom" name="name">
-                           @foreach($array as $name)
-                           @if($class->name === $name)
-                           <option value="{{$name}}" selected>{{$name}}</option>
-                           @else
-                           @endif
-                           <option value="{{$name}}" >{{$name}}</option>
-                           @endforeach
-                          
-                        </select>
+                        <label for="name">اسم الصف:</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{$class->name}}">
+                    @if($errors->has('name'))
+                    <span class="text-danger">*{{$errors->first('name')}}</span>
+                    @endif
                     </div>
                     
                     <div class="radioG">
                         <h5>مجانية الصف :</h5>
-                        @foreach($freeArray as $k=>$item)
-                        @if($class->free === $k)
+                      
                         <div class="radio">
-                        <input type="radio" name="free" value="{{$k}}" checked>
-                        <label>{{$item}}</label>
+                        <input type="radio" name="free" value="1" {{$class->free ? 'checked' : ''}}>
+                        <label>مجاني</label>
                         </div>
-                        @else
                         <div class="radio">
-                        <input type="radio" name="free" value="{{$k}}" >
-                        <label>{{$item}}</label>
+                        <input type="radio" name="free" value="0" {{!$class->free ? 'checked' : ''}} >
+                        <label>غير مجاني</label>
                         </div>
-                        @endif
-                        @endforeach
+                    
                     </div>
 
                     <button type="submit" class="btn btn-success myhover">تعديل</button>

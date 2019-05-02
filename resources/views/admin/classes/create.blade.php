@@ -24,21 +24,10 @@
                       {!! csrf_field() !!}
                     <div class="form-group">
                       <label for="classRoom"><h5>الصف الدراسي:</h5></label>
-                        <select class="form-control" id="classRoom" name="name">
-                          <option selected>--اختر الصف--</option>
-                          <option value="الصف الأول">الصف الأول</option>
-                          <option value="الصف الثاني">الصف الثاني</option>
-                          <option value=" الصف الثالث">الصف الثالث</option>
-                          <option value=" الصف الرابع">الصف الرابع</option>
-                          <option value="الصف الخامس">الصف الخامس</option>
-                          <option value="الصف السادس">الصف السادس</option>
-                          <option value="الصف السابع">الصف السابع</option>
-                          <option value="الصف الثامن">الصف الثامن</option>
-                          <option value="الصف التاسع">الصف التاسع</option>
-                          <option value="الصف العاشر">الصف العاشر</option>
-                          <option value="الصف الحادي عشر">الصف الحادي عشر</option>
-                          <option value="بكالوريا">بكالوريا</option>
-                        </select>
+                       <input class="form-control" name="name" id="classRoom" placeholder="اسم الصف الجديد" required>
+                      @if($errors->has('name'))
+                    <span class="text-danger">*{{$errors->first('name')}}</span>
+                      @endif
                     </div>
                     
                     <div class="radioG">

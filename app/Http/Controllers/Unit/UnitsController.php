@@ -156,7 +156,8 @@ class UnitsController extends Controller
 
 
         return redirect()
-                ->route('unit.index');
+                ->back()
+                ->with('success','تم حذف الوحدة الدرسية بنجاح');
 
     }
 

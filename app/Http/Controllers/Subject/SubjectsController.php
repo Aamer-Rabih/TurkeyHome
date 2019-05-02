@@ -55,7 +55,7 @@ class SubjectsController extends Controller
      */
     public function store(Request $request)
     {
-        
+      
         //Validate Data 
         $request->validate([
             'name' => 'required|max:200', 
@@ -153,7 +153,8 @@ class SubjectsController extends Controller
         $subject->delete();
 
 
-        return redirect()->route('subject.index')
+        return redirect()
+                ->back()
                 ->with('success','تم حذف المادة الدراسية بنجاح');
 
     }
