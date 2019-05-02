@@ -2,11 +2,13 @@
 
 @section('content')
 
-<?php $array= ["الصف الأول","الصف الثاني", "الصف الثالث", "الصف الرابع",
+<?php 
+  $array= ["الصف الأول","الصف الثاني", "الصف الثالث", "الصف الرابع",
                                     "الصف الخامس", "الصف السادس","الصف السابع","الصف الثامن",
                                      "الصف التاسع", "الصف العاشر", "الصف الحادي عشر" , "الباكالوريا"];
-                    $freeArray= [ true =>"مجاني", false => "غير مجاني"];
-                ?>
+  $freeArray= [ true =>"مجاني", false => "غير مجاني"];
+                
+ ?>
 
     <div id="content">
 
@@ -30,7 +32,7 @@
                         <input type="hidden" name="_method" value="PATCH">
                       
                         <label for="email">اسم الصف:</label>
-                       <select class="form-control" id="classRoom" name="name">
+                       <select class="form-control form-control-select" id="classRoom" name="name">
                            @foreach($array as $name)
                            @if($class->name === $name)
                            <option value="{{$name}}" selected>{{$name}}</option>

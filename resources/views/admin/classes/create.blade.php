@@ -24,7 +24,7 @@
                       {!! csrf_field() !!}
                     <div class="form-group">
                       <label for="classRoom"><h5>الصف الدراسي:</h5></label>
-                        <select class="form-control" id="classRoom" name="name">
+                        <select class="form-control form-control-select" id="classRoom" name="name">
                           <option selected>--اختر الصف--</option>
                           <option value="الصف الأول">الصف الأول</option>
                           <option value="الصف الثاني">الصف الثاني</option>
