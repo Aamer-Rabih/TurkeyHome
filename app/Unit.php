@@ -9,6 +9,9 @@ class Unit extends Model
     
     protected $fillable = ['title','active','subject_id'];
 
+    //Eager Loading Default 
+    protected $with = ['subject'];
+
     //A Unit belongs to A Subject
     public function subject(){
 
@@ -25,5 +28,20 @@ class Unit extends Model
         ->withPivot('lesson_order')
         ->withTimestamps(); 
         
+    }
+
+
+    //Units Operations 
+    //activate unit 
+    public function activate(){
+
+
+        $this->active = true ;
+    }
+
+    //deactivate Unit 
+    public function deactivate(){
+
+        $this->active = false ; 
     }
 }

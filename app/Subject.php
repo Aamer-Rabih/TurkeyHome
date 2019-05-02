@@ -9,10 +9,15 @@ class Subject extends Model
     //Mass Assignment Exception 
     protected $fillable = ['name','downloable','units_nums','class_id'];
 
+    //Eager Loading Default 
+    protected $with = ['class'] ; 
+  
+
+     
   
 
     //A Subject belongs to one Class 
-    public function classroom(){
+    public function class(){
 
         return $this->belongsTo('App\ClassRoom','class_id');
     }
@@ -49,6 +54,21 @@ class Subject extends Model
 
         return $this->belongsToMany('App\Teacher','subject_teacher')
                 ->withTimestamps();
+    }
+
+
+    /**Model Operations */
+
+    //activate A Subject 
+    public function activate(){
+
+        $this->active = true ; 
+    }
+
+    //deactivate A Subject 
+    public function deactivate(){
+
+        $this->active = false ; 
     }
 
 }

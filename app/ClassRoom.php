@@ -11,6 +11,8 @@ class ClassRoom extends Model
 
     protected $table = 'classes';
 
+    //Eager Loading Default 
+
     /**
      * Subjects belonging to this Class 
     */   
@@ -95,5 +97,13 @@ class ClassRoom extends Model
         $this->free = false ;
 
         return $this ; 
+    }
+
+
+    //Add A Subject for the Class 
+    public function add($subject){
+
+        $this->subjects()->create($subject);
+        
     }
 }

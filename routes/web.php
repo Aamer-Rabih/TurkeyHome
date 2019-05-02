@@ -103,7 +103,7 @@ Route::post('courses/{course}/activate','Course\CoursesController@activate')
 Route::post('courses/{course}/deactivate','Course\CoursesController@deactivate')
     ->name('course.deactivate');
 /**
- * Subjects Operations 
+ * Subjects endpoints
  */
 
 //Show All Subjects 
@@ -112,41 +112,91 @@ Route::get('subjects','Subject\SubjectsController@index')
 
 
 //Show The Form to Create A New Subject 
-
 Route::get('subjects/create','Subject\SubjectsController@create')
-    ->name('subject.index');
-
+    ->name('subject.create');
 
 //Show A Single Subject 
-Route::get('classes/{class}/subjects/{subject}','Subject\SubjectsController@show')
+Route::get('subjects/{subject}','Subject\SubjectsController@show')
 ->name('subject.show');
 
-//Edit A Subject 
-Route::get('classes/{class}/subjects/{subject}','Subject\SubjectsController@edit')
-->name('subject.edit');
 
-//Store A Subject 
+//DELETE A Subject 
+Route::delete('subjects/{subject}','Subject\SubjectsController@destroy')
+    ->name('subject.destroy');
+
+
+
+//Store Subject 
 Route::post('subjects','Subject\SubjectsController@store')
 ->name('subject.store');
 
+
+//Edit A Subject 
+Route::get('subjects/{subject}/edit','Subject\SubjectsController@edit')
+->name('subject.edit');
+
+
 //Update A Subject 
-Route::patch('classes/{class}/subjects/{subject}','Subject\SubjectsController@update')
+Route::put('subjects/{subject}','Subject\SubjectsController@update')
 ->name('subject.update');
 
 
-//Delete A Subject 
-
-Route::delete('subjects/{subject}','Subject\SubjectsController@destroy')
-->name('subject.destroy');
-
-
-//Activate A Subject
-
-Route::post('subject/{subject}/activate','Subject\SubjectsController@activate');
+//Activate A Subject 
+Route::post('subjects/{subject}/activate','Subject\SubjectsController@activate')
+->name('subject.activate');
 
 
 
 //Deactivate A Subject 
-Route::post('subjects/{subject}/deactivate','Subject\SubjectsController@deactivate');
+Route::post('subjects/{subject}/deactivate','Subject\SubjectsController@deactivate')
+->name('subject.deactivate');
+
+/**
+ * Units endpoints
+ */
+
+ //Index Units 
+ //Display All Units 
+ Route::get('units','Unit\UnitsController@index')
+    ->name('unit.index');
 
 
+//Delete A Unit 
+Route::delete('units/{unit}','Unit\UnitsController@destroy')
+    ->name('unit.destroy');
+
+
+
+//Show All Classes to choose A Class to create A Unit in it 
+
+Route::get('units/create','Unit\UnitsController@chooseClass');
+
+
+//Show The Form to create a New Unit 
+Route::get('classes/{class}/units/create','Unit\UnitsController@create')
+    ->name('unit.create');
+
+//Store The Unit 
+Route::post('units','Unit\UnitsController@store')
+->name('unit.store');
+
+
+//Show The Form to edit A Unit 
+Route::get('units/{unit}/edit','Unit\UnitsController@edit')
+    ->name('unit.edit');
+
+//Update The Unit 
+Route::put('units/{unit}','Unit\UnitsController@update')
+->name('unit.update');
+
+//Show A Unit 
+Route::get('units/{unit}','Unit\UnitsController@show')
+    ->name('unit.show');
+
+//Activate A unit 
+Route::post('units/{unit}/activate','Unit\UnitsController@activate')
+    ->name('unit.activate');
+
+//Deactivate The unit 
+Route::post('units/{unit}/deactivate','Unit\UnitsController@deactivate')
+->name('unit.deactivate');
