@@ -32,16 +32,7 @@
                         <input type="hidden" name="_method" value="PATCH">
                       
                         <label for="email">اسم الصف:</label>
-                       <select class="form-control form-control-select" id="classRoom" name="name">
-                           @foreach($array as $name)
-                           @if($class->name === $name)
-                           <option value="{{$name}}" selected>{{$name}}</option>
-                           @else
-                           @endif
-                           <option value="{{$name}}" >{{$name}}</option>
-                           @endforeach
-                          
-                        </select>
+                        <input type="text" class="form-control" id="classRoom" name="name" value="{{$class->name}}">
                     </div>
                     
                     <div class="radioG">
