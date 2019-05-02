@@ -5,8 +5,7 @@
 <div id="content">
     <div class="content-header">
         <h1>
-          داش بورد
-          <small>لوحة التحكم</small>
+            <small>إدارة الدورات</small>
         </h1>
     </div>
 
@@ -34,6 +33,12 @@
                                     </a>
                             </form>
                             @endif
+
+                            <a href="#" class="btn btn-success" style="margin-right: 22px" >
+                                إضافة درس +
+                             </a>
+     
+                             <a href="{{route('course.index')}}" class="btn btn-primary pull-left" > >>إدارة الدورات</a>
                     </div>
                 </div>
             </div>

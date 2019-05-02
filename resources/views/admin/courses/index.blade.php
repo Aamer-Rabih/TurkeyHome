@@ -4,8 +4,7 @@
     <div id="content">
       <div class="content-header">
         <h1>
-          داش بورد
-          <small>لوحة التحكم</small>
+        <small>إدارة الدورات</small>
         </h1>
       </div>
 
@@ -56,7 +55,7 @@
                       <td>
                         <div class="operations delete">
 
-                          <form action="{{ route('course.destroy', $course) }}" method="POST" id="deleteForm">
+                          <form action="{{ route('course.destroy',['course' => $course]) }}" method="POST" id="deleteForm">
                             {!! csrf_field() !!}
                             <input type="hidden" name="_method" value="DELETE">
                             <a href="#" onclick="document.getElementById('deleteForm').submit();">

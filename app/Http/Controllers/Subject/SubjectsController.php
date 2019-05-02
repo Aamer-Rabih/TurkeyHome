@@ -41,7 +41,7 @@ class SubjectsController extends Controller
     {
         //Fetch Classes to pass them to dropdown box 
 
-        $selectedclass = $request->has('selectedclass') ? $request->selectedclass: null ; 
+        $selectedclass = $request->has('selectedclass') ? ClassRoom::findOrFail($request->selectedclass): null ; 
         $classes = ClassRoom::all();
 
         return view('admin.subjects.create', compact('classes' , 'selectedclass'));
@@ -190,7 +190,7 @@ class SubjectsController extends Controller
         $subject->save();
         
         return redirect()
-                ->route('subject.show', ['subject'])
+                ->route('subject.show', ['subject' => $subject->id])
                 ->with('success','تم إلغاء تفعيل المادة بنجاح');
     }
 

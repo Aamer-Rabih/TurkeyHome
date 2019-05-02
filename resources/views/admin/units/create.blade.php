@@ -22,7 +22,7 @@
                       {!! csrf_field() !!}
                     <div class="form-group">
                       <label for="classRoom"><h5>اسم الوحدة:</h5></label>
-                        <input class="form-control" type="text" name="title" id="title" >
+                        <input class="form-control" type="text" name="title" id="title" required>
                         @if($errors->has('title'))
                     <span class="text-danger">*{{$errors->first('title')}}</span>
                         @endif
@@ -39,9 +39,18 @@
                         <label>غير فعالة</label>
                         </div>
                     </div>
+                   
+                    @if($selectedSubject)
+                      <div class="form-group">
+
+                      <p>الصف: {{$selectedSubject->class->name}}</p>
+                      <p>المادة: {{$selectedSubject->name}}</p>
+                      </div>
 
                    
+                    @else 
                     <div class="form-group">
+                            <p>الصف:{{$class->name}}</p>
                             <label for="subject"><h5>المادة:</h5></label>
                               <select class="form-control select" id="subject" name="subject_id">
                                 <option selected value="0">--اختر المادة--</option>
@@ -49,12 +58,12 @@
                               <option value="{{$subject->id}}">{{$subject->name}}</option>
                                 @endforeach
                               </select>
-                              @if($errors->has('subejct_id'))
+                              @if($errors->has('subject_id'))
                             <span class="text-danger">{{$errors->first('subject_id')}}</span>
                               @endif
-                          </div>
+                      </div>
                           
-        
+                    @endif
                     <button type="submit" class="btn btn-success ">إضافة</button>
                     <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
 

@@ -18,16 +18,13 @@
                 <div class="card-header">تعديل صف</div>
                 <div class="card-body">
 
-                  <form action="{{ route('class.update', $class) }}" method="POST">
+                  <form action="{{ route('class.update',['class' => $class->id]) }}" method="POST">
                     <div class="form-group">
                         {!! csrf_field() !!}
                         <input type="hidden" name="_method" value="PATCH">
                       
-                        <label for="name">اسم الصف:</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{$class->name}}">
-                    @if($errors->has('name'))
-                    <span class="text-danger">*{{$errors->first('name')}}</span>
-                    @endif
+                        <label for="classRoom">اسم الصف:</label>
+                        <input type="text" class="form-control" id="classRoom" name="name" value="{{$class->name}}" required>
                     </div>
                     
                     <div class="radioG">
@@ -45,6 +42,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success myhover">تعديل</button>
+                    <a href="{{route('class.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
                   </form>
 
                 </div>

@@ -10,8 +10,7 @@
 
       <div class="content-header">
         <h1>
-          داش بورد
-          <small>لوحة التحكم</small>
+            <small>إدارة الدورات</small>
         </h1>
       </div>
 
@@ -26,7 +25,7 @@
                       {!! csrf_field() !!}
                     <div class="form-group">
                       <label for="course"><h5>الدورة الدراسية :</h5></label>
-                      <input type="text" class="form-control" id="course" name="title"> 
+                      <input type="text" class="form-control" id="course" name="title" required> 
                       @if($errors->has('title'))
                     <span class="text-danger">{{$errors->first('course')}}</span>
                       @endif
@@ -48,6 +47,7 @@
                         @endforeach
                     </div>
                     <button type="submit" class="btn btn-success myhover">إضافة</button>
+                    <a href="{{route('course.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
                   </form>
 
                 </div>

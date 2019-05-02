@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Unit;
 
 use App\Unit;
 use App\ClassRoom;
+use App\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -44,9 +45,9 @@ class UnitsController extends Controller
     {
         //Fetch All Classes 
         
-
+        $selectedSubject = request()->filled('selectedsubject') ? Subject::findOrFail(request()->selectedsubject) : null ; 
         //Return View to render All Classes
-        return view('admin.units.create', compact('class')); 
+        return view('admin.units.create', compact('class','selectedSubject')); 
     }
 
     /**

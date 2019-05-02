@@ -12,8 +12,7 @@
 
     <div class="content-header">
         <h1>
-            داش بورد
-            <small>لوحة التحكم</small>
+            <small>إدارة الدورات</small>
         </h1>
     </div>
 
@@ -54,6 +53,7 @@
                                     @endforeach
                                 </div>
                                 <button type="submit" class="btn btn-success myhover">تعديل</button>
+                                <a href="{{route('course.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
                             </form>
 
                         </div>

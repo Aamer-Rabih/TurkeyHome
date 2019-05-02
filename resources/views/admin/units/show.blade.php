@@ -38,7 +38,7 @@
                             <a href="#"class="btn btn-success" style="margin-right: 22px" >
                                 إضافة درس للوحدة
                             </a>
-                    </form>
+                    
                 <a href="{{route('unit.index')}}" class="btn btn-primary pull-left" > >>إدارة كافة الوحدات </a>
                   </div>
               </div>

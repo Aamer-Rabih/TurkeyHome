@@ -124,6 +124,8 @@ class ClassesController extends Controller
             'free' => 'boolean'
         ]);
 
+        $class->name = $request->name ; 
+
         if($request->has('free')){
             $class->free = $request->free ; 
         }else {
