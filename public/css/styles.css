@@ -40,7 +40,7 @@ a:hover {
   width: 18%;
   background-color: #1a2226;
   height: 100%; /* Full height */
-  position: fixed; /* Make it stick, even on scroll */
+  position: absolute; /* Make it stick, even on scroll */
   overflow: auto; /* Enable scrolling if the sidenav has too much content */
 }
 
@@ -83,8 +83,8 @@ a:hover {
 	padding: 10px 40px 10px 20px;
 	border-top: 1px solid #d2d6de;
 	position: fixed;
-  	left: 0;
-  	bottom: 0;
+	bottom: 0px;
+	left: 0px;
   	width: 82%;
   	text-align: center;
 
