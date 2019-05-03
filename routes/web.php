@@ -200,3 +200,9 @@ Route::post('units/{unit}/activate','Unit\UnitsController@activate')
 //Deactivate The unit 
 Route::post('units/{unit}/deactivate','Unit\UnitsController@deactivate')
 ->name('unit.deactivate');
+
+//Carousels Endpoints 
+
+//Display All Carousels for Admin 
+Route::get('carousels','Carousel\CarouselsController@index')
+->name('carousel.index');

@@ -9,14 +9,53 @@ use App\Http\Controllers\Controller;
 class CarouselsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Carouels.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $carouselQuery = (new Carousel())->newQuery();
+        //Handle Filtering and sorting paramaters 
+        if($request->has('orderby')){
+
+                if ($request->filled('ordertype')){
+
+                    if($request->ordertype == 'asc'){
+
+                       $carouselQuery = $carouselQuery->oldest($request->orderby);
+                    }else if($request->ordertype == 'desc'){
+
+                       $carouselQuery =  $carouselQuery->latest($request->orderby);
+                    }
+
+
+                }else {
+
+
+                   $carouselQuery =  $carouselQuery->latest($request->orderby);
+                }
+            }
+                else {
+
+
+                  $carouselQuery =   $carouselQuery->latest();
+                }
+
+
+            
+            $carousels = $carouselQuery->get();
+        //Handle the Json Response 
+        if($request->expectsJson()){
+
+            return response()->json(['data' => $carousels],200);
+        }
+
+        //Return View to display Carouels
+        return view('admin.carousels.index', compact('carousels'));
+
+  
+}
 
     /**
      * Show the form for creating a new resource.
