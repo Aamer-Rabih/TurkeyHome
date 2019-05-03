@@ -66,10 +66,12 @@
                         <div class="operations delete">
                         <form action="{{route('unit.destroy',['unit' => $unit->id])}}" id="deleteForm" method="POST">
                             {{csrf_field()}}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <a href="#" onclick="document.getElementById('deleteForm').submit();">
-                              <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
-                            </a>
+                            {{method_field('DELETE')}}
+
+                            <button class="btn btn-danger btn-xs" style="background-color:#FFF;border:0"><i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
+                              
+                            </button>
+                           
 
                           </form>
                           

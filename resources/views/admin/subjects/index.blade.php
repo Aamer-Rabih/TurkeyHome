@@ -72,9 +72,9 @@
                           <form action="{{ route('subject.destroy',['subject'=> $subject]) }}" method="POST" id="deleteForm">
                             {!! csrf_field() !!}
                             <input type="hidden" name="_method" value="DELETE">
-                            <a href="#" onclick="document.getElementById('deleteForm').submit();">
-                              <i class="material-icons" style="font-size:18px;color:#dd4b39">cancel</i>
-                            </a>
+                            <button class="btn btn-danger btn-xs" style="background-color:#FFF;border:0"><i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
+                              
+                            </button>
                           </form>
                           
                         </div>
