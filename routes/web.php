@@ -200,3 +200,34 @@ Route::post('units/{unit}/activate','Unit\UnitsController@activate')
 //Deactivate The unit 
 Route::post('units/{unit}/deactivate','Unit\UnitsController@deactivate')
 ->name('unit.deactivate');
+
+
+/* Carousels Endpoints */ 
+Route::get('carousels','Carousel\CarouselsController@index')
+->name('carousel.index');
+
+//Show the form to create a new carousel 
+Route::get('carousels/create','Carousel\CarouselsController@create')
+->name('carousel.create');
+
+
+//Show The Form to Edit Carousel 
+Route::get('carousels/{carousel}/edit','Carousel\CarouselsController@edit')
+    ->name('carousel.edit');
+
+//Show Single Carousel 
+Route::get('carousels/{carousel}','Carousel\CarouselsController@show')
+->name('carousel.show');
+
+//Delete A Carousel 
+Route::delete('carousels/{carousel}','Carousel\CarouselsController@destroy')
+->name('carousel.destroy');
+
+//Store A Carousel 
+Route::post('carousels','Carousel\CarouselsController@store')
+->name('carousel.store');
+
+//Update Carousel 
+Route::put('carousels/{carousel}','Carousel/CarouselsController@update')
+->name('carousel.update');
+

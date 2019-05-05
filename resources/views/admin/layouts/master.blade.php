@@ -20,9 +20,9 @@
     @include('admin.layouts.partials.header')
 
     @include('admin.layouts.partials.sidbar')
-    
-    @yield('content')
   
+    @yield('content')
+    
     @include('admin.layouts.partials.footer')
 
     <!-- jQuery (Bootstrap JS plugins depend on it) -->

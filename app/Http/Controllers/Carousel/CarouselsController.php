@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Carousel;
 use App\Carousel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Storage ; 
 
 class CarouselsController extends Controller
 {
@@ -15,7 +16,13 @@ class CarouselsController extends Controller
      */
     public function index()
     {
-        //
+        
+
+
+
+        $carousels = Carousel::latest()->get(); 
+
+        return view('admin.carousels.index', compact('carousels'));
     }
 
     /**
@@ -25,7 +32,10 @@ class CarouselsController extends Controller
      */
     public function create()
     {
-        //
+        $orders = $this->getAllOrders() ; 
+
+        return view('admin.carousels.create',compact('orders')); 
+        
     }
 
     /**
@@ -36,7 +46,39 @@ class CarouselsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'src' => 'required',
+            'order' => 'required|integer'
+        ]);
+            
+
+        $attributes = [];
+        //save Image 
+            if($request->hasFile('src')){
+
+                    $attributes['src'] = $request->src->store('public/carousels');
+
+            }
+
+
+        //Save Order 
+
+
+     
+
+         $this->shiftOrdersAfterStore($request->order);
+
+      
+
+        $attributes['order'] = $request->order ; 
+
+       
+
+        Carousel::create($attributes);
+        
+        return redirect()
+                ->route('carousel.index')
+                ->with('success','تم إنشاء عنصر قلاب جديد');
     }
 
     /**
@@ -47,7 +89,8 @@ class CarouselsController extends Controller
      */
     public function show(Carousel $carousel)
     {
-        //
+        
+        return view('admin.carousels.show', compact('carousel'));
     }
 
     /**
@@ -58,7 +101,12 @@ class CarouselsController extends Controller
      */
     public function edit(Carousel $carousel)
     {
-        //
+        
+        $orders = $this->getCurrentOrders() ; 
+
+
+        return view('admin.carousels.edit' , compact('carousel','orders')); 
+
     }
 
     /**
@@ -81,6 +129,87 @@ class CarouselsController extends Controller
      */
     public function destroy(Carousel $carousel)
     {
-        //
+        
+        $oldOrder = $carousel->order ; 
+
+        //Delete The carousel image 
+        Storage::delete('/public/' . $carousel->src);
+
+
+        //Delete The table 
+        $carousel->delete();
+
+        $this->shiftOrdersAfterDelete($oldOrder);
+
+
+        return redirect()
+                ->back()
+                ->with('success','تم حذف عنصر القلاب بنجاح');
+
+
+
+        
+    }
+
+    //Get new order 
+    public function getNewOrder(){
+
+
+        return Carousel::max('order') + 1 ; 
+    }
+
+
+    //Get All Orders 
+    public function getAllOrders(){
+
+
+        $oldOrders = Carousel::pluck('order')->toArray(); 
+
+
+        $lastOrder = Carousel::max('order') + 1 ; 
+
+        return array_merge($oldOrders, [$lastOrder]); 
+    }
+
+
+    public function getCurrentOrders(){
+
+        
+        return Carousel::pluck('order')->toArray() ; 
+    }
+
+    public function shiftOrdersAfterStore($order){
+
+        //Fetch All carousels after sepcifed order 
+        $carousels = Carousel::where('order','>=',$order)->get(); 
+
+        
+
+
+        foreach($carousels as $carousel){
+
+            $oldOrder= $carousel->order ; 
+
+            $carousel->order  = $oldOrder + 1 ;  
+            $carousel->save();
+        }
+    }
+
+    public function shiftOrdersAfterDelete($order){
+
+        //Fetch All carousels after sepcifed order 
+        $carousels = Carousel::where('order','>',$order)->get(); 
+
+        
+
+
+        foreach($carousels as $carousel){
+
+            $oldOrder= $carousel->order ; 
+
+            $carousel->order  = $oldOrder - 1 ;  
+            $carousel->save();
+        }
+
     }
 }

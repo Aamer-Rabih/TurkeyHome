@@ -19,7 +19,7 @@ class CreateCarouselsTable extends Migration
             $table->charset = 'utf8';
             $table->increments('id');
             $table->string('src')->unique();
-            $table->integer('order')->unsigned()->unique();
+            $table->integer('order')->unsigned();
             $table->timestamps();
         });
     }
