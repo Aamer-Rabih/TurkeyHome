@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Storage ; 
+
 class Carousel extends Model
 {
     
@@ -27,5 +29,10 @@ class Carousel extends Model
         array_shift($segments);
 
         return implode('/',$segments);
+    }
+
+    public function getSrcAttribute($value){
+
+        return Storage::url($value) ; 
     }
 }

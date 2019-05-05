@@ -10,11 +10,11 @@ use Storage ;
 class CarouselsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Carouels.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         
 
