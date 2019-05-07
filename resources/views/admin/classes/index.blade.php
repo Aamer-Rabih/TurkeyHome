@@ -1,6 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
+
 <div id="content">
 
   <div class="header-card table-cards color-grey">
@@ -45,7 +46,7 @@
                 <td>غير مجاني</td>
                 @endif
                 <td>
-                  <div class="operations update">
+                  <div class="operations show">
                     <a href="{{ route('class.show', $class) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
                   </div>
                 </td>
@@ -59,9 +60,7 @@
                     <form action="{{ route('class.destroy',['class' => $class->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$class->id}}" class=" btn-xs delete-button" style="display:none;">
-                        <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
-                      </button>
+                      <button id="{{$class->id}}" class=" btn-xs delete-button" style="display:none;"></button>
                       <a herf="javascript:;" class="" onclick="$('#{{$class->id}}').click();" >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>

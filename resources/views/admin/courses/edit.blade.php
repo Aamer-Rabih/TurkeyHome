@@ -10,13 +10,17 @@
 
 <div id="content">
 
-    <div class="content-header">
-        <h1>
-            <small>إدارة الدورات</small>
-        </h1>
+    <div class="header-card table-cards color-grey">
+        <div class="row">
+        <div class="col-lg-8">
+            <div class="content-header">
+            <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> إدارة دورة {{$course->title}}</small></h1>
+            </div>
+        </div> 
+        </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="table">
         <div class="card-deck">
             <div class="col-lg-6">
                 <div class="card color-grey">

@@ -19,7 +19,7 @@
 
     @include('admin.layouts.partials.header')
 
-    @include('admin.layouts.partials.sidbar')
+    @include('admin.layouts.partials.sidebar')
   
     @yield('content')
     
