@@ -16,6 +16,11 @@ Route::get('welcome',function(){
 
     return view('welcome');
 });
+
+Route::get('test', function() {
+    return view('front-end.layouts.master');
+});
+
 /**
  * Class Operatrions
  */
@@ -228,6 +233,6 @@ Route::post('carousels','Carousel\CarouselsController@store')
 ->name('carousel.store');
 
 //Update Carousel 
-Route::put('carousels/{carousel}','Carousel/CarouselsController@update')
+Route::put('carousels/{carousel}','Carousel\CarouselsController@update')
 ->name('carousel.update');
 

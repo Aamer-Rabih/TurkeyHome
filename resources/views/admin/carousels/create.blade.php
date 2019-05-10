@@ -30,8 +30,8 @@
                   <label for="">ملف الصورة :</label>
                   <div class="input-group mt-3">
                     <div class="custom-file">
-                      <input id="imageField" type="file" class="custom-file-input" id="fileUpload" name="src">
-                      <label class="custom-file-label" for="imageFeild" id="uploadLabel">اختر ملف الصورة 
+                      <input id="imageField" type="file" class="custom-file-input imageField" name="src">
+                      <label class="custom-file-label imageFieldLabel" for="imageFeild">اختر ملف الصورة 
                         <i class="fa fa-upload pull-left" aria-hidden="true" style="margin-top:3px;"></i>
                       </label>
                     </div>

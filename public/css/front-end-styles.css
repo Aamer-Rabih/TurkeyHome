@@ -1,0 +1,117 @@
+/**
+	*		TurkeyHome school CSS
+	*   Author: 4K Company
+	*	 	Website: 
+	*   License: Open source
+ **/
+
+ /** ---Import Section--- **/
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaijaan&amp;subset=arabic');
+@import url('https://fonts.googleapis.com/css?family=Cairo:200,300,400,600,700,900&subset=arabic,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Changa');
+
+
+/** ---Media Queries--- **/
+@media (max-width: 992px) {
+
+}
+@media (max-width: 768) {
+
+}
+@media (max-width: 576) {
+
+}
+
+
+body {
+  background-color: #fff;
+  /*font-family: 'text';
+  font-family: 'Cairo', sans-serif;*/
+  font-family: 'Changa', sans-serif;
+  font-size: 14px;
+  direction: rtl;
+}
+.main-red {
+  color: #AC282F;
+}
+.bold {
+  font-weight: bold;
+}
+
+/**
+  *   ---Begin Mini Header Section---
+**/
+
+.mini-header {
+  background-color: #253444;
+  color: #999;
+  font-family: 'Changa', sans-serif;
+  font-size: 14px;
+  padding: 6px 0px;
+}
+.contact-info > span {
+  background-color: #1c2733;
+  display: inline-block;
+  margin-right: 5px;
+  padding: 5px 18px;
+  float: right;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+.contact-info > span .icon {
+  font-size: 14px;
+  color: #AC282F;
+}
+#user-area-section {
+  text-align: center;
+}
+.user-area > ul > li {
+  background-color: #1c2733;
+  display: inline-block;
+  margin-right: 5px;
+  padding: 5px 18px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+.user-area > ul > li > a {
+  color: #999;
+  text-decoration: none;
+}
+.user-area > ul > li > a:hover {
+  color: #AC282f;
+  text-decoration: none;
+}
+.user-area > ul > li .icon {
+  font-size: 14px;
+  color: #AC282F;
+}
+.navbar-nav {
+  flex-direction: row;
+}
+.navbar-brand {
+  padding: 0px;
+}
+#brand-label {
+  float: left;
+  padding: 20px 10px;
+}
+
+/**
+  *   --End Mini Header Section--
+**/
+
+
+/**
+  *   ---Begin Header Section---
+**/
+
+
+/**
+  *   ---End Header Section---
+**/

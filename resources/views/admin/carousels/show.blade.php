@@ -39,29 +39,29 @@
               </h2>
             </div>
           <img src="{{$carousel->src}}" alt="Picture" width="80%" height="60%">
-<div  class="border-padding">
-          <table class="show-table">
-            <thead>
-                <tr>
-                    <th><span class="border-padding">بعض المعلومات عن الصورة</span></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>اسم الصورة</td>
-                    <td>:</td>
-                    <td style="direction:ltr;">{{$img_name}}</td>
-                </tr>
-                <tr>
-                    <td>ترتيب عرضها في القلاب</td>
-                    <td>:</td>
-                    <td>{{$carousel->order}}</td>
-                </tr>
-            </tbody>
-          </table>
-</div>
+          <div  class="border-padding">
+            <table class="show-table">
+              <thead>
+                  <tr>
+                      <th><span class="border-padding">بعض المعلومات عن الصورة</span></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>اسم الصورة</td>
+                      <td>:</td>
+                      <td style="direction:ltr;">{{$img_name}}</td>
+                  </tr>
+                  <tr>
+                      <td>ترتيب عرضها في القلاب</td>
+                      <td>:</td>
+                      <td>{{$carousel->order}}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
           
           <form action="{{ route('carousel.destroy',['carousel' => $carousel->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}

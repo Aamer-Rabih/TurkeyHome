@@ -22,7 +22,7 @@ class Carousel extends Model
     }
 
 
-    public  function getStoragePath($url){
+    public function getStoragePath($url){
 
         $segments = explode('/',$url);
 
