@@ -15,7 +15,11 @@ class ShowLessonsController extends Controller
      */
     public function index()
     {
-        //
+        //fetch All Show Lessons Ordered from last to oldest 
+        $showLessons = ShowLesson::latest()->get();
+
+
+        return view('admin.showlesson.index' , compact('showLessons'));
     }
 
     /**
@@ -25,7 +29,7 @@ class ShowLessonsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.showlesson.create');
     }
 
     /**
@@ -36,7 +40,33 @@ class ShowLessonsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Vaidate Data 
+        $request->validate([
+            
+            'title' => 'required|unique|max:200',
+            'order' => 'required',
+            'src' => 'required|unique'
+
+        ]);
+
+
+        //Prepare data to save 
+
+        $attributes['title'] = $request->title ; 
+
+        $attributes['order'] = $request->order ; 
+
+        $attributes['src'] = $request->src ; 
+
+
+        //Persist data in the database 
+        $showLesson = ShowLesson::create($attributes);
+
+
+        //Return redirect 
+        return redirect()
+            ->route('showlesson.show', ['showlesson' => $showLesson->id])
+            ->with('success', 'تم إنشاء الدرس الاستعراضي بنجاح');
     }
 
     /**
@@ -47,7 +77,8 @@ class ShowLessonsController extends Controller
      */
     public function show(ShowLesson $showLesson)
     {
-        //
+        //Return a view with showlesson Model 
+        return view('admin.showlesson.show', compact('showLesson'));
     }
 
     /**
@@ -58,7 +89,8 @@ class ShowLessonsController extends Controller
      */
     public function edit(ShowLesson $showLesson)
     {
-        //
+        //go to the edit view for show lesson
+        return view('admin.showlesson.edit',compact('showLesson'));
     }
 
     /**
@@ -70,7 +102,33 @@ class ShowLessonsController extends Controller
      */
     public function update(Request $request, ShowLesson $showLesson)
     {
-        //
+        //Vaidate Data 
+        $request->validate([
+            
+            'title' => 'required|unique|max:200',
+            'order' => 'required',
+            'src' => 'required|unique'
+
+        ]);
+
+
+        //Prepare data to save 
+
+        $attributes['title'] = $request->title ; 
+
+        $attributes['order'] = $request->order ; 
+
+        $attributes['src'] = $request->src ; 
+
+
+        //Persist data in the database 
+        $showLesson = ShowLesson::create($attributes);
+
+
+        //Return redirect 
+        return redirect()
+            ->route('showlesson.show', ['showlesson' => $showLesson->id])
+            ->with('success', 'تم تعديل الدرس الاستعراضي بنجاح');
     }
 
     /**
@@ -81,6 +139,8 @@ class ShowLessonsController extends Controller
      */
     public function destroy(ShowLesson $showLesson)
     {
-        //
+        $showLesson->delete();
+        return redirect()->back()
+        ->with('success','تم حذف الدرس الاستعراضي بنجاح');
     }
 }

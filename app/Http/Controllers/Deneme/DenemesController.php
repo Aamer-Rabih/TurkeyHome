@@ -15,7 +15,8 @@ class DenemesController extends Controller
      */
     public function index()
     {
-        //
+        $denemes = Deneme::latest()->get();
+        return view('admin.denemes.index', compact('denemes'));
     }
 
     /**
@@ -25,7 +26,7 @@ class DenemesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.denemes.create');
     }
 
     /**
@@ -35,8 +36,41 @@ class DenemesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    { 
+        //validate data
+        $request->validate([
+          'title' => 'required|max:200',
+          'term' => 'required',
+          'active' => 'requried',
+          'type' => 'requried',
+          'class_id' => 'requried',
+        ]);
+
+        //Prepare data to save 
+
+        $attributes['title'] = $request->title ; 
+
+        $attributes['active'] = $request->active ? true : false ; 
+
+        $attributes['term'] = $request->term ;
+
+        $attributes['type'] = $request->type ;
+
+        $attributes['src'] = $request->src ;
+
+        $attributes['class_id'] = $request->class_id ;
+
+
+        //Persist data in the database 
+        $deneme = Deneme::create($attributes);
+
+
+        //Return redirect 
+        return redirect()
+            ->route('deneme.show', ['deneme' => $deneme->id])
+            ->with('success', 'تم إنشاءالدينمي بنجاح');
+
+
     }
 
     /**
@@ -47,7 +81,7 @@ class DenemesController extends Controller
      */
     public function show(Deneme $deneme)
     {
-        //
+        return view('admin.denemes.show', compact('deneme'));
     }
 
     /**
@@ -58,7 +92,7 @@ class DenemesController extends Controller
      */
     public function edit(Deneme $deneme)
     {
-        //
+        return view('admin.denemes.edit',compact('deneme'));
     }
 
     /**
@@ -70,7 +104,35 @@ class DenemesController extends Controller
      */
     public function update(Request $request, Deneme $deneme)
     {
-        //
+
+        //validate data
+        $request->validate([
+            'title' => 'required|max:200',
+            'term' => 'required',
+            'active' => 'requried',
+            'type' => 'requried',
+            'class_id' => 'requried',
+          ]);
+
+        //Prepare data to save 
+
+        $deneme->title = $request->type ; 
+
+        $deneme->term = $request->src ; 
+
+        $deneme->active = $request->content ; 
+
+        $deneme->order = $request->order ; 
+
+
+        //update student thank in db 
+        $deneme->save();
+
+
+        //Return redirect 
+        return redirect()
+            ->route('studentthank.show', ['studentThank' => $studentThank->id])
+            ->with('success', 'تم تعديل التشكر بنجاح');
     }
 
     /**

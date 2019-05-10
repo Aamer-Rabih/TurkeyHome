@@ -14,8 +14,11 @@ class StudentThanksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    { 
+        //fetch all thanks 
+        $studentThanks = StudentThank::latest()->get();
+
+        return view('admin.studentthanks.index', compact('studentThanks'));
     }
 
     /**
@@ -25,7 +28,8 @@ class StudentThanksController extends Controller
      */
     public function create()
     {
-        //
+        //go to view create
+        return view('admin.studentthanks.create');
     }
 
     /**
@@ -36,7 +40,32 @@ class StudentThanksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type' => 'required',
+            'src' => 'required',
+            'text' => 'required',
+            'order' => 'required'
+        ]);
+
+        //Prepare data to save 
+
+        $attributes['type'] = $request->type ; 
+
+        $attributes['src'] = $request->src ; 
+
+        $attributes['content'] = $request->content ; 
+
+        $attributes['order'] = $request->order ; 
+
+
+        //Persist data in the database 
+        $studentThank = StudentTank::create($attributes);
+
+
+        //Return redirect 
+        return redirect()
+            ->route('studentthank.show', ['studentThank' => $studentThank->id])
+            ->with('success', 'تم إنشاءالتشكر بنجاح');
     }
 
     /**
@@ -47,7 +76,7 @@ class StudentThanksController extends Controller
      */
     public function show(StudentThank $studentThank)
     {
-        //
+        return view('admin.studentthanks.show', compact('studentThank'));
     }
 
     /**
@@ -58,7 +87,7 @@ class StudentThanksController extends Controller
      */
     public function edit(StudentThank $studentThank)
     {
-        //
+        return view('admin.studentthanks.edit',compact('studentThank'));
     }
 
     /**
@@ -70,7 +99,32 @@ class StudentThanksController extends Controller
      */
     public function update(Request $request, StudentThank $studentThank)
     {
-        //
+        $request->validate([
+            'type' => 'required',
+            'src' => 'required',
+            'content' => 'required',
+            'order' => 'required'
+        ]);
+
+        //Prepare data to save 
+
+        $studentThank->type = $request->type ; 
+
+        $studentThank->src = $request->src ; 
+
+        $studentThank->content = $request->content ; 
+
+        $studentThank->order = $request->order ; 
+
+
+        //update student thank in db 
+        $studentThank->save();
+
+
+        //Return redirect 
+        return redirect()
+            ->route('studentthank.show', ['studentThank' => $studentThank->id])
+            ->with('success', 'تم تعديل التشكر بنجاح');
     }
 
     /**
@@ -81,6 +135,10 @@ class StudentThanksController extends Controller
      */
     public function destroy(StudentThank $studentThank)
     {
-        //
+        $studentThank->delete();
+
+        return redirect()
+        ->route('studentthank.index')
+        ->with('success','تم حذف التشكر بنجاح');
     }
 }

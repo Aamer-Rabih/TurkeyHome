@@ -236,3 +236,87 @@ Route::post('carousels','Carousel\CarouselsController@store')
 Route::put('carousels/{carousel}','Carousel\CarouselsController@update')
 ->name('carousel.update');
 
+
+
+//Index Show Lesson 
+ //Display All show lessons 
+ Route::get('showlessons','ShowLesson\ShowLessonsController@index')
+    ->name('showlesson.index');
+
+//Show The Form to create a New ShowLesson 
+Route::get('showlessons/create','ShowLesson\ShowLessonsController@create')
+    ->name('showlesson.create');
+
+    //Show A showlesson 
+Route::get('showlessons/{showLesson}','ShowLesson\ShowLessonsController@show')
+->name('showlesson.show');
+
+//store show lesson route
+Route::post('showlessons','ShowLesson\ShowLssonsController@store')
+->name('showlesson.store');
+
+//Show The Form to Edit a ShowLesson 
+Route::get('showlessons/{showLesson}/edit','ShowLesson\ShowLessonsController@edit')
+    ->name('showlesson.edit');
+
+    //update show lesson route
+Route::put('showlessons/{showLesson}','ShowLesson\ShowLssonsController@update')
+->name('showlesson.update');
+
+//Delete A ShowLesson 
+Route::delete('showlessons/{showLesson}','ShowLesson\ShowLessonsController@destroy')
+    ->name('showlesson.destroy');
+
+
+
+//display all denemes
+    Route::get('denemes','Deneme\DenemesController@index')
+    ->name('deneme.index');
+
+    //create view route for deneme
+    Route::get('denemes/create','Deneme\DenemesController@create')
+    ->name('deneme.create');
+
+    //store route for deneme
+    Route::post('denemes','Deneme\DenemesController@store')
+    ->name('deneme.store');
+
+    //Show The Form to Edit a Deneme 
+Route::get('denemes/{deneme}/edit','Deneme\DenemesController@edit')
+->name('deneme.edit');
+
+//update deneme route
+Route::put('denemes/{deneme}','Deneme\DenemesController@update')
+->name('deneme.update');
+
+
+
+//student Thanks index
+Route::get('studentthanks','StudentThank\StudentThanksController@index')
+->name('studentthank.index');
+
+//student thank create route
+Route::get('studentthanks/create','StudentThank\StudentThanksController@create')
+->name('studentthank.create');
+
+//student thank show route
+Route::get('studentthanks/{studentThank}','StudentThank\StudentThanksController@show')
+->name('studentthank.show');
+
+//store student thank route
+Route::post('studentthanks','StudentThank\StudentThanksController@store')
+->name('studentthank.store');
+
+//Show The Form to Edit a student thank 
+Route::get('studentthanks/{studentThank}/edit','StudentThank\StudentThanksController@edit')
+    ->name('studentthank.edit');
+
+    //update student thank route
+Route::put('studentthanks/{studentThank}','StudentThank\StudentThanksController@update')
+->name('studentthank.update');
+
+//Delete A student thank 
+Route::delete('studentthanks/{studentThank}','StudentThank\StudentThanksController@destroy')
+    ->name('studentthank.destroy');
+
+
