@@ -2,15 +2,27 @@
 
 @section('content')
 <div id="content">
-<form action="" method="POST">
-<label for="title">title</label>
-<input type="text" name="title">
+<form action="{{route('studentthank.store')}}" method="POST" enctype='multipart/form-data'>
+{{csrf_field()}}
+<div class="form-group">
+<label for="title">type</label>
+<input type="text" name="type">
+</div>
 
-<label for="title">order</label>
+<div class="form-group"> 
+<label for="title">src</label>
 <input type="text" name="order">
+</div>
 
+<div class="form-group">
 <label for="title">source</label>
-<input type="text" name="src">
+<input type="file" name="src">
+</div>
+
+<div class="form-group">
+<label for="title">text</label>
+<input type="text" name="content">
+</div>
 
 <input type="submit">
 

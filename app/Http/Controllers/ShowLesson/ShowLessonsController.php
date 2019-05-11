@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\ShowLesson;
 
-use App\ShowLesson;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\ShowLesson;
+use Storage ; 
+use File;
+
 
 class ShowLessonsController extends Controller
 {
@@ -43,9 +46,9 @@ class ShowLessonsController extends Controller
         //Vaidate Data 
         $request->validate([
             
-            'title' => 'required|unique|max:200',
+            'title' => 'required|max:200',
             'order' => 'required',
-            'src' => 'required|unique'
+            'src' => 'required'
 
         ]);
 
@@ -56,7 +59,12 @@ class ShowLessonsController extends Controller
 
         $attributes['order'] = $request->order ; 
 
-        $attributes['src'] = $request->src ; 
+        //save File 
+        if($request->hasFile('src')){
+
+            $attributes['src'] = $request->src->store('public/showlessons');
+
+        }
 
 
         //Persist data in the database 
@@ -114,15 +122,18 @@ class ShowLessonsController extends Controller
 
         //Prepare data to save 
 
-        $attributes['title'] = $request->title ; 
+        $showLesson->title = $request->title ; 
 
-        $attributes['order'] = $request->order ; 
+        $showLesson->order = $request->order ; 
 
-        $attributes['src'] = $request->src ; 
-
+        if($request->hasFile('src')) {
+            Storage::delete($showLesson->src);
+            $showLesson->src = $request->src->store('public/showlessons');
+        }
+        
 
         //Persist data in the database 
-        $showLesson = ShowLesson::create($attributes);
+        $showLesson->save();
 
 
         //Return redirect 
@@ -139,8 +150,13 @@ class ShowLessonsController extends Controller
      */
     public function destroy(ShowLesson $showLesson)
     {
+        //Delete The showLesson file
+        Storage::delete($showLesson->src);
+
+        //Delete ShowLesson from db
         $showLesson->delete();
         return redirect()->back()
         ->with('success','تم حذف الدرس الاستعراضي بنجاح');
     }
 }
+

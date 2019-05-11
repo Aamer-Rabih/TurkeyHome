@@ -252,7 +252,7 @@ Route::get('showlessons/{showLesson}','ShowLesson\ShowLessonsController@show')
 ->name('showlesson.show');
 
 //store show lesson route
-Route::post('showlessons','ShowLesson\ShowLssonsController@store')
+Route::post('showlessons','ShowLesson\ShowLessonsController@store')
 ->name('showlesson.store');
 
 //Show The Form to Edit a ShowLesson 
@@ -260,7 +260,7 @@ Route::get('showlessons/{showLesson}/edit','ShowLesson\ShowLessonsController@edi
     ->name('showlesson.edit');
 
     //update show lesson route
-Route::put('showlessons/{showLesson}','ShowLesson\ShowLssonsController@update')
+Route::put('showlessons/{showLesson}','ShowLesson\ShowLessonsController@update')
 ->name('showlesson.update');
 
 //Delete A ShowLesson 
@@ -277,6 +277,10 @@ Route::delete('showlessons/{showLesson}','ShowLesson\ShowLessonsController@destr
     Route::get('denemes/create','Deneme\DenemesController@create')
     ->name('deneme.create');
 
+    //create view route for deneme
+    Route::get('denemes/{deneme}','Deneme\DenemesController@show')
+    ->name('deneme.show');
+
     //store route for deneme
     Route::post('denemes','Deneme\DenemesController@store')
     ->name('deneme.store');
@@ -288,6 +292,18 @@ Route::get('denemes/{deneme}/edit','Deneme\DenemesController@edit')
 //update deneme route
 Route::put('denemes/{deneme}','Deneme\DenemesController@update')
 ->name('deneme.update');
+
+//delete route for deneme
+Route::delete('deneme/{deneme}','Deneme\DenemesController@destroy')
+->name('deneme.destroy');
+
+//Activate A Deneme 
+Route::post('denemes/{course}/activate','Deneme\DenemesController@activate')
+    ->name('deneme.activate');
+
+//Deactivate A Deneme 
+Route::post('denemes/{deneme}/deactivate','Deneme\DenemesController@deactivate')
+    ->name('deneme.deactivate');
 
 
 

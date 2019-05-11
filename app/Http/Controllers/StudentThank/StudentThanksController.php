@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\StudentThank;
-
 use App\StudentThank;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Storage ; 
+use File;
 
 class StudentThanksController extends Controller
 {
-    /**
+      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -43,7 +44,7 @@ class StudentThanksController extends Controller
         $request->validate([
             'type' => 'required',
             'src' => 'required',
-            'text' => 'required',
+            'content' => 'required',
             'order' => 'required'
         ]);
 
@@ -51,7 +52,12 @@ class StudentThanksController extends Controller
 
         $attributes['type'] = $request->type ; 
 
-        $attributes['src'] = $request->src ; 
+        //save File 
+        if($request->hasFile('src')){
+
+            $attributes['src'] = $request->src->store('public/studentthanks');
+
+        }
 
         $attributes['content'] = $request->content ; 
 
@@ -59,7 +65,7 @@ class StudentThanksController extends Controller
 
 
         //Persist data in the database 
-        $studentThank = StudentTank::create($attributes);
+        $studentThank = StudentThank::create($attributes);
 
 
         //Return redirect 
@@ -110,7 +116,10 @@ class StudentThanksController extends Controller
 
         $studentThank->type = $request->type ; 
 
-        $studentThank->src = $request->src ; 
+        if($request->hasFile('src')) {
+            Storage::delete($studentThank->src);
+            $studentThank->src = $request->src->store('public/studentthanks');
+        }
 
         $studentThank->content = $request->content ; 
 
@@ -135,6 +144,10 @@ class StudentThanksController extends Controller
      */
     public function destroy(StudentThank $studentThank)
     {
+        //Delete The student thank file
+        Storage::delete($studentThank->src);
+
+        //Delete from db  
         $studentThank->delete();
 
         return redirect()

@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="content">
-<form action="" method="POST">
+<form action="{{route('showlesson.update',['showLesson' => $showLesson->id])}}" method="POST">
 <label for="title">title</label>
 <input type="text" name="title">
 
@@ -11,6 +11,8 @@
 
 <label for="title">source</label>
 <input type="text" name="src">
+
+<input type="hidden" name='_method' value="PUT">
 
 <input type="submit">
 

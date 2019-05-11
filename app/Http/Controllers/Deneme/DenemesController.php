@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Deneme;
 
+use App\ClassRoom;
 use App\Deneme;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Storage ; 
+use File;
 
 class DenemesController extends Controller
 {
@@ -26,7 +29,9 @@ class DenemesController extends Controller
      */
     public function create()
     {
-        return view('admin.denemes.create');
+        $classes = ClassRoom::all();
+
+        return view('admin.denemes.create',compact('classes'));
     }
 
     /**
@@ -38,13 +43,13 @@ class DenemesController extends Controller
     public function store(Request $request)
     { 
         //validate data
-        $request->validate([
+        /*$request->validate([
           'title' => 'required|max:200',
           'term' => 'required',
           'active' => 'requried',
           'type' => 'requried',
-          'class_id' => 'requried',
-        ]);
+          'class_id' => 'requried'
+        ]);*/
 
         //Prepare data to save 
 
@@ -92,7 +97,7 @@ class DenemesController extends Controller
      */
     public function edit(Deneme $deneme)
     {
-        return view('admin.denemes.edit',compact('deneme'));
+        return view('admin.denemes.edit', compact('deneme'));
     }
 
     /**
@@ -116,22 +121,28 @@ class DenemesController extends Controller
 
         //Prepare data to save 
 
-        $deneme->title = $request->type ; 
+        $deneme->title = $request->title ; 
 
-        $deneme->term = $request->src ; 
+        $deneme->term = $request->term ; 
 
-        $deneme->active = $request->content ; 
+        $deneme->active = $request->active ; 
 
-        $deneme->order = $request->order ; 
+        $deneme->type = $request->type ; 
+
+        //save new File 
+        if($request->hasFile('src')) {
+            Storage::delete($deneme->src);
+            $deneme->src = $request->src->store('public/denemes');
+        }
 
 
-        //update student thank in db 
+        //update deneme in db 
         $deneme->save();
 
 
         //Return redirect 
         return redirect()
-            ->route('studentthank.show', ['studentThank' => $studentThank->id])
+            ->route('deneme.show', ['deneme' => $deneme->id])
             ->with('success', 'تم تعديل التشكر بنجاح');
     }
 
@@ -143,6 +154,37 @@ class DenemesController extends Controller
      */
     public function destroy(Deneme $deneme)
     {
-        //
+        //Delete The deneme file
+        Storage::delete($deneme->src);
+
+        //Delete ShowLesson from db
+        $showLesson->delete();
+        return redirect()->back()
+        ->with('success','تم حذف الدينيمي بنجاح');
     }
+
+    /**
+     * Action to Activate A Course 
+     */
+    public function activate(Deneme $deneme){
+
+        $deneme->active = true;
+        
+        $deneme->save();
+        
+        return redirect()->route('deneme.show', ['deneme' => $deneme->id])
+                ->with('success','تم تفعيل الدينيمي بنجاح');
+    }
+
+     /**
+      * Action to deactivate A Deneme
+      */
+      public function deactivate(Deneme $deneme){
+        $deneme->active = false;
+        $deneme->save();
+
+        return redirect()->route('deneme.show', ['deneme' => $deneme->id])
+                ->with('success', 'تم إلغاء تفعيل الدينيمي بنجاح');
+
+      }
 }
