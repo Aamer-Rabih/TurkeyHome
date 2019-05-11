@@ -32,7 +32,9 @@ class ShowLessonsController extends Controller
      */
     public function create()
     {
-        return view('admin.showlesson.create');
+        $orders = $this->getAllOrders() ; 
+
+        return view('admin.showlesson.create',compact('orders'));
     }
 
     /**
@@ -57,6 +59,7 @@ class ShowLessonsController extends Controller
 
         $attributes['title'] = $request->title ; 
 
+        $this->shiftOrdersAfterStore($request->order);
         $attributes['order'] = $request->order ; 
 
         //save File 
@@ -97,8 +100,9 @@ class ShowLessonsController extends Controller
      */
     public function edit(ShowLesson $showLesson)
     {
+        $orders = $this->getCurrentOrders() ; 
         //go to the edit view for show lesson
-        return view('admin.showlesson.edit',compact('showLesson'));
+        return view('admin.showlesson.edit',compact('showLesson','orders'));
     }
 
     /**
@@ -124,11 +128,18 @@ class ShowLessonsController extends Controller
 
         $showLesson->title = $request->title ; 
 
-        $showLesson->order = $request->order ; 
+        //$showLesson->order = $request->order ; 
 
         if($request->hasFile('src')) {
             Storage::delete($showLesson->src);
             $showLesson->src = $request->src->store('public/showlessons');
+        }
+
+        if($request->order != $showLesson->order) {
+
+            //Call the function for updating the order
+            $this->shiftOrdersAfterUpdate($showLesson, $showLesson->order, $request->order);
+            $showLesson->order = $request->order;
         }
         
 
@@ -150,13 +161,100 @@ class ShowLessonsController extends Controller
      */
     public function destroy(ShowLesson $showLesson)
     {
+
+        $oldOrder = $showLesson->order ;
         //Delete The showLesson file
         Storage::delete($showLesson->src);
 
         //Delete ShowLesson from db
         $showLesson->delete();
+        //reorder after delete
+        $this->shiftOrdersAfterDelete($oldOrder);
+
         return redirect()->back()
         ->with('success','تم حذف الدرس الاستعراضي بنجاح');
+    }
+
+     //Get new order 
+     public function getNewOrder(){
+
+
+        return ShowLesson::max('order') + 1 ; 
+    }
+
+
+    //Get All Orders 
+    public function getAllOrders(){
+
+
+        $oldOrders = ShowLesson::pluck('order')->toArray(); 
+
+
+        $lastOrder = ShowLesson::max('order') + 1 ; 
+
+        return array_merge($oldOrders, [$lastOrder]); 
+    }
+
+
+    public function getCurrentOrders(){
+
+        
+        return ShowLesson::pluck('order')->toArray() ; 
+    }
+
+    public function shiftOrdersAfterStore($order){
+
+        //Fetch All ShowLessons after sepcifed order 
+        $showLessons = ShowLesson::where('order','>=',$order)->get();
+        foreach($showLessons as $showLesson){
+
+            $oldOrder= $showLesson->order ; 
+            $showLesson->order  = $oldOrder + 1 ;  
+            $showLesson->save();
+        }
+    }
+
+    public function shiftOrdersAfterUpdate($oldOrderShowLesson, $oldOrder, $newOrder){
+
+        $oldOrderShowLesson->order = 0;
+        $oldOrderShowLesson->save;
+
+        //Fetch All ShowLesson Which It's Order smaller Than Sepcifed order
+        if($oldOrder < $newOrder) {
+            $showLessons = ShowLesson::whereBetween('order', [$oldOrder, $newOrder+1])->get();
+            foreach($showLessons as $showLesson) {
+                $showLesson->order -= 1;
+                $showLesson->save();
+            }
+        }
+
+        //Fetch All ShowLesson Which  It's Order Larger Than Sepcifed order
+        if($oldOrder > $newOrder) {
+            $showLessons = ShowLesson::whereBetween('order', [$newOrder-1, $oldOrder])->get();
+            foreach($showLessons as $showLesson) {
+                $showLesson->order += 1;
+                $showLesson->save();
+            }
+        }
+
+    }
+
+    public function shiftOrdersAfterDelete($order){
+
+        //Fetch All showLessons after sepcifed order 
+        $showLessons = ShowLesson::where('order','>',$order)->get(); 
+
+        
+
+
+        foreach($showLessons as $showLesson){
+
+            $oldOrder= $showLesson->order ; 
+
+            $showLesson->order  = $oldOrder - 1 ;  
+            $showLesson->save();
+        }
+
     }
 }
 

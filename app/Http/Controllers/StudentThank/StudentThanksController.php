@@ -29,8 +29,11 @@ class StudentThanksController extends Controller
      */
     public function create()
     {
+
+        $orders = $this->getAllOrders() ; 
+
         //go to view create
-        return view('admin.studentthanks.create');
+        return view('admin.studentthanks.create',compact('orders'));
     }
 
     /**
@@ -60,6 +63,8 @@ class StudentThanksController extends Controller
         }
 
         $attributes['content'] = $request->content ; 
+
+        $this->shiftOrdersAfterStore($request->order);
 
         $attributes['order'] = $request->order ; 
 
@@ -93,7 +98,9 @@ class StudentThanksController extends Controller
      */
     public function edit(StudentThank $studentThank)
     {
-        return view('admin.studentthanks.edit',compact('studentThank'));
+        $orders = $this->getCurrentOrders() ; 
+
+        return view('admin.studentthanks.edit',compact('studentThank','orders'));
     }
 
     /**
@@ -120,10 +127,16 @@ class StudentThanksController extends Controller
             Storage::delete($studentThank->src);
             $studentThank->src = $request->src->store('public/studentthanks');
         }
+        if($request->order != $studentThank->order) {
+
+            //Call the function for updating the order
+            $this->shiftOrdersAfterUpdate($studentThank, $studentThank->order, $request->order);
+            $studentThank->order = $request->order;
+        }
 
         $studentThank->content = $request->content ; 
 
-        $studentThank->order = $request->order ; 
+        //$studentThank->order = $request->order ; 
 
 
         //update student thank in db 
@@ -144,14 +157,100 @@ class StudentThanksController extends Controller
      */
     public function destroy(StudentThank $studentThank)
     {
+
+        $oldOrder = $studentThank->order ; 
         //Delete The student thank file
         Storage::delete($studentThank->src);
 
         //Delete from db  
         $studentThank->delete();
 
+        $this->shiftOrdersAfterDelete($oldOrder);
+
         return redirect()
         ->route('studentthank.index')
         ->with('success','تم حذف التشكر بنجاح');
+    }
+
+    //Get new order 
+    public function getNewOrder(){
+
+
+        return StudentThank::max('order') + 1 ; 
+    }
+
+
+    //Get All Orders 
+    public function getAllOrders(){
+
+
+        $oldOrders = StudentThank::pluck('order')->toArray(); 
+
+
+        $lastOrder = StudentThank::max('order') + 1 ; 
+
+        return array_merge($oldOrders, [$lastOrder]); 
+    }
+
+
+    public function getCurrentOrders(){
+
+        
+        return StudentThank::pluck('order')->toArray() ; 
+    }
+
+    public function shiftOrdersAfterStore($order){
+
+        //Fetch All studentThanks after sepcifed order 
+        $studentThanks = StudentThank::where('order','>=',$order)->get();
+        foreach($studentThanks as $studentThank){
+
+            $oldOrder= $studentThank->order ; 
+            $studentThank->order  = $oldOrder + 1 ;  
+            $studentThank->save();
+        }
+    }
+
+    public function shiftOrdersAfterUpdate($oldOrderstudentThank, $oldOrder, $newOrder){
+
+        $oldOrderstudentThank->order = 0;
+        $oldOrderstudentThank->save;
+
+        //Fetch All studentThank Which It's Order smaller Than Sepcifed order
+        if($oldOrder < $newOrder) {
+            $studentThanks = StudentThank::whereBetween('order', [$oldOrder, $newOrder+1])->get();
+            foreach($studentThanks as $studentThank) {
+                $studentThank->order -= 1;
+                $studentThank->save();
+            }
+        }
+
+        //Fetch All studentThank Which  It's Order Larger Than Sepcifed order
+        if($oldOrder > $newOrder) {
+            $studentThanks = StudentThank::whereBetween('order', [$newOrder-1, $oldOrder])->get();
+            foreach($studentThanks as $studentThank) {
+                $studentThank->order += 1;
+                $studentThank->save();
+            }
+        }
+
+    }
+
+    public function shiftOrdersAfterDelete($order){
+
+        //Fetch All studentThanks after sepcifed order 
+        $studentThanks = StudentThank::where('order','>',$order)->get(); 
+
+        
+
+
+        foreach($studentThanks as $studentThank){
+
+            $oldOrder= $studentThank->order ; 
+
+            $studentThank->order  = $oldOrder - 1 ;  
+            $studentThank->save();
+        }
+
     }
 }

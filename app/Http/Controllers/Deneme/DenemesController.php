@@ -46,22 +46,28 @@ class DenemesController extends Controller
         /*$request->validate([
           'title' => 'required|max:200',
           'term' => 'required',
-          'active' => 'requried',
-          'type' => 'requried',
-          'class_id' => 'requried'
+          'active' =>'required',
+          'type' => 'requried'
+          
         ]);*/
 
         //Prepare data to save 
 
         $attributes['title'] = $request->title ; 
 
-        $attributes['active'] = $request->active ? true : false ; 
+        $attributes['active'] =  $request->active ? true : false ; 
 
         $attributes['term'] = $request->term ;
 
         $attributes['type'] = $request->type ;
 
-        $attributes['src'] = $request->src ;
+
+        if($request->hasFile('src')){
+
+            $attributes['src'] = $request->src->store('public/denemes');
+
+        }
+        
 
         $attributes['class_id'] = $request->class_id ;
 
@@ -111,13 +117,13 @@ class DenemesController extends Controller
     {
 
         //validate data
-        $request->validate([
+        /*$request->validate([
             'title' => 'required|max:200',
             'term' => 'required',
             'active' => 'requried',
             'type' => 'requried',
             'class_id' => 'requried',
-          ]);
+          ]);*/
 
         //Prepare data to save 
 
@@ -125,13 +131,15 @@ class DenemesController extends Controller
 
         $deneme->term = $request->term ; 
 
-        $deneme->active = $request->active ; 
+        $deneme->active = $request->active ? true : false ; 
 
         $deneme->type = $request->type ; 
 
         //save new File 
         if($request->hasFile('src')) {
+            //delete old file
             Storage::delete($deneme->src);
+            
             $deneme->src = $request->src->store('public/denemes');
         }
 
@@ -157,8 +165,8 @@ class DenemesController extends Controller
         //Delete The deneme file
         Storage::delete($deneme->src);
 
-        //Delete ShowLesson from db
-        $showLesson->delete();
+        //Delete deneme from db
+        $deneme->delete();
         return redirect()->back()
         ->with('success','تم حذف الدينيمي بنجاح');
     }
