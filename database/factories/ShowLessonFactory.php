@@ -6,9 +6,10 @@ use App\ShowLesson;
 use Faker\Generator as Faker;
 
 $factory->define(ShowLesson::class, function (Faker $faker) {
-    static $order = 1 ;
+    
     return [
-        
-
+        'title' => $faker->name,
+        'src'   => $faker->url,
+        'order' => $faker->numberBetween(1, 100),
     ];
 });

@@ -121,7 +121,7 @@ class CarouselsController extends Controller
     {
         //Fields Validation
         $request->validate([
-            'src' => 'required',
+            'src' => '',
             'order' => 'required|integer'
         ]);
 
@@ -135,6 +135,7 @@ class CarouselsController extends Controller
             //Call the function for updating the order
             $this->shiftOrdersAfterUpdate($carousel, $carousel->order, $request->order);
             $carousel->order = $request->order;
+            
         }
         $carousel->save();
 
@@ -214,13 +215,13 @@ class CarouselsController extends Controller
     public function shiftOrdersAfterUpdate($oldOrderCarousel, $oldOrder, $newOrder){
 
         $oldOrderCarousel->order = 0;
-        $oldOrderCarousel->save;
+        $oldOrderCarousel->save();
 
         //Fetch All Carousel Which It's Order smaller Than Sepcifed order
         if($oldOrder < $newOrder) {
             $carousels = Carousel::whereBetween('order', [$oldOrder, $newOrder+1])->get();
             foreach($carousels as $carousel) {
-                $carousel->order -= 1;
+                $carousel->order = $carousel->order-1;
                 $carousel->save();
             }
         }
@@ -229,7 +230,7 @@ class CarouselsController extends Controller
         if($oldOrder > $newOrder) {
             $carousels = Carousel::whereBetween('order', [$newOrder-1, $oldOrder])->get();
             foreach($carousels as $carousel) {
-                $carousel->order += 1;
+                $carousel->order = $carousel->order+1;
                 $carousel->save();
             }
         }

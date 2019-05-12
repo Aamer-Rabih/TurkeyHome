@@ -46,7 +46,7 @@ class StudentThanksController extends Controller
     {
         $request->validate([
             'type' => 'required',
-            'src' => 'required',
+            'src' => '',
             'content' => 'required',
             'order' => 'required|integer'
         ]);
@@ -59,7 +59,6 @@ class StudentThanksController extends Controller
         if($request->hasFile('src')){
 
             $attributes['src'] = $request->src->store('public/studentthanks');
-
         }
 
         $attributes['content'] = $request->content ; 
@@ -114,7 +113,7 @@ class StudentThanksController extends Controller
     {
         $request->validate([
             'type' => 'required',
-            'src' => 'required',
+            'src' => '',
             'content' => 'required',
             'order' => 'required|integer'
         ]);
@@ -214,7 +213,7 @@ class StudentThanksController extends Controller
     public function shiftOrdersAfterUpdate($oldOrderstudentThank, $oldOrder, $newOrder){
 
         $oldOrderstudentThank->order = 0;
-        $oldOrderstudentThank->save;
+        $oldOrderstudentThank->save();
 
         //Fetch All studentThank Which It's Order smaller Than Sepcifed order
         if($oldOrder < $newOrder) {
