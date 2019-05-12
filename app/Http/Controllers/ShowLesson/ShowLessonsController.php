@@ -217,7 +217,7 @@ class ShowLessonsController extends Controller
     public function shiftOrdersAfterUpdate($oldOrderShowLesson, $oldOrder, $newOrder){
 
         $oldOrderShowLesson->order = 0;
-        $oldOrderShowLesson->save;
+        $oldOrderShowLesson->save();
 
         //Fetch All ShowLesson Which It's Order smaller Than Sepcifed order
         if($oldOrder < $newOrder) {
