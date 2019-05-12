@@ -48,7 +48,7 @@ class StudentThanksController extends Controller
             'type' => 'required',
             'src' => 'required',
             'content' => 'required',
-            'order' => 'required'
+            'order' => 'required|integer'
         ]);
 
         //Prepare data to save 
@@ -116,7 +116,7 @@ class StudentThanksController extends Controller
             'type' => 'required',
             'src' => 'required',
             'content' => 'required',
-            'order' => 'required'
+            'order' => 'required|integer'
         ]);
 
         //Prepare data to save 

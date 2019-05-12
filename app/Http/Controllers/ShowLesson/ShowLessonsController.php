@@ -49,7 +49,7 @@ class ShowLessonsController extends Controller
         $request->validate([
             
             'title' => 'required|max:200',
-            'order' => 'required',
+            'order' => 'required|integer',
             'src' => 'required'
 
         ]);
@@ -118,8 +118,8 @@ class ShowLessonsController extends Controller
         $request->validate([
             
             'title' => 'required|unique|max:200',
-            'order' => 'required',
-            'src' => 'required|unique'
+            'order' => 'required|integer',
+            'src' => 'required'
 
         ]);
 

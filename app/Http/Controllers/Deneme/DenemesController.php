@@ -43,13 +43,13 @@ class DenemesController extends Controller
     public function store(Request $request)
     { 
         //validate data
-        /*$request->validate([
+        $request->validate([
           'title' => 'required|max:200',
-          'term' => 'required',
+          'term' => 'required|integer',
           'active' =>'required',
-          'type' => 'requried'
-          
-        ]);*/
+          'type' => 'required',
+          'src' => 'required'
+        ]);
 
         //Prepare data to save 
 
@@ -117,13 +117,14 @@ class DenemesController extends Controller
     {
 
         //validate data
-        /*$request->validate([
+        $request->validate([
             'title' => 'required|max:200',
-            'term' => 'required',
-            'active' => 'requried',
-            'type' => 'requried',
-            'class_id' => 'requried',
-          ]);*/
+            'term' => 'required|integer',
+            'active' => 'required',
+            'type' => 'required',
+            'class_id' => 'required',
+            'src' => 'required'
+          ]);
 
         //Prepare data to save 
 
