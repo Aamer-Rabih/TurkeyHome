@@ -119,7 +119,7 @@ class ShowLessonsController extends Controller
             
             'title' => 'required|unique|max:200',
             'order' => 'required|integer',
-            'src' => 'required'
+            'src' => ''
 
         ]);
 
