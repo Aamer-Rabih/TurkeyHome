@@ -336,3 +336,60 @@ Route::delete('studentthanks/{studentThank}','StudentThank\StudentThanksControll
     ->name('studentthank.destroy');
 
 
+    //Evaluations index
+Route::get('evaluations','Evaluation\EvaluationsController@index')
+->name('evaluation.index');
+
+//Evaluation create route
+Route::get('evaluations/create','Evaluation\EvaluationsController@create')
+->name('evaluation.create');
+
+//Evaluation show route
+Route::get('evaluations/{evaluation}','Evaluation\EvaluationsController@show')
+->name('evaluation.show');
+
+//store Evaluation route
+Route::post('evaluations','Evaluation\EvaluationsController@store')
+->name('evaluation.store');
+
+//Show The Form to Edit a Evaluation 
+Route::get('evaluations/{evaluation}/edit','Evaluation\EvaluationsController@edit')
+    ->name('evaluation.edit');
+
+    //update Evaluation route
+Route::put('evaluations/{evaluation}','Evaluation\EvaluationsController@update')
+->name('evaluation.update');
+
+//Delete A Evaluation 
+Route::delete('evaluations/{evaluation}','Evaluation\EvaluationsController@destroy')
+    ->name('evaluation.destroy');
+
+ 
+ 
+    //freereasons index
+Route::get('freereasons','FreeReason\FreeReasonsController@index')
+->name('freereason.index');
+
+//freereason create route
+Route::get('freereasons/create','FreeReason\FreeReasonsController@create')
+->name('freereason.create');
+
+//freereason show route
+Route::get('freereasons/{freeReason}','FreeReason\FreeReasonsController@show')
+->name('freereason.show');
+
+//store freereason route
+Route::post('freereasons','FreeReason\FreeReasonsController@store')
+->name('freereason.store');
+
+//Show The Form to Edit a freereason
+Route::get('freereasons/{freeReason}/edit','FreeReason\FreeReasonsController@edit')
+    ->name('freereason.edit');
+
+    //update freereason route
+Route::put('freereasons/{freeReason}','FreeReason\FreeReasonsController@update')
+->name('freereason.update');
+
+//Delete A FreeReason 
+Route::delete('freereasons/{freeReason}','FreeReason\FreeReasonsController@destroy')
+    ->name('freereason.destroy');
