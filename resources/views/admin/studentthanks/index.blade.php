@@ -39,15 +39,12 @@
             <tbody>
               @foreach($studentThanks as $studentThank)
               <tr>
-                @if($studentThank->type == 'img') {
+                @if($studentThank->type == 'img')
                 <td>صورة</td>
-                }
-                @elseif($studentThank->type == 'video') {
+                @elseif($studentThank->type == 'video')
                 <td>فيديو</td>
-                }
-                @else {
+                @else
                 <td>نص و صورة</td>
-                }
                 @endif
                 <td>{{$studentThank->order}}</td>
                 <td>

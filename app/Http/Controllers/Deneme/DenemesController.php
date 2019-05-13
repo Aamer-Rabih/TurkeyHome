@@ -11,6 +11,11 @@ use File;
 
 class DenemesController extends Controller
 {
+
+    protected $types = ['فيديو', 'صورة', 'PDF ملف', 'Word ملف', 'رابط'];
+    protected $terms = ['الفصل الأول', 'الفصل الثاني'];
+    protected $active = ['فعال', 'غير فعال'];
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,9 @@ class DenemesController extends Controller
     public function index()
     {
         $denemes = Deneme::latest()->get();
-        return view('admin.denemes.index', compact('denemes'));
+        $types = $this->types;
+        $terms = $this->terms;
+        return view('admin.denemes.index', compact('denemes', 'types', 'terms'));
     }
 
     /**
@@ -30,8 +37,10 @@ class DenemesController extends Controller
     public function create()
     {
         $classes = ClassRoom::all();
+        $types = $this->types;
+        $terms = $this->terms;
 
-        return view('admin.denemes.create',compact('classes'));
+        return view('admin.denemes.create',compact('classes', 'types', 'terms'));
     }
 
     /**
@@ -92,7 +101,11 @@ class DenemesController extends Controller
      */
     public function show(Deneme $deneme)
     {
-        return view('admin.denemes.show', compact('deneme'));
+        $types = $this->types;
+        $terms = $this->terms;
+        $active = $this->active;
+
+        return view('admin.denemes.show', compact('deneme', 'active', 'terms'));
     }
 
     /**
