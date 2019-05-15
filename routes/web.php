@@ -393,3 +393,95 @@ Route::put('freereasons/{freeReason}','FreeReason\FreeReasonsController@update')
 //Delete A FreeReason 
 Route::delete('freereasons/{freeReason}','FreeReason\FreeReasonsController@destroy')
     ->name('freereason.destroy');
+
+
+    //Tests index
+Route::get('ests','Test\TestController@index')
+->name('test.index');
+
+//Test create route
+Route::get('tests/create','Test\TestController@create')
+->name('test.create');
+
+//Test show route
+Route::get('tests/{test}','Test\TestController@show')
+->name('test.show');
+
+//store Test route
+Route::post('tests','Test\TestController@store')
+->name('test.store');
+
+//Show The Form to Edit a Test
+Route::get('tests/{test}/edit','Test\TestController@edit')
+    ->name('test.edit');
+
+    //update Test route
+Route::put('tests/{test}','Test\TestController@update')
+->name('test.update');
+
+//Delete A Test 
+Route::delete('tests/{test}','Test\TestController@destroy')
+    ->name('test.destroy');
+
+
+
+//Comments index
+Route::get('comments','Comment\CommentsController@index')
+->name('comment.index');
+
+//Comment create route
+Route::get('comments/create','Comment\CommentsController@create')
+->name('comment.create');
+
+//Comment show route
+Route::get('comments/{comment}','Comment\CommentsController@show')
+->name('comment.show');
+
+//store Comment route
+Route::post('comments','Comment\CommentsController@store')
+->name('comment.store');
+
+//Show The Form to Edit a Comment
+Route::get('comments/{comment}/edit','Comment\CommentsController@edit')
+    ->name('comment.edit');
+
+    //update Comment route
+Route::put('comments/{comment}','Comment\CommentsController@update')
+->name('comment.update');
+
+//Delete A Comment 
+Route::delete('comments/{comment}','Comment\CommentsController@destroy')
+    ->name('comment.destroy');
+
+
+    //replies index
+Route::get('replies','Reply\RepliesController@index')
+->name('reply.index');
+
+//Reply create route
+Route::get('replies/create','Reply\RepliesController@create')
+->name('reply.create');
+
+//Reply show route
+Route::get('replies/{reply}','Reply\RepliesController@show')
+->name('reply.show');
+
+//store Reply route
+Route::post('replies','Reply\repliesController@store')
+->name('reply.store');
+
+//Show The Form to Edit a Reply
+Route::get('replies/{reply}/edit','Reply\RepliesController@edit')
+    ->name('reply.edit');
+
+    //update Reply route
+Route::put('replies/{reply}','Reply\RepliesController@update')
+->name('reply.update');
+
+//Delete A Reply 
+Route::delete('replies/{reply}','Reply\RepliesController@destroy')
+    ->name('reply.destroy');
+
+
+
+

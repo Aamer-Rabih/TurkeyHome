@@ -21,6 +21,30 @@ class Test extends Model
     ];
 
 
+    //get the name of file from the full path
+    public function setSrcAttribute($value){
+
+        $this->attributes['src'] = $this->getStoragePath($value);
+
+
+    }
+
+
+    public function getStoragePath($url){
+
+        $segments = explode('/',$url);
+
+        array_shift($segments);
+
+        return implode('/',$segments);
+    }
+
+    public function getSrcAttribute($value){
+
+        return Storage::url($value) ; 
+    }
+
+
     //Subjects belonging to this Test 
     public function subjects(){
 
