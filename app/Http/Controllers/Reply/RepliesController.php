@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Reply;
 
-use App\Reoly;
+use App\Reply;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +27,8 @@ class RepliesController extends Controller
      */
     public function create()
     {
-        return view('admin.replies.create');
+        $comments = Comment::all();
+        return view('admin.replies.create',compact('comments'));
     }
 
     /**
@@ -90,7 +92,8 @@ class RepliesController extends Controller
      */
     public function edit(Reply $reply)
     {
-        return view('admin.replies.edit',compact('reply'));
+        $comments = Comment::all();
+        return view('admin.replies.edit',compact('reply','comments'));
     }
 
     /**

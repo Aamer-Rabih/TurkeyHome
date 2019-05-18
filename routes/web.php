@@ -396,7 +396,7 @@ Route::delete('freereasons/{freeReason}','FreeReason\FreeReasonsController@destr
 
 
     //Tests index
-Route::get('ests','Test\TestController@index')
+Route::get('tests','Test\TestController@index')
 ->name('test.index');
 
 //Test create route
@@ -481,6 +481,64 @@ Route::put('replies/{reply}','Reply\RepliesController@update')
 //Delete A Reply 
 Route::delete('replies/{reply}','Reply\RepliesController@destroy')
     ->name('reply.destroy');
+
+
+       //attachments index
+Route::get('attachments','Attachment\AttachmentsController@index')
+->name('attachment.index');
+
+//attachment create route
+Route::get('attachments/create','Attachment\AttachmentsController@create')
+->name('attachment.create');
+
+//attachment show route
+Route::get('attachments/{attachment}','Attachment\AttachmentsController@show')
+->name('attachment.show');
+
+//store attachment route
+Route::post('attachments','Attachment\AttachmentsController@store')
+->name('attachment.store');
+
+//Show The Form to Edit a attachment
+Route::get('attachments/{attachment}/edit','Attachment\AttachmentsController@edit')
+    ->name('attachment.edit');
+
+    //update attachment route
+Route::put('attachments/{attachment}','Attachment\AttachmentsController@update')
+->name('attachment.update');
+
+//Delete A attachment 
+Route::delete('attachments/{attachment}','Attachment\AttachmentsController@destroy')
+    ->name('attachment.destroy');
+
+
+     //advices index
+Route::get('advices','Advice\AdvicesController@index')
+->name('advice.index');
+
+//advice create route
+Route::get('advices/create','Advice\AdvicesController@create')
+->name('advice.create');
+
+//advice show route
+Route::get('advices/{advice}','Advice\AdvicesController@show')
+->name('advice.show');
+
+//store advice route
+Route::post('advices','Advice\AdvicesController@store')
+->name('advice.store');
+
+//Show The Form to Edit an advice
+Route::get('advices/{advice}/edit','Advice\AdvicesController@edit')
+    ->name('advice.edit');
+
+    //update advice route
+Route::put('advices/{advice}','Advice\AdvicesController@update')
+->name('advice.update');
+
+//Delete An advice 
+Route::delete('advices/{advice}','Advice\AdvicesController@destroy')
+    ->name('advice.destroy');
 
 
 

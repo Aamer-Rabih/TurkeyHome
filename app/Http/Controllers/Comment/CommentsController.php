@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Comment;
 
+use App\Comment;
+use App\Lesson;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +27,8 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        return view('admin.comments.create');
+        $lessons = Lesson::all();
+        return view('admin.comments.create',compact('lessons'));
     }
 
     /**
@@ -89,7 +92,8 @@ class CommentsController extends Controller
      */
     public function edit(Comment $comment)
     {
-        return view('admin.comments.edit',compact('comment'));
+        $lessons = Lesson::all();
+        return view('admin.comments.edit',compact('comment','lessons'));
     }
 
     /**
