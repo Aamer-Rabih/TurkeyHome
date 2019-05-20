@@ -45,7 +45,7 @@
                   </select>
                 </div>
                 <button type="submit" class="btn btn-success myhover">تعديل</button>
-                <a href="{{route('carousel.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+                <a href="{{route('carousel.index')}}" class="btn btn-default button2" style="margin-right:5px">إلغاء</a>
               </form>
 
           </div>

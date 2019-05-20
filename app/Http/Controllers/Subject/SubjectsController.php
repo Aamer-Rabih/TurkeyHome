@@ -164,14 +164,14 @@ class SubjectsController extends Controller
      *  @param \App\Subject $subject
      *  @return \Illuminate\Http\Response 
      */
-    public function activate(Subject $subject){
+    public function activate(Request $request, Subject $subject){
 
         $subject->activate();
 
         $subject->save();
 
-        return redirect()
-                ->route('subject.show', ['subject' => $subject->id])
+        return back()
+                //->route('subject.show', ['subject' => $subject->id])
                 ->with('success','تم تفعبل المادة بنجاح');
 
     }
@@ -183,14 +183,14 @@ class SubjectsController extends Controller
      * @param \App\Subject $subject 
      * @return \Illuminate\Http\Response 
      */
-    public function deactivate(Subject $subject){
+    public function deactivate(Request $request, Subject $subject){
 
         $subject->deactivate(); 
 
         $subject->save();
         
-        return redirect()
-                ->route('subject.show', ['subject' => $subject->id])
+        return back()
+                //->route('subject.show', ['subject' => $subject->id])
                 ->with('success','تم إلغاء تفعيل المادة بنجاح');
     }
 

@@ -18,22 +18,22 @@
         @if(!$class->free)
         <form action="{{ route('class.free', $class) }}" method="POST" id="makeClassFreeForm" style="display:inline; margin-right:10px;">
           {!! csrf_field() !!}
-          <a href="#" class="btn btn-success button-margin-header" onclick="document.getElementById('makeClassFreeForm').submit();"> اجعل الصف مجاني</a>
+          <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassFreeForm').submit();"> اجعل الصف مجاني</a>
           </form>
           @else
           <form action="{{ route('class.priced', $class) }}" method="POST" id="makeClassUnfreeForm" style="display:inline; margin-right:10px;">
             {!! csrf_field() !!}
-            <a href="#" class="btn btn-success button-margin-header" onclick="document.getElementById('makeClassUnfreeForm').submit();"> اجعل الصف غير مجاني</a>
+            <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassUnfreeForm').submit();"> اجعل الصف غير مجاني</a>
         </form>
         @endif
       </div>
       <div class="col-lg-2">
-        <a href="/subjects/create?selectedclass={{$class->id}}" class="btn btn-success button-margin-header" style="margin-right: 22px" >إضافة مادة 
+        <a href="/subjects/create?selectedclass={{$class->id}}" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة مادة 
           <i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i>
         </a>
       </div>
       <div class="col-lg-4">
-        <a href="{{route('class.index')}}" class="btn btn-primary button-margin-header pull-left" > إدارة كافة الصفوف 
+        <a href="{{route('class.index')}}" class="btn btn-primary button-margin-header custom-but pull-left" > إدارة كافة الصفوف 
           <i class="fa fa-angle-double-left" aria-hidden="true" style="font-size: 20px;"></i>
         </a>
       </div> 
@@ -53,8 +53,8 @@
             <thead>
               <tr> 
                 <th>اسم المادة</th>
-                <th>عدد الوحدات الدرسية</th>
                 <th>التفعيل</th>
+                <th>عدد الوحدات الدرسية</th>
                 <th>قابلية الدروس للتنزيل</th>
                 <th>العرض</th>
                 <th>التعديل</th>
@@ -65,12 +65,28 @@
               @foreach($class->subjects as $subject)
               <tr>
                 <td>{{$subject->name}}</td>
-                <td>{{$subject->units->count()}}</td>
                 @if($subject->active)
-                <td>فعال</td>
+                <td class="operations">
+                  <form action="{{ route('subject.deactivate', $subject) }}" method="POST" id="activateForm">
+                    {!! csrf_field() !!}
+                    <button id="{{$subject->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#{{$subject->id}}').click();" >
+                      <i class="fa fa-check-circle" aria-hidden="true" style="font-size:18px;color:#5cb85c;cursor: pointer;"></i>
+                    </a>
+                  </form>          
+                </td>
                 @else
-                <td>غير فعال</td>
+                <td class="operations">
+                  <form action="{{ route('subject.activate', $subject) }}" method="POST" id="activateForm">
+                    {!! csrf_field() !!}
+                    <button id="{{$subject->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#{{$subject->id}}').click();" >
+                      <i class="fa fa-times-circle" aria-hidden="true" style="font-size:18px;color:#dd4b39;cursor: pointer;"></i>
+                    </a>
+                  </form>                    
+                </td>
                 @endif
+                <td>{{$subject->units->count()}}</td>
                 @if($subject->downloable)
                 <td>قابلة للتنزيل</td>
                 @else
@@ -91,14 +107,11 @@
                     <form action="{{ route('subject.destroy', $subject) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">
-                      <button id="{{$subject->id}}" class=" btn-xs delete-button" style="display:none;">
-                        <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
-                      </button>
+                      <button id="{{$subject->id}}" class=" btn-xs delete-button" style="display:none;"></button>
                       <a herf="javascript:;" class="" onclick="$('#{{$subject->id}}').click();" >
-                        <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
+                        <i class="fa fa-trash" style="font-size:18px;color:#dd4b39;cursor: pointer;"></i>
                       </a>
-                    </form>
-                            
+                    </form>                           
                   </div>
                 </td>
   

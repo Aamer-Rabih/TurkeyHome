@@ -22,7 +22,7 @@
       <div class="col-lg-6">
         <div class="card color-grey">
           <div class="card-body">
-            <div class="card-header">إضافة دينيمي</div>
+            <div class="card-header">إضافة دينيمي  <i class="fa fa-plus-square" aria-hidden="true"></i></div>
               
               <form action="{{route('deneme.store')}}" enctype="multipart/form-data" method="POST">
                       {!! csrf_field() !!}

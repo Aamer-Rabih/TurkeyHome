@@ -15,12 +15,12 @@
                 @if(!$course->active)
                 <form action="{{ route('course.activate', $course) }}" method="POST" id="makeCourseActive" style="display:inline; margin-right:10px;">
                     {!! csrf_field() !!}
-                    <a href="#" class="btn btn-success button-margin-header" onclick="document.getElementById('makeCourseActive').submit();">تفعيل الدورة</a>
+                    <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeCourseActive').submit();">تفعيل الدورة</a>
                 </form>
                 @else
                 <form action="{{ route('course.deactivate', $course) }}" method="POST" id="makeCourseDeactive" style="display:inline; margin-right:10px;">
                     {!! csrf_field() !!}
-                    <a href="#" class="btn btn-success button-margin-header" onclick="document.getElementById('makeCourseDeactive').submit();">إلغاء تفعيل الدورة</a>
+                    <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeCourseDeactive').submit();">إلغاء تفعيل الدورة</a>
                 </form>
                 @endif
             </div>
@@ -30,7 +30,7 @@
                 </a> -->
             </div>
             <div class="col-lg-4">
-                <a href="{{route('course.index')}}" class="btn btn-primary button-margin-header pull-left" > إدارة كافة الدورات 
+                <a href="{{route('course.index')}}" class="btn btn-primary button-margin-header custom-but pull-left" > إدارة كافة الدورات 
                     <i class="fa fa-angle-double-left" aria-hidden="true" style="font-size: 20px;"></i>
                 </a>
             </div> 

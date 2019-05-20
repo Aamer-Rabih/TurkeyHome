@@ -18,7 +18,7 @@
     <div class="card-deck">
       <div class="col-lg-6">
         <div class="card color-grey">
-          <div class="card-header">تعديل تشكر الطالب</div>
+          <div class="card-header">تعديل تشكر الطالب <i class="fa fa-edit" aria-hidden="true"></i></div>
             <div class="card-body">
 
               <form action="{{route('studentthank.update', $studentThank)}}" enctype="multipart/form-data" method="POST">

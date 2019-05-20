@@ -178,7 +178,7 @@ Route::get('units/create','Unit\UnitsController@chooseClass');
 
 
 //Show The Form to create a New Unit 
-Route::get('classes/{class}/units/create','Unit\UnitsController@create')
+Route::get('units/create','Unit\UnitsController@create')
     ->name('unit.create');
 
 //Store The Unit 
