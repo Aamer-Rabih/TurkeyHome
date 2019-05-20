@@ -13,6 +13,8 @@
         <li><a href="{{route('showlesson.index')}}">الدروس الأستعراضية<i class="fa fa-angle-double-left pull-left"></i></a></li>
         <li><a href="{{route('studentthank.index')}}">تشكرات الطلاب<i class="fa fa-angle-double-left pull-left"></i></a></li>
         <li><a href="{{route('deneme.index')}}">إدارة الدينيمي<i class="fa fa-angle-double-left pull-left"></i></a></li>
+        <li><a href="{{route('freereason.index')}}">إعفاءات الطلاب<i class="fa fa-angle-double-left pull-left"></i></a></li>
+        <li><a href="{{route('advice.index')}}">إدارة النصائح<i class="fa fa-angle-double-left pull-left"></i></a></li>
       </ul>
     </div>
 
