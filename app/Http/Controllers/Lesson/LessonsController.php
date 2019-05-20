@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Advice;
+namespace App\Http\Controllers\Lesson;
 
-use App\Advice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdvicesController extends Controller
+class LessonsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class AdvicesController extends Controller
      */
     public function index()
     {
-        $advices = Advice::latest()->get();
-        return View('admin.advices.index',compact('advices'));
+        $lessons = Lesson::latest()->get();
+        return view('admin.lessons.index',compact('lessons'));
     }
 
     /**
@@ -26,7 +25,7 @@ class AdvicesController extends Controller
      */
     public function create()
     {
-        return view('admin.advices.create');
+        return view('admin.lessons.create');
     }
 
     /**
@@ -37,111 +36,111 @@ class AdvicesController extends Controller
      */
     public function store(Request $request)
     {
-        //Vaidate Data 
         $request->validate([
-            
             'title' => 'required|max:200',
             'type' => 'required',
             'active' => 'required',
-            'src' => 'required'
-
+            'src' => 'required',
+            'intro' => 'required'
         ]);
 
-
+        
         //Prepare data to save 
 
         $attributes['title'] = $request->title ; 
         $attributes['type'] = $request->type ;
         $attributes['active'] = $request->active ? true : false ;
+        $attributes['intro'] = $request->intro ;
+
         //save File 
         if($request->hasFile('src')){
 
-            $attributes['src'] = $request->src->store('public/advices');
+            $attributes['src'] = $request->src->store('public/lessons');
 
         }
 
          //Persist data in the database 
-         $advice = Advice::create($attributes);
+         $lesson = Lesson::create($attributes);
 
          //Return redirect 
         return redirect()
-        ->route('advice.show', ['advice' => $advice->id])
-        ->with('success', 'تم إنشاء النصيحة بنجاح');
-
+        ->route('lesson.show', ['lesson' => $lesson->id])
+        ->with('success', 'تم إنشاء الدرس بنجاح');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  App\Advice $advice
+     * @param  App\Lesson $lesson
      * @return \Illuminate\Http\Response
      */
-    public function show(Advice $advice)
+    public function show(Lesson $lesson)
     {
-        return view('admin.advices.show',compact('advice'));
+        return view('admin.lessons.show',compact('lesson'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  App\Advice $advice
+     * @param  App\Lesson $lesson
      * @return \Illuminate\Http\Response
      */
-    public function edit(Advice $advice)
+    public function edit(Lesson $lesson)
     {
-        return view('admin.advices.edit',compact('advice'));
+        return view('admin.lessons.edit',compact('lesson'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Advice $advice
+     * @param  App\Lesson $lesson
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Advice $advice)
+    public function update(Request $request, Lesson $lesson)
     {
         $request->validate([
-            
             'title' => 'required|max:200',
             'type' => 'required',
             'active' => 'required',
-            'src' => ''
-
+            'src' => '',
+            'intro' => 'required'
         ]);
 
-        $advice->title = $request->title ;
-        $advice->type = $request->type ;  
-        $advice->active = $request->active ? true : false ;  
+        $lesson->title = $request->title ;
+        $lesson->type = $request->type ;
+        $lesson->intro =$request->intro;  
+        $lesson->active = $request->active ? true : false ;  
 
         if($request->hasFile('src')) {
-            Storage::delete($advice->src);
-            $advice->src = $request->src->store('public/advices');
+            Storage::delete($lesson->src);
+            $lesson->src = $request->src->store('public/lessons');
         }
 
-        $advice->save();
+        $lesson->save();
 
         //Return redirect 
         return redirect()
-            ->route('advice.show', ['advice' => $advice->id])
-            ->with('success', 'تم تعديل النصيحة بنجاح');
+            ->route('lesson.show', ['lesson' => $lesson->id])
+            ->with('success', 'تم تعديل الدرس بنجاح');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  App\Advice $advice
+     * @param  App\Lesson $lesson
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Advice $advice)
+    public function destroy(Lesson $lesson)
     {
-         //Delete The advice file
-         Storage::delete($advice->src);
+        //Delete The lesson file
+        Storage::delete($lesson->src);
 
-         //Delete advice from db
-         $advice->delete();
+        //Delete lesson from db
+        $lesson->delete();
 
-         return redirect()->back()
-        ->with('success','تم حذف النصيحة بنجاح');
+        return redirect()->back()
+       ->with('success','تم حذف الدرس بنجاح');
     }
 }

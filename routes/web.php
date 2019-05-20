@@ -542,4 +542,34 @@ Route::delete('advices/{advice}','Advice\AdvicesController@destroy')
 
 
 
+        //lessons index
+Route::get('lessons','Lesson\LessonsController@index')
+->name('lesson.index');
+
+//lesson create route
+Route::get('lessons/create','Lesson\LessonsController@create')
+->name('lesson.create');
+
+//lesson show route
+Route::get('lessons/{lesson}','Lesson\LessonsController@show')
+->name('lesson.show');
+
+//store lesson route
+Route::post('lessons','Lesson\LessonsController@store')
+->name('lesson.store');
+
+//Show The Form to Edit an lesson
+Route::get('lessons/{lesson}/edit','Lesson\LessonsController@edit')
+    ->name('lesson.edit');
+
+    //update lesson route
+Route::put('lessons/{lesson}','Lesson\LessonsController@update')
+->name('lesson.update');
+
+//Delete An lesson 
+Route::delete('lessons/{lesson}','Lesson\LessonsController@destroy')
+    ->name('lesson.destroy');
+
+
+
 
