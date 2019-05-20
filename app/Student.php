@@ -50,7 +50,7 @@ class Student extends User
      * Replies Posted by this student
      */
     public function replies(){
-        return $this->morphMany('App\Reply','replier','replier_type','replier_id')
+        return $this->morphMany('App\Reply','replier','replier_type','replier_id');
     }
 
 

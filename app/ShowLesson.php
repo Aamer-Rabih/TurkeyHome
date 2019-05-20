@@ -12,5 +12,26 @@ class ShowLesson extends Model
         'src']; 
 
 
+        public function setSrcAttribute($value){
+
+            $this->attributes['src'] = $this->getStoragePath($value);
+    
+    
+        }
+    
+    
+        public function getStoragePath($url){
+    
+            $segments = explode('/',$url);
+    
+            array_shift($segments);
+    
+            return implode('/',$segments);
+        }
+    
+        public function getSrcAttribute($value){
+    
+            return Storage::url($value) ; 
+        }
 
 }

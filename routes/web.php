@@ -336,3 +336,240 @@ Route::delete('studentthanks/{studentThank}','StudentThank\StudentThanksControll
     ->name('studentthank.destroy');
 
 
+    //Evaluations index
+Route::get('evaluations','Evaluation\EvaluationsController@index')
+->name('evaluation.index');
+
+//Evaluation create route
+Route::get('evaluations/create','Evaluation\EvaluationsController@create')
+->name('evaluation.create');
+
+//Evaluation show route
+Route::get('evaluations/{evaluation}','Evaluation\EvaluationsController@show')
+->name('evaluation.show');
+
+//store Evaluation route
+Route::post('evaluations','Evaluation\EvaluationsController@store')
+->name('evaluation.store');
+
+//Show The Form to Edit a Evaluation 
+Route::get('evaluations/{evaluation}/edit','Evaluation\EvaluationsController@edit')
+    ->name('evaluation.edit');
+
+    //update Evaluation route
+Route::put('evaluations/{evaluation}','Evaluation\EvaluationsController@update')
+->name('evaluation.update');
+
+//Delete A Evaluation 
+Route::delete('evaluations/{evaluation}','Evaluation\EvaluationsController@destroy')
+    ->name('evaluation.destroy');
+
+ 
+ 
+    //freereasons index
+Route::get('freereasons','FreeReason\FreeReasonsController@index')
+->name('freereason.index');
+
+//freereason create route
+Route::get('freereasons/create','FreeReason\FreeReasonsController@create')
+->name('freereason.create');
+
+//freereason show route
+Route::get('freereasons/{freeReason}','FreeReason\FreeReasonsController@show')
+->name('freereason.show');
+
+//store freereason route
+Route::post('freereasons','FreeReason\FreeReasonsController@store')
+->name('freereason.store');
+
+//Show The Form to Edit a freereason
+Route::get('freereasons/{freeReason}/edit','FreeReason\FreeReasonsController@edit')
+    ->name('freereason.edit');
+
+    //update freereason route
+Route::put('freereasons/{freeReason}','FreeReason\FreeReasonsController@update')
+->name('freereason.update');
+
+//Delete A FreeReason 
+Route::delete('freereasons/{freeReason}','FreeReason\FreeReasonsController@destroy')
+    ->name('freereason.destroy');
+
+
+    //Tests index
+Route::get('tests','Test\TestController@index')
+->name('test.index');
+
+//Test create route
+Route::get('tests/create','Test\TestController@create')
+->name('test.create');
+
+//Test show route
+Route::get('tests/{test}','Test\TestController@show')
+->name('test.show');
+
+//store Test route
+Route::post('tests','Test\TestController@store')
+->name('test.store');
+
+//Show The Form to Edit a Test
+Route::get('tests/{test}/edit','Test\TestController@edit')
+    ->name('test.edit');
+
+    //update Test route
+Route::put('tests/{test}','Test\TestController@update')
+->name('test.update');
+
+//Delete A Test 
+Route::delete('tests/{test}','Test\TestController@destroy')
+    ->name('test.destroy');
+
+
+
+//Comments index
+Route::get('comments','Comment\CommentsController@index')
+->name('comment.index');
+
+//Comment create route
+Route::get('comments/create','Comment\CommentsController@create')
+->name('comment.create');
+
+//Comment show route
+Route::get('comments/{comment}','Comment\CommentsController@show')
+->name('comment.show');
+
+//store Comment route
+Route::post('comments','Comment\CommentsController@store')
+->name('comment.store');
+
+//Show The Form to Edit a Comment
+Route::get('comments/{comment}/edit','Comment\CommentsController@edit')
+    ->name('comment.edit');
+
+    //update Comment route
+Route::put('comments/{comment}','Comment\CommentsController@update')
+->name('comment.update');
+
+//Delete A Comment 
+Route::delete('comments/{comment}','Comment\CommentsController@destroy')
+    ->name('comment.destroy');
+
+
+    //replies index
+Route::get('replies','Reply\RepliesController@index')
+->name('reply.index');
+
+//Reply create route
+Route::get('replies/create','Reply\RepliesController@create')
+->name('reply.create');
+
+//Reply show route
+Route::get('replies/{reply}','Reply\RepliesController@show')
+->name('reply.show');
+
+//store Reply route
+Route::post('replies','Reply\repliesController@store')
+->name('reply.store');
+
+//Show The Form to Edit a Reply
+Route::get('replies/{reply}/edit','Reply\RepliesController@edit')
+    ->name('reply.edit');
+
+    //update Reply route
+Route::put('replies/{reply}','Reply\RepliesController@update')
+->name('reply.update');
+
+//Delete A Reply 
+Route::delete('replies/{reply}','Reply\RepliesController@destroy')
+    ->name('reply.destroy');
+
+
+       //attachments index
+Route::get('attachments','Attachment\AttachmentsController@index')
+->name('attachment.index');
+
+//attachment create route
+Route::get('attachments/create','Attachment\AttachmentsController@create')
+->name('attachment.create');
+
+//attachment show route
+Route::get('attachments/{attachment}','Attachment\AttachmentsController@show')
+->name('attachment.show');
+
+//store attachment route
+Route::post('attachments','Attachment\AttachmentsController@store')
+->name('attachment.store');
+
+//Show The Form to Edit a attachment
+Route::get('attachments/{attachment}/edit','Attachment\AttachmentsController@edit')
+    ->name('attachment.edit');
+
+    //update attachment route
+Route::put('attachments/{attachment}','Attachment\AttachmentsController@update')
+->name('attachment.update');
+
+//Delete A attachment 
+Route::delete('attachments/{attachment}','Attachment\AttachmentsController@destroy')
+    ->name('attachment.destroy');
+
+
+     //advices index
+Route::get('advices','Advice\AdvicesController@index')
+->name('advice.index');
+
+//advice create route
+Route::get('advices/create','Advice\AdvicesController@create')
+->name('advice.create');
+
+//advice show route
+Route::get('advices/{advice}','Advice\AdvicesController@show')
+->name('advice.show');
+
+//store advice route
+Route::post('advices','Advice\AdvicesController@store')
+->name('advice.store');
+
+//Show The Form to Edit an advice
+Route::get('advices/{advice}/edit','Advice\AdvicesController@edit')
+    ->name('advice.edit');
+
+    //update advice route
+Route::put('advices/{advice}','Advice\AdvicesController@update')
+->name('advice.update');
+
+//Delete An advice 
+Route::delete('advices/{advice}','Advice\AdvicesController@destroy')
+    ->name('advice.destroy');
+
+
+
+        //lessons index
+Route::get('lessons','Lesson\LessonsController@index')
+->name('lesson.index');
+
+//lesson create route
+Route::get('lessons/create','Lesson\LessonsController@create')
+->name('lesson.create');
+
+//lesson show route
+Route::get('lessons/{lesson}','Lesson\LessonsController@show')
+->name('lesson.show');
+
+//store lesson route
+Route::post('lessons','Lesson\LessonsController@store')
+->name('lesson.store');
+
+//Show The Form to Edit an lesson
+Route::get('lessons/{lesson}/edit','Lesson\LessonsController@edit')
+    ->name('lesson.edit');
+
+    //update lesson route
+Route::put('lessons/{lesson}','Lesson\LessonsController@update')
+->name('lesson.update');
+
+//Delete An lesson 
+Route::delete('lessons/{lesson}','Lesson\LessonsController@destroy')
+    ->name('lesson.destroy');
+
+
+
+
