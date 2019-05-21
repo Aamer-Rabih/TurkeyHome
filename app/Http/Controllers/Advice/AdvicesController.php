@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Advice;
 use App\Advice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Storage ; 
+use File;
 
 class AdvicesController extends Controller
 {

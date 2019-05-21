@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Test;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Test;
+use Storage ; 
+use File;
 
 class TestController extends Controller
 {

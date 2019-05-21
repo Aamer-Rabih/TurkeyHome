@@ -571,5 +571,34 @@ Route::delete('lessons/{lesson}','Lesson\LessonsController@destroy')
     ->name('lesson.destroy');
 
 
+     //whatsappLinks index
+Route::get('whatsapplinks','WhatsappLink\WhatsappLinksController@index')
+->name('whatsapplink.index');
+
+//whatsappLink create route
+Route::get('whatsapplinks/create','WhatsappLink\WhatsappLinksController@create')
+->name('whatsapplink.create');
+
+//whatsappLink show route
+Route::get('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksController@show')
+->name('whatsapplink.show');
+
+//store whatsappLink route
+Route::post('whatsapplinks','WhatsappLink\WhatsappLinksController@store')
+->name('whatsapplink.store');
+
+//Show The Form to Edit an whatsappLink
+Route::get('whatsapplinks/{whatsappLink}/edit','WhatsappLink\WhatsappLinksController@edit')
+    ->name('whatsapplink.edit');
+
+    //update whatsappLink route
+Route::put('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksController@update')
+->name('whatsapplink.update');
+
+//Delete An whatsappLink 
+Route::delete('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksController@destroy')
+    ->name('whatsapplink.destroy');
+
+
 
 
