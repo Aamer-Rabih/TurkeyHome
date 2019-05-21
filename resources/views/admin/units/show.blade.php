@@ -2,88 +2,68 @@
 
 @section('content')
 
-    <div id="content">
-      <div class="content-header">
-        <h1>
-            <small>إدارة الوحدات الدرسية</small>
-        </h1>
+<div id="content">
+  <div class="header-card table-cards color-grey">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="content-header">
+         <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> إدارة الوحدات الدراسية</small></h1>
+        </div>
       </div>
-
-
-        <div class="row">
-          <div class="card-deck">
-            
-            <div class="col-lg-12">
-              <div class="card table-cards color-grey">
-                  <div class="card-body table-hover">
-
-                        <h4 style="display:inline;">{{$unit->title}} :</h4>
-                        @if(!$unit->active)
-                        <form action="{{ route('unit.activate',['unit' => $unit->id]) }}" method="POST" id="makeClassFreeForm" style="display:inline; margin-right:10px;">
-                                {!! csrf_field() !!}
-                                <a href="#" class="btn btn-success" onclick="document.getElementById('makeClassFreeForm').submit();">
-                                فعل الوحدة الدرسية
-                                </a>
-                        </form>
-                        @else
-                        <form action="{{ route('unit.deactivate',['unit' => $unit->id]) }}" method="POST" id="makeClassUnfreeForm" style="display:inline; margin-right:10px;">
-                                {!! csrf_field() !!}
-                                <a href="#" class="btn btn-success" onclick="document.getElementById('makeClassUnfreeForm').submit();">
-                                    الغ تفعيل الوحدة الدرسية
-                                </a>
-                        </form>
-                        @endif
-
-                       
-                            <a href="#"class="btn btn-success" style="margin-right: 22px" >
-                                إضافة درس للوحدة
-                            </a>
-                    
-                <a href="{{route('unit.index')}}" class="btn btn-primary pull-left" > >>إدارة كافة الوحدات </a>
-                  </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-
-        <div id="table" class="row">
-          <div class="col-lg-8">
-            <div class="card table-cards color-grey">
-              <div class="card-body">
-                <table class="table table-bordered table-hover table-width">
-                  <thead>
-                    <tr> 
-                      <th>اسم الدرس</th>
-                      <th>النوع</th>
-                      <th>المصدر</th>
-                      <th>المادة</th>
-                      <th>الصف</th>
-                      <th>تاريخ الإنشاء</th>
-                      <th>تاريخ آخر تعديل</th>
-                      <th>فعال؟</th>
-                      <th>عرض</th>
-                      <th>تعديل</th>
-                      <th>حذف</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($unit->lessons as $lesson)
-                    <tr>
-                      <td>{{$lesson->name}}</td>
-
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div class="col-lg-2">
+        @if(!$unit->active)
+        <form action="{{ route('unit.activate', $unit) }}" method="POST" id="makeunitActivate" style="display:inline; margin-right:10px;">
+          {!! csrf_field() !!}
+          <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeunitActivate').submit();"> اجعل الوحدة مفعلة </a>
+          </form>
+          @else
+          <form action="{{ route('unit.deactivate', $unit) }}" method="POST" id="makeUnitDeactivate" style="display:inline; margin-right:10px;">
+            {!! csrf_field() !!}
+            <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeUnitDeactivate').submit();"> اجعل الوحدة غير مفعلة</a>
+        </form>
+        @endif
+      </div>
+      <div class="col-lg-2">
+        <a href="#" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة درس 
+          <i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i>
+        </a>
+      </div>
+      <div class="col-lg-4">
+        <a href="{{route('unit.index')}}" class="btn btn-primary button-margin-header custom-but pull-left" > إدارة كافة الوحدات 
+          <i class="fa fa-angle-double-left" aria-hidden="true" style="font-size: 20px;"></i>
+        </a>
+      </div> 
     </div>
+  </div>
+        
+  <div id="table" class="row">
+    <div class="col-lg-10">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> الدروس المعتمدة ضمن هذه الوحدة</small>
+            </h2>
+          </div>
+          <table class="table table-bordered table-hover table-width">
+            <thead>
+              <tr> 
+                <th>اسم الدرس</th>
+                <th>التفعيل</th>
+                <th>العرض</th>
+                <th>التعديل</th>
+                <th>الحذف</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 @endsection
-
-
-

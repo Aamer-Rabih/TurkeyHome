@@ -17,7 +17,7 @@
       <div class="col-lg-6">
         <div class="card color-grey">
           <div class="card-body">
-            <div class="card-header">إضافة صف</div>
+            <div class="card-header">إضافة صف <i class="fa fa-plus-square" aria-hidden="true"></i></div>
               
               <form action="{{route('class.store')}}" method="POST">
                       {!! csrf_field() !!}
@@ -39,8 +39,8 @@
                     <label>غير مجاني</label>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-success myhover">إضافة</button>
-                <a href="{{route('class.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+                <button type="submit" class="btn btn-success button1">إضافة</button>
+                <a href="{{route('class.index')}}" class="btn btn-default button2" style="margin-right:5px">إلغاء</a>
               </form>
               
           </div>

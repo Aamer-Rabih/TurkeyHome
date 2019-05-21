@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="col-lg-2">
-        <a href="{{route('class.create')}}" class="btn btn-success myhover BP" role="button">إضافة صف<div><i class="material-icons" style="font-size:16px">add_box</i></div></a>
+        <a href="{{route('class.create')}}" class="btn btn-success custom-but BP" >إضافة صف <div><i class="fa fa-plus-square" aria-hidden="true"></i></div></a>
       </div>
     </div>
   </div>

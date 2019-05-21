@@ -24,7 +24,7 @@
         <div class="card-deck">
             <div class="col-lg-6">
                 <div class="card color-grey">
-                    <div class="card-header">تعديل الدورة</div>
+                    <div class="card-header">تعديل الدورة <i class="fa fa-edit" aria-hidden="true"></i></div>
                         <div class="card-body">
 
                             <form action="{{ route('course.update', $course) }}" method="POST">
@@ -57,7 +57,7 @@
                                     @endforeach
                                 </div>
                                 <button type="submit" class="btn btn-success myhover">تعديل</button>
-                                <a href="{{route('course.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+                                <a href="{{route('course.index')}}" class="btn btn-default button2" style="margin-right:5px">إلغاء</a>
                             </form>
 
                         </div>

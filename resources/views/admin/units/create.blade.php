@@ -3,78 +3,57 @@
 @section('content')
 
 <div id="content">
-      <div class="content-header">
-        <h1>
-          <small>إدارةالوحدات الدرسية</small>
-        </h1>
+  <div class="header-card table-cards color-grey">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="content-header">
+         <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> إدارة الوحدات الدراسية</small></h1>
+        </div>
       </div>
-
-
-        <div class="row">
-          <div class="card-deck">
-            
-            <div class="col-lg-6">
-              <div class="card color-grey">
-                <div class="card-body">
-                  <div class="card-header">إضافة وحدة</div>
-
-                  <form action="{{route('unit.store')}}" method="POST">
+    </div>
+  </div>
+  <div id="table" class="row">
+    <div class="card-deck">       
+      <div class="col-lg-6">
+        <div class="card color-grey">
+          <div class="card-body">
+            <div class="card-header">إضافة وحدة دراسية <i class="fa fa-plus-square" aria-hidden="true"></i></div>
+              
+              <form action="{{route('unit.store')}}" method="POST">
                       {!! csrf_field() !!}
-                    <div class="form-group">
-                      <label for="classRoom"><h5>اسم الوحدة:</h5></label>
-                        <input class="form-control" type="text" name="title" id="title" required>
-                        @if($errors->has('title'))
-                    <span class="text-danger">*{{$errors->first('title')}}</span>
-                        @endif
-                    </div>
-                    
-                    <div class="radioG">
-                        <h5>فعالية الوحدة الدرسية :</h5>
-                        <div class="radio">
-                        <input type="radio" name="active" value="1" checked>
-                        <label>فعالة</label>
-                        </div>
-                        <div class="radio">
-                        <input type="radio" name="active" value="0">
-                        <label>غير فعالة</label>
-                        </div>
-                    </div>
-                   
-                    @if($selectedSubject)
-                      <div class="form-group">
-
-                      <p>الصف: {{$selectedSubject->class->name}}</p>
-                      <p>المادة: {{$selectedSubject->name}}</p>
-                      </div>
-
-                   
-                    @else 
-                    <div class="form-group">
-                            <p>الصف:{{$class->name}}</p>
-                            <label for="subject"><h5>المادة:</h5></label>
-                              <select class="form-control select" id="subject" name="subject_id">
-                                <option selected value="0">--اختر المادة--</option>
-                                @foreach($class->subjects as $subject)
-                              <option value="{{$subject->id}}">{{$subject->name}}</option>
-                                @endforeach
-                              </select>
-                              @if($errors->has('subject_id'))
-                            <span class="text-danger">{{$errors->first('subject_id')}}</span>
-                              @endif
-                      </div>
-                          
-                    @endif
-                    <button type="submit" class="btn btn-success ">إضافة</button>
-                    <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
-
-                  </form>
+                <div class="form-group">
+                  <label for="unit"><h5>الوحدة الدراسية :</h5></label>
+                  <input type="text" class="form-control" id="unit" name="title" required placeholder="اسم الوحدة الجديدة">
+                </div>                
+                <div class="form-group">
+                  <label for="subject">المادة الدراسية :</label>
+                  <select class="form-control form-control-select mt-3" id="subject" name="subject_id">
+                    <option selected>-- اختر المادة الدراسية --</option>
+                    @foreach($subjects as $subject)
+                    <option value="{{$subject->id}}">{{$subject->name}} التابعة لل {{$subject->class->name}}</option>
+                    @endforeach 
+                  </select>
                 </div>
-              </div>
-            </div>
-            
+                <div class="radioG">
+                  <h5>تفعيل الوحدة الدراسية :</h5>
+                  <div class="radio">
+                    <input type="radio" name="active" id="active" value="1" checked>
+                    <label for="active">مفعلة</label>
+                  </div>
+                  <div class="radio">
+                    <input type="radio" name="active" id="deactive" value="0">
+                    <label for="deactive">غير مفعلة</label>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-success button1">إضافة</button>
+                <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+              </form>
+              
           </div>
         </div>
-
+      </div>      
     </div>
+  </div>
+</div>
 
 @endsection

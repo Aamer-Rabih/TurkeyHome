@@ -1,104 +1,65 @@
 @extends('admin.layouts.master')
 
-
-@section('styles')
-<style>
-
-
-.subject-list{
-
-    color : #111;
-    text-align: right ;
-    margin-bottom: 20px; 
-}
-.subject-list .subject-name {
-
-    color : #828383 ; 
-}
-
-
-
-
-</style>
-@endsection
 @section('content')
+
 
 <div id="content">
 
-      <div class="content-header">
-        <h1>
-            <small>إدارة الوحدات الدرسية</small>
-        </h1>
-      </div>
+  <div class="header-card table-cards color-grey">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="content-header">
+         <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> إدارة الوحدات الدراسية</small></h1>
+        </div>
+      </div> 
+    </div>
+  </div>
 
-        <div class="row">
-          <div class="card-deck">
-            <div class="col-lg-6">
-              <div class="card color-grey">
-                <div class="card-header">تعديل وحدة درسية</div>
-                <div class="card-body">
+  <div class="row" id="table">
+    <div class="card-deck">
+      <div class="col-lg-6">
+        <div class="card color-grey">
+          <div class="card-header">تعديل الوحدة الدراسية <i class="fa fa-edit" aria-hidden="true"></i></div>
+            <div class="card-body">
 
-                  <form action="{{ route('unit.update',['unit' => $unit->id]) }}" method="POST">
-                    <div class="form-group">
-                        {!! csrf_field() !!}
-                        <input type="hidden" name="_method" value="PUT">
-                      
-                        <label for="title">اسم الوحدة:</label>
-                    <input type="text" name="title" value="{{$unit->title}}" class="form-control">
-                    @if($errors->has('title'))
-
-                    <span class="text-danger">{{$errors->first('title')}}</span>
-                    @endif
-                    </div>
-                    
-                    <div class="radioG">
-                        <h5>فعالية الوحدة :</h5>
-                            <div class="radio">
-                            <input type="radio" name="active" value="1" {{$unit->active ? 'checked' : ''}}>
-                        <label>فعالة</label>
-                        </div>
-                        <div class="radio">
-                        <input type="radio" name="active" value="0" {{!$unit->active ? 'checked' :'' }}>
-                        <label>غير فعالة</label>
-                        </div>
-                      
-                    </div>
-
-                    <div dir="rtl" class="subject-list">
-                        <h4>اختيار المادة :</h4>
-                        <ul class="list-group">
-                        @foreach($classes as $class)
-                            <li class="list-group-item"><h5>{{$class->name}}</h5>
-                              <ul class="list-group">
-                            @foreach($class->subjects as $subject)
-                               <li class="list-group-item" {{$unit->subject->id == $subject->id ? 'style="background-color:#AAA;"' : ''}}>
-                                <div >
-                                <input type="radio" name="subject_id" value="{{$subject->id}}" {{$subject->id == $unit->subject->id ? 'checked' :'' }}>
-                                <label class="subject-name">{{$subject->name}}</label>
-                              </div>
-                               </li>
-                            @endforeach
-                          </ul>
-                            </li>
-                        
-
-                        @endforeach
-                      </ul>
-                    </div>
-                    <hr>
-                    <div class="card-footer">
-                    <button type="submit" class="btn btn-success ">تعديل</button>
-                    <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+            <form action="{{route('unit.update', $unit)}}" method="POST">
+                      {!! csrf_field() !!}
+                      {!! method_field('PUT') !!}
+                <div class="form-group">
+                  <label for="unit"><h5>الوحدة الدراسية :</h5></label>
+                  <input type="text" class="form-control" id="unit" name="title" required value="{{$unit->title}}">
+                </div>                
+                <div class="form-group">
+                  <label for="subject">المادة الدراسية :</label>
+                  <select class="form-control form-control-select mt-3" id="subject" name="subject_id">
+                    @foreach($subjects as $subject)
+                    <option value="{{$subject->id}}" {{$subject->id === $unit->subject_id ? "selected" : ""}}>
+                      {{$subject->name}} التابعة لل {{$subject->class->name}}
+                    </option>
+                    @endforeach 
+                  </select>
                 </div>
-                  </form>
-
+                <div class="radioG">
+                  <h5>تفعيل الوحدة الدراسية :</h5>
+                  <div class="radio">
+                    <input type="radio" name="active" id="active" value="1" {{$unit->active ? "checked" : ""}}>
+                    <label for="active">مفعلة</label>
+                  </div>
+                  <div class="radio">
+                    <input type="radio" name="active" id="deactive" value="0" {{!$unit->active ? "checked" : ""}}>
+                    <label for="deactive">غير مفعلة</label>
+                  </div>
                 </div>
-              </div>
-            </div>
-            
+                <button type="submit" class="btn btn-success button1">تعديل</button>
+                <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+              </form>
+              
           </div>
         </div>
-
+      </div> 
     </div>
+  </div>
+
+</div>
 
 @endsection

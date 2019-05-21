@@ -116,7 +116,10 @@ class DenemesController extends Controller
      */
     public function edit(Deneme $deneme)
     {
-        return view('admin.denemes.edit', compact('deneme'));
+        $classes = ClassRoom::all();
+        $terms = $this->terms;
+        $types = $this->types;
+        return view('admin.denemes.edit', compact('deneme', 'classes', 'terms', 'types'));
     }
 
     /**

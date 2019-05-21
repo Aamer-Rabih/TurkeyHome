@@ -41,13 +41,15 @@ class UnitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(ClassRoom $class)
+    public function create(Request $request)
     {
         //Fetch All Classes 
         
         $selectedSubject = request()->filled('selectedsubject') ? Subject::findOrFail(request()->selectedsubject) : null ; 
+        $subjects = Subject::latest()->get(); 
+
         //Return View to render All Classes
-        return view('admin.units.create', compact('class','selectedSubject')); 
+        return view('admin.units.create', compact('selectedSubject','subjects')); 
     }
 
     /**
@@ -107,9 +109,9 @@ class UnitsController extends Controller
      */
     public function edit(Unit $unit)
     {
-        $classes = ClassRoom::all();    
+        $subjects = Subject::latest()->get();    
 
-        return view('admin.units.edit', compact('unit' , 'classes'));
+        return view('admin.units.edit', compact('unit' , 'subjects'));
 
     }
 
@@ -171,8 +173,7 @@ class UnitsController extends Controller
 
         $unit->save();
 
-        return redirect()
-                ->route('unit.show', ['unit' => $unit->id])
+        return back()
                 ->with('success','تم تفعيل الوحدة الدرسية بنجاح');
     }
 
@@ -185,8 +186,7 @@ class UnitsController extends Controller
         $unit->deactivate();
         $unit->save();
 
-        return redirect()
-                ->route('unit.show', ['unit' => $unit->id])
+        return back()
                 ->with('success','تم إلغاء تفعيل الوحدة الدرسية بنجاح') ; 
                 
     }

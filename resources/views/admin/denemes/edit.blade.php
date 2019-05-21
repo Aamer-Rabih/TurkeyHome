@@ -19,7 +19,7 @@
     <div class="card-deck">
       <div class="col-lg-6">
         <div class="card color-grey">
-          <div class="card-header">تعديل دينيمي</div>
+          <div class="card-header">تعديل دينيمي <i class="fa fa-edit" aria-hidden="true"></i></div>
             <div class="card-body">
 
 
@@ -33,7 +33,7 @@
                   <label for="orderField">الصف :</label>
                   <select class="form-control form-control-select mt-3" id="orderField" name="class_id">
                     @foreach($classes as $class)
-                    <option value="{{$class->id}}" {{$deneme->class_id === class->id ? "selected" : ""}}>{{$class->name}}</option>
+                    <option value="{{$class->id}}" {{ $deneme->class_id === $class->id ? "selected" : ""}}>{{$class->name}}</option>
                     @endforeach 
                   </select>
                 </div>

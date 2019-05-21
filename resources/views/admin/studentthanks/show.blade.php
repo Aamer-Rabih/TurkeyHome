@@ -19,7 +19,7 @@
         
       </div>
       <div class="col-lg-6">
-        <a href="{{route('studentthank.index')}}" class="btn btn-primary button-margin-header pull-left" > إدارة تشكرات الطلاب 
+        <a href="{{route('studentthank.index')}}" class="btn btn-primary button-margin-header custom-but pull-left" > إدارة تشكرات الطلاب 
           <i class="fa fa-angle-double-left" aria-hidden="true" style="font-size: 20px;"></i>
         </a>
       </div> 
@@ -77,7 +77,7 @@
           <form action="{{ route('studentthank.destroy',['studentThank' => $studentThank->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button class=" btn btn-danger">حذف التشكر</button>
+                      <button class=" btn btn-danger custom-but">حذف التشكر</button>
               
           </form>       
                   

@@ -57,7 +57,8 @@ class CarouselsController extends Controller
         //save Image 
             if($request->hasFile('src')){
 
-                    $attributes['src'] = $request->src->store('public/carousels');
+                    //$attributes['src'] = $request->src->store('public/carousels');
+                    $attributes['src'] = $request->src->storeAs('public/carousels', $request->src->getClientOriginalName());
 
             }
 
@@ -128,7 +129,7 @@ class CarouselsController extends Controller
         //Delete old img and save new one
         if($request->hasFile('src')) {
             Storage::delete($carousel->src);
-            $carousel->src = $request->src->store('public/carousels');
+            $carousel->src = $request->src->storeAs('public/carousels', $request->src->getClientOriginalName());
         }
         if($request->order != $carousel->order) {
 

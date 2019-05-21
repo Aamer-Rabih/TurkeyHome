@@ -18,7 +18,7 @@
     <div class="card-deck">
       <div class="col-lg-6">
         <div class="card color-grey">
-          <div class="card-header">تعديل الدرس الأستعراضي</div>
+          <div class="card-header">تعديل الدرس الأستعراضي<i class="fa fa-edit" aria-hidden="true"></i></div>
             <div class="card-body">
 
               <form action="{{route('showlesson.update', $showLesson)}}" enctype="multipart/form-data" method="POST">

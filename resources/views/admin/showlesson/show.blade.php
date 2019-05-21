@@ -19,7 +19,7 @@
         
       </div>
       <div class="col-lg-6">
-        <a href="{{route('showlesson.index')}}" class="btn btn-primary button-margin-header pull-left" > إدارة الدروس الأستعراضي 
+        <a href="{{route('showlesson.index')}}" class="btn btn-primary button-margin-header custom-but pull-left" > إدارة الدروس الأستعراضي 
           <i class="fa fa-angle-double-left" aria-hidden="true" style="font-size: 20px;"></i>
         </a>
       </div> 
@@ -65,7 +65,7 @@
           <form action="{{ route('showlesson.destroy',['showLesson' => $showLesson->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button class=" btn btn-danger">حذف الملف</button>     
+                      <button class=" btn btn-danger custom-but">حذف الملف</button>     
           </form>       
                   
         </div>
