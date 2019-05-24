@@ -126,7 +126,11 @@ Route::get('subjects/{subject}','Subject\SubjectsController@show')
 
 
 //DELETE A Subject 
-Route::delete('subjects/{subject}','Subject\SubjectsController@destroy')
+Route::delete('subjects/{subject}',
+    ['uses' => 'Subject\SubjectsController@destroy',
+    'middleware' => 'roles',
+    'roles' => [1]
+    ])
     ->name('subject.destroy');
 
 
@@ -602,3 +606,7 @@ Route::delete('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksControll
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

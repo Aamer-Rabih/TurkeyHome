@@ -36,4 +36,31 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role','role_user')
             ->withTimestamps();
     }
+
+    //any role check for the user
+    public function hasAnyRole($roles)
+    {
+        if (is_array($roles))
+         foreach($roles as $role )
+         {
+             if ($this->hasRole($roles)){
+                 return true;
+             }
+         }else{
+             if ($this->hasRole($roles))
+             {
+                 return true;
+             }
+             else return false;
+         }
+    }
+    //check if the user has a specific role
+    public function hasRole($role)
+    {
+        if($this->roles()->where('role',$role)->first()){
+        return true;
+        }
+        
+        return false;
+    }
 }
