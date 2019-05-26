@@ -187,4 +187,24 @@ class CoursesController extends Controller
                 ->with('success', 'تم إلغاء تفعيل الدورة بنجاح');
 
       }
+
+      public function addLesson(Course $course)
+    {
+        $user = Auth::user();
+        $lessons = $user->lessons();
+        //$lessons = Lesson::with('techers');
+        
+        return view('admin.courses.addlesson',compact('course','lessons'));
+    }
+
+    public function storeLesson(Request $request,Course $course)
+    {
+        $lesson = Lesson::find($request->lesson_id);
+        $course->lessons()->attach($lesson);
+
+        //Redirect with status 
+        return redirect()
+                ->route('course.show',['course' => $course->id])
+                ->with('success','تم تعديل الدورة بنجاح');
+    }
 }

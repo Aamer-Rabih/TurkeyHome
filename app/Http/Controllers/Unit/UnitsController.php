@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Unit;
 use App\Unit;
 use App\ClassRoom;
 use App\Subject;
+use App\Lesson;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -189,5 +191,25 @@ class UnitsController extends Controller
         return back()
                 ->with('success','تم إلغاء تفعيل الوحدة الدرسية بنجاح') ; 
                 
+    }
+
+    public function addLesson(Unit $unit)
+    {
+        $user = Auth::user();
+        $lessons = $user->lessons();
+        //$lessons = Lesson::with('techers');
+        
+        return view('admin.units.addlesson',compact('unit','lessons'));
+    }
+
+    public function storeLesson(Request $request,Unit $unit)
+    {
+        $lesson = Lesson::find($request->lesson_id);
+        $unit->lessons()->attach($lesson);
+
+        //Redirect with status 
+        return redirect()
+                ->route('unit.show',['unit' => $unit->id])
+                ->with('success','تم تعديل الوحدة الدرسية بنجاح');
     }
 }

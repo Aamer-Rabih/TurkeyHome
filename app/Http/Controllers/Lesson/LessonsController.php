@@ -143,4 +143,27 @@ class LessonsController extends Controller
         return redirect()->back()
        ->with('success','تم حذف الدرس بنجاح');
     }
+
+    public function activate(Lesson $lesson){
+
+        $lesson->makeActive();
+        
+        $lesson->save();
+        
+        return redirect()->route('lesson.show', ['lesson' => $lesson->id])
+                ->with('success','تم تفعيل الدرس بنجاح');
+    }
+
+     /**
+      * Action to deactivate A lesson
+      */
+      public function deactivate(Lesson $lesson){
+        $lesson->makeInactive();
+        $lesson->save();
+
+        return redirect()->route('lesson.show', ['lesson' => $lesson->id])
+                ->with('success', 'تم إلغاء تفعيل الدرس بنجاح');
+
+      }
+
 }

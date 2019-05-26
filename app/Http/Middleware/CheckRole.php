@@ -21,11 +21,11 @@ class CheckRole
         }
         $actions = $request->route()->getAction();
         $roles = isset($actions['roles']) ? $actions['roles'] : null;   
-
+        //dd($roles);
         if($request->user()->hasAnyRole($roles) || !$roles)
         {
         return $next($request);
         }
-        return response('صلاحيات غير كافية',401);
+        return response(401);
     }
 }

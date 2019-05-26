@@ -24,7 +24,7 @@
         @endif
       </div>
       <div class="col-lg-2">
-        <a href="#" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة درس 
+        <a href="{{route('unit.addlesson', $unit)}}" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة درس 
           <i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i>
         </a>
       </div>

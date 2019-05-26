@@ -107,6 +107,15 @@ Route::post('courses/{course}/activate','Course\CoursesController@activate')
 //Deactivate A Course 
 Route::post('courses/{course}/deactivate','Course\CoursesController@deactivate')
     ->name('course.deactivate');
+
+    //Show The Form to add Lesson to Course 
+Route::get('courses/{course}/addlesson','Course\CoursesController@addLesson')
+->name('course.addlesson');
+
+//Update The Course 
+Route::put('courses/{course}','Course\CoursesController@storeLesson')
+->name('course.storelesson');
+    
 /**
  * Subjects endpoints
  */
@@ -129,7 +138,7 @@ Route::get('subjects/{subject}','Subject\SubjectsController@show')
 Route::delete('subjects/{subject}',
     ['uses' => 'Subject\SubjectsController@destroy',
     'middleware' => 'roles',
-    'roles' => [1]
+    'roles' => [1,2]
     ])
     ->name('subject.destroy');
 
@@ -209,6 +218,16 @@ Route::post('units/{unit}/activate','Unit\UnitsController@activate')
 //Deactivate The unit 
 Route::post('units/{unit}/deactivate','Unit\UnitsController@deactivate')
 ->name('unit.deactivate');
+
+//Show The Form to add Lesson to Unit 
+Route::get('units/{unit}/addlesson','Unit\UnitsController@addLesson')
+    ->name('unit.addlesson');
+
+    //Update The Unit 
+Route::put('units/{unit}','Unit\UnitsController@storeLesson')
+->name('unit.storelesson');
+
+
 
 
 /* Carousels Endpoints */ 
@@ -574,6 +593,14 @@ Route::put('lessons/{lesson}','Lesson\LessonsController@update')
 Route::delete('lessons/{lesson}','Lesson\LessonsController@destroy')
     ->name('lesson.destroy');
 
+    //Activate A lesson 
+Route::post('lessons/{lesson}/activate','Lesson\LessonsController@activate')
+->name('lesson.activate');
+
+//Deactivate A lesson 
+Route::post('lessons/{lesson}/deactivate','Lesson\LessonsController@deactivate')
+->name('lesson.deactivate');
+
 
      //whatsappLinks index
 Route::get('whatsapplinks','WhatsappLink\WhatsappLinksController@index')
@@ -604,9 +631,37 @@ Route::delete('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksControll
     ->name('whatsapplink.destroy');
 
 
-
-
-
+//auth routes
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+     //users index
+     Route::get('users','User\UsersController@index')
+     ->name('user.index');
+     
+     //user create route
+     Route::get('users/create','User\UsersController@create')
+     ->name('user.create');
+     
+     //user show route
+     Route::get('users/{user}','User\UsersController@show')
+     ->name('user.show');
+     
+     //store user route
+     Route::post('users','User\UsersController@store')
+     ->name('user.store');
+     
+     //Show The Form to Edit an user
+     Route::get('users/{user}/edit','User\UsersController@edit')
+         ->name('user.edit');
+     
+         //update user route
+     Route::put('users/{user}','User\UsersController@update')
+     ->name('user.update');
+     
+     //Delete An user 
+     Route::delete('users/{user}','User\UsersController@destroy')
+         ->name('user.destroy');
+
