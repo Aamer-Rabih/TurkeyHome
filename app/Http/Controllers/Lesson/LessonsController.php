@@ -38,20 +38,9 @@ class LessonsController extends Controller
      */
     public function create(Request $request)
     {
-<<<<<<< HEAD
-        $selectedunit = $request->has('selectedunit') ? Unit::findOrFail($request->selectedunit): null ;
-        $selectedcourse = $request->has('selectedcourse') ? Course::findOrFail($request->selectedcourse): null ;
-        $types = $this->types;
-        $activate = $this->activate;
-        $units = Unit::latest()->get();
-        $courses = Course::latest()->get();
-
-        return view('admin.lessons.create', compact('units', 'courses', 'types', 'activate', 'selectedunit', 'selectedcourse'));
-=======
         $selectedUnit = request()->filled('selectedunit') ? Unit::findOrFail(request()->selectedunit) : null ;
         $units = Unit::all();
         return view('admin.lessons.create',compact('selectedUnit','units'));
->>>>>>> f06be3abd595a8ddafb1ac0b360f23db515b604b
     }
 
     /**
@@ -119,17 +108,8 @@ class LessonsController extends Controller
      */
     public function edit(Lesson $lesson)
     {
-<<<<<<< HEAD
-        $types = $this->types;
-        $activate = $this->activate;
-        $units = Unit::latest()->get();
-        $courses = Course::latest()->get();
-
-        return view('admin.lessons.edit',compact('lesson', 'units', 'courses', 'types', 'activate'));
-=======
         
         return view('admin.lessons.edit',compact('lesson'));
->>>>>>> f06be3abd595a8ddafb1ac0b360f23db515b604b
     }
 
     /**
