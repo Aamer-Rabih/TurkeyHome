@@ -8,6 +8,12 @@ use App\Http\Controllers\Controller;
 
 class CoursesController extends Controller
 {
+    public function __construct()
+    {
+    
+    $this->middleware('auth');
+    
+    }
     /**
      * Display a listing of the resource.
      *
@@ -187,4 +193,34 @@ class CoursesController extends Controller
                 ->with('success', 'تم إلغاء تفعيل الدورة بنجاح');
 
       }
+
+      public function addLesson(Course $course)
+    {
+        $user = Auth::user();
+        $lessons = $user->lessons();
+        //$lessons = Lesson::with('techers');
+        
+        return view('admin.courses.addlesson',compact('course','lessons'));
+    }
+
+    public function storeLesson(Request $request,Course $course)
+    {
+        $lesson = Lesson::find($request->lesson_id);
+        $course->lessons()->attach($lesson);
+
+        //Redirect with status 
+        return redirect()
+                ->route('course.show',['course' => $course->id])
+                ->with('success','تم تعديل الدورة بنجاح');
+    }
+
+    public function deleteLesson(Request $request , Course $course)
+    {
+        $lesson = Lesson::find($request->lesson_id);
+        $course->lessons()->detach($lesson);
+        //Redirect with status 
+        return redirect()
+                ->route('course.show',['course' => $course->id])
+                ->with('success','تم تعديل الوحدة الدرسية بنجاح');
+    }
 }

@@ -11,6 +11,12 @@ use File;
 
 class DenemesController extends Controller
 {
+    public function __construct()
+    {
+    
+    $this->middleware('auth');
+    
+    }
 
     protected $types = ['فيديو', 'صورة', 'PDF ملف', 'Word ملف', 'رابط'];
     protected $terms = ['الفصل الأول', 'الفصل الثاني'];

@@ -27,12 +27,18 @@
                 </div>                
                 <div class="form-group">
                   <label for="subject">المادة الدراسية :</label>
+                  @if($selectedSubject === null)
                   <select class="form-control form-control-select mt-3" id="subject" name="subject_id">
                     <option selected>-- اختر المادة الدراسية --</option>
                     @foreach($subjects as $subject)
                     <option value="{{$subject->id}}">{{$subject->name}} التابعة لل {{$subject->class->name}}</option>
                     @endforeach 
                   </select>
+                  @elseif($selectedSubject != null)
+                    <select class="form-control form-control-select mt-3" id="classField" name="unit_id" disabled>
+                      <option value="{{$selectedSubject->id}}">{{$selectedSubject->name}}</option>
+                    </select>
+                  @endif
                 </div>
                 <div class="radioG">
                   <h5>تفعيل الوحدة الدراسية :</h5>

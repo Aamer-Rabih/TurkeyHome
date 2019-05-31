@@ -30,7 +30,11 @@ Route::get('/', function() {
  * Class Operatrions
  */
 //Show All Classes
-Route::get('classes','ClassRoom\ClassesController@index')
+Route::get('classes',
+['uses' => 'ClassRoom\ClassesController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+])
 ->name('class.index');
 
 
@@ -38,127 +42,258 @@ Route::get('classes','ClassRoom\ClassesController@index')
 //TODO display courses depending on the Role of the user 
 
 //Show The Form to Create New Class 
-Route::get('classes/create','ClassRoom\ClassesController@create')
+Route::get('classes/create',
+['uses' => 'ClassRoom\ClassesController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('class.create');
 
 //Show One Class 
-Route::get('classes/{class}','ClassRoom\ClassesController@show')
+Route::get('classes/{class}',
+['uses' => 'ClassRoom\ClassesController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+])
 ->name('class.show');
 
 
 //Store the new Class in the database 
-Route::post('classes','ClassRoom\ClassesController@store')
+Route::post('classes',
+['uses' => 'ClassRoom\ClassesController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('class.store');
 
 //Show the Form to edit a class
-Route::get('classes/{class}/edit','ClassRoom\ClassesController@edit')
+Route::get('classes/{class}/edit',
+['uses' => 'ClassRoom\ClassesController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('class.edit');
 
 
 //Update A Class 
-Route::patch('classes/{class}/','ClassRoom\ClassesController@update')
+Route::patch('classes/{class}/',
+['uses' => 'ClassRoom\ClassesController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('class.update');
 
 //Delete A Class 
-Route::delete('classes/{class}','ClassRoom\ClassesController@destroy')
+Route::delete('classes/{class}',
+['uses' => 'ClassRoom\ClassesController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('class.destroy');
 
 //endpoint to Make The Class Free
-Route::post('classes/{class}/setFree','ClassRoom\ClassesController@free')
+Route::post('classes/{class}/setFree',
+['uses' => 'ClassRoom\ClassesController@free',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('class.free');
 
 
 //endpoint to make the class priced 
-Route::post('classes/{class}/setPriced','ClassRoom\ClassesController@priced')
+Route::post('classes/{class}/setPriced',
+['uses' => 'ClassRoom\ClassesController@priced',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('class.priced');
 
 
 /**Courses Endpoints */
 
 //Show All Courses
-Route::get('courses','Course\CoursesController@index')
+Route::get('courses',
+['uses' => 'Course\CoursesController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT]
+])
     ->name('course.index');
 
 //Create A Form to store new Course 
-Route::get('courses/create','Course\CoursesController@create')
+Route::get('courses/create',
+['uses' => 'Course\CoursesController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('course.create');
 
 //Post Course 
-Route::post('courses','Course\CoursesController@store')
+Route::post('courses',
+['uses' => 'Course\CoursesController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('course.store');
 
 //Show A Single Course 
-Route::get('courses/{course}','Course\CoursesController@show')
+Route::get('courses/{course}',
+['uses' => 'Course\CoursesController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('course.show');
 
 //Delete A Course 
-Route::delete('courses/{course}','Course\CoursesController@destroy')
-    ->name('course.destroy');
+// Route::delete('courses/{course}','Course\CoursesController@destroy')
+//     ->name('course.destroy');
+Route::delete('courses/{course}',
+['uses' => 'Course\CoursesController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
+     ->name('course.destroy');
 
 //Edit A Course
-Route::get('courses/{course}/edit','Course\CoursesController@edit')
+Route::get('courses/{course}/edit',
+['uses' => 'Course\CoursesController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('course.edit');
 
 
 //Update A Course 
-Route::patch('courses/{course}','Course\CoursesController@update')
+Route::patch('courses/{course}',
+['uses' => 'Course\CoursesController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('course.update');
 
 
 //Activate A Course 
-Route::post('courses/{course}/activate','Course\CoursesController@activate')
+Route::post('courses/{course}/activate',
+['uses' => 'Course\CoursesController@activate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('course.activate');
 
 //Deactivate A Course 
-Route::post('courses/{course}/deactivate','Course\CoursesController@deactivate')
+Route::post('courses/{course}/deactivate',
+['uses' => 'Course\CoursesController@deactivate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('course.deactivate');
+
+    //Show The Form to add Lesson to Course 
+Route::get('courses/{course}/addlesson',
+['uses' => 'Course\CoursesController@addLesson',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+])
+->name('course.addlesson');
+
+//Update The Course attach lesson
+Route::post('courses/{course}',
+['uses' => 'Course\CoursesController@storeLesson',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+])
+->name('course.storelesson');
+
+//Update The course detach lesson
+Route::post('courses/{course}',
+['uses' => 'Course\CoursesController@deleteLesson',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+])
+->name('course.deletelesson');
+    
 /**
  * Subjects endpoints
  */
 
 //Show All Subjects 
-Route::get('subjects','Subject\SubjectsController@index')
+Route::get('subjects',
+['uses' => 'Subject\SubjectsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('subject.index');
 
 
 //Show The Form to Create A New Subject 
-Route::get('subjects/create','Subject\SubjectsController@create')
+Route::get('subjects/create',
+['uses' => 'Subject\SubjectsController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('subject.create');
 
 //Show A Single Subject 
-Route::get('subjects/{subject}','Subject\SubjectsController@show')
+Route::get('subjects/{subject}',
+['uses' => 'Subject\SubjectsController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT]
+])
 ->name('subject.show');
 
 
 //DELETE A Subject 
-Route::delete('subjects/{subject}','Subject\SubjectsController@destroy')
+Route::delete('subjects/{subject}',
+    ['uses' => 'Subject\SubjectsController@destroy',
+    'middleware' => 'roles',
+    'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+    ])
     ->name('subject.destroy');
 
 
 
 //Store Subject 
-Route::post('subjects','Subject\SubjectsController@store')
+Route::post('subjects',
+['uses' => 'Subject\SubjectsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('subject.store');
 
 
 //Edit A Subject 
-Route::get('subjects/{subject}/edit','Subject\SubjectsController@edit')
+Route::get('subjects/{subject}/edit',
+['uses' => 'Subject\SubjectsController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('subject.edit');
 
 
 //Update A Subject 
-Route::put('subjects/{subject}','Subject\SubjectsController@update')
+Route::put('subjects/{subject}',
+['uses' => 'Subject\SubjectsController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('subject.update');
 
 
 //Activate A Subject 
-Route::post('subjects/{subject}/activate','Subject\SubjectsController@activate')
+Route::post('subjects/{subject}/activate',
+['uses' => 'Subject\SubjectsController@activate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('subject.activate');
 
 
 
 //Deactivate A Subject 
-Route::post('subjects/{subject}/deactivate','Subject\SubjectsController@deactivate')
+Route::post('subjects/{subject}/deactivate',
+['uses' => 'Subject\SubjectsController@deactivate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('subject.deactivate');
 
 /**
@@ -167,12 +302,20 @@ Route::post('subjects/{subject}/deactivate','Subject\SubjectsController@deactiva
 
  //Index Units 
  //Display All Units 
- Route::get('units','Unit\UnitsController@index')
+ Route::get('units',
+ ['uses' => 'Unit\UnitsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('unit.index');
 
 
 //Delete A Unit 
-Route::delete('units/{unit}','Unit\UnitsController@destroy')
+Route::delete('units/{unit}',
+['uses' => 'Unit\UnitsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('unit.destroy');
 
 
@@ -183,313 +326,640 @@ Route::get('units/create','Unit\UnitsController@chooseClass');
 
 
 //Show The Form to create a New Unit 
-Route::get('units/create','Unit\UnitsController@create')
+Route::get('units/create',
+['uses' => 'Unit\UnitsController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('unit.create');
 
 //Store The Unit 
-Route::post('units','Unit\UnitsController@store')
+Route::post('units',
+['uses' => 'Unit\UnitsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('unit.store');
 
 
 //Show The Form to edit A Unit 
-Route::get('units/{unit}/edit','Unit\UnitsController@edit')
+Route::get('units/{unit}/edit',
+['uses' => 'Unit\UnitsController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('unit.edit');
 
 //Update The Unit 
-Route::put('units/{unit}','Unit\UnitsController@update')
+Route::put('units/{unit}',
+['uses' => 'Unit\UnitsController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('unit.update');
 
 //Show A Unit 
-Route::get('units/{unit}','Unit\UnitsController@show')
+Route::get('units/{unit}',
+['uses' => 'Unit\UnitsController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('unit.show');
 
 //Activate A unit 
-Route::post('units/{unit}/activate','Unit\UnitsController@activate')
+Route::post('units/{unit}/activate',
+['uses' => 'Unit\UnitsController@activate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
     ->name('unit.activate');
 
 //Deactivate The unit 
-Route::post('units/{unit}/deactivate','Unit\UnitsController@deactivate')
+Route::post('units/{unit}/deactivate',
+['uses' => 'Unit\UnitsController@deactivate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
 ->name('unit.deactivate');
+
+//Show The Form to add Lesson to Unit 
+// Route::get('units/{unit}/addlesson','Unit\UnitsController@addLesson')
+//     ->name('unit.addlesson');
+
+    //Update The Unit attach lesson
+Route::post('units/{unit}/attachlesson',
+['uses' => 'Unit\UnitsController@attachLesson',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT]
+])
+->name('unit.attachlesson');
+
+//Update The Unit detach lesson
+Route::post('units/{unit}/detachlesson',
+['uses' => 'Unit\UnitsController@deleteLesson',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT]
+])
+->name('unit.deletelesson');
+
 
 
 /* Carousels Endpoints */ 
-Route::get('carousels','Carousel\CarouselsController@index')
-->name('carousel.index');
+Route::get('carousels',
+['uses' => 'Carousel\CarouselsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]])->name('carousel.index');
 
 //Show the form to create a new carousel 
-Route::get('carousels/create','Carousel\CarouselsController@create')
+Route::get('carousels/create',
+['uses' => 'Carousel\CarouselsController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('carousel.create');
 
 
 //Show The Form to Edit Carousel 
-Route::get('carousels/{carousel}/edit','Carousel\CarouselsController@edit')
+Route::get('carousels/{carousel}/edit',
+['uses' => 'Carousel\CarouselsController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('carousel.edit');
 
 //Show Single Carousel 
-Route::get('carousels/{carousel}','Carousel\CarouselsController@show')
+Route::get('carousels/{carousel}',
+['uses' => 'Carousel\CarouselsController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('carousel.show');
 
 //Delete A Carousel 
-Route::delete('carousels/{carousel}','Carousel\CarouselsController@destroy')
+Route::delete('carousels/{carousel}',
+['uses' => 'Carousel\CarouselsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('carousel.destroy');
 
 //Store A Carousel 
-Route::post('carousels','Carousel\CarouselsController@store')
+Route::post('carousels',
+['uses' => 'Carousel\CarouselsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('carousel.store');
 
 //Update Carousel 
-Route::put('carousels/{carousel}','Carousel\CarouselsController@update')
+Route::put('carousels/{carousel}',
+['uses' => 'Carousel\CarouselsController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('carousel.update');
 
 
 
 //Index Show Lesson 
  //Display All show lessons 
- Route::get('showlessons','ShowLesson\ShowLessonsController@index')
+ Route::get('showlessons',
+ ['uses' => 'ShowLesson\ShowLessonsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT
+]])
     ->name('showlesson.index');
 
 //Show The Form to create a New ShowLesson 
-Route::get('showlessons/create','ShowLesson\ShowLessonsController@create')
+Route::get('showlessons/create',
+['uses' => 'ShowLesson\ShowLessonsController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('showlesson.create');
 
     //Show A showlesson 
-Route::get('showlessons/{showLesson}','ShowLesson\ShowLessonsController@show')
+Route::get('showlessons/{showLesson}',
+['uses' => 'ShowLesson\ShowLessonsController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT
+]])
 ->name('showlesson.show');
 
 //store show lesson route
-Route::post('showlessons','ShowLesson\ShowLessonsController@store')
+Route::post('showlessons',
+['uses' => 'ShowLesson\ShowLessonsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('showlesson.store');
 
 //Show The Form to Edit a ShowLesson 
-Route::get('showlessons/{showLesson}/edit','ShowLesson\ShowLessonsController@edit')
+Route::get('showlessons/{showLesson}/edit',
+['uses' => 'ShowLesson\ShowLessonsController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('showlesson.edit');
 
     //update show lesson route
-Route::put('showlessons/{showLesson}','ShowLesson\ShowLessonsController@update')
+Route::put('showlessons/{showLesson}',
+['uses' => 'ShowLesson\ShowLessonsController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('showlesson.update');
 
 //Delete A ShowLesson 
-Route::delete('showlessons/{showLesson}','ShowLesson\ShowLessonsController@destroy')
+Route::delete('showlessons/{showLesson}',
+['uses' => 'ShowLesson\ShowLessonsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('showlesson.destroy');
 
 
 
 //display all denemes
-    Route::get('denemes','Deneme\DenemesController@index')
-    ->name('deneme.index');
+    Route::get('denemes',
+    ['uses' => 'Deneme\DenemesController@index',
+     'middleware' => 'roles',
+     'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT]
+          ])->name('deneme.index');
 
     //create view route for deneme
-    Route::get('denemes/create','Deneme\DenemesController@create')
+    Route::get('denemes/create',
+    ['uses' => 'Deneme\DenemesController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('deneme.create');
 
     //create view route for deneme
-    Route::get('denemes/{deneme}','Deneme\DenemesController@show')
+    Route::get('denemes/{deneme}',
+    ['uses' => 'Deneme\DenemesController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT
+]])
     ->name('deneme.show');
 
     //store route for deneme
-    Route::post('denemes','Deneme\DenemesController@store')
+    Route::post('denemes',
+    ['uses' => 'Deneme\DenemesController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('deneme.store');
 
     //Show The Form to Edit a Deneme 
-Route::get('denemes/{deneme}/edit','Deneme\DenemesController@edit')
+Route::get('denemes/{deneme}/edit',
+['uses' => 'Deneme\DenemesController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('deneme.edit');
 
 //update deneme route
-Route::put('denemes/{deneme}','Deneme\DenemesController@update')
+Route::put('denemes/{deneme}',
+['uses' => 'Deneme\DenemesController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('deneme.update');
 
 //delete route for deneme
-Route::delete('deneme/{deneme}','Deneme\DenemesController@destroy')
+Route::delete('deneme/{deneme}',
+['uses' => 'Deneme\DenemesController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('deneme.destroy');
 
 //Activate A Deneme 
-Route::post('denemes/{course}/activate','Deneme\DenemesController@activate')
+Route::post('denemes/{deneme}/activate',
+['uses' => 'Deneme\DenemesController@activate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('deneme.activate');
 
 //Deactivate A Deneme 
-Route::post('denemes/{deneme}/deactivate','Deneme\DenemesController@deactivate')
+Route::post('denemes/{deneme}/deactivate',
+['uses' => 'Deneme\DenemesController@deactivate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('deneme.deactivate');
 
 
 
 //student Thanks index
-Route::get('studentthanks','StudentThank\StudentThanksController@index')
+Route::get('studentthanks',
+['uses' => 'StudentThank\StudentThanksController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT
+]])
 ->name('studentthank.index');
 
 //student thank create route
-Route::get('studentthanks/create','StudentThank\StudentThanksController@create')
+Route::get('studentthanks/create',
+['uses' => 'StudentThank\StudentThanksController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('studentthank.create');
 
 //student thank show route
-Route::get('studentthanks/{studentThank}','StudentThank\StudentThanksController@show')
+Route::get('studentthanks/{studentThank}',
+['uses' => 'StudentThank\StudentThanksController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT
+]])
 ->name('studentthank.show');
 
 //store student thank route
-Route::post('studentthanks','StudentThank\StudentThanksController@store')
+Route::post('studentthanks',
+['uses' => 'StudentThank\StudentThanksController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('studentthank.store');
 
 //Show The Form to Edit a student thank 
-Route::get('studentthanks/{studentThank}/edit','StudentThank\StudentThanksController@edit')
+Route::get('studentthanks/{studentThank}/edit',
+['uses' => 'StudentThank\StudentThanksController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('studentthank.edit');
 
     //update student thank route
-Route::put('studentthanks/{studentThank}','StudentThank\StudentThanksController@update')
+Route::put('studentthanks/{studentThank}',
+['uses' => 'StudentThank\StudentThanksController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('studentthank.update');
 
 //Delete A student thank 
-Route::delete('studentthanks/{studentThank}','StudentThank\StudentThanksController@destroy')
+Route::delete('studentthanks/{studentThank}',
+['uses' => 'StudentThank\StudentThanksController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('studentthank.destroy');
 
 
     //Evaluations index
-Route::get('evaluations','Evaluation\EvaluationsController@index')
+Route::get('evaluations',
+['uses' => 'Evaluation\EvaluationsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT
+]])
 ->name('evaluation.index');
 
 //Evaluation create route
-Route::get('evaluations/create','Evaluation\EvaluationsController@create')
+Route::get('evaluations/create',
+['uses' => 'Evaluation\EvaluationsController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT
+]])
 ->name('evaluation.create');
 
 //Evaluation show route
-Route::get('evaluations/{evaluation}','Evaluation\EvaluationsController@show')
+Route::get('evaluations/{evaluation}',
+['uses' => 'Evaluation\EvaluationsController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT
+]])
 ->name('evaluation.show');
 
 //store Evaluation route
-Route::post('evaluations','Evaluation\EvaluationsController@store')
+Route::post('evaluations',
+['uses' => 'Evaluation\EvaluationsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT
+]])
 ->name('evaluation.store');
 
 //Show The Form to Edit a Evaluation 
-Route::get('evaluations/{evaluation}/edit','Evaluation\EvaluationsController@edit')
+Route::get('evaluations/{evaluation}/edit',
+['uses' => 'Evaluation\EvaluationsController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT
+]])
     ->name('evaluation.edit');
 
     //update Evaluation route
-Route::put('evaluations/{evaluation}','Evaluation\EvaluationsController@update')
+Route::put('evaluations/{evaluation}',
+['uses' => 'Evaluation\EvaluationsController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT
+]])
 ->name('evaluation.update');
 
 //Delete A Evaluation 
-Route::delete('evaluations/{evaluation}','Evaluation\EvaluationsController@destroy')
+Route::delete('evaluations/{evaluation}',
+['uses' => 'Evaluation\EvaluationsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT
+]])
     ->name('evaluation.destroy');
 
  
  
     //freereasons index
-Route::get('freereasons','FreeReason\FreeReasonsController@index')
+Route::get('freereasons',
+['uses' => 'FreeREason\FreeREasonsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('freereason.index');
 
 //freereason create route
-Route::get('freereasons/create','FreeReason\FreeReasonsController@create')
+Route::get('freereasons/create',
+['uses' => 'FreeReason\FreeReasonsController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('freereason.create');
 
 //freereason show route
-Route::get('freereasons/{freeReason}','FreeReason\FreeReasonsController@show')
+Route::get('freereasons/{freeReason}',
+['uses' => 'FreeReason\FreeReasonsController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('freereason.show');
 
 //store freereason route
-Route::post('freereasons','FreeReason\FreeReasonsController@store')
+Route::post('freereasons',
+['uses' => 'FreeReason\FreeReasonsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('freereason.store');
 
 //Show The Form to Edit a freereason
-Route::get('freereasons/{freeReason}/edit','FreeReason\FreeReasonsController@edit')
+Route::get('freereasons/{freeReason}/edit',
+['uses' => 'FreeReason\FreeReasonsController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('freereason.edit');
 
     //update freereason route
-Route::put('freereasons/{freeReason}','FreeReason\FreeReasonsController@update')
+Route::put('freereasons/{freeReason}',
+['uses' => 'FreeReason\FreeReasonsController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('freereason.update');
 
 //Delete A FreeReason 
-Route::delete('freereasons/{freeReason}','FreeReason\FreeReasonsController@destroy')
+Route::delete('freereasons/{freeReason}',
+['uses' => 'FreeReason\FreeReasonsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('freereason.destroy');
+
+    //update freereason route
+Route::post('freereasons/{freeReason}/addstudent',
+['uses' => 'FreeReason\FreeReasonsController@addStudent',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+->name('freereason.addstudent');
+
+//update freereason route
+Route::post('freereasons/{freeReason}/deletestudent',
+['uses' => 'FreeReason\FreeReasonsController@deleteStudent',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+->name('freereason.deletestudent');
+
 
 
     //Tests index
-Route::get('tests','Test\TestController@index')
+Route::get('tests',
+['uses' => 'Test\TestController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
 ->name('test.index');
 
 //Test create route
-Route::get('tests/create','Test\TestController@create')
+Route::get('tests/create',
+['uses' => 'Test\TestController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
 ->name('test.create');
 
 //Test show route
-Route::get('tests/{test}','Test\TestController@show')
+Route::get('tests/{test}',
+['uses' => 'Test\TestController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
 ->name('test.show');
 
 //store Test route
-Route::post('tests','Test\TestController@store')
+Route::post('tests',
+['uses' => 'Test\TestController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
 ->name('test.store');
 
 //Show The Form to Edit a Test
-Route::get('tests/{test}/edit','Test\TestController@edit')
+Route::get('tests/{test}/edit',
+['uses' => 'Test\TestController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
     ->name('test.edit');
 
     //update Test route
-Route::put('tests/{test}','Test\TestController@update')
+Route::put('tests/{test}',
+['uses' => 'Test\TestController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
 ->name('test.update');
 
 //Delete A Test 
-Route::delete('tests/{test}','Test\TestController@destroy')
+Route::delete('tests/{test}',
+['uses' => 'Test\TestController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
     ->name('test.destroy');
 
 
 
 //Comments index
-Route::get('comments','Comment\CommentsController@index')
+Route::get('comments',
+['uses' => 'Comment\CommentsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('comment.index');
 
 //Comment create route
-Route::get('comments/create','Comment\CommentsController@create')
+Route::get('comments/create',
+['uses' => 'Comment\CommentsController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('comment.create');
 
 //Comment show route
-Route::get('comments/{comment}','Comment\CommentsController@show')
+Route::get('comments/{comment}',
+['uses' => 'Comment\CommentsController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('comment.show');
 
 //store Comment route
-Route::post('comments','Comment\CommentsController@store')
+Route::post('comments',
+['uses' => 'Comment\CommentsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('comment.store');
 
 //Show The Form to Edit a Comment
-Route::get('comments/{comment}/edit','Comment\CommentsController@edit')
+Route::get('comments/{comment}/edit',
+['uses' => 'Comment\CommentsController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
     ->name('comment.edit');
 
     //update Comment route
-Route::put('comments/{comment}','Comment\CommentsController@update')
+Route::put('comments/{comment}',
+['uses' => 'Comment\CommentsController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('comment.update');
 
 //Delete A Comment 
-Route::delete('comments/{comment}','Comment\CommentsController@destroy')
+Route::delete('comments/{comment}',
+['uses' => 'Comment\CommentsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
     ->name('comment.destroy');
 
 
     //replies index
-Route::get('replies','Reply\RepliesController@index')
+Route::get('replies',
+['uses' => 'Reply\RepliesController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('reply.index');
 
 //Reply create route
-Route::get('replies/create','Reply\RepliesController@create')
+Route::get('replies/create',
+['uses' => 'Reply\RepliesController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('reply.create');
 
 //Reply show route
-Route::get('replies/{reply}','Reply\RepliesController@show')
+Route::get('replies/{reply}',
+['uses' => 'Reply\RepliesController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('reply.show');
 
 //store Reply route
-Route::post('replies','Reply\repliesController@store')
+Route::post('replies',
+['uses' => 'Reply\RepliesController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('reply.store');
 
 //Show The Form to Edit a Reply
-Route::get('replies/{reply}/edit','Reply\RepliesController@edit')
+Route::get('replies/{reply}/edit',
+['uses' => 'Reply\RepliesController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
     ->name('reply.edit');
 
     //update Reply route
-Route::put('replies/{reply}','Reply\RepliesController@update')
+Route::put('replies/{reply}',
+['uses' => 'Reply\RepliessController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('reply.update');
 
 //Delete A Reply 
-Route::delete('replies/{reply}','Reply\RepliesController@destroy')
+Route::delete('replies/{reply}',
+['uses' => 'Reply\RepliesController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
     ->name('reply.destroy');
 
 
        //attachments index
-Route::get('attachments','Attachment\AttachmentsController@index')
+Route::get('attachments',
+['uses' => 'Attachment\AttachmentsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('attachment.index');
 
 //attachment create route
@@ -548,32 +1018,84 @@ Route::delete('advices/{advice}','Advice\AdvicesController@destroy')
 
 
         //lessons index
-Route::get('lessons','Lesson\LessonsController@index')
+Route::get('lessons',
+['uses' => 'Lesson\LessonsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT
+]])
 ->name('lesson.index');
 
 //lesson create route
-Route::get('lessons/create','Lesson\LessonsController@create')
+Route::get('lessons/create',
+['uses' => 'Lesson\LessonsController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+]])
 ->name('lesson.create');
 
 //lesson show route
-Route::get('lessons/{lesson}','Lesson\LessonsController@show')
+Route::get('lessons/{lesson}',
+['uses' => 'Lesson\LessonsController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT
+]])
 ->name('lesson.show');
 
 //store lesson route
-Route::post('lessons','Lesson\LessonsController@store')
+Route::post('lessons',
+['uses' => 'Lesson\LessonsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+]])
 ->name('lesson.store');
 
 //Show The Form to Edit an lesson
-Route::get('lessons/{lesson}/edit','Lesson\LessonsController@edit')
+Route::get('lessons/{lesson}/edit',
+['uses' => 'Lesson\LessonsController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+]])
     ->name('lesson.edit');
 
     //update lesson route
-Route::put('lessons/{lesson}','Lesson\LessonsController@update')
+Route::put('lessons/{lesson}',
+['uses' => 'Lesson\LessonsController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+]])
 ->name('lesson.update');
 
 //Delete An lesson 
-Route::delete('lessons/{lesson}','Lesson\LessonsController@destroy')
+Route::delete('lessons/{lesson}',
+['uses' => 'Lesson\LessonsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+]])
     ->name('lesson.destroy');
+
+    //Activate A lesson 
+Route::post('lessons/{lesson}/activate',
+['uses' => 'Lesson\LessonsController@activate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+]])
+->name('lesson.activate');
+
+//Deactivate A lesson 
+Route::post('lessons/{lesson}/deactivate',
+['uses' => 'Lesson\LessonsController@deactivate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+]])
+->name('lesson.deactivate');
+
+Route::post('lessons/{lesson}/addComment',
+['uses' => 'Lesson\LessonsController@addComment',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT
+]])
+->name('lesson.addcomment');
+
 
 
      //whatsappLinks index
@@ -605,9 +1127,80 @@ Route::delete('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksControll
     ->name('whatsapplink.destroy');
 
 
-
-
-
+//auth routes
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+     //users index
+     Route::get('users',
+     ['uses' => 'USer\USersController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+     ->name('users.index');
+     
+     //user create route
+     Route::get('users/create',
+     ['uses' => 'USer\USersController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+     ->name('users.create');
+     
+     //user show route
+     Route::get('users/{user}',
+     ['uses' => 'USer\USersController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+     ->name('users.show');
+     
+     //store user route
+     Route::post('users',
+     ['uses' => 'USer\USersController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+     ->name('users.store');
+     
+     //Show The Form to Edit an user
+     Route::get('users/{user}/edit',
+     ['uses' => 'USer\USersController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+         ->name('users.edit');
+     
+         //update user route
+     Route::put('users/{user}',
+     ['uses' => 'USer\USersController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+     ->name('users.update');
+     
+     //Delete A user 
+     Route::delete('users/{user}',
+     ['uses' => 'USer\USersController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+         ->name('users.destroy');
+
+         //Deactivate A user 
+Route::post('users/{user}/deactivate',
+['uses' => 'USer\USersController@deactivate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+->name('users.deactivate');
+
+Route::post('users/{user}/activate',
+['uses' => 'USer\USersController@activate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+->name('users.aactivate');
+

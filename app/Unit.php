@@ -10,7 +10,7 @@ class Unit extends Model
     protected $fillable = ['title','active','subject_id'];
 
     //Eager Loading Default 
-    protected $with = ['subject'];
+   protected $with = ['lessons'];
 
     //A Unit belongs to A Subject
     public function subject(){

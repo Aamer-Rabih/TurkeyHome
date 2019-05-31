@@ -5,10 +5,18 @@ namespace App\Http\Controllers\FreeReason;
 use App\FreeReason;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Role;
+use App\User;
 
 
 class FreeReasonsController extends Controller
 {
+    public function __construct()
+    {
+    
+    $this->middleware('auth');
+    
+    }
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +70,9 @@ class FreeReasonsController extends Controller
      */
     public function show(FreeReason  $freeReason)
     {
-        return view('admin.freereasons.show');
+        $students = Role::find(3)->users()->get();
+        $freeStudents = FreeReason::find($freeReason->id)->students()->get();
+        return view('admin.freereasons.show',compact('freeReason','freeStudents','students'));
     }
 
     /**
@@ -112,5 +122,30 @@ class FreeReasonsController extends Controller
         $freeReason->delete();
         return redirect()->back()
         ->with('success','تم حذف سبب الاعفاء بنجاح');
+    }
+
+
+    public function addStudent(Request $request, FreeReason $freeReason)
+    {
+        $student = User::where('id',$request->student)->get();
+        //dd($student);
+        $freeReason->students()->attach($student);
+
+        //Return redirect 
+        return redirect()
+            ->route('freereason.show', ['freeReason' => $freeReason->id])
+            ->with('success', 'تم اضافة الطالب لسبب الاعفاء بنجاح'); 
+    }
+
+    public function deleteStudent( FreeReason $freeReason ,Request $request )
+    {
+        //$student = User::where('id',$request->student)->get();
+
+        $request->freeReason->students()->detach($request->student_id);
+
+        //Return redirect 
+        return redirect()
+            ->route('freereason.show', ['freeReason' => $freeReason->id])
+            ->with('success', 'تم اضافة الطالب لسبب الاعفاء بنجاح'); 
     }
 }

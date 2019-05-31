@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
+use File;
 
 class ShowLesson extends Model
 {

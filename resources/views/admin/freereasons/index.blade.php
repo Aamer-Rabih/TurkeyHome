@@ -29,7 +29,7 @@
           <table class="table table-bordered table-hover table-width">
             <thead>
               <tr> 
-                <th>الطالب</th>
+                <th>الاعفاء</th>
                 <th>التاريخ</th>
                 <th>عرض</th>
                 <th>تعديل</th>
@@ -39,8 +39,8 @@
             <tbody>
               @foreach($freeReasons as $freeReason)
               <tr>
-                <td>الطالب</td>
-                <td>{{$freeReason->created_at->format('d/m/Y')}}</td>
+                <td>{{$freeReason->text}}</td>
+                <td>{{$freeReason->create_at}}</td>
                 <td>
                   <div class="operations show">
                     <a href="{{ route('freereason.show', $freeReason) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>

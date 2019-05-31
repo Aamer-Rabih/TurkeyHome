@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
+use File;
 
 class Lesson extends Model
 {
@@ -22,12 +24,49 @@ class Lesson extends Model
     ];
 
 
+    //Operations On Courses 
+    public function makeActive(){
+
+      $this->active = true ; 
+      
+      
+  }
+
+  //Deactivate A Course 
+  public function makeInactive(){
+
+      $this->active = false ; 
+     
+  }
+
+  public function setSrcAttribute($value){
+
+    $this->attributes['src'] = $this->getStoragePath($value);
+
+
+}
+
+
+public function getStoragePath($url){
+
+    $segments = explode('/',$url);
+
+    array_shift($segments);
+
+    return implode('/',$segments);
+}
+
+public function getSrcAttribute($value){
+
+    return Storage::url($value) ; 
+}
+
     /**
      * The Units that the lesson belongs to
      */
     public function units(){
 
-        return $this->belongsToMany('App\Unit','unit_lesson')
+        return $this->belongsToMany('App\Unit','lesson_unit')
         ->withPivot('lesson_order')
         ->withTimestamps();
 

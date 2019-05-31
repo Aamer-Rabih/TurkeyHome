@@ -5,11 +5,21 @@ namespace App\Http\Controllers\Unit;
 use App\Unit;
 use App\ClassRoom;
 use App\Subject;
+use App\Lesson;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class UnitsController extends Controller
 {
+
+    public function __construct()
+    {
+    
+    $this->middleware('auth');
+    
+    }
+    
     /**
      * Display a listing of the Unit.
      *
@@ -96,9 +106,20 @@ class UnitsController extends Controller
      */
     public function show(Unit $unit)
     {
-        
+        // $user = Auth::user()->with(['lessons' => function($query){
+        //     $query->where()
+        // }])->get();
 
-        return view('admin.units.show', compact('unit'));
+        $lessons = Lesson::with(['teachers' => function($query){
+            $query->where('teacher_id', Auth::user()->id);
+        }])->get();
+        //dd($lessons);
+        $unitLessons = Lesson::with(['units'])->get();
+        
+        //$lessons = array_diff($lessons, $unitLesson);
+
+        
+        return view('admin.units.show', compact('unit','lessons','unitLessons'));
     }
 
     /**
@@ -189,5 +210,39 @@ class UnitsController extends Controller
         return back()
                 ->with('success','تم إلغاء تفعيل الوحدة الدرسية بنجاح') ; 
                 
+    }
+
+    // public function addLesson(Unit $unit)
+    // {
+    //     $user = Auth::user();
+
+    //     $lessons = $user->lessons();
+
+    
+    //     //$lessons = Lesson::with('techers');
+        
+    //     return view('admin.units.addlesson',compact('unit','lessons'));
+    // }
+
+    public function attachLesson(Request $request,Unit $unit)
+    {
+        $lesson = Lesson::find($request->lesson);
+        $unit->lessons()->save($lesson,['lesson_order'=>$unit->lessons()->count()+1]);
+        //$order->product()->save($product, ['price' => 12.34]);
+
+        //Redirect with status 
+        return redirect()
+                ->route('unit.show',['unit' => $unit->id])
+                ->with('success','تم تعديل الوحدة الدرسية بنجاح');
+    }
+
+    public function deleteLesson(Request $request , Unit $unit)
+    {
+        $lesson = Lesson::find($request->lesson_id);
+        $unit->lessons()->detach($lesson);
+        //Redirect with status 
+        return redirect()
+                ->route('unit.show',['unit' => $unit->id])
+                ->with('success','تم تعديل الوحدة الدرسية بنجاح');
     }
 }
