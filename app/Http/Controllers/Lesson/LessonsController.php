@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Lesson;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Unit;
+use App\Course;
 
 class LessonsController extends Controller
 {
+
+    protected $types = ['فيديو', 'صورة', 'ملف PDF', 'ملف Word', 'رابط'];
+    protected $activate = ['فعال', 'غير فعال'];
+
     /**
      * Display a listing of the resource.
      *
@@ -23,9 +29,16 @@ class LessonsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.lessons.create');
+        $selectedunit = $request->has('selectedunit') ? Unit::findOrFail($request->selectedunit): null ;
+        $selectedcourse = $request->has('selectedcourse') ? Course::findOrFail($request->selectedcourse): null ;
+        $types = $this->types;
+        $activate = $this->activate;
+        $units = Unit::latest()->get();
+        $courses = Course::latest()->get();
+
+        return view('admin.lessons.create', compact('units', 'courses', 'types', 'activate', 'selectedunit', 'selectedcourse'));
     }
 
     /**
@@ -87,7 +100,12 @@ class LessonsController extends Controller
      */
     public function edit(Lesson $lesson)
     {
-        return view('admin.lessons.edit',compact('lesson'));
+        $types = $this->types;
+        $activate = $this->activate;
+        $units = Unit::latest()->get();
+        $courses = Course::latest()->get();
+
+        return view('admin.lessons.edit',compact('lesson', 'units', 'courses', 'types', 'activate'));
     }
 
     /**

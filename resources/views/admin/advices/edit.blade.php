@@ -26,9 +26,20 @@
                       {!! csrf_field() !!}
                       {!! method_field('PUT') !!}
                 <div class="form-group">
-                  <label for="adviceTitle"><h5>الصف الدراسي:</h5></label>
+                  <label for="adviceTitle"><h5>عنوان النصيحة :</h5></label>
                   <input type="text" class="form-control" id="adviceTitle" name="title" required value="{{$advice->title}}">
                 </div>
+                <div class="form-group">
+                  <label for="type">الصف أو الدورة التي تتبع إليها النصيحة :</label>
+                  <select class="form-control form-control-select mt-3" id="type" name="type">
+                    <option selected>-- اختر الصف أو الدورة --</option>
+                    @foreach($classes as $class)
+                    <option value="{{$class->id}}">{{$class->name}}</option>
+                    @endforeach
+                    @foreach($courses as $course)
+                    <option value="{{$course->id}}">دورة {{$course->title}}</option>
+                    @endforeach
+                  </select>
                 <div class="form-group">
                   <label for="orderField">النوع :</label>
                   <select class="form-control form-control-select mt-3" id="orderField" name="order">

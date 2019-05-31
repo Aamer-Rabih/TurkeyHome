@@ -13,17 +13,101 @@
 
 /** ---Media Queries--- **/
 @media (max-width: 992px) {
+  
+  /* ===Top Bar=== */
+  .container {
+    max-width: 900px;
+  }
+  .contact-info {
+    font-size: 12px;
+  }
+  .user-area > ul > li {
+    font-size: 12px
+  }
+
+
+  .navbar-nav > .nav-item > .nav-link {
+    font-size: 14px !important;
+  }
 
 }
-@media (max-width: 768) {
+
+@media (max-width: 768px) {
+
+  /* ===Top Bar=== */
+  #contact-info-section {
+    text-align: center;
+  }
+  .contact-info {
+    text-align: center;
+    font-size: 10px;
+    display: inline-block;
+  }
+  .contact-info > span {
+    padding: 5px 9px;
+  }
+  .user-area {
+    display: inline-block;
+  }
+  .user-area > ul {
+    padding: 0px;
+  }
+  .user-area > ul > li {
+    font-size: 12px
+  }
+
+  .navbar-toggler {
+    margin: 20px 30px;
+  }
 
 }
-@media (max-width: 576) {
+
+@media (max-width: 576px) {
+
+  /* ===Top Bar=== */
+  #contact-info-section {
+    text-align: center;
+  }
+  .contact-info {
+    text-align: center;
+    font-size: 10px;
+    display: inline-block;
+  }
+  .contact-info > span {
+    padding: 5px 9px;
+  }
+  .user-area {
+    display: inline-block;
+  }
+  .user-area > ul {
+    padding: 0px;
+  }
+  .user-area > ul > li {
+    font-size: 12px
+  }
+
+  /*  ===Navigation=== */
+  #img-brand {
+    width: 75px;
+  }
+  #brand-label > h2 {
+    font-size: 1.7rem;
+  }
+  #brand-label > h6 {
+    font-size: 0.8rem;
+  }
+  nav > .container {
+    display: inline-block !important;
+  }
+  .navbar-toggler {
+    margin: 20px 30px;
+  }
 
 }
 
 
 body {
+  overflow-x: hidden;
   background-color: #fff;
   /*font-family: 'text';
   font-family: 'Cairo', sans-serif;*/
@@ -37,9 +121,13 @@ body {
 .bold {
   font-weight: bold;
 }
+.padding-section {
+  padding: 30px 0px;
+}
+
 
 /**
-  *   ---Begin Mini Header Section---
+  *   ---Begin Top Bar Section---
 **/
 
 .mini-header {
@@ -91,6 +179,22 @@ body {
   font-size: 14px;
   color: #AC282F;
 }
+
+/**
+  *   --End Top Bar Section--
+**/
+
+
+
+/**
+  *   ---Begin Navigation Section---
+**/
+.navbar {
+  position: absolute;
+  width: 100%;
+  opacity: 0.8 !important;
+  z-index: 1;
+}
 .navbar-nav {
   flex-direction: row;
 }
@@ -99,19 +203,179 @@ body {
 }
 #brand-label {
   float: left;
-  padding: 20px 10px;
+  padding: 15px 10px 5px;
+}
+.navbar-nav > .nav-item {
+  margin: 0px 18px 0px 0px;
+}
+.navbar-nav > .nav-item > .nav-link {
+  font-size: 16px;
+  color: #1c2733;
+}
+.navbar-nav > .nav-item > .nav-link:hover, .navbar-nav > .nav-item > .nav-link.active {
+  color: #AC282F !important;
 }
 
 /**
-  *   --End Mini Header Section--
+  *   ---End Navigation Section---
 **/
 
 
+
 /**
-  *   ---Begin Header Section---
+  *   ---Begin Image Slider Section---
+**/
+
+#carouselHomeIndicators {
+  z-index: 0;
+}
+.carousel-item {
+  height: 655px;
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+}
+.carousel-caption {
+  position: absolute;
+  top: 48%;
+}
+.btn1-carousel {
+  border-radius: 15px;
+  padding: 12px;
+  margin-left: 10px;
+  background-color: #0d2d62;
+  border-color: #0d2d62;
+}
+.btn1-carousel:hover {
+  background-color: #AC282F;
+  border-color: #AC282F;
+}
+.btn2-carousel {
+  border-radius: 15px;
+  padding: 12px;
+  background-color: #AC282F;
+  border-color: #AC282F;
+}
+.btn2-carousel:hover {
+  background-color: #fff;
+  border-color: #fff;
+  color: #AC282F !important;
+}
+
+/**
+  *   ---End Image Slider Section---
 **/
 
 
+
 /**
-  *   ---End Header Section---
+  *   ---Begin ShowLesson Slider Section---
+**/
+
+.showLessonItem, .studentThankItem {
+  width: 90% !important;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.sliderArrows {
+  position: absolute;
+  top: 45%;
+  display: block;
+  cursor: pointer;
+  font-size: 36px;
+}
+.prevArrow {
+  left: -45px;
+}
+.nextArrow {
+  right: -45px;
+}
+.prevArrow2 {
+  left: 0px;
+}
+.nextArrow2 {
+  right: 0px;
+}
+.dots-slick2 {
+  color: red;
+}
+.slick-dots {
+  position: absolute;
+  bottom: -55px;
+}
+
+/**
+  *   ---End ShowLesson Slider Section---
+**/
+
+.image-cropper {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  margin: 10% 20%;
+}
+.ST-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.studentThank-section {
+  background-color: #0d2d62;
+  color: #fff;
+}
+.studentThankItem {
+  border: none !important;
+  background-color: #0d2d62;
+}
+
+
+footer {
+  background-color: #1c2733;
+  color: #999;
+  padding: 2rem 0.3rem;
+}
+footer img {
+  height: 4rem;
+  margin:1.5rem 25%;
+}
+footer a {
+  color:white;
+}
+footer .icon {
+  font-size: 2.5rem;
+  margin: .1rem .5rem 0 0;
+  color: white;
+}
+footer .icon:hover {
+  color: #AC282F;
+}
+hr.socket {
+  border-top: .2rem solid #666b71;
+  margin-bottom: 0px;
+  width: 100%
+}
+.justfy-content-center {
+  margin: 0px 40% 0px 0px;
+  width: fit-content;
+}
+#bottom-bar {
+  height: 40px;
+  bottom: 0px;
+  font-size: 12px;
+  direction: ltr;
+  padding: 10px 40px 10px 20px;
+  text-align: center;
+}
+
+/**
+  *   ---Begin Bootstarp Overrite Section---
+**/
+
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+.col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+  
+}
+
+/**
+  *   ---End Bootstarp Overrite Section---
 **/

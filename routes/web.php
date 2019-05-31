@@ -17,8 +17,13 @@ Route::get('welcome',function(){
     return view('welcome');
 });
 
-Route::get('test', function() {
-    return view('front-end.layouts.master');
+/**
+ * Front-End Endpoints
+ */
+
+ //Home interface
+Route::get('/', function() {
+    return view('front-end.home.home');
 });
 
 /**
@@ -126,11 +131,7 @@ Route::get('subjects/{subject}','Subject\SubjectsController@show')
 
 
 //DELETE A Subject 
-Route::delete('subjects/{subject}',
-    ['uses' => 'Subject\SubjectsController@destroy',
-    'middleware' => 'roles',
-    'roles' => [1]
-    ])
+Route::delete('subjects/{subject}','Subject\SubjectsController@destroy')
     ->name('subject.destroy');
 
 

@@ -47,16 +47,16 @@
                   @if($subject->active)
                   <form action="{{ route('subject.deactivate', $subject) }}" method="POST" id="activateForm">
                     {!! csrf_field() !!}
-                    <button id="{{$subject->id+1}}" class=" btn-xs delete-button" style="display:none;"></button>
-                    <a herf="javascript:;" class="" onclick="$('#{{$subject->id+1}}').click();" >
+                    <button id="deactivate" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#deactivate').click();" >
                       <i class="fa fa-check-circle" aria-hidden="true" style="font-size:18px;color:#5cb85c;cursor: pointer;"></i>
                     </a>
                   </form> 
                   @else
                   <form action="{{ route('subject.activate', $subject) }}" method="POST" id="activateForm">
                     {!! csrf_field() !!}
-                    <button id="{{$subject->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                    <a herf="javascript:;" class="" onclick="$('#{{$subject->id}}').click();" >
+                    <button id="activate" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#activate').click();" >
                       <i class="fa fa-times-circle" aria-hidden="true" style="font-size:18px;color:#dd4b39;cursor: pointer;"></i>
                     </a>
                   </form>

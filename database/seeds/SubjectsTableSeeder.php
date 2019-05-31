@@ -35,6 +35,8 @@ class SubjectsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
         Subject::truncate();
 
         
@@ -63,6 +65,7 @@ class SubjectsTableSeeder extends Seeder
 
         $this->fillClass(5 , 12,$physics); 
 
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         }
 }

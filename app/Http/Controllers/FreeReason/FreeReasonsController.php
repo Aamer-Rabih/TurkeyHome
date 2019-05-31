@@ -73,7 +73,7 @@ class FreeReasonsController extends Controller
      */
     public function edit(FreeReason  $freeReason)
     {
-        return view('admin.freereasons.edit');
+        return view('admin.freereasons.edit', compact('freeReason'));
     }
 
     /**

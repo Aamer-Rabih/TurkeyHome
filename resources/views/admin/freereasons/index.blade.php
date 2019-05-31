@@ -40,24 +40,24 @@
               @foreach($freeReasons as $freeReason)
               <tr>
                 <td>الطالب</td>
-                <td>{{$freeReason->create_at}}</td>
+                <td>{{$freeReason->created_at->format('d/m/Y')}}</td>
                 <td>
                   <div class="operations show">
-                    <a href="{{ route('freereason.show', $freereason) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
+                    <a href="{{ route('freereason.show', $freeReason) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
                   </div>
                 </td>
                 <td>
                   <div class="operations update">
-                    <a href="{{ route('freereason.edit', $freereason) }}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
+                    <a href="{{ route('freereason.edit', $freeReason) }}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
                   </div>
                 </td>
                 <td>
                   <div class="operations delete">
-                    <form action="{{ route('freereason.destroy',['class' => $freereason->id]) }}" method="POST" id="deleteForm">
+                    <form action="{{ route('freereason.destroy',['class' => $freeReason->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$freereason->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                      <a herf="javascript:;" class="" onclick="$('#{{$freereason->id}}').click();" >
+                      <button id="{{$freeReason->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" class="" onclick="$('#{{$freeReason->id}}').click();" >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>       

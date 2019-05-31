@@ -22,12 +22,12 @@
           <div class="card-header">تعديل الإعفاءات <i class="fa fa-edit" aria-hidden="true"></i></div>
             <div class="card-body">
 
-              <form action="{{route('freereason.update')}}" method="POST">
+              <form action="{{route('freereason.update', ['freeReason' => $freeReason])}}" method="POST">
                       {!! csrf_field() !!}
                       {!! method_field('PUT') !!}
                 <div class="form-group">
                   <label for="reason"><h5>نص سبب الأعفاء :</h5></label>
-                  <textarea class="form-control" id="reason" name="text" rows="3" required value="{{$freereason->text}}"></textarea> 
+                  <textarea class="form-control" id="reason" name="text" rows="3" required>{{$freeReason->text}}</textarea> 
                 </div>
                 <button type="submit" class="btn btn-success button1">تعديل</button>
                 <a href="{{route('freereason.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>

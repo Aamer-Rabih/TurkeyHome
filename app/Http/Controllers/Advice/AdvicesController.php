@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Advice;
 
 use App\Advice;
+use App\ClassRoom;
+use App\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Storage ; 
@@ -28,7 +30,10 @@ class AdvicesController extends Controller
      */
     public function create()
     {
-        return view('admin.advices.create');
+        $classes = ClassRoom::latest()->get();
+        $courses = Course::latest()->get();
+
+        return view('admin.advices.create', compact('classes', 'courses'));
     }
 
     /**

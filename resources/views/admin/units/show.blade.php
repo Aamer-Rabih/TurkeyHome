@@ -24,7 +24,7 @@
         @endif
       </div>
       <div class="col-lg-2">
-        <a href="#" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة درس 
+        <a href="/lessons/create?selectedunit={{$unit->id}}" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة درس ضمن هذه الوحدة 
           <i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i>
         </a>
       </div>
@@ -37,7 +37,7 @@
   </div>
         
   <div id="table" class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-8">
       <div class="card table-cards color-grey">
         <div class="card-body">
           <div class="content-header">
@@ -48,7 +48,8 @@
           <table class="table table-bordered table-hover table-width">
             <thead>
               <tr> 
-                <th>اسم الدرس</th>
+                <th>عنوان الدرس</th>
+                <th>نوع الملف</th>
                 <th>التفعيل</th>
                 <th>العرض</th>
                 <th>التعديل</th>
@@ -56,7 +57,54 @@
               </tr>
             </thead>
             <tbody>
-              
+              @foreach($lessons as $lesson)
+              <tr>
+                <td>{{$lesson->title}}</td>
+                <td>{{$lesson->type}}</td>
+                <td class="operations">
+                  @if($lesson->active)
+                  <form action="{{ route('lesson.deactivate', $lesson) }}" method="POST" id="activateForm">
+                    {!! csrf_field() !!}
+                    <button id="{{$lesson->id+1}}" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#{{$lesson->id+1}}').click();" >
+                      <i class="fa fa-check-circle" aria-hidden="true" style="font-size:18px;color:#5cb85c;cursor: pointer;"></i>
+                    </a>
+                  </form> 
+                  @else
+                  <form action="{{ route('lesson.activate', $lesson) }}" method="POST" id="activateForm">
+                    {!! csrf_field() !!}
+                    <button id="{{$lesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#{{$lesson->id}}').click();" >
+                      <i class="fa fa-times-circle" aria-hidden="true" style="font-size:18px;color:#dd4b39;cursor: pointer;"></i>
+                    </a>
+                  </form>
+                  @endif          
+                </td>
+                <td>
+                  <div class="operations show">
+                    <a href="{{ route('lesson.show', $lesson) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
+                  </div>
+                </td>
+                <td>
+                  <div class="operations update">
+                     <a href="{{ route('lesson.edit', $lesson) }}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
+                  </div>
+                </td>
+                <td>
+                  <div class="operations delete">
+                    <form action="{{ route('lesson.destroy', $lesson) }}" method="POST" id="deleteForm">
+                      {!! csrf_field() !!}
+                      <input type="hidden" name="_method" value="DELETE">    
+                      <button id="{{$lesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" class="" onclick="$('#{{$lesson->id}}').click();" >
+                        <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
+                      </a>
+                    </form>
+                    
+                  </div>
+                </td>
+              </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

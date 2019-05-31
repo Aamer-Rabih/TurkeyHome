@@ -1,8 +1,7 @@
-<!-- Mini header code -->
 <div class="container-fluid mini-header">
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-sm-6">
+      <div class="col-lg-6 col-md-6 col-sm-12">
         <section id="contact-info-section" class="clearfix">
           <div class="contact-info">
             <span>
@@ -11,12 +10,12 @@
             </span>
             <span>
               <i class="fa fa-envelope icon" aria-hidden="true"></i>
-              &nbsp;&nbsp;TurkishHome@gmail.com
+              &nbsp;&nbsp;TurkeyHome@gmail.com
             </span>
           </div>
         </section>
       </div>
-      <div class="col-md-6 col-sm-6">
+      <div class=" col-lg-6 col-md-6 col-sm-12">
         <section id="user-area-section" class="clearfix">
           <div class="user-area">
             <ul class="nav navbar-nav pull-left">

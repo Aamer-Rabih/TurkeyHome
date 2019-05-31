@@ -27,7 +27,7 @@
               <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>عرض سبب الإعفاء</small>
             </h2>
           </div>
-          <p>{{$freereason->text}}</p>
+          <p>{{$freeReason->text}}</p>
         </div>
       </div>
     </div>

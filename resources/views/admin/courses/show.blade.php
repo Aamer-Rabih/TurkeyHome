@@ -25,9 +25,9 @@
                 @endif
             </div>
             <div class="col-lg-2">
-                <!-- <a href="/subjects/create?selectedclass={{$course->id}}" class="btn btn-success button-margin-header" style="margin-right: 22px" >إضافة مادة 
+                <a href="/lessons/create?selectedcourse={{$course->id}}" class="btn btn-success button-margin-header" style="margin-right: 22px" >إضافة درس  
                     <i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i>
-                </a> -->
+                </a> 
             </div>
             <div class="col-lg-4">
                 <a href="{{route('course.index')}}" class="btn btn-primary button-margin-header custom-but pull-left" > إدارة كافة الدورات 
@@ -41,19 +41,71 @@
         <div class="col-lg-8">
             <div class="card table-cards color-grey">
                 <div class="card-body">
+                    <div class="content-header">
+                        <h2>
+                        <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> الدروس المعتمدة ضمن هذه الدورة</small>
+                        </h2>
+                    </div>
                     <table class="table table-bordered table-hover table-width">
                         <thead>
-                            <tr> 
-                                <th></th>
-                                <th></th>
-                                <th>  </th>
-                                <th>العرض</th>
-                                <th>التعديل</th>
-                                <th>الحذف</th>
-                            </tr>
+                        <tr> 
+                            <th>عنوان الدرس</th>
+                            <th>نوع الملف</th>
+                            <th>التفعيل</th>
+                            <th>العرض</th>
+                            <th>التعديل</th>
+                            <th>الحذف</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr></tr>
+                        @foreach($lessons as $lesson)
+                        <tr>
+                            <td>{{$lesson->title}}</td>
+                            <td>{{$lesson->type}}</td>
+                            <td class="operations">
+                            @if($lesson->active)
+                            <form action="{{ route('lesson.deactivate', $lesson) }}" method="POST" id="activateForm">
+                                {!! csrf_field() !!}
+                                <button id="{{$lesson->id+1}}" class=" btn-xs delete-button" style="display:none;"></button>
+                                <a herf="javascript:;" class="" onclick="$('#{{$lesson->id+1}}').click();" >
+                                <i class="fa fa-check-circle" aria-hidden="true" style="font-size:18px;color:#5cb85c;cursor: pointer;"></i>
+                                </a>
+                            </form> 
+                            @else
+                            <form action="{{ route('lesson.activate', $lesson) }}" method="POST" id="activateForm">
+                                {!! csrf_field() !!}
+                                <button id="{{$lesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                                <a herf="javascript:;" class="" onclick="$('#{{$lesson->id}}').click();" >
+                                <i class="fa fa-times-circle" aria-hidden="true" style="font-size:18px;color:#dd4b39;cursor: pointer;"></i>
+                                </a>
+                            </form>
+                            @endif          
+                            </td>
+                            <td>
+                            <div class="operations show">
+                                <a href="{{ route('lesson.show', $lesson) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
+                            </div>
+                            </td>
+                            <td>
+                            <div class="operations update">
+                                <a href="{{ route('lesson.edit', $lesson) }}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
+                            </div>
+                            </td>
+                            <td>
+                            <div class="operations delete">
+                                <form action="{{ route('lesson.destroy', $lesson) }}" method="POST" id="deleteForm">
+                                {!! csrf_field() !!}
+                                <input type="hidden" name="_method" value="DELETE">    
+                                <button id="{{$lesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                                <a herf="javascript:;" class="" onclick="$('#{{$lesson->id}}').click();" >
+                                    <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
+                                </a>
+                                </form>
+                                
+                            </div>
+                            </td>
+                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
