@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Symfony\Component\HttpKernel\Exception\HttpNotFoundException ; 
+
 
 class CheckRole
 {
@@ -17,7 +19,8 @@ class CheckRole
     {
         if($request->user() === null)
         {
-            return response('صلاحيات غير كافية',401);
+           abort(404);
+           //return response('صلاحيات غير كافية',401);
         }
         $actions = $request->route()->getAction();
         $roles = isset($actions['roles']) ? $actions['roles'] : null;   
@@ -26,6 +29,7 @@ class CheckRole
         {
         return $next($request);
         }
-        return response(401);
+        abort(404);
+       // return response(401);
     }
 }

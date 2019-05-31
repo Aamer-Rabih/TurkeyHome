@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
+use File;
 
 class Lesson extends Model
 {
@@ -64,7 +66,7 @@ public function getSrcAttribute($value){
      */
     public function units(){
 
-        return $this->belongsToMany('App\Unit','unit_lesson')
+        return $this->belongsToMany('App\Unit','lesson_unit')
         ->withPivot('lesson_order')
         ->withTimestamps();
 

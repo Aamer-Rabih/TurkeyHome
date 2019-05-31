@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 
 class SubjectsController extends Controller
 {
+    public function __construct()
+        {
+        
+        $this->middleware('auth');
+        
+        }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +22,8 @@ class SubjectsController extends Controller
      */
     public function index()
     {
+        
+        
         //Fetch all the subjects from teh database 
         $subjectsQuery = Subject::latest(); 
 

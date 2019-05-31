@@ -9,6 +9,13 @@ use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+    
+    $this->middleware('auth');
+    
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,19 +23,23 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $admins = User::whereHas('roles', function ($query)  {
+            $query->where('role', '=', 0);
+        })->get();
+
         $managers = User::whereHas('roles', function ($query)  {
-            $query->where('roles.role', '=', 1);
+            $query->where('role', '=', 1);
         })->get();
 
         $teachers = User::whereHas('roles', function ($query)  {
-            $query->where('roles.role', '=', 2);
+            $query->where('role', '=', 2);
         })->get();
 
         $students = User::whereHas('roles', function ($query)  {
-            $query->where('roles.role', '=', 3);
+            $query->where('role', '=', 3);
         })->get();
         //dd($managers,$teachers,$students);
-        return view('admin.users.index',compact('managers','teachers','students'));
+        return view('admin.users.index',compact('managers','teachers','students','admins'));
     }
 
     /**
@@ -55,8 +66,8 @@ class UsersController extends Controller
             'full_name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'tc' => 'required',
-            'roles' => 'required',
+            'tc' => '',
+            'role' => 'required',
         ]);
 
         $user = new User();
@@ -65,16 +76,24 @@ class UsersController extends Controller
         $user->full_name = $request->full_name;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        $user->tc = $request->tc;
-        $user->save();
-        foreach($request->roles as $role)
+        if($request->role === Role::TEACHER)
         {
-           $user->roles()->attach(Role::where('role',$role));
+            $user->tc = $request->tc;
         }
+        else
+        {
+            $user->tc = time();
+        }
+        $user->save();
+        
+        
+          //$role = Role::where('role',0)->get();
+          $user->roles()->attach(Role::where('role',$request->role)->get());
+        
 
         //Return redirect 
         return redirect()
-            ->route('user.show', ['user' => $user->id])
+            ->route('user.index')
             ->with('success', 'تم اضافة مستخدم بنجاح');
     }
 
@@ -150,4 +169,26 @@ class UsersController extends Controller
         return redirect()->back()
         ->with('success','تم حذف مستخدم بنجاح');
     }
+
+    public function activate(User $user){
+
+        $user->active = true;
+        
+        $user->save();
+        
+        return redirect()->route('user.show', ['user' => $user->id])
+                ->with('success','تم تفعيل المستخدم بنجاح');
+    }
+
+     /**
+      * Action to deactivate A lesson
+      */
+      public function deactivate(User $user){
+        $user->active = false;
+        $user->save();
+
+        return redirect()->route('user.show', ['user' => $user->id])
+                ->with('success', 'تم إلغاء تفعيل المستخدم بنجاح');
+
+      }
 }

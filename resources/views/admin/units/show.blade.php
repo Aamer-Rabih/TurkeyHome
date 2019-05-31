@@ -24,7 +24,7 @@
         @endif
       </div>
       <div class="col-lg-2">
-        <a href="{{route('unit.addlesson', $unit)}}" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة درس 
+        <a href="/lessons/create?selectedunit={{$unit->id}}" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة درس 
           <i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i>
         </a>
       </div>
@@ -56,11 +56,52 @@
               </tr>
             </thead>
             <tbody>
-              
+              @foreach($unitLessons as $lesson1)
+              <tr>
+               <td>{{$lesson1->title}}</td>
+               <td>{{$lesson1->acive}}</td>
+               <td><a href="{{route('lesson.show',$lesson1)}}"></a></td>
+               <td><a href="{{route('lesson.edit',$lesson1)}}"></a></td>
+               <!-- <td><a href="{{route('lesson.destroy',$lesson1)}}"></a></td> -->
+              </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="table" class="row">
+    <div class="card-deck">       
+      <div class="col-lg-6">
+        <div class="card color-grey">
+          <div class="card-body">
+            <div class="card-header">اضافة درس للوحدة</div>
+              
+              <form action="{{route('unit.attachlesson', ['unit' => $unit->id])}}" enctype="multipart/form-data" method="POST">
+                      {!! csrf_field() !!}
+                
+                <div class="form-group">
+                  <label for="lesson">اختر الدرس :</label>
+                  <select class="form-control form-control-select mt-3" id="lesson" name="lesson">
+                    <option selected>-- اختر درس --</option>
+                    @foreach($lessons as $lesson)
+                     
+                     
+                     <option value="{{$lesson->id}}">{{$lesson->title}}</option>
+                     
+                     
+                    @endforeach 
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-success myhover">إضافة</button>
+                <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+              </form>
+              
+          </div>
+        </div>
+      </div>      
     </div>
   </div>
 

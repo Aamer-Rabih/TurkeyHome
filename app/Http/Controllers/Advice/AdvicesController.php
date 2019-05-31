@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Storage ; 
 use File;
+use Validator ; 
 
 class AdvicesController extends Controller
 {
+    public function __construct()
+    {
+    
+    $this->middleware('auth');
+    
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,15 +46,42 @@ class AdvicesController extends Controller
      */
     public function store(Request $request)
     {
+        
+/*
+        $v->sometimes('reason', 'required|max:500', function ($input) {
+            return $input->games >= 100;
+        });*/
         //Vaidate Data 
-        $request->validate([
+
+        //'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime'
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:200',
+            'type' => 'required',
+            'active' => 'required',
+            'src' => 'required'
+        ]);
+
+      
+
+        if ($validator->fails()) {
+            return redirect()
+                        ->route('advice.create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+       
+        /*$request->validate([
             
             'title' => 'required|max:200',
             'type' => 'required',
             'active' => 'required',
             'src' => 'required'
 
-        ]);
+        ]);*/
+
+       
 
 
         //Prepare data to save 

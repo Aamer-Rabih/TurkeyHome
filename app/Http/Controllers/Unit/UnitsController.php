@@ -12,6 +12,14 @@ use App\Http\Controllers\Controller;
 
 class UnitsController extends Controller
 {
+
+    public function __construct()
+    {
+    
+    $this->middleware('auth');
+    
+    }
+    
     /**
      * Display a listing of the Unit.
      *
@@ -98,9 +106,20 @@ class UnitsController extends Controller
      */
     public function show(Unit $unit)
     {
-        
+        // $user = Auth::user()->with(['lessons' => function($query){
+        //     $query->where()
+        // }])->get();
 
-        return view('admin.units.show', compact('unit'));
+        $lessons = Lesson::with(['teachers' => function($query){
+            $query->where('teacher_id', Auth::user()->id);
+        }])->get();
+        //dd($lessons);
+        $unitLessons = Lesson::with(['units'])->get();
+        
+        //$lessons = array_diff($lessons, $unitLesson);
+
+        
+        return view('admin.units.show', compact('unit','lessons','unitLessons'));
     }
 
     /**
@@ -193,20 +212,34 @@ class UnitsController extends Controller
                 
     }
 
-    public function addLesson(Unit $unit)
-    {
-        $user = Auth::user();
-        $lessons = $user->lessons();
-        //$lessons = Lesson::with('techers');
+    // public function addLesson(Unit $unit)
+    // {
+    //     $user = Auth::user();
+
+    //     $lessons = $user->lessons();
+
+    
+    //     //$lessons = Lesson::with('techers');
         
-        return view('admin.units.addlesson',compact('unit','lessons'));
+    //     return view('admin.units.addlesson',compact('unit','lessons'));
+    // }
+
+    public function attachLesson(Request $request,Unit $unit)
+    {
+        $lesson = Lesson::find($request->lesson);
+        $unit->lessons()->save($lesson,['lesson_order'=>$unit->lessons()->count()+1]);
+        //$order->product()->save($product, ['price' => 12.34]);
+
+        //Redirect with status 
+        return redirect()
+                ->route('unit.show',['unit' => $unit->id])
+                ->with('success','تم تعديل الوحدة الدرسية بنجاح');
     }
 
-    public function storeLesson(Request $request,Unit $unit)
+    public function deleteLesson(Request $request , Unit $unit)
     {
         $lesson = Lesson::find($request->lesson_id);
-        $unit->lessons()->attach($lesson);
-
+        $unit->lessons()->detach($lesson);
         //Redirect with status 
         return redirect()
                 ->route('unit.show',['unit' => $unit->id])

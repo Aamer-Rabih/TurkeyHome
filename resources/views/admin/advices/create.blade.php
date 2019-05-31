@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                   <label for="orderField">النوع :</label>
-                  <select class="form-control form-control-select mt-3" id="orderField" name="order">
+                  <select class="form-control form-control-select mt-3" id="orderField" name="type">
                     <option selected>-- اختر نوع الملف --</option>
                     <option value="audio">ملف صوتي</option>
                     <option value="video">فيديو</option>

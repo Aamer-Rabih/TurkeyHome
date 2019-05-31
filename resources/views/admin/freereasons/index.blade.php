@@ -29,7 +29,7 @@
           <table class="table table-bordered table-hover table-width">
             <thead>
               <tr> 
-                <th>الطالب</th>
+                <th>الاعفاء</th>
                 <th>التاريخ</th>
                 <th>عرض</th>
                 <th>تعديل</th>
@@ -39,7 +39,7 @@
             <tbody>
               @foreach($freeReasons as $freeReason)
               <tr>
-                <td>الطالب</td>
+                <td>{{$freeReason->text}}</td>
                 <td>{{$freeReason->create_at}}</td>
                 <td>
                   <div class="operations show">

@@ -30,6 +30,6 @@ class Comment extends Model
 
     public function commenter(){
 
-        return $this->morphTo('commenter','commenter_type','commenter_id','id');
+        return $this->belongsTo('App\User');
     }
 }

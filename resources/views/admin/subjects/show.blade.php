@@ -24,8 +24,11 @@
         @endif
       </div>
       <div class="col-lg-2">
-        <a href="/classes/{{$subject->class->id}}/units/create?selectedsubject={{$subject->id}}" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة وحدة 
-          <i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i>
+        <!-- <a href="/classes/{{$subject->class->id}}/units/create?selectedsubject={{$subject->id}}" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة وحدة 
+         -->
+         <a href="/units/create?selectedsubject={{$subject->id}}" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة وحدة 
+        
+         <i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i> 
         </a>
       </div>
       <div class="col-lg-3">

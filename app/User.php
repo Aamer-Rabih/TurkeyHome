@@ -65,13 +65,13 @@ class User extends Authenticatable
     /**Comments posted by this teacher */
     public function comments(){
 
-        return $this->morphMany('App\Comment','commenter','commenter_type','commenter_id');
+        return $this->hasMany('App\Comment','commenter','commenter_type','commenter_id');
     }
 
     /**Replier Posted By This Teacher */
     public function replies(){
 
-        return $this->morphMany('App\Reply','replier','replier_type','replier_id');
+        return $this->hasMany('App\Reply','replier','replier_type','replier_id');
     }
 
     /**Classes beloning to this this Teacher */
@@ -106,6 +106,14 @@ class User extends Authenticatable
 
         return $this->belongsToMany('App\Lesson','lesson_teacher','teacher_id','lesson_id')
             ->withTimestamps();
+    }
+
+
+    public function freeReasons(){
+
+
+        return $this->belongsToMany('App\FreeReason','freereason_student','student_id','freereason_id')
+        ->withTimestamps();
     }
 
 }

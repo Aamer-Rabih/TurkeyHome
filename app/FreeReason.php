@@ -13,7 +13,7 @@ class FreeReason extends Model
     //Students belonging to This FreeReason
     public function students(){
 
-        return $this->belongsToMany('App\Student','freereason_student','freereason_id','student_id')
+        return $this->belongsToMany('App\User','freereason_student','freereason_id','student_id')
         ->withTimestamps();
     }
 }
