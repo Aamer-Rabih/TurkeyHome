@@ -15,6 +15,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+    	DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
         User::truncate();
 
@@ -22,6 +23,7 @@ class UserTableSeeder extends Seeder
         $role_manager = Role::where('role',Role::MANAGER)->first();
         $role_teacher = Role::where('role',Role::TEACHER)->first();
         $role_student = Role::where('role',Role::STUDENT)->first();
+        $role_admin = Role::where('role',Role::ADMIN)->first();
         
         //DEFINE USERS
         $manager = new User();
@@ -55,7 +57,18 @@ class UserTableSeeder extends Seeder
         $student->tc = 'student';
         $student->save();
         $student->roles()->attach($role_student);
+
+        $student = new User();
+        $student->username = 'admin';
+        $student->password = bcrypt('123456789');
+        $student->full_name = 'admin_nd';
+        $student->email = 'admin@admin.com';
+        $student->phone = '665234987';
+        $student->tc = 'admin';
+        $student->save();
+        $student->roles()->attach($role_admin);
         
 
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

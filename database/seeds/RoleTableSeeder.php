@@ -12,6 +12,7 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Role::truncate();
 
         $role_manager = new Role();
@@ -26,8 +27,9 @@ class RoleTableSeeder extends Seeder
         $role_student->role = Role::STUDENT;
         $role_student->save();
 
-        /*$role_admin = new Role();
+        $role_admin = new Role();
         $role_admin->role = Role::ADMIN;
-        $role_admin->save();*/
+        $role_admin->save();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
