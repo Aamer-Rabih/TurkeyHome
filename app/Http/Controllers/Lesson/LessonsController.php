@@ -110,7 +110,7 @@ class LessonsController extends Controller
     {
         
         return view('admin.lessons.edit',compact('lesson'));
-    }
+  }
 
     /**
      * Update the specified resource in storage.
