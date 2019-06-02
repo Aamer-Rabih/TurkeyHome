@@ -20,13 +20,13 @@
           <div class="user-area">
             <ul class="nav navbar-nav pull-left">
               <li>
-                <a href="#">
+                <a href="{{ route('register') }}">
                 <i class="fas fa-user-graduate icon" aria-hidden="true"></i>
                 &nbsp;&nbsp; إنشاء حساب
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="{{ route('login') }}">
                 <i class="fas fa-sign-in-alt icon" aria-hidden="true"></i>
                 &nbsp;&nbsp; تسجيل الدخول 
                 </a>

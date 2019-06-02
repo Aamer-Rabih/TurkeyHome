@@ -12,7 +12,9 @@
         </div>
       </div>
       <div class="col-lg-2">
+        @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
         <a href="{{route('lesson.create')}}" class="btn btn-success myhover BP" role="button">إضافة درس<div><i class="material-icons" style="font-size:16px">add_box</i></div></a>
+        @endif
       </div>
     </div>
   </div>
@@ -31,10 +33,14 @@
               <tr> 
                 <th>عنوان الدرس</th>
                 <th>نوع الملف</th>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
                 <th>التفعيل</th>
+                @endif
                 <th>العرض</th>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
                 <th>التعديل</th>
                 <th>الحذف</th>
+                @endif
               </tr>
             </thead>
             <tbody>
@@ -42,6 +48,7 @@
               <tr>
                 <td>{{$lesson->title}}</td>
                 <td>{{$lesson->type}}</td>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
                 <td class="operations">
                   @if($lesson->active)
                   <form action="{{ route('lesson.deactivate', $lesson) }}" method="POST" id="activateForm">
@@ -61,11 +68,13 @@
                   </form>
                   @endif          
                 </td>
+                @endif
                 <td>
                   <div class="operations show">
                     <a href="{{ route('lesson.show', $lesson) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
                   </div>
                 </td>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
                 <td>
                   <div class="operations update">
                      <a href="{{ route('lesson.edit', $lesson) }}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
@@ -84,6 +93,7 @@
                     
                   </div>
                 </td>
+                @endif
               </tr>
               @endforeach
             </tbody>

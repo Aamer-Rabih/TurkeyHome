@@ -1130,7 +1130,10 @@ Route::delete('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksControll
 //auth routes
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function() {
+    return view('admin.layouts.partials.index');})->name('home');
+
 
 
      //users index

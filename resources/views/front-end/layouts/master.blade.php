@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('js/slick/slick.css')}}"/>
     <!-- Add the new slick-theme.css if you want the default styling -->
     <link rel="stylesheet" type="text/css" href="{{asset('js/slick/slick-theme.css')}}"/>
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/front-end-styles.css')}}">
 
     @yield('styles')

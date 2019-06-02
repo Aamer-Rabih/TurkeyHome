@@ -1,6 +1,6 @@
 <div class="container-fluid padding-section studentThank-section">
   <div class="text-center" style="margin-top:20px; margin-bottom:20px;">
-    <h1>تشكرات الطلاب</h1>
+    <h1>أراء طلابنا</h1>
   </div>
   <div class="studentThankCarouselIndicators">
     <div class="card text-center studentThankItem">

@@ -12,7 +12,9 @@
         </div>
       </div>
       <div class="col-lg-2">
+        @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
         <a href="{{route('subject.create')}}" class="btn btn-success custom-but BP" >إضافة مادة <div><i class="fa fa-plus-square" aria-hidden="true"></i></div></a>
+        @endif
       </div>
     </div>
   </div>
@@ -30,19 +32,24 @@
             <thead>
               <tr> 
                 <th>اسم المادة</th>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
                 <th>التفعيل</th>
+                @endif
                 <th>الصف</th>
                 <th>عدد الوحدات الدراسية</th>
                 <th>قابلية التنزيل</th>
                 <th>عرض</th>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
                 <th>تعديل</th>
                 <th>حذف</th>
+                @endif
               </tr>
             </thead>
             <tbody>
               @foreach($subjects as $subject)
               <tr>
                 <td>{{$subject->name}}</td>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
                 <td class="operations">
                   @if($subject->active)
                   <form action="{{ route('subject.deactivate', $subject) }}" method="POST" id="activateForm">
@@ -62,6 +69,7 @@
                   </form>
                   @endif          
                 </td>
+                @endif
                 <td>{{$subject->class->name}}</td>
                 <td>{{$subject->units->count()}}</td>
                 @if($subject->downloable)
@@ -74,6 +82,7 @@
                     <a href="{{ route('subject.show', $subject) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
                   </div>
                 </td>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
                 <td>
                   <div class="operations update">
                     <a href="{{ route('subject.edit', $subject) }}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
@@ -91,6 +100,7 @@
                     </form>       
                   </div>
                 </td>
+                @endif
               </tr>
               @endforeach
             </tbody>

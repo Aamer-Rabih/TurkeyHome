@@ -1,15 +1,45 @@
-@extends('master')
+@extends('admin.layouts.master')
 
 @sectoin('content')
-
-    <div id="content">
-      <div class="content-header">
-        <h1>
-          داش بورد
-          <small>لوحة التحكم</small>
-        </h1>
+<div id="content">
+  <div class="header-card table-cards color-grey">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="content-header">
+          <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> لوحة التحكم</small></h1>
+          </div>
+        </div>
       </div>
+    </div>
 
+
+
+
+
+    <div id="table" class="row">
+    <div class="col-lg-8">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> لوحة التحكم</small>
+            </h2>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+<!--
         <div class="row">
           <div class="card-deck">
             <div class="col-lg-3">
@@ -91,6 +121,6 @@
           </div>
         </div>
 
-    </div>
-
+    </div>-->
+</div>
 @endsetion

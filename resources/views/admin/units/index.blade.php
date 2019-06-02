@@ -12,7 +12,9 @@
         </div>
       </div>
       <div class="col-lg-2">
+        @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
         <a href="{{route('unit.create')}}" class="btn btn-success custom-but BP" >إضافة وحدة دراسية <div><i class="fa fa-plus-square" aria-hidden="true"></i></div></a>
+        @endif
       </div>
     </div>
   </div>
@@ -30,19 +32,22 @@
             <thead>
               <tr> 
                 <th>اسم الوحدة</th>
-                <th>التفعيل</th>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))<th>التفعيل</th>@endif
                 <th>عدد دروس الوحدة</th>
                 <th>المادة الدراسية</th>
                 <th>الصف</th>
                 <th>عرض</th>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
                 <th>تعديل</th>
                 <th>حذف</th>
+                @endif
               </tr>
             </thead>
             <tbody>
               @foreach($units as $unit)
               <tr>
                 <td>{{$unit->title}}</td>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
                 <td class="operations">
                   @if($unit->active)
                   <form action="{{ route('unit.deactivate', $unit) }}" method="POST" id="activateForm">
@@ -62,6 +67,7 @@
                   </form>
                   @endif          
                 </td>
+                @endif
                 <td>لم يتم البناء</td>
                 <td>{{$unit->subject->name}}</td>
                 <td>{{$unit->subject->class->name}}</td>
@@ -70,6 +76,7 @@
                     <a href="{{ route('unit.show', $unit) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
                   </div>
                 </td>
+                @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
                 <td>
                   <div class="operations update">
                     <a href="{{ route('unit.edit', $unit) }}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
@@ -87,6 +94,7 @@
                     </form>       
                   </div>
                 </td>
+                @endif
               </tr>
               @endforeach
             </tbody>

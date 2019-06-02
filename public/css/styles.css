@@ -419,6 +419,17 @@
 		float: right;
 		padding: 5px 5px;
 	}
+	.logout {
+		background-color: #89171E;
+    border-radius: 6px;
+    color: #F5F5F5;
+    padding: 7px 15px;
+    margin: 6px;
+    float: left;
+	}
+	.logout:hover {
+		color: #888;
+	}
 	.card-body {
 		color: #777;
 	}

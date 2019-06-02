@@ -1,6 +1,6 @@
-<div class="container padding-section">
+<div class="container padding-section" style="color: #777;">
   <div class="text-center" style="margin-bottom:20px;">
-    <h1>نماذج الدروس</h1>
+    <h1>نماذج من دروسنا</h1>
   </div>
   <div class="showLessonCarouselIndicators">
     <div class="card text-center showLessonItem">
