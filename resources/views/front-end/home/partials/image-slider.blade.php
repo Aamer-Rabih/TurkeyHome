@@ -8,7 +8,7 @@
 
     @foreach($carousels  as $carousel)
     <!--- Slides -->
-    <div class="carousel-item active" style="background-image: url({{ $carousel->src }})">
+    <div class="carousel-item {{$carousel->order == 1 ? 'active' : ''}}" style="background-image: url({{ $carousel->src }})">
       <div class="carousel-caption text-right">
         <h1>تركي هوم</h1>
         <h3>المدرسة الألكترونية الأفضل</h3>
