@@ -26,7 +26,9 @@ Route::get('/', function() {
     $studentThanks = \App\StudentThank::latest()->get();
     $carousels = \App\Carousel::latest()->get();
     $showLessons =\App\ShowLesson::latest()->get();
-    return view('front-end.home.home',compact('studentThanks','carousels','showLessons'));
+    $classes =\App\ClassRoom::latest()->get();
+    $courses =\App\Course::latest()->get();
+    return view('front-end.home.home',compact('studentThanks','carousels','showLessons','classes','courses'));
 });
 
 /**

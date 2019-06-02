@@ -24,10 +24,9 @@
               الصفوف
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">الأول</a>
-              <a class="dropdown-item" href="#">الثاني</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">مفعل غير مفعل</a>
+              @foreach($classes as $class)
+              <a class="dropdown-item" href="#">$class->name</a>
+              @endforeach
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -35,10 +34,10 @@
               الدورات
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">الأول</a>
-              <a class="dropdown-item" href="#">الثاني</a>
+            @foreach($classes as $class)
+              <a class="dropdown-item" href="#">$courses->title</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">مفعل غير مفعل</a>
+            @endforeach
             </div>
           </li>
           <li class="nav-item">
