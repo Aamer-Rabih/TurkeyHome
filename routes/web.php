@@ -23,7 +23,10 @@ Route::get('welcome',function(){
 
  //Home interface
 Route::get('/', function() {
-    return view('front-end.home.home');
+    $studentThanks = \App\StudentThank::latest()->get();
+    $carousels = \App\Carousel::latest()->get();
+    $showLessons =\App\ShowLesson::latest()->get();
+    return view('front-end.home.home',compact('studentThanks','carousels','showLessons'));
 });
 
 /**
@@ -1138,7 +1141,7 @@ Route::get('/home', function() {
 
      //users index
      Route::get('users',
-     ['uses' => 'USer\USersController@index',
+     ['uses' => 'User\UsersController@index',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
@@ -1146,7 +1149,7 @@ Route::get('/home', function() {
      
      //user create route
      Route::get('users/create',
-     ['uses' => 'USer\USersController@create',
+     ['uses' => 'User\UsersController@create',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
@@ -1154,7 +1157,7 @@ Route::get('/home', function() {
      
      //user show route
      Route::get('users/{user}',
-     ['uses' => 'USer\USersController@show',
+     ['uses' => 'User\UsersController@show',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
@@ -1162,7 +1165,7 @@ Route::get('/home', function() {
      
      //store user route
      Route::post('users',
-     ['uses' => 'USer\USersController@store',
+     ['uses' => 'User\UsersController@store',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
@@ -1170,7 +1173,7 @@ Route::get('/home', function() {
      
      //Show The Form to Edit an user
      Route::get('users/{user}/edit',
-     ['uses' => 'USer\USersController@edit',
+     ['uses' => 'User\UsersController@edit',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
@@ -1178,7 +1181,7 @@ Route::get('/home', function() {
      
          //update user route
      Route::put('users/{user}',
-     ['uses' => 'USer\USersController@update',
+     ['uses' => 'User\UsersController@update',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
@@ -1186,7 +1189,7 @@ Route::get('/home', function() {
      
      //Delete A user 
      Route::delete('users/{user}',
-     ['uses' => 'USer\USersController@destroy',
+     ['uses' => 'User\UsersController@destroy',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
@@ -1194,14 +1197,14 @@ Route::get('/home', function() {
 
          //Deactivate A user 
 Route::post('users/{user}/deactivate',
-['uses' => 'USer\USersController@deactivate',
+['uses' => 'User\UsersController@deactivate',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
 ->name('users.deactivate');
 
 Route::post('users/{user}/activate',
-['uses' => 'USer\USersController@activate',
+['uses' => 'User\UsersController@activate',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
