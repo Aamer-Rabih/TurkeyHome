@@ -25,7 +25,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               @foreach($classes as $class)
-              <a class="dropdown-item" href="#">$class->name</a>
+              <a class="dropdown-item" href="#">{{ $class->name }}</a>
               @endforeach
             </div>
           </li>
@@ -35,7 +35,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             @foreach($classes as $class)
-              <a class="dropdown-item" href="#">$courses->title</a>
+              <a class="dropdown-item" href="#">{{ $courses->title }}</a>
               <div class="dropdown-divider"></div>
             @endforeach
             </div>
