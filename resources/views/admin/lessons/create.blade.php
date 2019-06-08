@@ -19,7 +19,7 @@
           <div class="card-body">
             <div class="card-header">اضافة درس جديد <i class="fa fa-plus-square" aria-hidden="true"></i></div>
               
-              <form action="{{route('lesson.store')}}" method="POST">
+              <form action="{{route('lesson.store')}}" enctype="multipart/form-data" method="POST" >
                       {!! csrf_field() !!}
                 <div class="form-group">
                   <label for="lesson"><h5>الدرس :</h5></label>

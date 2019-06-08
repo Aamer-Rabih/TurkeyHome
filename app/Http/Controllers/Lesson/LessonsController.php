@@ -94,17 +94,17 @@ class LessonsController extends Controller
           }
 
         $lesson->save();
-
+          
          if($request->unit_id != null){
              $unit = Unit::findOrFail($request->unit_id)->first()->get();
              $unit->lessons()->attach($lesson);
          }
-
+         
          if($request->course_id != null){
             $course = Course::findOrFail($request->course_id)->first()->get();
             $course->lessons()->attach($lesson);
         }
-
+        
          //Return redirect 
         return redirect()
         ->route('lesson.show', ['lesson' => $lesson->id])
