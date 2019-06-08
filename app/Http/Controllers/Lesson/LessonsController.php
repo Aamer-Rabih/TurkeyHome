@@ -10,6 +10,9 @@ use App\Comment;
 use App\Reply;
 use Auth;
 use App\Role;
+use App\Course;
+use Storage ; 
+use File ;
 
 class LessonsController extends Controller
 {
@@ -38,9 +41,11 @@ class LessonsController extends Controller
      */
     public function create(Request $request)
     {
+        $selectedCourse = request()->filled('selectedCourse') ? Course::findOrFail(request()->selectedCourse) : null ;
         $selectedUnit = request()->filled('selectedunit') ? Unit::findOrFail(request()->selectedunit) : null ;
         $units = Unit::all();
-        return view('admin.lessons.create',compact('selectedUnit','units'));
+        $courses = Course::all();
+        return view('admin.lessons.create',compact('selectedUnit','units','selectedCourse','courses'));
     }
 
     /**
@@ -49,7 +54,7 @@ class LessonsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Unit $unit = null)
+    public function store(Request $request, Unit $unit = null, Course $course = null)
     {
         $request->validate([
             'title' => 'required|max:200',
@@ -62,24 +67,43 @@ class LessonsController extends Controller
         
         //Prepare data to save 
 
-        $attributes['title'] = $request->title ; 
-        $attributes['type'] = $request->type ;
-        $attributes['active'] = $request->active ? true : false ;
-        $attributes['intro'] = $request->intro ;
+        // $attributes['title'] = $request->title ; 
+        // $attributes['type'] = $request->type ;
+        // $attributes['active'] = $request->active ? true : false ;
+        // $attributes['intro'] = $request->intro ;
 
-        //save File 
-        if($request->hasFile('src')){
+        // //save File 
+        // if($request->hasFile('src')){
 
-            $attributes['src'] = $request->src->store('public/lessons');
+        //     $attributes['src'] = $request->src->storeAs('public/lessons', $request->src->getClientOriginalName());
 
-        }
+        // }
 
-         //Persist data in the database 
-         $lesson = Lesson::create($attributes);
+        //  //Persist data in the database 
+        //  $lesson = Lesson::create($attributes);
 
-         if($unit != null){
+        $lesson = new Lesson();
+        $lesson->title = $request->title;
+        $lesson->type = $request->type;
+        $lesson->active = $request->active;
+        $lesson->intro = $request->intro;
+
+        if ($request->hasFile('src'))
+          {
+              $lesson->src = $request->src->storeAs('public/lessons', $request->src->getClientOriginalName());
+          }
+
+        $lesson->save();
+
+         if($request->unit_id != null){
+             $unit = Unit::findOrFail($request->unit_id)->first()->get();
              $unit->lessons()->attach($lesson);
          }
+
+         if($request->course_id != null){
+            $course = Course::findOrFail($request->course_id)->first()->get();
+            $course->lessons()->attach($lesson);
+        }
 
          //Return redirect 
         return redirect()

@@ -176,7 +176,7 @@ class UsersController extends Controller
         
         $user->save();
         
-        return redirect()->route('user.show', ['user' => $user->id])
+        return redirect()->back()
                 ->with('success','تم تفعيل المستخدم بنجاح');
     }
 
@@ -187,7 +187,7 @@ class UsersController extends Controller
         $user->active = false;
         $user->save();
 
-        return redirect()->route('user.show', ['user' => $user->id])
+        return redirect()->back()
                 ->with('success', 'تم إلغاء تفعيل المستخدم بنجاح');
 
       }

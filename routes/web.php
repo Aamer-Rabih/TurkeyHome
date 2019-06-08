@@ -715,7 +715,7 @@ Route::delete('evaluations/{evaluation}',
  
     //freereasons index
 Route::get('freereasons',
-['uses' => 'FreeREason\FreeREasonsController@index',
+['uses' => 'FreeReason\FreeReasonsController@index',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
 ]])
@@ -1210,5 +1210,5 @@ Route::post('users/{user}/activate',
 'middleware' => 'roles',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
-->name('users.aactivate');
+->name('users.activate');
 

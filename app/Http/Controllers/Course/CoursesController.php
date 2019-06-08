@@ -96,7 +96,8 @@ class CoursesController extends Controller
             return $course ; 
         }
 
-        return view('admin.courses.show' , compact('course'));
+        $lessons = $course->lessons;
+        return view('admin.courses.show' , compact('course','lessons'));
 
     }
 

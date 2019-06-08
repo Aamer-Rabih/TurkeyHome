@@ -26,7 +26,7 @@
                   <input type="text" class="form-control" id="lesson" name="title" required placeholder="اسم الدرس الجديد">
                 </div>
                 <div class="radioG">
-                  <h5>تفعيل الدورة التدريسية :</h5>
+                  <h5>تفعيل الدرس  :</h5>
                   <div class="radio">
                     <input type="radio" name="active" value="1" checked>
                     <label>مفعل</label>
@@ -48,6 +48,22 @@
                   @elseif($selectedUnit != null)
                     <select class="form-control form-control-select mt-3" id="classField" name="unit_id" disabled>
                       <option value="{{$selectedUnit->id}}">{{$selectedUnit->title}}</option>
+                    </select>
+                  @endif
+                </div>
+
+                <div class="form-group">
+                  <label for="classField">الدورة الدراسية:</label>
+                  @if($selectedCourse === null)
+                    <select class="form-control form-control-select mt-3" id="classField" name="course_id">
+                      <option selected>-- اختر الدورة --</option>
+                      @foreach($courses as $course)
+                      <option value="{{$course->id}}">{{$course->title}}</option>
+                      @endforeach
+                    </select>
+                  @elseif($selectedCourse != null)
+                    <select class="form-control form-control-select mt-3" id="classField" name="course_id" disabled>
+                      <option value="{{$selectedCourse->id}}">{{$selectedCourse->title}}</option>
                     </select>
                   @endif
                 </div>

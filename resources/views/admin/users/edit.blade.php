@@ -23,32 +23,32 @@
                       {!! csrf_field() !!}
                 <div class="form-group">
                   <label for="username"><h5>اسم المستخدم :</h5></label>
-                  <input type="text" class="form-control" id="username" name="username" required placeholder="اسم المستخدم" value="{{$user->usernmae}}">
+                  <input type="text" class="form-control" id="username" name="username" required placeholder="اسم المستخدم" value="{{$user->username}}">
                 </div>
 
                 <div class="form-group">
                   <label for="password"><h5>كلمة المرور :</h5></label>
-                  <input type="password" class="form-control" id="password" name="password" required placeholder="كلمة المرور" value="{{$user->password}}>
+                  <input type="password" class="form-control" id="password" name="password" required placeholder="كلمة المرور" value="{{$user->password}}">
                 </div>
 
                 <div class="form-group">
                   <label for="full_name"><h5>الاسم الكامل :</h5></label>
-                  <input type="text" class="form-control" id="full_name" name="full_name" required placeholder="الاسم الكامل" value="{{$user->full_name}}>
+                  <input type="text" class="form-control" id="full_name" name="full_name" required placeholder="الاسم الكامل" value="{{$user->full_name}}">
                 </div>
 
                 <div class="form-group">
                   <label for="tc"><h5>tc:</h5></label>
-                  <input type="text" class="form-control" id="tc" name="tc" required placeholder="tc"value="{{$user->tc}}>
+                  <input type="text" class="form-control" id="tc" name="tc" required placeholder="tc"value="{{$user->tc}}">
                 </div>
 
                 <div class="form-group">
                   <label for="email"><h5>البريد الالكتروني :</h5></label>
-                  <input type="text" class="form-control" id="email" name="email" required placeholder="البريد" value="{{$user->email}}>
+                  <input type="text" class="form-control" id="email" name="email" required placeholder="البريد" value="{{$user->email}}">
                 </div>
 
                 <div class="form-group">
                   <label for="phone"><h5>رقم الهاتف:</h5></label>
-                  <input type="text" class="form-control" id="phone" name="phone" required placeholder="رقم الهاتف"value="{{$user->phone}}>
+                  <input type="text" class="form-control" id="phone" name="phone" required placeholder="رقم الهاتف"value="{{$user->phone}}">
                 </div>
 
                 <div class="radioG">
