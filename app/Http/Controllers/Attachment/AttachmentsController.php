@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Attachment;
 
 use App\Attachment;
+use App\Lesson;
+use App\Deneme;
+use App\Test;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Storage ; 
@@ -34,7 +37,11 @@ class AttachmentsController extends Controller
      */
     public function create()
     {
-        return view('admin.attachments.create');
+        $lessons = Lesson::latest()->get();
+        $denemes = Deneme::latest()->get();
+        $tests = Test::latest()->get();
+
+        return view('admin.attachments.create', compact('lessons', 'denemes', 'tests'));
     }
 
     /**
@@ -81,7 +88,7 @@ class AttachmentsController extends Controller
 
         //Return redirect 
         return redirect()
-            ->route('attachment.show', ['attachment' => $attachment->id])
+            ->route('attachment.index', ['attachment' => $attachment->id])
             ->with('success', 'تم إنشاء الملحق بنجاح');
     }
 
@@ -104,7 +111,11 @@ class AttachmentsController extends Controller
      */
     public function edit(Attachment $attachment)
     {
-        return view('admin.attachments.edit',compact('attachment'));
+        $lessons = Lesson::latest()->get();
+        $denemes = Deneme::latest()->get();
+        $tests = Test::latest()->get();
+
+        return view('admin.attachments.edit',compact('attachment', 'lessons', 'denemes', 'tests'));
     }
 
     /**
@@ -121,7 +132,7 @@ class AttachmentsController extends Controller
             
             'name' => 'required|max:200',
             'type' => 'required',
-            'src' => 'required',
+            'src' => '',
             'attachmentable_id' => 'required',
             'attachmentable_type' => 'required'
 
@@ -140,7 +151,7 @@ class AttachmentsController extends Controller
 
         //Return redirect 
         return redirect()
-            ->route('attachment.show', ['attachment' => $attachment->id])
+            ->route('attachment.index', ['attachment' => $attachment->id])
             ->with('success', 'تم تعديل الملحق بنجاح');
     }
 

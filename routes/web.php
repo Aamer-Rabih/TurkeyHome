@@ -1131,6 +1131,9 @@ Route::put('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksController@
 Route::delete('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksController@destroy')
     ->name('whatsapplink.destroy');
 
+//Ajax Dropdown
+Route::get('dropdownlist/getdata/{type}','WhatsappLink\WhatsappLinksController@getData'); 
+
 
 //auth routes
 Auth::routes();

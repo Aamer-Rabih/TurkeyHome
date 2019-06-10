@@ -344,8 +344,12 @@ footer {
 footer img {
   width: 8rem;
 }
-footer a {
+footer a:hover {
   color:white;
+  text-decoration: none;
+}
+footer a {
+  color:#999;
 }
 footer .icon {
   font-size: 1.7rem;
@@ -365,7 +369,7 @@ hr.socket {
   width: fit-content;
 }
 #bottom-bar {
-  height: 40px;
+  height: 60px;
   font-size: 12px;
   direction: ltr;
   padding: 10px 40px 10px 20px;
