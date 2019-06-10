@@ -104,6 +104,7 @@ class LessonsController extends Controller
             $course = Course::findOrFail($request->course_id)->first()->get();
             $course->lessons()->attach($lesson);
         }
+        Auth::user()->lessons()->syncWithoutDetaching($lesson->id);
         
          //Return redirect 
         return redirect()

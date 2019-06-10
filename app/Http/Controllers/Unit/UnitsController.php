@@ -110,9 +110,15 @@ class UnitsController extends Controller
         //     $query->where()
         // }])->get();
 
-        $lessons = Lesson::with(['teachers' => function($query){
-            $query->where('teacher_id', Auth::user()->id);
-        }])->get();
+        // $lessons = Lesson::with(['teachers' => function($query){
+        //     $query->where('teacher_id', Auth::user()->id);
+        // }])->get();
+        if (Auth::user()->hasRole(Role::TEACHER)){
+        $lessons = Auth::user()->lessons;
+        }
+        else{
+            $lessons = Lesson::all();
+        }
         //dd($lessons);
         $unitLessons = Lesson::with(['units'])->get();
         

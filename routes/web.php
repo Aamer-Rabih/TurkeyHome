@@ -310,7 +310,7 @@ Route::post('subjects/{subject}/deactivate',
  Route::get('units',
  ['uses' => 'Unit\UnitsController@index',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
     ->name('unit.index');
 
@@ -319,7 +319,7 @@ Route::post('subjects/{subject}/deactivate',
 Route::delete('units/{unit}',
 ['uses' => 'Unit\UnitsController@destroy',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
     ->name('unit.destroy');
 
@@ -334,7 +334,7 @@ Route::get('units/create','Unit\UnitsController@chooseClass');
 Route::get('units/create',
 ['uses' => 'Unit\UnitsController@create',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
     ->name('unit.create');
 
@@ -342,7 +342,7 @@ Route::get('units/create',
 Route::post('units',
 ['uses' => 'Unit\UnitsController@store',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
 ->name('unit.store');
 
@@ -351,7 +351,7 @@ Route::post('units',
 Route::get('units/{unit}/edit',
 ['uses' => 'Unit\UnitsController@edit',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
     ->name('unit.edit');
 
@@ -359,7 +359,7 @@ Route::get('units/{unit}/edit',
 Route::put('units/{unit}',
 ['uses' => 'Unit\UnitsController@update',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
 ->name('unit.update');
 
@@ -367,7 +367,7 @@ Route::put('units/{unit}',
 Route::get('units/{unit}',
 ['uses' => 'Unit\UnitsController@show',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
     ->name('unit.show');
 
@@ -375,7 +375,7 @@ Route::get('units/{unit}',
 Route::post('units/{unit}/activate',
 ['uses' => 'Unit\UnitsController@activate',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
     ->name('unit.activate');
 
@@ -383,7 +383,7 @@ Route::post('units/{unit}/activate',
 Route::post('units/{unit}/deactivate',
 ['uses' => 'Unit\UnitsController@deactivate',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
 ->name('unit.deactivate');
 
@@ -395,7 +395,7 @@ Route::post('units/{unit}/deactivate',
 Route::post('units/{unit}/attachlesson',
 ['uses' => 'Unit\UnitsController@attachLesson',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
 ->name('unit.attachlesson');
 
@@ -403,7 +403,7 @@ Route::post('units/{unit}/attachlesson',
 Route::post('units/{unit}/detachlesson',
 ['uses' => 'Unit\UnitsController@deleteLesson',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
 ->name('unit.deletelesson');
 
@@ -1026,7 +1026,7 @@ Route::delete('advices/{advice}','Advice\AdvicesController@destroy')
 Route::get('lessons',
 ['uses' => 'Lesson\LessonsController@index',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::STUDENT,\App\Role::TEACHER
 ]])
 ->name('lesson.index');
 

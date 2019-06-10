@@ -132,7 +132,7 @@ public function getSrcAttribute($value){
        */
       public function teachers(){
 
-        return $this->belongsToMany('App\Teacher','lesson_teacher','lesson_id','teacher_id')
+        return $this->belongsToMany('App\User','lesson_teacher','lesson_id','teacher_id')
           ->withTimestamps();
       }
 }
