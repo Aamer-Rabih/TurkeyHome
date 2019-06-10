@@ -19,7 +19,12 @@
    
 
  	<div id="bottom-bar">
-      Copyright © 2019-2020 4K Company.All rights reserved.
+      
+   حقوق النشر © 2019 -
+        كافة الحقوق محفوظة -
+        <a href="/" class="active">تركي هوم</a> 
+        <br/>
+        Designed By 4K Company.
     </footer>
 
 

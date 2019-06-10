@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\WhatsappLink;
 
 use App\WhatsappLink;
+use App\ClassRoom;
+use App\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Storage ; 
@@ -20,7 +22,7 @@ class WhatsappLinksController extends Controller
         $whatsappLinks = WhatsappLink::latest()->get();
 
 
-        return view('admin.whatsapplink.index' , compact('whatsappLinks'));
+        return view('admin.whatsapplinks.index' , compact('whatsappLinks'));
     }
 
     /**
@@ -30,9 +32,11 @@ class WhatsappLinksController extends Controller
      */
     public function create()
     {
+        $classes = ClassRoom::latest()->get();
+        $courses = Course::latest()->get();
         $orders = $this->getAllOrders() ; 
 
-        return view('admin.whatsapplinks.create',compact('orders'));
+        return view('admin.whatsapplinks.create',compact('classes' ,'courses' , 'orders'));
     }
 
     /**
@@ -48,7 +52,6 @@ class WhatsappLinksController extends Controller
             
             'url' => 'required',
             'order' => 'required|integer',
-            'src' => 'required',
             'type' => 'required',
             'linkable_id' => 'required',
             'linkable_type' => 'required'
@@ -64,13 +67,7 @@ class WhatsappLinksController extends Controller
         $attributes['order'] = $request->order ;
         $attributes['linkable_id'] = $request->linkable_id ;
         $attributes['linkable_type'] = $request->linkable_type ; 
-
-        //save File 
-        if($request->hasFile('src')){
-
-            $attributes['src'] = $request->src->store('public/whatsapplinks');
-
-        }
+        $attributes['type'] = $request->type;
 
 
         //Persist data in the database 
@@ -79,7 +76,7 @@ class WhatsappLinksController extends Controller
 
         //Return redirect 
         return redirect()
-            ->route('whatsappLink.show', ['whatsappLink' => $whatsappLink->id])
+            ->route('whatsapplink.index', ['whatsappLink' => $whatsappLink->id])
             ->with('success', 'تم إنشاء رابط واتساب بنجاح');
     }
 
@@ -103,7 +100,11 @@ class WhatsappLinksController extends Controller
      */
     public function edit(WhatsappLink $whatsappLink)
     {
-        return view('admin.whatsapplinks.edit',compact('whatsappLink'));
+        $classes = ClassRoom::latest()->get();
+        $courses = Course::latest()->get();
+        $orders = $this->getAllOrders() ;
+
+        return view('admin.whatsapplinks.edit',compact('whatsappLink' ,'classes' ,'courses' , 'orders'));
     }
 
     /**
@@ -147,7 +148,7 @@ class WhatsappLinksController extends Controller
 
          //Return redirect 
          return redirect()
-         ->route('whatsapplink.show', ['whatsappLink' => $whatsappLink->id])
+         ->route('whatsapplink.index', ['whatsappLink' => $whatsappLink->id])
          ->with('success', 'تم تعديل رابط واتساب بنجاح');
     }
 
@@ -253,4 +254,18 @@ class WhatsappLinksController extends Controller
         }
 
     }
+
+
+    public function getData($type) 
+    {       
+        if($type === 'class') {
+                $data = DB::table("classes")->pluck("id","name");
+                return json_encode($data);
+            }
+            if($type === 'course') {
+                $data = DB::table("courses")->pluck("id","title");
+                return json_encode($data);
+            }
+    }
+
 }
