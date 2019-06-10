@@ -14,6 +14,8 @@
         <li><a href="{{route('deneme.index')}}">إدارة الدينيمي<i class="fa fa-angle-double-left pull-left"></i></a></li>
         <li><a href="{{route('freereason.index')}}">إعفاءات الطلاب<i class="fa fa-angle-double-left pull-left"></i></a></li>
         <li><a href="{{route('advice.index')}}">إدارة النصائح<i class="fa fa-angle-double-left pull-left"></i></a></li>
+        <li><a href="{{route('classrequest.index')}}">إدارة طلبات الصفوف<i class="fa fa-angle-double-left pull-left"></i></a></li>
+        <li><a href="{{route('courserequest.index')}}">إدارة طلبات الدورات<i class="fa fa-angle-double-left pull-left"></i></a></li>
         @endif
         @if (Auth::user()->hasRole(1))
         <li><a href="{{route('users.index')}}">مستخدمي النظام<i class="fa fa-angle-double-left pull-left"></i></a></li>
@@ -28,6 +30,8 @@
         <li><a href="{{route('deneme.index')}}">إدارة الدينيمي<i class="fa fa-angle-double-left pull-left"></i></a></li>
         <li><a href="{{route('freereason.index')}}">إعفاءات الطلاب<i class="fa fa-angle-double-left pull-left"></i></a></li>
         <li><a href="{{route('advice.index')}}">إدارة النصائح<i class="fa fa-angle-double-left pull-left"></i></a></li>
+        <li><a href="{{route('classrequest.index')}}">إدارة طلبات الصفوف<i class="fa fa-angle-double-left pull-left"></i></a></li>
+        <li><a href="{{route('courserequest.index')}}">إدارة طلبات الدورات<i class="fa fa-angle-double-left pull-left"></i></a></li>
         @endif
         @if (Auth::user()->hasRole(2))
         <li><a href="{{route('subject.index')}}">المواد<i class="fa fa-angle-double-left pull-left"></i></a></li>

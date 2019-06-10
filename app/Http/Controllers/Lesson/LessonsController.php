@@ -90,21 +90,24 @@ class LessonsController extends Controller
 
         if ($request->hasFile('src'))
           {
-              $lesson->src = $request->src->storeAs('public/lessons', $request->src->getClientOriginalName());
+              $lesson->src = $request->src->storeAs('public/lessons', $request->src->getClientOriginalName().time());
           }
 
         $lesson->save();
           
+        
          if($request->unit_id != null){
-             $unit = Unit::findOrFail($request->unit_id)->first()->get();
-             $unit->lessons()->attach($lesson);
+            //$arr= $lesson->fresh()->unit->pluck('pivot.lesson_order')->toArray();
+            //$lesson->fresh()->units[1]->pivot->lesson_order = 1 ;
+            $lesson->units()->syncWithoutDetaching($request->unit_id ,['pivot.lesson_order'=>1]);
          }
          
+         
          if($request->course_id != null){
-            $course = Course::findOrFail($request->course_id)->first()->get();
-            $course->lessons()->attach($lesson);
+            $lesson->courses()->syncWithoutDetaching($request->course_id);
         }
-        Auth::user()->lessons()->syncWithoutDetaching($lesson->id);
+        $lesson->teachers()->syncWithoutDetaching(Auth::user()->id);
+        //Auth::user()->lessons()->syncWithoutDetaching($lesson->id);
         
          //Return redirect 
         return redirect()

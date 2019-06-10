@@ -67,7 +67,7 @@ public function getSrcAttribute($value){
     public function units(){
 
         return $this->belongsToMany('App\Unit','lesson_unit')
-        ->withPivot('lesson_order')
+        
         ->withTimestamps();
 
     }

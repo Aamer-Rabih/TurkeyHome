@@ -20,7 +20,7 @@ class CreateLessonUnitTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('unit_id');
             $table->unsignedInteger('lesson_id');
-            $table->unsignedInteger('lesson_order');
+            
 
             $table->foreign('unit_id')
                 ->references('id')

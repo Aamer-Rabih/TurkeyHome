@@ -113,6 +113,81 @@
         </div> 
     </div>
 
+
+    <div id="table" class="row">
+    <div class="col-lg-8">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>مدرسوا الدورة</small>
+            </h2>
+          </div>
+          <table class="table table-bordered table-hover table-width">
+            <thead>
+              <tr> 
+                <th>اسم المدرس</th>
+                
+                <th>حذف</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($teachersCourse as $teacherCourse)
+              <tr>
+                <td>{{$teacherCourse->username}}</td>
+                
+                
+                 
+                <td>
+                  <div class="operations delete">
+                    <form action="{{ route('course.deleteteacher',['course' => $course->id, 'teacher_id'=>$teacherCourse->id]) }}" method="POST" id="deleteForm">
+                       {!! csrf_field() !!}
+                         
+                      <button id="{{$course->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" class="" onclick="$('#{{$course->id}}').click();" >
+                        <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
+                      </a>
+                    </form>       
+                  </div>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="table2" class="row">
+    <div class="col-lg-10">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> </small>
+            </h2>
+          </div>
+          
+          <form action="{{route('course.addteacher',$course)}}" method="POST">
+            {!! csrf_field() !!}
+          <div class="form-group">
+          <label for="addteacher">اختر مدرس لاضافته الى هذه الدورة</label>
+          <select name="teacher" id="teacher" class="form-contorl form-control-select mt-3">
+          @foreach($teachers as $teacher)
+          <option value="{{$teacher->id}}">{{$teacher->username}}</option>
+          @endforeach
+          </select>
+          </div>
+          <input type="submit" class="btn btn-success button1" value="اضافة المدرس">
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 @endsection

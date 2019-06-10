@@ -17,6 +17,6 @@ class RequestCourse extends Model
     //Request belogns to Student 
     public function student(){
 
-        return $this->belongsTo('App\Student');
+        return $this->belongsTo('App\User');
     }
 }

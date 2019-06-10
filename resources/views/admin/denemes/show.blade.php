@@ -82,7 +82,7 @@
           <form action="{{ route('deneme.destroy',['carousel' => $deneme->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button class=" btn btn-danger custom-but">حذف الصورة</button>
+                      <button class=" btn btn-danger custom-but">حذف الدينيمي</button>
               
           </form>       
                   

@@ -24,6 +24,7 @@ class UnitsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Unit::truncate();
         //Seeding Data 
         $units = [

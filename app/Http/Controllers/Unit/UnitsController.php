@@ -9,6 +9,7 @@ use App\Lesson;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Role;
 
 class UnitsController extends Controller
 {
