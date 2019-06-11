@@ -25,7 +25,7 @@ class Unit extends Model
     public function lessons(){
 
         return $this->belongsToMany('App\Lesson','lesson_unit')
-        ->withPivot('lesson_order')
+        
         ->withTimestamps(); 
         
     }

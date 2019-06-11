@@ -5,6 +5,8 @@ namespace App\Http\Controllers\ClassRoom;
 use App\ClassRoom;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Role;
+use App\User;
 
 class ClassesController extends Controller
 {
@@ -95,11 +97,14 @@ class ClassesController extends Controller
             return $class ; 
         }
 
+        $teachers = Role::find(2)->users()->get();
+        
+        $teachersClass = ClassRoom::find($class->id)->teachers()->get();
        
         
         //TODO FrontEnd Developer 
         //Load admin.classes.show view with the $class Model Intance 
-        return view('admin.classes.show',compact('class'));
+        return view('admin.classes.show',compact('class','teachers','teachersClass'));
     }
 
     /**
@@ -183,5 +188,29 @@ class ClassesController extends Controller
 
         return redirect()->route('class.show',['class' => $class->id])
         ->with('success','تم تعديل الصف ليكون مدفوع');
+    }
+
+    public function addteacher(Request $request, ClassRoom $class)
+    {
+        $teacher = User::where('id',$request->teacher)->get();
+        //dd($teacher);
+        $class->teachers()->syncWithoutDetaching($teacher);
+
+        //Return redirect 
+        return redirect()
+            ->route('class.show', ['class' => $class->id])
+            ->with('success', 'تم اضافة المدرس للصف بنجاح'); 
+    }
+
+    public function deleteTeacher( ClassRoom $class ,Request $request )
+    {
+        //$teacher = User::where('id',$request->teacher)->get();
+
+        $request->class->teachers()->detach($request->teacher_id);
+
+        //Return redirect 
+        return redirect()
+            ->route('class.show', ['class' => $class->id])
+            ->with('success', 'تم فصل المدرس عن الصف بنجاح'); 
     }
 }

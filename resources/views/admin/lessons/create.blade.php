@@ -40,7 +40,7 @@
                   <label for="classField">الوحدة الدراسية:</label>
                   @if($selectedUnit === null)
                     <select class="form-control form-control-select mt-3" id="classField" name="unit_id">
-                      <option selected>-- اختر الوحدة --</option>
+                      <option selected value="">-- اختر الوحدة --</option>
                       @foreach($units as $unit)
                       <option value="{{$unit->id}}">{{$unit->title}}</option>
                       @endforeach
@@ -56,7 +56,7 @@
                   <label for="classField">الدورة الدراسية:</label>
                   @if($selectedCourse === null)
                     <select class="form-control form-control-select mt-3" id="classField" name="course_id">
-                      <option selected>-- اختر الدورة --</option>
+                      <option selected vlaue="">-- اختر الدورة --</option>
                       @foreach($courses as $course)
                       <option value="{{$course->id}}">{{$course->title}}</option>
                       @endforeach

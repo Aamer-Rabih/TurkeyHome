@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Course;
 use App\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Role;
+use App\User;
 
 class CoursesController extends Controller
 {
@@ -90,6 +92,10 @@ class CoursesController extends Controller
     {
         
 
+        $teachers = Role::find(2)->users()->get();
+        
+        $teachersCourse = Course::find($course->id)->teachers()->get();
+        
         //prepare for AjaxCall 
         if(request()->wantsJson()){
 
@@ -97,7 +103,7 @@ class CoursesController extends Controller
         }
 
         $lessons = $course->lessons;
-        return view('admin.courses.show' , compact('course','lessons'));
+        return view('admin.courses.show' , compact('course','lessons','teachersCourse','teachers'));
 
     }
 
@@ -223,5 +229,29 @@ class CoursesController extends Controller
         return redirect()
                 ->route('course.show',['course' => $course->id])
                 ->with('success','تم تعديل الوحدة الدرسية بنجاح');
+    }
+
+    public function addteacher(Request $request, Course $course)
+    {
+        $teacher = User::where('id',$request->teacher)->get();
+        //dd($teacher);
+        $course->teachers()->syncWithoutDetaching($teacher);
+
+        //Return redirect 
+        return redirect()
+            ->route('course.show', ['course' => $course->id])
+            ->with('success', 'تم اضافة المدرس للدورة الدراسية بنجاح'); 
+    }
+
+    public function deleteTeacher( Course $course ,Request $request )
+    {
+        //$teacher = User::where('id',$request->teacher)->get();
+
+        $request->course->teachers()->detach($request->teacher_id);
+
+        //Return redirect 
+        return redirect()
+            ->route('course.show', ['course' => $course->id])
+            ->with('success', 'تم فصل المدرس عن الدورة الدراسية بنجاح'); 
     }
 }

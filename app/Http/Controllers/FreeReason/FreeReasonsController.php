@@ -71,6 +71,7 @@ class FreeReasonsController extends Controller
     public function show(FreeReason  $freeReason)
     {
         $students = Role::find(3)->users()->get();
+        
         $freeStudents = FreeReason::find($freeReason->id)->students()->get();
         return view('admin.freereasons.show',compact('freeReason','freeStudents','students'));
     }
@@ -129,7 +130,7 @@ class FreeReasonsController extends Controller
     {
         $student = User::where('id',$request->student)->get();
         //dd($student);
-        $freeReason->students()->attach($student);
+        $freeReason->students()->syncWithouthDetaching($student);
 
         //Return redirect 
         return redirect()

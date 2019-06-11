@@ -30,16 +30,22 @@
             <thead>
               <tr> 
                 <th>اسم الدورة</th>
+                @if(Auth::user()->hasAnyRole([0,1,2]))
                 <th>التفعيل</th>
                 <th>العرض</th>
                 <th>التعديل</th>
                 <th>الحذف</th>
+                @endif
+                @if(Auth::user()->hasRole(3))
+                <th>طلب اشتراك</th>
+                @endif
               </tr>
             </thead>
             <tbody>
               @foreach($courses as $course)
               <tr>
                 <td>{{$course->title}}</td>
+                @if(Auth::user()->hasAnyRole([0,1,2]))
                 @if($course->active)
                 <td>فعال</td>
                 @elseif(!$course->active)
@@ -68,6 +74,15 @@
                     
                   </div>
                 </td>
+                @endif
+
+                @if(Auth::user()->hasRole(3))
+                <td><form action="{{ route('courserequest.store') }}" method="POST" id="makeCourseFreeForm" style="display:inline; margin-right:10px;">
+          {!! csrf_field() !!}
+          <input type="hidden" name="course_id" value="{{$course->id}}">
+          <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassFreeForm').submit();"> طلب اشتراك بهذه الدورة</a>
+          </form></td>
+                @endif
               </tr>
               @endforeach
             </tbody>

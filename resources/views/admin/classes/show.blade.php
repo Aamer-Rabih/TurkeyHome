@@ -26,6 +26,13 @@
             <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassUnfreeForm').submit();"> اجعل الصف غير مجاني</a>
         </form>
         @endif
+        @if(Auth::user()->hasRole(3))
+        <form action="{{ route('classrequest.store') }}" method="POST" id="makeClassFreeForm" style="display:inline; margin-right:10px;">
+          {!! csrf_field() !!}
+          <input type="hidden" name="class_id" value="{{$class->id}}">
+          <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassFreeForm').submit();"> طلب اشتراك بهذا الصف</a>
+          </form>
+          @endif
       </div>
       <div class="col-lg-2">
         <a href="/subjects/create?selectedclass={{$class->id}}" class="btn btn-success button-margin-header custom-but" style="margin-right: 22px" >إضافة مادة 
@@ -119,6 +126,81 @@
                       @endforeach
                     </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="table" class="row">
+    <div class="col-lg-8">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>مدرسوا الصف</small>
+            </h2>
+          </div>
+          <table class="table table-bordered table-hover table-width">
+            <thead>
+              <tr> 
+                <th>اسم المدرس</th>
+                
+                <th>حذف</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($teachersClass as $teacherClass)
+              <tr>
+                <td>{{$teacherClass->username}}</td>
+                
+                
+                 
+                <td>
+                  <div class="operations delete">
+                    <form action="{{ route('class.deleteteacher',['class' => $class->id, 'teacher_id'=>$teacherClass->id]) }}" method="POST" id="deleteForm">
+                       {!! csrf_field() !!}
+                         
+                      <button id="{{$class->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" class="" onclick="$('#{{$class->id}}').click();" >
+                        <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
+                      </a>
+                    </form>       
+                  </div>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="table2" class="row">
+    <div class="col-lg-10">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> </small>
+            </h2>
+          </div>
+          
+          <form action="{{route('class.addteacher',$class)}}" method="POST">
+            {!! csrf_field() !!}
+          <div class="form-group">
+          <label for="addteacher">اختر مدرس لاضافته الى هذه الدورة</label>
+          <select name="teacher" id="teacher" class="form-contorl form-control-select mt-3">
+          @foreach($teachers as $teacher)
+          <option value="{{$teacher->id}}">{{$teacher->username}}</option>
+          @endforeach
+          </select>
+          </div>
+          <input type="submit" class="btn btn-success button1" value="اضافة المدرس">
+          </form> 
         </div>
       </div>
     </div>

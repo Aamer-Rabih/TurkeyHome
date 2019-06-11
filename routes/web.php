@@ -38,7 +38,7 @@ Route::get('/', function() {
 Route::get('classes',
 ['uses' => 'ClassRoom\ClassesController@index',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT]
 ])
 ->name('class.index');
 
@@ -58,7 +58,7 @@ Route::get('classes/create',
 Route::get('classes/{class}',
 ['uses' => 'ClassRoom\ClassesController@show',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT]
 ])
 ->name('class.show');
 
@@ -112,6 +112,23 @@ Route::post('classes/{class}/setPriced',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
 ])
 ->name('class.priced');
+
+
+//update freereason route
+Route::post('classes/{class}/addteacher',
+['uses' => 'ClassRoom\ClassesController@addteacher',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+->name('class.addteacher');
+
+//update freereason route
+Route::post('classes/{class}/deleteTeacher',
+['uses' => 'ClassRoom\ClassesController@deleteTeacher',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+->name('class.deleteteacher');
 
 
 /**Courses Endpoints */
@@ -215,6 +232,22 @@ Route::post('courses/{course}',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
 ->name('course.deletelesson');
+
+    //update freereason route
+    Route::post('courses/{course}/addteacher',
+    ['uses' => 'Course\CoursesController@addteacher',
+    'middleware' => 'roles',
+    'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+    ]])
+    ->name('course.addteacher');
+
+    //update freereason route
+Route::post('courses/{course}/deleteteacher',
+['uses' => 'Course\CoursesController@deleteTeacher',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+->name('course.deleteteacher');
     
 /**
  * Subjects endpoints
@@ -1215,3 +1248,55 @@ Route::post('users/{user}/activate',
 ]])
 ->name('users.activate');
 
+
+//Delete and approve A student request to class 
+Route::delete('classrequests/{classrequest}',
+['uses' => 'Requests\ClassRequestsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+    ->name('classrequest.destroy');
+
+    
+//show classes requests 
+Route::get('classrequests',
+['uses' => 'Requests\ClassRequestsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+    ->name('classrequest.index');
+
+//send request to class
+Route::post('classrequests',
+['uses' => 'Requests\ClassRequestsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::STUDENT
+]])
+    ->name('classrequest.store');
+
+
+
+    //Delete and approve A student request to course 
+Route::delete('courseRequests/{courserequest}',
+['uses' => 'Requests\CourseRequestsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+    ->name('courserequest.destroy');
+
+    
+//show coursees requests 
+Route::get('courserequests',
+['uses' => 'Requests\CourseRequestsController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+    ->name('courserequest.index');
+
+//send request to course
+Route::post('courserequests',
+['uses' => 'Requests\CourseRequestsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::STUDENT
+]])
+    ->name('courserequest.store');

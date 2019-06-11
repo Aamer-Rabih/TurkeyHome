@@ -66,7 +66,9 @@
                 <div class="form-group">
                   <label for="role">اختر نوع المستخدم :</label>
                   <select name="role" id="role" class="form-control">
+                  @if(Auth::user()->hasRole(0))
                   <option value="0">مدير نظام</option>
+                  @endif
                   <option value="1">مشرف</option>
                   <option value="2">مدرس</option>
                   <option selected value="3">طالب</option>
