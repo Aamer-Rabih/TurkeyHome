@@ -197,7 +197,7 @@ class LessonsController extends Controller
         
         $lesson->save();
         
-        return redirect()->route('lesson.show', ['lesson' => $lesson->id])
+        return redirect()->route('lesson.index', ['lesson' => $lesson->id])
                 ->with('success','تم تفعيل الدرس بنجاح');
     }
 
@@ -208,7 +208,7 @@ class LessonsController extends Controller
         $lesson->makeInactive();
         $lesson->save();
 
-        return redirect()->route('lesson.show', ['lesson' => $lesson->id])
+        return redirect()->route('lesson.index', ['lesson' => $lesson->id])
                 ->with('success', 'تم إلغاء تفعيل الدرس بنجاح');
 
       }

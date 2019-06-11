@@ -33,7 +33,7 @@
               <tr> 
                 <th>اسم الوحدة</th>
                 @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))<th>التفعيل</th>@endif
-                <th>عدد دروس الوحدة</th>
+                
                 <th>المادة الدراسية</th>
                 <th>الصف</th>
                 <th>عرض</th>
@@ -68,7 +68,7 @@
                   @endif          
                 </td>
                 @endif
-                <td>لم يتم البناء</td>
+               
                 <td>{{$unit->subject->name}}</td>
                 <td>{{$unit->subject->class->name}}</td>
                 <td>

@@ -7,24 +7,24 @@
     <div class="row">
       <div class="col-lg-4">
         <div class="content-header">
-         <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> إدارة الوحدات الدراسية</small></h1>
+         <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> إدارة الدروس </small></h1>
         </div>
       </div>
       <div class="col-lg-2">
         @if(!$lesson->active)
         <form action="{{ route('lesson.activate', $lesson) }}" method="POST" id="makelessonActivate" style="display:inline; margin-right:10px;">
           {!! csrf_field() !!}
-          <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makelessonActivate').submit();"> اجعل الوحدة مفعلة </a>
+          <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makelessonActivate').submit();"> اجعل الدرس مفعل </a>
           </form>
           @else
           <form action="{{ route('lesson.deactivate', $lesson) }}" method="POST" id="makelessonDeactivate" style="display:inline; margin-right:10px;">
             {!! csrf_field() !!}
-            <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makelessonDeactivate').submit();"> اجعل الوحدة غير مفعلة</a>
+            <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makelessonDeactivate').submit();"> اجعل الدرس غير مفعل</a>
         </form>
         @endif
       </div>
       
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <a href="{{route('lesson.index')}}" class="btn btn-primary button-margin-header custom-but pull-left" >العودة 
           <i class="fa fa-angle-double-left" aria-hidden="true" style="font-size: 20px;"></i>
         </a>
@@ -45,22 +45,37 @@
             <thead>
               <tr> 
                 <th>اسم الدرس</th>
-                <th>التفعيل</th>
-                
-                <th>رابط الدرس</th>
+                <th>التفعيل</th>   
                 <th>المقدمة</th>
+                <th>رابط الدرس</th>
               </tr>
             </thead>
             <tbody>
-              
               <tr>
                <td>{{$lesson->title}}</td>
-               <td>{{$lesson->acive}}</td>
+               <td>
+               @if($lesson->active)
+                  <form action="{{ route('lesson.deactivate', $lesson) }}" method="POST" id="activateForm">
+                    {!! csrf_field() !!}
+                    <button id="{{$lesson->id+1}}" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#{{$lesson->id+1}}').click();" >
+                      <i class="fa fa-check-circle" aria-hidden="true" style="font-size:18px;color:#5cb85c;cursor: pointer;"></i>
+                    </a>
+                  </form> 
+                  @else
+                  <form action="{{ route('lesson.activate', $lesson) }}" method="POST" id="activateForm">
+                    {!! csrf_field() !!}
+                    <button id="{{$lesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#{{$lesson->id}}').click();" >
+                      <i class="fa fa-times-circle" aria-hidden="true" style="font-size:18px;color:#dd4b39;cursor: pointer;"></i>
+                    </a>
+                  </form>
+                  @endif          
+               </td>
                <td>{{$lesson->intro}}</td>
-               <td><a href="{{$lesson->sc}}">تحميل الدرس</a></td>
-               
+               <td><a href="{{$lesson->src}}">تحميل الدرس</a></td>
               </tr>
-              
+
             </tbody>
           </table>
 

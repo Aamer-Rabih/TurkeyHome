@@ -28,8 +28,10 @@ class UnitsController extends Controller
     public function index()
     {
         //fetch All Units Ordered from last to oldest 
-        $units = Unit::latest()->get();
-
+         $units = Unit::latest()->get();
+        // foreach($units as $unit) {
+        //     $lessonsCount = DB::where()->count();
+        // }
 
         return view('admin.units.index' , compact('units'));
 
@@ -113,7 +115,7 @@ class UnitsController extends Controller
         // $lessons = Lesson::with(['teachers' => function($query){
         //     $query->where('teacher_id', Auth::user()->id);
         // }])->get();
-        if (Auth::user()->hasRole(Role::TEACHER)){
+        if (Auth::user()->hasRole(2)){
         $lessons = Auth::user()->lessons;
         }
         else{
