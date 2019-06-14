@@ -31,7 +31,7 @@
               <tr> 
                 <th>اسم الطالب </th>
                 <th>اسم الصف</th>
-                <th></th>
+                <th>قبول</th>
                 
               </tr>
             </thead>
@@ -46,7 +46,7 @@
                     <form action="{{ route('classrequest.destroy',['id' => $request->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <input type="submit" class="btn btn-success" value="Approve">
+                      <input type="submit" class="btn btn-success" value="قبول">
                         
                       </a>
                     </form>       

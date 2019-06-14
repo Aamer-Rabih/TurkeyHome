@@ -78,10 +78,11 @@
 
                 @if(Auth::user()->hasRole(3))
                 <td><form action="{{ route('courserequest.store') }}" method="POST" id="makeCourseFreeForm" style="display:inline; margin-right:10px;">
-          {!! csrf_field() !!}
-          <input type="hidden" name="course_id" value="{{$course->id}}">
-          <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassFreeForm').submit();"> طلب اشتراك بهذه الدورة</a>
-          </form></td>
+                      {!! csrf_field() !!}
+                      <input type="hidden" name="course_id" value="{{$course->id}}">
+                      <input type="submit" class="btn btn-success" value="اشتراك">
+                    </form>
+                </td>
                 @endif
               </tr>
               @endforeach
