@@ -41,6 +41,7 @@
               <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> معلومات الدرس</small>
             </h2>
           </div>
+
           <table class="table table-bordered table-hover table-width">
             <thead>
               <tr> 
@@ -48,6 +49,7 @@
                 <th>التفعيل</th>   
                 <th>المقدمة</th>
                 <th>رابط الدرس</th>
+                @if (Auth::user()->hasRole(3))<th>تقيم الدرس</th>@endif
               </tr>
             </thead>
             <tbody>
@@ -74,20 +76,59 @@
                </td>
                <td>{{$lesson->intro}}</td>
                <td><a href="{{$lesson->src}}">تحميل الدرس</a></td>
+               @if (Auth::user()->hasRole(3))
+               <td>
+                @if($studentEvaluation === null)
+                <form action="{{route('evaluation.store', $lesson)}}" method="POST">
+                      {!! csrf_field() !!}
+                  <div class="rate">
+                    <input type="radio" id="star5" name="value" value="5" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="value" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="value" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="value" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="value" value="1" />
+                    <label for="star1" title="text">1 star</label>
+                    <input type="hidden" id="lesson_id" name="lesson_id" value="{{$lesson->id}}" />
+                    <input type="hidden" id="lesson_id" name="student_id" value="{{Auth::user()->id}}" />
+                    <button class="btn btn-sm btn-success">تأكيد</button>
+                  </div>
+                </form>
+                @elseif($studentEvaluation != null)
+                <form action="{{route('evaluation.update', $studentEvaluation)}}" method="POST">
+                      {!! csrf_field() !!}
+                  <div class="rate">
+                    <input type="radio" id="star5" name="value" value="5" {{ $studentEvaluation->value === 5 ? 'checked' : '' }} />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="value" value="4" {{ $studentEvaluation->value === 4 ? 'checked' : '' }} />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="value" value="3" {{ $studentEvaluation->value === 3 ? 'checked' : '' }} />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="value" value="2" {{ $studentEvaluation->value === 2 ? 'checked' : '' }} />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="value" value="1" {{ $studentEvaluation->value === 1 ? 'checked' : '' }} />
+                    <label for="star1" title="text">1 star</label>
+                    <button class="btn btn-sm btn-success">تأكيد</button>
+                  </div>
+                </form>
+                @endif
+              </td>
+              @endif
               </tr>
-
             </tbody>
           </table>
-
-
+          
         </div>
       </div>
     </div>
   </div>
 
-
+  
   <div id="table" class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-8">
       <div class="card table-cards color-grey">
         <div class="card-body">
           <div class="content-header">
@@ -130,8 +171,50 @@
         </div>
       </div>
     </div>
+    
   </div>
 
+  @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2) || Auth::user()->hasRole(3))
+  <div id="table" class="row">
+    <div class="col-lg-6">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>تقيم الدرس من قبل الطلاب</small>
+            </h2>
+          </div>
 
+          <table class="table table-bordered table-hover table-width">
+            <thead>
+              <tr> 
+                <th>الطالب</th>
+                <th>التقيم</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($ratings as $rating)
+              <tr>
+               <td>{{$rating->student->full_name}}</td>
+               <td>
+                <div class="rating">
+                  @for($i =0; $i < $rating->value; $i++)
+                  <span class="fa fa-star checked"></span>
+                  @endfor
+                  @for($i =$rating->value; $i < 5; $i++)
+                  <span class="fa fa-star"></span>
+                  @endfor
+                </div>
+               </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
 
 </div>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
 
 class Test extends Model
 {
@@ -56,4 +57,19 @@ class Test extends Model
 
         return $this->morphMany('App\Attachment','attachmentable');
     }
+
+    /**Model Operations */
+
+    //activate A Test 
+    public function activate(){
+
+        $this->active = true ; 
+    }
+
+    //deactivate A Test 
+    public function deactivate(){
+
+        $this->active = false ; 
+    }
+
 }

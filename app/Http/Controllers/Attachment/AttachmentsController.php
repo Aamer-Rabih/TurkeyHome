@@ -85,6 +85,18 @@ class AttachmentsController extends Controller
         //Persist data in the database 
         $attachment = Attachment::create($attributes);
 
+        //Attach with Object
+        if($request->attachmentable_type === 'App\Lesson') {
+            $lesson = Lesson::where('id', $request->attachmentable_id)->get();
+            $attachment->attachmentable()->syncWithoutDetaching($lesson);
+            
+        }elseif($request->attachmentable_type === 'App\Deneme') {
+            $deneme = Deneme::where('id', $request->attachmentable_id)->get();
+            $attachment->attachmentable()->syncWithoutDetaching($deneme);
+        }elseif($request->attachmentable_type === 'App\Test') {
+            $Test = Test::where('id', $request->attachmentable_id)->get();
+            $attachment->attachmentable()->syncWithoutDetaching($test);
+        }
 
         //Return redirect 
         return redirect()

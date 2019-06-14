@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Lesson;
 use App\Evaluation;
+use DB;
+
 class EvaluationsController extends Controller
 {
     public function __construct()
@@ -43,7 +45,7 @@ class EvaluationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Lesson $lesson)
     {
         //Vaidate Data 
         $request->validate([
@@ -54,16 +56,20 @@ class EvaluationsController extends Controller
 
         ]);
 
-        //prepare object to save
-        $evaluation = new Evaluation();
-        $evaluation->value= $request->value;
-        $evaluation->student_id= $request->student_id;
-        $evaluation->lesson_id= $request->lesson_id;
-        $evaluation->save();
+        //Prepare object to save
+        $attributes = [];
+        $attributes['value'] = $request->value;
+        $attributes['lesson_id'] = $request->lesson_id;
+        $attributes['student_id'] = $request->student_id;
+
+        //Prepare to begin a transaction
+        DB::transaction(function ( ) use ($attributes) {
+            Evaluation::create($attributes);
+        });
 
         //Return redirect 
         return redirect()
-        ->route('evaluation.show', ['evaluation' => $evaluation->id])
+        ->route('lesson.show', ['lesson' => $lesson])
         ->with('success', 'تم تقييم الدرس بنجاح');
     
     }
@@ -109,14 +115,14 @@ class EvaluationsController extends Controller
         ]);
 
         //prepare object to save
-        $evaluation = new Evaluation();
+        
         $evaluation->value= $request->value;
        
         $evaluation->save();
 
         //Return redirect 
         return redirect()
-        ->route('evaluation.show', ['evaluation' => $evaluation->id])
+        ->back()
         ->with('success', 'تم تقييم الدرس بنجاح');
     }
 
