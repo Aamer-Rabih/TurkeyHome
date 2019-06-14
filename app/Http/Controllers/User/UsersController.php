@@ -21,25 +21,31 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexManager()
     {
-        $admins = User::whereHas('roles', function ($query)  {
-            $query->where('role', '=', 0);
-        })->get();
-
         $managers = User::whereHas('roles', function ($query)  {
             $query->where('role', '=', 1);
         })->get();
+        
+        return view('admin.users.indexmanager',compact('managers'));
+    }
 
+    public function indexTeacher()
+    {
         $teachers = User::whereHas('roles', function ($query)  {
             $query->where('role', '=', 2);
         })->get();
+        //dd($managers,$teachers,$students);
+        return view('admin.users.indexteacher',compact('teachers'));
+    }
 
+    public function indexStudent()
+    {
         $students = User::whereHas('roles', function ($query)  {
             $query->where('role', '=', 3);
         })->get();
-        //dd($managers,$teachers,$students);
-        return view('admin.users.index',compact('managers','teachers','students','admins'));
+        
+        return view('admin.users.indexstudent',compact('students'));
     }
 
     /**
@@ -64,7 +70,7 @@ class UsersController extends Controller
             'username' => 'required',
             'password' => 'required',
             'full_name' => 'required',
-            'email' => 'required|email',
+            
             'phone' => 'required',
             'tc' => '',
             'role' => 'required',
@@ -74,7 +80,7 @@ class UsersController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->full_name = $request->full_name;
-        $user->email = $request->email;
+        $user->email = time().'@hh.com';
         $user->phone = $request->phone;
         if($request->role === Role::TEACHER)
         {
@@ -93,7 +99,7 @@ class UsersController extends Controller
 
         //Return redirect 
         return redirect()
-            ->route('user.index')
+            ->back()
             ->with('success', 'تم اضافة مستخدم بنجاح');
     }
 
@@ -132,7 +138,7 @@ class UsersController extends Controller
             'username' => 'required',
             'password' => 'required',
             'full_name' => 'required',
-            'email' => 'required|email',
+            
             'phone' => 'required',
             'tc' => 'required',
             'roles' => 'required',
@@ -142,7 +148,7 @@ class UsersController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->full_name = $request->full_name;
-        $user->email = $request->email;
+        //$user->email = $request->email;
         $user->phone = $request->phone;
         $user->tc = $request->tc;
         $user->save();
@@ -153,7 +159,7 @@ class UsersController extends Controller
 
         //Return redirect 
         return redirect()
-            ->route('user.show', ['user' => $user->id])
+            ->back()
             ->with('success', 'تم تعديل مستخدم بنجاح');
     }
 

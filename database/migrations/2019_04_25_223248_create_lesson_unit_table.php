@@ -24,11 +24,15 @@ class CreateLessonUnitTable extends Migration
 
             $table->foreign('unit_id')
                 ->references('id')
-                ->on('units');
+                ->on('units')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->foreign('lesson_id')
                 ->references('id')
-                ->on('lessons');
+                ->on('lessons')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             
             $table->timestamps();

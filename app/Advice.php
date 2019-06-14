@@ -14,6 +14,23 @@ class Advice extends Model
     protected $guarded = ['id','created_at','updated_at'];
 
 
+
+
+    //Operations On Courses 
+    public function makeActive(){
+
+        $this->active = true ; 
+        
+        
+    }
+  
+    //Deactivate A Course 
+    public function makeInactive(){
+  
+        $this->active = false ; 
+       
+    }
+    
     /**
      * Fetch the courses owner of this advice
      */

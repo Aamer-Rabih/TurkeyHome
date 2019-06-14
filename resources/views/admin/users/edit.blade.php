@@ -21,6 +21,19 @@
               
               <form action="{{route('users.update',$user)}}" method="POST">
                       {!! csrf_field() !!}
+
+                <div class="form-group">
+                  <label for="role">اختر نوع المستخدم :</label>
+                  <select name="role" id="role" class="form-control">
+                  @if(Auth::user()->hasRole(0))
+                  <option value="0">مدير نظام</option>
+                  <option value="1">مشرف</option>
+                  @endif
+                  <option value="2">مدرس</option>
+                  <option selected value="3">طالب</option>
+                  </select>
+                </div>
+
                 <div class="form-group">
                   <label for="username"><h5>اسم المستخدم :</h5></label>
                   <input type="text" class="form-control" id="username" name="username" required placeholder="اسم المستخدم" value="{{$user->username}}">
@@ -41,10 +54,10 @@
                   <input type="text" class="form-control" id="tc" name="tc" required placeholder="tc"value="{{$user->tc}}">
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="email"><h5>البريد الالكتروني :</h5></label>
                   <input type="text" class="form-control" id="email" name="email" required placeholder="البريد" value="{{$user->email}}">
-                </div>
+                </div> -->
 
                 <div class="form-group">
                   <label for="phone"><h5>رقم الهاتف:</h5></label>
@@ -63,17 +76,7 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="role">اختر نوع المستخدم :</label>
-                  <select name="role" id="role" class="form-control">
-                  @if(Auth::user()->hasRole(0))
-                  <option value="0">مدير نظام</option>
-                  @endif
-                  <option value="1">مشرف</option>
-                  <option value="2">مدرس</option>
-                  <option selected value="3">طالب</option>
-                  </select>
-                </div>
+                
                 
                 <input type="hidden" name="_method" value="put">
                 <button type="submit" class="btn btn-success button1">إضافة</button>

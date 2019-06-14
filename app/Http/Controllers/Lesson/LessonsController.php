@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Lesson;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\unit;
+use App\Unit;
 use App\Lesson;
 use App\Comment;
 use App\Reply;
@@ -41,7 +41,7 @@ class LessonsController extends Controller
      */
     public function create(Request $request)
     {
-        $selectedCourse = request()->filled('selectedCourse') ? Course::findOrFail(request()->selectedCourse) : null ;
+        $selectedCourse = request()->filled('selectedcourse') ? Course::findOrFail(request()->selectedcourse) : null ;
         $selectedUnit = request()->filled('selectedunit') ? Unit::findOrFail(request()->selectedunit) : null ;
         $units = Unit::all();
         $courses = Course::all();
@@ -90,20 +90,20 @@ class LessonsController extends Controller
 
         if ($request->hasFile('src'))
           {
-              $lesson->src = $request->src->storeAs('public/lessons', $request->src->getClientOriginalName().time());
+              $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
           }
 
         $lesson->save();
           
         
-         if($request->unit_id != null){
+         if($request->unit_id != "-- اختر الوحدة --"|| $request->unit_id != null){
             //$arr= $lesson->fresh()->unit->pluck('pivot.lesson_order')->toArray();
             //$lesson->fresh()->units[1]->pivot->lesson_order = 1 ;
             $lesson->units()->syncWithoutDetaching($request->unit_id ,['pivot.lesson_order'=>1]);
          }
          
          
-         if($request->course_id != null){
+         if($request->course_id != "-- اختر الدورة --" || $request->course_id != null){
             $lesson->courses()->syncWithoutDetaching($request->course_id);
         }
         $lesson->teachers()->syncWithoutDetaching(Auth::user()->id);
@@ -136,8 +136,9 @@ class LessonsController extends Controller
      */
     public function edit(Lesson $lesson)
     {
-        
-        return view('admin.lessons.edit',compact('lesson'));
+        $units = Unit::all();
+        $courses = Course::all();
+        return view('admin.lessons.edit',compact('lesson','units','courses'));
   }
 
     /**

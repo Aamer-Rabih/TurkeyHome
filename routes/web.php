@@ -1053,6 +1053,22 @@ Route::put('advices/{advice}','Advice\AdvicesController@update')
 Route::delete('advices/{advice}','Advice\AdvicesController@destroy')
     ->name('advice.destroy');
 
+     //Activate A advice 
+Route::post('advices/{advice}/activate',
+['uses' => 'Advice\AdvicesController@activate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+]])
+->name('advice.activate');
+
+//Deactivate A advice 
+Route::post('advices/{advice}/deactivate',
+['uses' => 'Advice\AdvicesController@deactivate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+]])
+->name('advice.deactivate');
+
 
 
         //lessons index
@@ -1178,12 +1194,28 @@ Route::get('/home', function() {
 
 
      //users index
-     Route::get('users',
-     ['uses' => 'User\UsersController@index',
+     Route::get('managers',
+     ['uses' => 'User\UsersController@indexManager',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+'roles' => [\App\Role::ADMIN
 ]])
-     ->name('users.index');
+     ->name('users.indexmanager');
+
+     //users index
+     Route::get('teachers',
+     ['uses' => 'User\UsersController@indexTeacher',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,App\Role::MANAGER
+]])
+     ->name('users.indexteacher');
+
+     //users index
+     Route::get('students',
+     ['uses' => 'User\UsersController@indexStudent',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,App\Role::MANAGER
+]])
+     ->name('users.indexstudent');
      
      //user create route
      Route::get('users/create',

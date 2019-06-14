@@ -36,27 +36,32 @@
                     <label>غير مفعل</label>
                   </div>
                 </div>
+
+                @if($selectedUnit === null && $selectedCourse === null)
                 <div class="form-group">
                   <label for="classField">الوحدة الدراسية:</label>
-                  @if($selectedUnit === null)
+                  
                     <select class="form-control form-control-select mt-3" id="classField" name="unit_id">
-                      <option selected value="">-- اختر الوحدة --</option>
+                      <option  value="">-- اختر الوحدة --</option>
                       @foreach($units as $unit)
                       <option value="{{$unit->id}}">{{$unit->title}}</option>
                       @endforeach
                     </select>
                   @elseif($selectedUnit != null)
+                  <div class="form-group">
+                  <label for="classField">الوحدة الدراسية:</label>
                     <select class="form-control form-control-select mt-3" id="classField" name="unit_id" disabled>
                       <option value="{{$selectedUnit->id}}">{{$selectedUnit->title}}</option>
                     </select>
-                  @endif
+                    @endif
                 </div>
-
+                
+                @if($selectedCourse === null && $selectedUnit === null)
                 <div class="form-group">
                   <label for="classField">الدورة الدراسية:</label>
-                  @if($selectedCourse === null)
+                  
                     <select class="form-control form-control-select mt-3" id="classField" name="course_id">
-                      <option selected vlaue="">-- اختر الدورة --</option>
+                      <option vlaue="">-- اختر الدورة --</option>
                       @foreach($courses as $course)
                       <option value="{{$course->id}}">{{$course->title}}</option>
                       @endforeach
@@ -73,7 +78,7 @@
                   <select class="form-control form-control-select mt-3" name="type" id="type">
                    <option value="video">فديو</option>
                    <option value="image">صورة</option>
-                   <option value="link">رابط</option>
+                   
                    <option value="pdf">pdf</option>
                    <option value="word">word</option>
                   </select>

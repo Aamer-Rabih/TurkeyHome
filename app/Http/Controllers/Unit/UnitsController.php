@@ -123,7 +123,10 @@ class UnitsController extends Controller
             $lessons = Lesson::all();
         }
         //dd($lessons);
-        $unitLessons = Lesson::with(['units'])->get();
+        //$unitLessons = Lesson::with(['units'])->get();
+        $unitLessons = $unit->lessons;
+        //dd($unitLessons);
+        
         
         //$lessons = array_diff($lessons, $unitLesson);
 

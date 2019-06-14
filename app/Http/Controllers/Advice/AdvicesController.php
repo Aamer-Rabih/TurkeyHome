@@ -185,4 +185,26 @@ class AdvicesController extends Controller
          return redirect()->back()
         ->with('success','تم حذف النصيحة بنجاح');
     }
+
+    public function activate(Advice $advice){
+
+        $advice->makeActive();
+        
+        $advice->save();
+        
+        return redirect()->route('advice.index', ['advice' => $advice->id])
+                ->with('success','تم تفعيل النصيحة بنجاح');
+    }
+
+     /**
+      * Action to deactivate A advice
+      */
+      public function deactivate(Advice $advice){
+        $advice->makeInactive();
+        $advice->save();
+
+        return redirect()->route('advice.index', ['advice' => $advice->id])
+                ->with('success', 'تم إلغاء تفعيل النصيحة بنجاح');
+
+      }
 }

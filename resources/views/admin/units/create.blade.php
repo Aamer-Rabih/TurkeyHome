@@ -35,8 +35,8 @@
                     @endforeach 
                   </select>
                   @elseif($selectedSubject != null)
-                    <select class="form-control form-control-select mt-3" id="classField" name="unit_id" disabled>
-                      <option value="{{$selectedSubject->id}}">{{$selectedSubject->name}}</option>
+                    <select class="form-control form-control-select mt-3" id="classField" name="subject_id" readonly>
+                      <option value="{{$selectedSubject->id}}" selected>{{$selectedSubject->name}}</option>
                     </select>
                   @endif
                 </div>

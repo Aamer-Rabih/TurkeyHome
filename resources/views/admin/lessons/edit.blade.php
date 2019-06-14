@@ -40,16 +40,18 @@
                     <option value="{{$unit->id}}">{{$unit->name}} ضمن مادة {{$unit->subject->title}}  التابعة لل {{$unit->subject->class->name}}</option>
                     @endforeach
                     @foreach($courses as $course)
-                    <option value="{{$course->id}}">{{course->title}}</option>
+                    <option value="{{$course->id}}">{{$course->title}}</option>
                     @endforeach
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="type">النوع :</label>
                   <select class="form-control form-control-select mt-3" id="type" name="type">
-                    @foreach($types as $type)
-                    <option value="{{$type}}" {{$lesson->type === $type ? "selected" : ""}}>{{$type}}</option>
-                    @endforeach
+                   <option value="video">فديو</option>
+                   <option value="image">صورة</option>
+                   
+                   <option value="pdf">pdf</option>
+                   <option value="word">word</option>
                   </select>
                 </div>
                 <div class="form-group">
