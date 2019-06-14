@@ -21,7 +21,7 @@ class Evaluation extends Model
     //Evaluating Student
     public function student(){
 
-        return $this->belongsTo('App\Student');
+        return $this->belongsTo('App\User');
     }
     
 }

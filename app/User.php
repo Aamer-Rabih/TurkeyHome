@@ -116,4 +116,11 @@ class User extends Authenticatable
         ->withTimestamps();
     }
 
+    /**Evaluations By This student */
+    public function evaluations(){
+
+
+        return $this->hasMany('App\Evaluation');
+    }
+
 }

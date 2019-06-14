@@ -11,6 +11,7 @@ use App\Reply;
 use Auth;
 use App\Role;
 use App\Course;
+use App\Evaluation;
 use Storage ; 
 use File ;
 
@@ -125,7 +126,25 @@ class LessonsController extends Controller
     {
         $comments = $lesson->comments()->with('commenter')->get();
         //$comments = Comment::where('lesson_id',$lesson->id)->get();
-        return view('admin.lessons.show',compact('lesson','comments'));
+        $ratings = $lesson->evaluations;
+        $studentEvaluation = null;
+        $eva_value = 0;
+        if (Auth::user()->hasRole(3)) {
+            
+            //$evaluations = Auth::user()->evaluations;
+            $evaluations = Evaluation::whereHas('student', function($query) {
+                $query->where('student_id', '=', Auth::user()->id);
+            })->get();
+            //dd( $evaluations);
+            foreach($evaluations as $evaluation) {
+                if($lesson->id === $evaluation->lesson_id) {
+                    $studentEvaluation = $evaluation;
+                    $eva_value = $evaluation->value;
+                }
+            }
+        }
+        
+        return view('admin.lessons.show',compact('lesson', 'comments', 'ratings','studentEvaluation', 'eva_value'));
     }
 
     /**
@@ -348,6 +367,19 @@ class LessonsController extends Controller
          ->with('success', 'تم حذف الرد بنجاح');
       }
 
+      public function createEvaluation(Request $request, $studentEvaluation) {
+        DB::transaction(function (){
+            $createEvaluation= Evaluation::create([
+            'value' => $request->input('rate'),
+            ]);
+        });
+      }
 
+      public function editEvaluation(Request $request, $evaluation) {
+        DB::transaction(function (){
+            $evaluation->value = $request->rate;
+            $evaluation->save();
+        });
+      }
 
 }

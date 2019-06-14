@@ -876,6 +876,31 @@ Route::delete('tests/{test}',
 ]])
     ->name('test.destroy');
 
+//Activate A Test 
+Route::post('tests/{test}/activate',
+['uses' => 'Test\TestController@activate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
+->name('test.activate');
+
+
+
+//Deactivate A Test 
+Route::post('tests/{test}/deactivate',
+['uses' => 'Test\TestController@deactivate',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+])
+->name('test.deactivate');
+
+//Add Attachment
+Route::post('tests/{test}/addAttachment',
+['uses' => 'Test\TestController@addAttachment',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT
+]])
+->name('test.addattachment');
 
 
 //Comments index

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Test;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Test;
+use App\Attachment;
 use Storage ; 
 use File;
 
@@ -35,7 +36,9 @@ class TestController extends Controller
      */
     public function create()
     {
-        return view('admin.tests.create');
+        $attachments = Attachment::latest()->get();
+
+        return view('admin.tests.create', compact('attachments'));
     }
 
     /**
@@ -79,9 +82,17 @@ class TestController extends Controller
 
         $attributes['sub_test'] = $request->sub_test ; 
 
+
         //Persist data in the database 
         $test = Test::create($attributes);
 
+        //Attach with attachment
+        // if($request->attachments != null){
+        //     $attachments = $request->attachments;
+        //     foreach($attachments as $attachment) {
+        //         $attachment->courses()->syncWithoutDetaching($request->course_id);
+        //     }
+        // }
 
         //Return redirect 
         return redirect()
@@ -97,7 +108,9 @@ class TestController extends Controller
      */
     public function show(Test $test)
     {
-        return view('admin.tests.show',compact('test'));
+        $attachments = Attachment::latest()->get();
+
+        return view('admin.tests.show',compact('test', 'attachments'));
     }
 
     /**
@@ -171,4 +184,53 @@ class TestController extends Controller
          return redirect()->back()
          ->with('success','تم حذف الاختبار بنجاح');
     }
+
+     /**
+     * Activate A Test
+     *  @param \App\Test $test
+     *  @return \Illuminate\Http\Response 
+     */
+    public function activate(Request $request, Test $test){
+
+        $test->activate();
+
+        $test->save();
+
+        return back()
+                //->route('tets.show', ['test' => $test->id])
+                ->with('success','تم تفعبل الإختبار بنجاح');
+
+    }
+
+
+    /**
+     * Deactivate A Test 
+     * 
+     * @param \App\Test $test 
+     * @return \Illuminate\Http\Response 
+     */
+    public function deactivate(Request $request, Test $test){
+
+        $test->deactivate(); 
+
+        $test->save();
+        
+        return back()
+                //->route('test.show', ['test' => $test->id])
+                ->with('success','تم إلغاء تفعيل الإختبار بنجاح');
+    }
+
+
+    public function addAttachment(Request $request,Test $test)
+      {
+        $attachment_id = $request->attachment_id;
+         $test->attachments()->syncWithoutDetaching($attachment_id);
+
+           //Return redirect 
+        return redirect()
+        ->route('test.show', ['test' => $test->id])
+        ->with('success', 'تم إضافة مرفق بنجاح');
+
+      }
+
 }
