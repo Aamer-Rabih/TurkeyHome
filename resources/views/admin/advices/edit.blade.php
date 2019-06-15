@@ -22,24 +22,31 @@
           <div class="card-header">تعديل النصيحة <i class="fa fa-edit" aria-hidden="true"></i></div>
             <div class="card-body">
 
-            <form action="{{route('advice.update')}}" enctype="multipart/form-data" method="POST">
+            <form action="{{route('advice.update',$advice)}}" enctype="multipart/form-data" method="POST">
                       {!! csrf_field() !!}
                       {!! method_field('PUT') !!}
                 <div class="form-group">
                   <label for="adviceTitle"><h5>عنوان النصيحة :</h5></label>
                   <input type="text" class="form-control" id="adviceTitle" name="title" required value="{{$advice->title}}">
                 </div>
-                <div class="form-group">
-                  <label for="type">الصف أو الدورة التي تتبع إليها النصيحة :</label>
-                  <select class="form-control form-control-select mt-3" id="type" name="type">
-                    <option selected>-- اختر الصف أو الدورة --</option>
+                <!-- <div class="form-group">
+                  <label for="type">الصف الذي تتبع إليه النصيحة :</label>
+                  <select class="form-control form-control-select mt-3" id="type" name="class_id">
+                    <option selected>-- اختر الصف   --</option>
                     @foreach($classes as $class)
                     <option value="{{$class->id}}">{{$class->name}}</option>
                     @endforeach
+                    </select>
+                </div>
+                <div class ="form-control">
+                    <label for="type"> الدورة التي تتبع إليها النصيحة :</label>
+                    <select name="course_id" id="course_id" class="form-control form-control-select mt-3">
+                    <option selected>-- اختر الدورة --</option>
                     @foreach($courses as $course)
                     <option value="{{$course->id}}">دورة {{$course->title}}</option>
                     @endforeach
                   </select>
+                  </div> -->
                 <div class="form-group">
                   <label for="orderField">النوع :</label>
                   <select class="form-control form-control-select mt-3" id="orderField" name="order">
@@ -69,7 +76,7 @@
                     <label for="deactive">غير مفعلة</label>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-success myhover button1">إضافة</button>
+                <button type="submit" class="btn btn-success myhover button1">تعديل</button>
                 <a href="{{route('advice.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
               </form>
 

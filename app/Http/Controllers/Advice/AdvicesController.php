@@ -104,6 +104,17 @@ class AdvicesController extends Controller
          //Persist data in the database 
          $advice = Advice::create($attributes);
 
+         if($request->class_id != "-- اختر الصف   --"&& $request->class_id != null){
+            //$arr= $lesson->fresh()->unit->pluck('pivot.lesson_order')->toArray();
+            //$lesson->fresh()->units[1]->pivot->lesson_order = 1 ;
+            $advice->classes()->syncWithoutDetaching($request->class_id );
+         }
+         
+         
+         if($request->course_id != "-- اختر الدورة --" && $request->course_id != null){
+            $advice->courses()->syncWithoutDetaching($request->course_id);
+        }
+
          //Return redirect 
         return redirect()
         ->route('advice.show', ['advice' => $advice->id])
@@ -130,7 +141,9 @@ class AdvicesController extends Controller
      */
     public function edit(Advice $advice)
     {
-        return view('admin.advices.edit',compact('advice'));
+        $classes = ClassRoom::all();
+        $courses = Course::all();
+        return view('admin.advices.edit',compact('advice','classes','courses'));
     }
 
     /**

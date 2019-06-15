@@ -4,6 +4,7 @@
 
 <div id="content">
     
+    @if(Auth::user()->hasAnyRole([0,1,2]))
     <div class="header-card table-cards color-grey">
         <div class="row">
             <div class="col-lg-4">
@@ -11,6 +12,7 @@
                     <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> إدارة الدورات الدراسية</small></h1>
                 </div>
             </div>
+            @if(Auth::user()->hasAnyRole([0,1]))
             <div class="col-lg-2">
                 @if(!$course->active)
                 <form action="{{ route('course.activate', $course) }}" method="POST" id="makeCourseActive" style="display:inline; margin-right:10px;">
@@ -24,6 +26,7 @@
                 </form>
                 @endif
             </div>
+            @endif
             <div class="col-lg-2">
                 <a href="/lessons/create?selectedcourse={{$course->id}}" class="btn btn-success button-margin-header" style="margin-right: 22px" >إضافة درس  
                     <i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i>
@@ -36,7 +39,7 @@
             </div> 
         </div>
     </div>
-
+    @endif
     <div id="table" class="row">
         <div class="col-lg-8">
             <div class="card table-cards color-grey">
@@ -50,11 +53,13 @@
                         <thead>
                         <tr> 
                             <th>عنوان الدرس</th>
-                            <th>نوع الملف</th>
-                            <th>التفعيل</th>
+                            <th>نوع الملف</th> 
                             <th>العرض</th>
+                            @if(Auth::user()->hasAnyRole([0,1]))
+                            <th>التفعيل</th>
                             <th>التعديل</th>
                             <th>الحذف</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -62,6 +67,12 @@
                         <tr>
                             <td>{{$lesson->title}}</td>
                             <td>{{$lesson->type}}</td>
+                            <td>
+                            <div class="operations show">
+                                <a href="{{ route('lesson.show', $lesson) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
+                            </div>
+                            </td>
+                            @if(Auth::user()->hasAnyRole([0,1]))
                             <td class="operations">
                             @if($lesson->active)
                             <form action="{{ route('lesson.deactivate', $lesson) }}" method="POST" id="activateForm">
@@ -81,11 +92,7 @@
                             </form>
                             @endif          
                             </td>
-                            <td>
-                            <div class="operations show">
-                                <a href="{{ route('lesson.show', $lesson) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
-                            </div>
-                            </td>
+                            
                             <td>
                             <div class="operations update">
                                 <a href="{{ route('lesson.edit', $lesson) }}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
@@ -104,6 +111,7 @@
                                 
                             </div>
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                         </tbody>
@@ -127,8 +135,9 @@
             <thead>
               <tr> 
                 <th>اسم المدرس</th>
-                
+                @if(Auth::user()->hasAnyRole([0,1]))
                 <th>حذف</th>
+                @endif
               </tr>
             </thead>
             <tbody>
@@ -137,7 +146,7 @@
                 <td>{{$teacherCourse->username}}</td>
                 
                 
-                 
+                @if(Auth::user()->hasAnyRole([0,1]))
                 <td>
                   <div class="operations delete">
                     <form action="{{ route('course.deleteteacher',['course' => $course->id, 'teacher_id'=>$teacherCourse->id]) }}" method="POST" id="deleteForm">
@@ -150,6 +159,7 @@
                     </form>       
                   </div>
                 </td>
+                @endif
               </tr>
               @endforeach
             </tbody>
@@ -161,6 +171,7 @@
 
 
 
+  @if(Auth::user()->hasAnyRole([0,1]))
   <div id="table2" class="row">
     <div class="col-lg-10">
       <div class="card table-cards color-grey">
@@ -187,6 +198,7 @@
       </div>
     </div>
   </div>
+  @endif
 
 </div>
 

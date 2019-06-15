@@ -4,6 +4,7 @@
 
 <div id="content">
   
+  @if(Auth::user()->hasAnyRole([0,1]))
   <div class="header-card table-cards color-grey">
     <div class="row">
       <div class="col-lg-4">
@@ -16,7 +17,9 @@
       </div>
     </div>
   </div>
+  @endif
 
+  @if(Auth::user()->hasAnyRole([0,1,3]))
   <div id="table" class="row">
     <div class="col-lg-8">
       <div class="card table-cards color-grey">
@@ -30,7 +33,7 @@
             <thead>
               <tr> 
                 <th>اسم الدورة</th>
-                @if(Auth::user()->hasAnyRole([0,1,2]))
+                @if(Auth::user()->hasAnyRole([0,1]))
                 <th>التفعيل</th>
                 <th>العرض</th>
                 <th>التعديل</th>
@@ -77,10 +80,11 @@
                 @endif
 
                 @if(Auth::user()->hasRole(3))
-                <td><form action="{{ route('courserequest.store') }}" method="POST" id="makeCourseFreeForm" style="display:inline; margin-right:10px;">
-                      {!! csrf_field() !!}
-                      <input type="hidden" name="course_id" value="{{$course->id}}">
-                      <input type="submit" class="btn btn-success" value="اشتراك">
+                <td>
+                    <form action="{{ route('courserequest.store') }}" method="POST" id="makeCourseFreeForm" style="display:inline; margin-right:10px;">
+                       {!! csrf_field() !!}
+                       <input type="hidden" name="course_id" value="{{$course->id}}">
+                       <input type="submit" class="btn btn-success" value="اشتراك">
                     </form>
                 </td>
                 @endif
@@ -92,7 +96,48 @@
       </div>
     </div>
   </div>
+  @endif
 
+
+  @if(Auth::user()->hasAnyRole([2,3]))
+
+  <div id="table" class="row">
+    <div class="col-lg-8">
+      <div class="card table-cards color-grey">
+        <div class="content-header">
+          <h2>
+            <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>الدورات الدراسية المشترك بها</small>
+          </h2>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-hover table-width">
+            <thead>
+              <tr> 
+                <th>اسم الدورة</th>
+                <th>العرض</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($mycourses as $mycourse)
+              <tr>
+                <td>{{$course->title}}</td>
+                
+                <td>
+                  <div class="operations show">
+                    <a href="{{ route('course.show', $course) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
+                  </div>
+                </td>
+              
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @endif
 </div>
 
 @endsection

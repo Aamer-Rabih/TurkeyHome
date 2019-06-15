@@ -22,7 +22,7 @@
               <form action="{{route('users.update',$user)}}" method="POST">
                       {!! csrf_field() !!}
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="role">اختر نوع المستخدم :</label>
                   <select name="role" id="role" class="form-control">
                   @if(Auth::user()->hasRole(0))
@@ -32,7 +32,7 @@
                   <option value="2">مدرس</option>
                   <option selected value="3">طالب</option>
                   </select>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                   <label for="username"><h5>اسم المستخدم :</h5></label>
@@ -79,8 +79,8 @@
                 
                 
                 <input type="hidden" name="_method" value="put">
-                <button type="submit" class="btn btn-success button1">إضافة</button>
-                <a href="{{route('users.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+                <button type="submit" class="btn btn-success button1">تعديل</button>
+                <a href="{{ URL::previous() }}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
               </form>
               
           </div>

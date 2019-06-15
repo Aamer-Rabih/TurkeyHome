@@ -28,7 +28,8 @@ Route::get('/', function() {
     $showLessons =\App\ShowLesson::latest()->get();
     $classes =\App\ClassRoom::latest()->get();
     $courses =\App\Course::latest()->get();
-    return view('front-end.home.home',compact('studentThanks','carousels','showLessons','classes','courses'));
+    $notes = \App\Note::where('type','public')->get();
+    return view('front-end.home.home',compact('studentThanks','carousels','showLessons','classes','courses','notes'));
 });
 
 /**
@@ -161,7 +162,7 @@ Route::post('courses',
 Route::get('courses/{course}',
 ['uses' => 'Course\CoursesController@show',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT]
 ])
     ->name('course.show');
 
@@ -1357,3 +1358,61 @@ Route::post('courserequests',
 'roles' => [\App\Role::STUDENT
 ]])
     ->name('courserequest.store');
+
+
+
+     //notes index
+     Route::get('notes',
+     ['uses' => 'Note\NotesController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,App\Role::MANAGER
+]])
+     ->name('notes.index');
+     
+     //note create route
+     Route::get('notes/create',
+     ['uses' => 'Note\NotesController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+     ->name('notes.create');
+     
+     //note show route
+     Route::get('notes/{note}',
+     ['uses' => 'Note\NotesController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+     ->name('notes.show');
+     
+     //store note route
+     Route::post('notes',
+     ['uses' => 'Note\NotesController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+     ->name('notes.store');
+     
+     //Show The Form to Edit an note
+     Route::get('notes/{note}/edit',
+     ['uses' => 'Note\NotesController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+         ->name('notes.edit');
+     
+         //update note route
+     Route::put('notes/{note}',
+     ['uses' => 'Note\NotesController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+     ->name('notes.update');
+     
+     //Delete A note 
+     Route::delete('notes/{note}',
+     ['uses' => 'Note\NotesController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+         ->name('notes.destroy');

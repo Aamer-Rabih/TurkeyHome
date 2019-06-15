@@ -99,6 +99,12 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function coursess(){
+
+        return $this->belongsToMany('App\Course','course_student','student_id','course_id')
+            ->withTimestamps();
+    }
+
     /**
      * Lessons which this teacher is teaching
      */

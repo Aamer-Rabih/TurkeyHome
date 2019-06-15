@@ -97,14 +97,14 @@ class LessonsController extends Controller
         $lesson->save();
           
         
-         if($request->unit_id != "-- اختر الوحدة --"|| $request->unit_id != null){
+         if($request->unit_id != "-- اختر الوحدة --"&& $request->unit_id != null){
             //$arr= $lesson->fresh()->unit->pluck('pivot.lesson_order')->toArray();
             //$lesson->fresh()->units[1]->pivot->lesson_order = 1 ;
             $lesson->units()->syncWithoutDetaching($request->unit_id ,['pivot.lesson_order'=>1]);
          }
          
          
-         if($request->course_id != "-- اختر الدورة --" || $request->course_id != null){
+         if($request->course_id != "-- اختر الدورة --" && $request->course_id != null){
             $lesson->courses()->syncWithoutDetaching($request->course_id);
         }
         $lesson->teachers()->syncWithoutDetaching(Auth::user()->id);

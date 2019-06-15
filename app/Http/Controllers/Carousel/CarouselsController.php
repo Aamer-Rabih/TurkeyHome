@@ -172,7 +172,7 @@ class CarouselsController extends Controller
 
 
         return redirect()
-                ->back()
+                ->route('carousel.index')
                 ->with('success','تم حذف عنصر القلاب بنجاح');
 
 

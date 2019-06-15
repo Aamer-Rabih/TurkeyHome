@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
+use Auth;
 
 class CoursesController extends Controller
 {
@@ -23,22 +24,33 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        $coursesQuery = Course::latest();
-
+        
+        
+        $courses = Course::latest()->get();
+        
+        if (Auth::user()->hasRole(2))
+        {
+           $mycourses = Auth::user()->courses;
+        }
+        elseif (Auth::user()->hasRole(3))
+        {
+           $mycourses = Auth::user()->coursess;
+        }
         //Prepare for Search Courses 
 
         if(request()->has('title')){
             $coursesQuery->where('title','like','%' .request('title') . '%');
         }
 
-        $courses = $coursesQuery->get();
+        //$courses = $coursesQuery->get();
         //Prepare for Ajax Calls 
         if(request()->wantsJson()){
 
             return $courses ; 
         }
 
-        return view('admin.courses.index', compact('courses'));
+        
+        return view('admin.courses.index', compact('courses','mycourses'));
     }
 
     /**

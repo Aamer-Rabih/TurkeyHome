@@ -72,7 +72,7 @@ class UsersController extends Controller
             'full_name' => 'required',
             
             'phone' => 'required',
-            'tc' => '',
+            'tc' => 'required',
             'role' => 'required',
         ]);
 
@@ -82,14 +82,9 @@ class UsersController extends Controller
         $user->full_name = $request->full_name;
         $user->email = time().'@hh.com';
         $user->phone = $request->phone;
-        if($request->role === Role::TEACHER)
-        {
-            $user->tc = $request->tc;
-        }
-        else
-        {
-            $user->tc = time();
-        }
+        
+        $user->tc = $request->tc;
+        
         $user->save();
         
         
@@ -97,10 +92,29 @@ class UsersController extends Controller
           $user->roles()->attach(Role::where('role',$request->role)->get());
         
 
+          //dd($request->role);
         //Return redirect 
+        if($request->role === "1")
+        {
         return redirect()
-            ->back()
-            ->with('success', 'تم اضافة مستخدم بنجاح');
+            ->route('users.indexmanager')
+            ->with('success', 'تم اضافة مشرف بنجاح');
+        }
+
+        if($request->role === "2")
+        {
+            
+        return redirect()
+            ->route('users.indexteacher')
+            ->with('success', 'تم اضافة مدرس بنجاح');
+        }
+
+        if($request->role === "3")
+        {
+        return redirect()
+            ->route('users.indexstudent')
+            ->with('success', 'تم اضافة طالب بنجاح');
+        }
     }
 
     /**
@@ -141,10 +155,10 @@ class UsersController extends Controller
             
             'phone' => 'required',
             'tc' => 'required',
-            'roles' => 'required',
+            
         ]);
 
-        $user = new User();
+        
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->full_name = $request->full_name;
@@ -152,15 +166,30 @@ class UsersController extends Controller
         $user->phone = $request->phone;
         $user->tc = $request->tc;
         $user->save();
-        foreach($request->roles as $role)
-        {
-           $user->roles()->attach(Role::where('role',$role));
-        }
+        
 
         //Return redirect 
+        if($user->hasRole(1))
+        {
         return redirect()
-            ->back()
-            ->with('success', 'تم تعديل مستخدم بنجاح');
+            ->route('users.indexmanager')
+            ->with('success', 'تم تعديل مشرف بنجاح');
+        }
+
+        if($user->hasRole(2))
+        {
+            
+        return redirect()
+            ->route('users.indexteacher')
+            ->with('success', 'تم تعديل مدرس بنجاح');
+        }
+
+        if($user->hasRole(3))
+        {
+        return redirect()
+            ->route('users.indexstudent')
+            ->with('success', 'تم تعديل طالب بنجاح');
+        }
     }
 
     /**

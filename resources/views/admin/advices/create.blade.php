@@ -28,17 +28,23 @@
                   <input type="text" class="form-control" id="adviceTitle" name="title" required placeholder="عنوان النصيحة">
                 </div>
                 <div class="form-group">
-                  <label for="type">الصف أو الدورة التي تتبع إليها النصيحة :</label>
-                  <select class="form-control form-control-select mt-3" id="type" name="type">
-                    <option selected>-- اختر الصف أو الدورة --</option>
+                  <label for="type">الصف الذي تتبع إليه النصيحة :</label>
+                  <select class="form-control form-control-select mt-3" id="type" name="class_id">
+                    <option selected>-- اختر الصف   --</option>
                     @foreach($classes as $class)
                     <option value="{{$class->id}}">{{$class->name}}</option>
                     @endforeach
+                    </select>
+                </div>
+                <div class ="form-group">
+                    <label for="type"> الدورة التي تتبع إليها النصيحة :</label>
+                    <select name="course_id" id="course_id" class="form-control form-control-select mt-3">
+                    <option selected>-- اختر الدورة --</option>
                     @foreach($courses as $course)
                     <option value="{{$course->id}}">دورة {{$course->title}}</option>
                     @endforeach
                   </select>
-                </div>
+                  </div> 
                 <div class="form-group">
                   <label for="orderField">النوع :</label>
                   <select class="form-control form-control-select mt-3" id="orderField" name="type">

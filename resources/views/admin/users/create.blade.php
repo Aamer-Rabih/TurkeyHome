@@ -79,7 +79,7 @@
                 
                 
                 <button type="submit" class="btn btn-success button1">إضافة</button>
-                <a href="{{route('users.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+                <a href="{{ URL::previous() }}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
               </form>
               
           </div>
