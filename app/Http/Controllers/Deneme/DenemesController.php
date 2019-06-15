@@ -63,7 +63,7 @@ class DenemesController extends Controller
           'term' => 'required|integer',
           'active' =>'required',
           'type' => 'required',
-          'src' => 'required'
+          'src' => ''
         ]);
 
         //Prepare data to save 
@@ -81,6 +81,9 @@ class DenemesController extends Controller
 
             $attributes['src'] = $request->src->store('public/denemes');
 
+        }
+        else {
+            $attributes['src'] = $request->url_src;
         }
         
 
@@ -145,7 +148,7 @@ class DenemesController extends Controller
             'active' => 'required',
             'type' => 'required',
             'class_id' => 'required',
-            'src' => 'required'
+            'src' => ''
           ]);
 
         //Prepare data to save 
@@ -165,7 +168,9 @@ class DenemesController extends Controller
             
             $deneme->src = $request->src->store('public/denemes');
         }
-
+        else {
+            $deneme->src = $request->url_src;
+        }
 
         //update deneme in db 
         $deneme->save();

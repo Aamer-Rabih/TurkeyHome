@@ -21,28 +21,22 @@
               
               <form action="{{route('lesson.store')}}" enctype="multipart/form-data" method="POST" >
                       {!! csrf_field() !!}
+
                 <div class="form-group">
                   <label for="lesson"><h5>الدرس :</h5></label>
                   <input type="text" class="form-control" id="lesson" name="title" required placeholder="اسم الدرس الجديد">
                 </div>
-                <div class="radioG">
-                  <h5>تفعيل الدرس  :</h5>
-                  <div class="radio">
-                    <input type="radio" name="active" value="1" checked>
-                    <label>مفعل</label>
-                  </div>
-                  <div class="radio">
-                    <input type="radio" name="active" value="0">
-                    <label>غير مفعل</label>
-                  </div>
+               
+                <div class="form-group">
+                  <label for="intro"><h5>المقدمة :</h5></label>
+                  <input type="text" class="form-control" id="intro" name="intro" required placeholder="مقدمة الدرس">
                 </div>
 
                 @if($selectedUnit === null && $selectedCourse === null)
                 <div class="form-group">
                   <label for="classField">الوحدة الدراسية:</label>
-                  
                     <select class="form-control form-control-select mt-3" id="classField" name="unit_id">
-                      <option  value="">-- اختر الوحدة --</option>
+                      <option  selected>-- اختر الوحدة --</option>
                       @foreach($units as $unit)
                       <option value="{{$unit->id}}">{{$unit->title}}</option>
                       @endforeach
@@ -61,7 +55,7 @@
                   <label for="classField">الدورة الدراسية:</label>
                   
                     <select class="form-control form-control-select mt-3" id="classField" name="course_id">
-                      <option vlaue="">-- اختر الدورة --</option>
+                      <option selected>-- اختر الدورة --</option>
                       @foreach($courses as $course)
                       <option value="{{$course->id}}">{{$course->title}}</option>
                       @endforeach
@@ -75,16 +69,17 @@
 
                 <div class="form-group">
                   <label for="type">نوع الدرس :</label>
-                  <select class="form-control form-control-select mt-3" name="type" id="type">
+                  <select class="form-control form-control-select mt-3" name="type" id="lesson_type">
+                  <option selected>-- اختر النوع --</option>
                    <option value="video">فديو</option>
                    <option value="image">صورة</option>
-                   
+                   <option value="url">URL</option>
                    <option value="pdf">pdf</option>
                    <option value="word">word</option>
                   </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="lesson_file" style="display: none;">
                   <label for="">ملف الدرس :</label>
                   <div class="input-group mt-3">
                     <div class="custom-file">
@@ -96,15 +91,25 @@
                   </div>
                 </div>
 
-
-
-                <div class="form-group">
-                  <label for="intro"><h5>المقدمة :</h5></label>
-                  <input type="text" class="form-control" id="intro" name="intro" required placeholder="مقدمة الدرس">
+                <div class="form-group" id="lesson_url" style="display: none;">
+                  <label for="urlField"><h5>ادخل ال URL :</h5></label>
+                  <input type="url" class="form-control" id="urlField" name="url_src" placeholder="ادخل ال URL"> 
                 </div>
-                
+
+                <div class="radioG">
+                  <h5>تفعيل الدرس  :</h5>
+                  <div class="radio">
+                    <input type="radio" name="active" value="1" checked>
+                    <label>مفعل</label>
+                  </div>
+                  <div class="radio">
+                    <input type="radio" name="active" value="0">
+                    <label>غير مفعل</label>
+                  </div>
+                </div>
+
                 <button type="submit" class="btn btn-success button1">إضافة</button>
-                <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+                <a href="{{route('lesson.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
               </form>
               
           </div>

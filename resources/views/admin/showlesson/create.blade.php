@@ -30,16 +30,9 @@
                   <label for="showLesson"><h5>الدرس الأستعراضي :</h5></label>
                   <input type="text" class="form-control" id="showLesson" name="title" required placeholder="اسم الدرس الأستعراضي الجديد"> 
                 </div>
-                <div class="form-group">
-                  <label for="">ملف الدرس الأستعراضي :</label>
-                  <div class="input-group mt-3">
-                    <div class="custom-file">
-                      <input id="imageField" type="file" class="custom-file-input imageField" name="src">
-                      <label class="custom-file-label imageFieldLabel" for="imageFeild">اختر ملف الدرس 
-                        <i class="fa fa-upload pull-left" aria-hidden="true" style="margin-top:3px;"></i>
-                      </label>
-                    </div>
-                  </div>
+                <div class="form-group" id="lesson_url">
+                  <label for="urlField"><h5>ادخل ال URL :</h5></label>
+                  <input type="url" class="form-control" id="urlField" name="src" required placeholder="ادخل ال URL"> 
                 </div>
                 <div class="form-group">
                   <label for="orderField">ترتيب العرض :</label>

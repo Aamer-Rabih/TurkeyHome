@@ -31,7 +31,29 @@
       </div> 
     </div>
   </div>
-        
+  
+  @if($lesson->type === 'video')
+  <div id="table" class="row">
+    <div class="col-lg-6">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> فيديو الدرس</small>
+            </h2>
+          </div>
+
+          <video width="520" height="440" controls>
+            <source src="{{$lesson->src}}" type="video/mp4">
+          Your browser does not support the video tag.
+          </video>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
+
   <div id="table" class="row">
     <div class="col-lg-10">
       <div class="card table-cards color-grey">
@@ -48,7 +70,11 @@
                 <th>اسم الدرس</th>
                 <th>التفعيل</th>   
                 <th>المقدمة</th>
+                @if($lesson->type === 'image' || $lesson->type === 'pdf' || $lesson->type === 'word')
                 <th>رابط الدرس</th>
+                @elseif($lesson->type === 'url')
+                <th>عنوان موقع الفيديو</th>
+                @endif
                 @if (Auth::user()->hasRole(3))<th>تقيم الدرس</th>@endif
               </tr>
             </thead>
@@ -75,7 +101,11 @@
                   @endif          
                </td>
                <td>{{$lesson->intro}}</td>
+               @if($lesson->type === 'image' || $lesson->type === 'pdf' || $lesson->type === 'word')
                <td><a href="{{$lesson->src}}">تحميل الدرس</a></td>
+               @elseif($lesson->type === 'url')
+               <td><a href="{{$lesson->src}} " target="_blank">الأنتقال إلى موقع الدرس </a></td>
+               @endif
                @if (Auth::user()->hasRole(3))
                <td>
                 @if($studentEvaluation === null)
@@ -174,7 +204,7 @@
     
   </div>
 
-  @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2) || Auth::user()->hasRole(3))
+  @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
   <div id="table" class="row">
     <div class="col-lg-6">
       <div class="card table-cards color-grey">
