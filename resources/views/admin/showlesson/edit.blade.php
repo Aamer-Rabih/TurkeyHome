@@ -28,16 +28,9 @@
                   <label for="showLesson">اسم الدرس الأستعراضي:</label>
                   <input type="text" class="form-control" id="showLesson" name="title" value="{{$showLesson->title}}" required>
                 </div>  
-                <div class="form-group">
-                  <label for="">ملف الدرس الأستعراضي :</label>
-                  <div class="input-group mt-3">
-                    <div class="custom-file">
-                      <input id="updateImageField" type="file" class="custom-file-input imageField" name="src" value="{{$showLesson->src}}">
-                      <label class="custom-file-label imageFieldLabel" for="updateImageField">اختر درس استعراضي جديد
-                        <i class="fa fa-upload pull-left" aria-hidden="true" style="margin-top:3px;"></i>
-                      </label>
-                    </div>
-                  </div>
+                <div class="form-group" id="lesson_url">
+                  <label for="urlField"><h5>ادخل ال URL :</h5></label>
+                  <input type="url" class="form-control" id="urlField" name="src" value="{{$showLesson->src}}" required placeholder="ادخل ال URL"> 
                 </div>
                 <div class="form-group">
                   <label for="orderField">ترتيب عرض الدرس الأستعراضي :</label>

@@ -45,14 +45,16 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="orderField">النوع :</label>
-                  <select class="form-control form-control-select mt-3" id="orderField" name="type">
-                    @foreach($types as $type)
-                    <option value="{{$type}}" {{$deneme->type === $type ? "selected" : ""}}>{{$type}}</option>
-                    @endforeach 
+                  <label for="deneme_type">النوع :</label>
+                  <select class="form-control form-control-select mt-3" id="deneme_type" name="type">
+                    <option value="video" {{$deneme->type === 'video' ? "selected" : ""}}>فديو</option>
+                    <option value="image" {{$deneme->type === 'image' ? "selected" : ""}}>صورة</option>
+                    <option value="url" {{$deneme->type === 'url' ? "selected" : ""}}>URL</option>
+                    <option value="pdf" {{$deneme->type === 'pdf' ? "selected" : ""}}>pdf</option>
+                    <option value="word" {{$deneme->type === 'word' ? "selected" : ""}}>word</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group"  id="deneme_file" style="display: none;">
                   <label for="">ملف الدينيمي :</label>
                   <div class="input-group mt-3">
                     <div class="custom-file">
@@ -62,6 +64,10 @@
                       </label>
                     </div>
                   </div>
+                </div>
+                <div class="form-group" id="deneme_url" style="display: none;">
+                  <label for="urlField"><h5>ادخل ال URL :</h5></label>
+                  <input type="url" class="form-control" id="urlField" name="url_src" placeholder="ادخل ال URL"> 
                 </div>
                 <div class="radioG">
                   <h5>تفعيل الدينيمي :</h5>

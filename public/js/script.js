@@ -33,3 +33,37 @@ jQuery(document).ready(function ()
             });
     });
 
+// Create Lesson
+jQuery(document).ready(function () {
+   jQuery('select[id="lesson_type"]').on('change', function() {
+      var lesson_type = jQuery(this).val();
+      if((lesson_type == "image") || (lesson_type == "word") || (lesson_type == "pdf")) {
+         $("#lesson_file").show();
+         $("#lesson_url").hide();
+         $("#lesson_url").attr("disabled", "disabled");
+      } if((lesson_type == "url") || (lesson_type == "video")) {
+         $("#lesson_url").show();
+         $("#lesson_file").hide();
+         $("#lesson_file").attr("disabled");
+       }
+      
+   });
+});
+
+
+// Deneme create
+jQuery(document).ready(function () {
+   jQuery('select[id="deneme_type"]').on('change', function() {
+      var deneme_type = jQuery(this).val();
+      if((deneme_type == "image") || (deneme_type == "word") || (deneme_type == "pdf")) {
+         $("#deneme_file").show();
+         $("#deneme_url").hide();
+         $("#deneme_url").attr("disabled", "disabled");
+      } if((deneme_type == "url") || (deneme_type == "video")) {
+         $("#deneme_url").show();
+         $("#deneme_file").hide();
+         $("#deneme_file").attr("disabled");
+       }
+      
+   });
+});

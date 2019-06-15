@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <div class="content-header">
                         <h2>
-                        <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> الدروس المعتمدة ضمن هذه الدورة</small>
+                        <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> الدروس المعتمدة ضمن {{$course->title}}</small>
                         </h2>
                     </div>
                     <table class="table table-bordered table-hover table-width">

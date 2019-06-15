@@ -56,12 +56,13 @@ class LessonsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Unit $unit = null, Course $course = null)
-    {
+    {   
         $request->validate([
             'title' => 'required|max:200',
             'type' => 'required',
             'active' => 'required',
-            'src' => 'required',
+            'src' => '',
+            'url_src' => '',
             'intro' => 'required'
         ]);
 
@@ -93,18 +94,21 @@ class LessonsController extends Controller
           {
               $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
           }
+          else {
+            $lesson->src = $request->url_src;
+          }
 
         $lesson->save();
           
         
-         if($request->unit_id != "-- اختر الوحدة --"|| $request->unit_id != null){
+         if($request->unit_id != "-- اختر الوحدة --" && $request->unit_id != null){
             //$arr= $lesson->fresh()->unit->pluck('pivot.lesson_order')->toArray();
             //$lesson->fresh()->units[1]->pivot->lesson_order = 1 ;
             $lesson->units()->syncWithoutDetaching($request->unit_id ,['pivot.lesson_order'=>1]);
          }
          
          
-         if($request->course_id != "-- اختر الدورة --" || $request->course_id != null){
+         if($request->course_id != "-- اختر الدورة --" && $request->course_id != null){
             $lesson->courses()->syncWithoutDetaching($request->course_id);
         }
         $lesson->teachers()->syncWithoutDetaching(Auth::user()->id);
