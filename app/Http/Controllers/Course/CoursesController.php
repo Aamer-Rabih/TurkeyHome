@@ -27,6 +27,7 @@ class CoursesController extends Controller
         
         
         $courses = Course::latest()->get();
+        $mycourses = null;
         
         if (Auth::user()->hasRole(2))
         {

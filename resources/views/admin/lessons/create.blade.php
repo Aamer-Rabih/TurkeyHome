@@ -34,38 +34,40 @@
 
                 @if($selectedUnit === null && $selectedCourse === null)
                 <div class="form-group">
-                  <label for="classField">الوحدة الدراسية:</label>
+                    <label for="classField">الوحدة الدراسية:</label>
                     <select class="form-control form-control-select mt-3" id="classField" name="unit_id">
                       <option  selected>-- اختر الوحدة --</option>
                       @foreach($units as $unit)
                       <option value="{{$unit->id}}">{{$unit->title}}</option>
                       @endforeach
                     </select>
+                </div>
                   @elseif($selectedUnit != null)
                   <div class="form-group">
-                  <label for="classField">الوحدة الدراسية:</label>
+                    <label for="classField">الوحدة الدراسية:</label>
                     <select class="form-control form-control-select mt-3" id="classField" name="unit_id" disabled>
                       <option value="{{$selectedUnit->id}}">{{$selectedUnit->title}}</option>
                     </select>
-                    @endif
-                </div>
+                  </div>
+                  @endif
                 
                 @if($selectedCourse === null && $selectedUnit === null)
                 <div class="form-group">
-                  <label for="classField">الدورة الدراسية:</label>
-                  
+                    <label for="classField">الدورة الدراسية:</label>
                     <select class="form-control form-control-select mt-3" id="classField" name="course_id">
                       <option selected>-- اختر الدورة --</option>
                       @foreach($courses as $course)
                       <option value="{{$course->id}}">{{$course->title}}</option>
                       @endforeach
                     </select>
-                  @elseif($selectedCourse != null)
+                </div>
+                @elseif($selectedCourse != null)
+                <div class="form-group">
                     <select class="form-control form-control-select mt-3" id="classField" name="course_id" disabled>
                       <option value="{{$selectedCourse->id}}">{{$selectedCourse->title}}</option>
                     </select>
-                  @endif
                 </div>
+                @endif
 
                 <div class="form-group">
                   <label for="type">نوع الدرس :</label>

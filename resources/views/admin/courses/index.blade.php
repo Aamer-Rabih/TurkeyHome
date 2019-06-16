@@ -17,6 +17,16 @@
       </div>
     </div>
   </div>
+  @elseif(Auth::user()->hasAnyRole([2,3]))
+  <div class="header-card table-cards color-grey">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="content-header">
+         <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> الدورات الدراسية</small></h1>
+        </div>
+      </div>
+    </div>
+  </div>
   @endif
 
   @if(Auth::user()->hasAnyRole([0,1,3]))
@@ -25,7 +35,11 @@
       <div class="card table-cards color-grey">
         <div class="content-header">
           <h2>
+            @if(Auth::user()->hasAnyRole([0,1]))
             <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>الدورات الدراسية</small>
+            @elseif(Auth::user()->hasAnyRole([2,3]))
+            <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>طلبات الأنضمام إلى الدورات الدراسية المتوفرة </small>
+            @endif
           </h2>
         </div>
         <div class="card-body">
@@ -40,7 +54,7 @@
                 <th>الحذف</th>
                 @endif
                 @if(Auth::user()->hasRole(3))
-                <th>طلب اشتراك</th>
+                <th>طلب انضمام</th>
                 @endif
               </tr>
             </thead>
@@ -84,7 +98,7 @@
                     <form action="{{ route('courserequest.store') }}" method="POST" id="makeCourseFreeForm" style="display:inline; margin-right:10px;">
                        {!! csrf_field() !!}
                        <input type="hidden" name="course_id" value="{{$course->id}}">
-                       <input type="submit" class="btn btn-success" value="اشتراك">
+                       <input type="submit" class="btn btn-success" value="انضم">
                     </form>
                 </td>
                 @endif
@@ -106,7 +120,7 @@
       <div class="card table-cards color-grey">
         <div class="content-header">
           <h2>
-            <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>الدورات الدراسية المشترك بها</small>
+            <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>الدورات الدراسية المنضم إليها</small>
           </h2>
         </div>
         <div class="card-body">
