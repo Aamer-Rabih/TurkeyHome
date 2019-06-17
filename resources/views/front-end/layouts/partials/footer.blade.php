@@ -24,7 +24,7 @@
         كافة الحقوق محفوظة -
         <a href="/" class="active">تركي هوم</a> 
         <br/>
-        Designed By 4K Company.
+        <div>Designed By <a href="https://www.facebook.com/4K-Company-335927173999246" target="_blank">4K Company.</a></div>
     </footer>
 
 

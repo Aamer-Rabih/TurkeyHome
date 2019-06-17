@@ -31,6 +31,12 @@ Route::get('/', function() {
     $notes = \App\Note::where('type','public')->get();
     return view('front-end.home.home',compact('studentThanks','carousels','showLessons','classes','courses','notes'));
 });
+Route::get('/AboutUs', function() {
+    $classes =\App\ClassRoom::latest()->get();
+    $courses =\App\Course::latest()->get();
+
+    return view('front-end.aboutUs.aboutUs', compact('classes', 'courses'));
+})->name('AboutUs');
 
 /**
  * Class Operatrions

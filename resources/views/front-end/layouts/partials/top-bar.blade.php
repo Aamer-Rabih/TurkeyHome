@@ -15,7 +15,7 @@
           </div>
         </section>
       </div>
-      <div class=" col-lg-6 col-md-6 col-sm-12">
+      <!-- <div class=" col-lg-6 col-md-6 col-sm-12">
         <section id="user-area-section" class="clearfix">
           <div class="user-area">
             <ul class="nav navbar-nav pull-left">
@@ -34,7 +34,7 @@
             </ul>
           </div>
         </section>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

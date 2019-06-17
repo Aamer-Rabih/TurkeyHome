@@ -7,7 +7,7 @@
     <div class="card text-center studentThankItem">
       <div class="image-cropper"><img class="card-img-top ST-img" src="{{ $studentThank->src }}"></div>
         <div class="card-body">
-          <h4>التشكر</h4>
+          <h4>{{ $studentThank->content }}</h4>
         </div>
     </div>
     @endforeach
