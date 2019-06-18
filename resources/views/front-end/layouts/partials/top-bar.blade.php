@@ -6,16 +6,16 @@
           <div class="contact-info">
             <span>
               <i class="fa fa-phone-square icon" aria-hidden="true"></i>
-              &nbsp;&nbsp;00963943621441
+              &nbsp;&nbsp;009005522568343
             </span>
             <span>
               <i class="fa fa-envelope icon" aria-hidden="true"></i>
-              &nbsp;&nbsp;TurkeyHome@gmail.com
+              &nbsp;&nbsp;TurkeyHome.Rim@gmail.com
             </span>
           </div>
         </section>
       </div>
-      <div class=" col-lg-6 col-md-6 col-sm-12">
+      <!-- <div class=" col-lg-6 col-md-6 col-sm-12">
         <section id="user-area-section" class="clearfix">
           <div class="user-area">
             <ul class="nav navbar-nav pull-left">
@@ -34,7 +34,7 @@
             </ul>
           </div>
         </section>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

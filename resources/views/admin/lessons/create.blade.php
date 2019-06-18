@@ -34,26 +34,26 @@
 
                 @if($selectedUnit === null && $selectedCourse === null)
                 <div class="form-group">
-                  <label for="classField">الوحدة الدراسية:</label>
+                    <label for="classField">الوحدة الدراسية:</label>
                     <select class="form-control form-control-select mt-3" id="classField" name="unit_id">
                       <option  selected>-- اختر الوحدة --</option>
                       @foreach($units as $unit)
                       <option value="{{$unit->id}}">{{$unit->title}}</option>
                       @endforeach
                     </select>
+                </div>
                   @elseif($selectedUnit != null)
                   <div class="form-group">
-                  <label for="classField">الوحدة الدراسية:</label>
+                    <label for="classField">الوحدة الدراسية:</label>
                     <select class="form-control form-control-select mt-3" id="classField" name="unit_id" disabled>
                       <option value="{{$selectedUnit->id}}">{{$selectedUnit->title}}</option>
                     </select>
-                    @endif
-                </div>
+                  </div>
+                  @endif
                 
                 @if($selectedCourse === null && $selectedUnit === null)
                 <div class="form-group">
-                  <label for="classField">الدورة الدراسية:</label>
-                  
+                    <label for="classField">الدورة الدراسية:</label>
                     <select class="form-control form-control-select mt-3" id="classField" name="course_id">
                       <option selected>-- اختر الدورة --</option>
                       @foreach($courses as $course)
@@ -74,7 +74,7 @@
                   <label for="type">نوع الدرس :</label>
                   <select class="form-control form-control-select mt-3" name="type" id="lesson_type">
                   <option selected>-- اختر النوع --</option>
-                   <option value="video">فديو</option>
+                   <option value="video">فيديو</option>
                    <option value="image">صورة</option>
                    <option value="url">URL</option>
                    <option value="pdf">pdf</option>
@@ -97,6 +97,11 @@
                 <div class="form-group" id="lesson_url" style="display: none;">
                   <label for="urlField"><h5>ادخل ال URL :</h5></label>
                   <input type="url" class="form-control" id="urlField" name="url_src" placeholder="ادخل ال URL"> 
+                </div>
+
+                <div class="form-group" id="embaded_code" style="display: none;">
+                  <label for="embadedCode"><h5>ادخل كود التضمين :</h5></label>
+                  <input type="url" class="form-control" id="embadedCode" name="embadedCode_src" placeholder="ادخل كود التضمين"> 
                 </div>
 
                 <div class="radioG">

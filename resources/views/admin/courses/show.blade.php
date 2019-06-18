@@ -39,7 +39,23 @@
             </div> 
         </div>
     </div>
+    @elseif(Auth::user()->hasAnyRole([3]))
+    <div class="header-card table-cards color-grey">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="content-header">
+                    <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> محتوى {{$course->title}}</small></h1>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <a href="{{route('course.index')}}" class="btn btn-primary button-margin-header custom-but pull-left" > العودة
+                    <i class="fa fa-angle-double-left" aria-hidden="true" style="font-size: 20px;"></i>
+                </a>
+            </div> 
+        </div>
+    </div>
     @endif
+
     <div id="table" class="row">
         <div class="col-lg-8">
             <div class="card table-cards color-grey">

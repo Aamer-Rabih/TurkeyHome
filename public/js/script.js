@@ -41,8 +41,20 @@ jQuery(document).ready(function () {
          $("#lesson_file").show();
          $("#lesson_url").hide();
          $("#lesson_url").attr("disabled", "disabled");
-      } if((lesson_type == "url") || (lesson_type == "video")) {
+         $("#embaded_code").hide();
+         $("#embaded_code").attr("disabled", "disabled");
+      } 
+      if((lesson_type == "url")) {
          $("#lesson_url").show();
+         $("#lesson_file").hide();
+         $("#lesson_file").attr("disabled");
+         $("#embaded_code").hide();
+         $("#embaded_code").attr("disabled", "disabled");
+       }
+       if((lesson_type == "video")) {
+         $("#embaded_code").show();
+         $("#lesson_url").hide();
+         $("#lesson_url").attr("disabled", "disabled");
          $("#lesson_file").hide();
          $("#lesson_file").attr("disabled");
        }

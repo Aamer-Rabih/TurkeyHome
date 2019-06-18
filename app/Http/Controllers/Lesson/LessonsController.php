@@ -106,8 +106,10 @@ class LessonsController extends Controller
                else
                {return redirect()->back()->withError('يرجى اختيار الملف من النوع المحدد');}
           }
-          else {
+          elseif($request->url_src != null) {
             $lesson->src = $request->url_src;
+          }elseif($request->embadedCode_src) {
+            $lesson->src = $request->embadedCode_src;
           }
 
         $lesson->title = $request->title;

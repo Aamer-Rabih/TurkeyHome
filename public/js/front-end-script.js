@@ -7,7 +7,7 @@ $(document).ready(function(){
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     prevArrow: '<i class="sliderArrows prevArrow fa fa-chevron-left" aria-hidden="true"></i>',
     nextArrow: '<i class="sliderArrows nextArrow fa fa-chevron-right" aria-hidden="true"></i>',
     responsive: [
@@ -52,7 +52,7 @@ $(document).ready(function(){
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     prevArrow: '<i class="sliderArrows prevArrow2 fa fa-chevron-left" aria-hidden="true"></i>',
     nextArrow: '<i class="sliderArrows nextArrow2 fa fa-chevron-right" aria-hidden="true"></i>',
     responsive: [

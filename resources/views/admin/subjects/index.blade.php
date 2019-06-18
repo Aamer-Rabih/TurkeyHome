@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content">
-
+  @if(Auth::user()->hasAnyRole([0,1]))
   <div class="header-card table-cards color-grey">
     <div class="row">
       <div class="col-lg-4">
@@ -12,12 +12,21 @@
         </div>
       </div>
       <div class="col-lg-2">
-        @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1))
         <a href="{{route('subject.create')}}" class="btn btn-success custom-but BP" >إضافة مادة <div><i class="fa fa-plus-square" aria-hidden="true"></i></div></a>
-        @endif
       </div>
     </div>
   </div>
+  @elseif(Auth::user()->hasAnyRole([2,3]))
+  <div class="header-card table-cards color-grey">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="content-header">
+         <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i> المواد الدراسية</small></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
   
   <div id="table" class="row">
     <div class="col-lg-10">

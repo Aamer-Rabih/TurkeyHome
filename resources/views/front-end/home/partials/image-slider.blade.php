@@ -14,8 +14,8 @@
       <div class="carousel-caption text-right">
         <h1>تركي هوم</h1>
         <h3>المدرسة الألكترونية الأفضل</h3>
-        <a class="btn btn-primary btn1-carousel">إنشاء حساب</a>
-        <a class="btn btn-danger btn2-carousel">تسجيل الدخول</a>
+        <a class="btn btn-primary btn1-carousel" href="{{ route('register') }}">إنشاء حساب</a>
+        <a class="btn btn-danger btn2-carousel" href="{{ route('login') }}">تسجيل الدخول</a>
       </div>
     </div>
     @endforeach

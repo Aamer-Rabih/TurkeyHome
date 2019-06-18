@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content">
-
+  @if(Auth::user()->hasAnyRole([0,1]))
   <div class="header-card table-cards color-grey">
     <div class="row">
       <div class="col-lg-4">
@@ -16,6 +16,17 @@
       </div>
     </div>
   </div>
+  @elseif(Auth::user()->hasAnyRole([2,3]))
+  <div class="header-card table-cards color-grey">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="content-header">
+         <h1><small><i class="fa fa-cogs" aria-hidden="true" style="font-size:26px;"></i>  الصفوف الدراسية ضمن المدرسة</small></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
   
   <div id="table" class="row">
     <div class="col-lg-8">
@@ -32,8 +43,10 @@
                 <th>الصف الدراسي</th>
                 <th>المجانية</th>
                 <th>عرض</th>
+                @if(Auth::user()->hasAnyRole([0,1]))
                 <th>تعديل</th>
                 <th>حذف</th>
+                @endif
               </tr>
             </thead>
             <tbody>
@@ -50,6 +63,7 @@
                     <a href="{{ route('class.show', $class) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
                   </div>
                 </td>
+                @if(Auth::user()->hasAnyRole([0,1]))
                 <td>
                   <div class="operations update">
                     <a href="{{ route('class.edit', $class) }}"><i class="fa fa-edit" style="font-size:18px;color:#00c0ef"></i></a>
@@ -67,6 +81,7 @@
                     </form>       
                   </div>
                 </td>
+                @endif
               </tr>
               @endforeach
             </tbody>

@@ -69,12 +69,8 @@ class ShowLessonsController extends Controller
         $this->shiftOrdersAfterStore($request->order);
         $attributes['order'] = $request->order ; 
 
-        //save File 
-        if($request->hasFile('src')){
-
-            $attributes['src'] = $request->src->store('public/showlessons');
-
-        }
+        //Save video URL
+        $attributes['src'] = $request->src;
 
 
         //Persist data in the database 

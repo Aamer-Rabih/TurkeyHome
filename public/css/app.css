@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -66,13 +66,14 @@ section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
-  font-size: 0.9rem;
+  font-family: 'Baloo Bhaijaan', cursive;
+	direction: rtl;
+  font-size: 16px;
+	color: #777;
   font-weight: 400;
   line-height: 1.6;
-  color: #212529;
-  text-align: left;
-  background-color: #f8fafc;
+  text-align: right;
+  background-color: #ffebcd;
 }
 
 [tabindex="-1"]:focus {
@@ -10665,5 +10666,73 @@ a.text-dark:focus {
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  
 }
 
+#header-nav {
+  background-color: #AC282F;
+  border-radius: 0;
+  border: 0;
+  margin: 0px;
+  margin-bottom: 50px;
+  padding: 0px;
+  width: 100%;
+  height: 50px;
+  z-index: 1;
+}
+
+.navbar-header {
+  float: right;
+  height: 50px;
+  background-color: #9B171E;
+  width: 18%;
+  padding: 0px 10px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #888;	
+}
+.navbar-header a {
+  color: #fff;
+}
+
+#logo-name {
+  margin: 0px 5px;
+  color: #fff;
+  text-align: right;
+  font-size: 18px;
+  position: absolute;
+  top: 12px;
+}
+
+.navbar-header a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+#header-nav .container-fluid {
+  padding: 0px;
+}
+
+.logout, .login, .register {
+  font-size: 12px;
+  background-color: #89171E;
+  border-radius: 6px;
+  color: #F5F5F5 !important;
+  margin: 10px;
+  float: left;
+}
+.logout:hover, .login:hover, .register:hover {
+  color: #f5f5f5;
+  background-color: #1a2226;
+}
+
+div.card {
+  background-color: #fffadf;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 6px;
+  opacity: 0.8;
+}
+
+.card-header {
+  text-align: center;
+  font-size: x-large;
+}
