@@ -30,7 +30,8 @@
         <form action="{{ route('classrequest.store') }}" method="POST" id="makeClassFreeForm" style="display:inline; margin-right:10px;">
           {!! csrf_field() !!}
           <input type="hidden" name="class_id" value="{{$class->id}}">
-          <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassFreeForm').submit();"> طلب اشتراك بهذا الصف</a>
+          <input type="submit" class="btn btn-success button-margin-header custom-but" value="اشترك بهذا الصف">
+          
           </form>
           @endif
       </div>

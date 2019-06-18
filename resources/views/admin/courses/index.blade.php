@@ -120,11 +120,11 @@
             <tbody>
               @foreach($mycourses as $mycourse)
               <tr>
-                <td>{{$course->title}}</td>
+                <td>{{$mycourse->title}}</td>
                 
                 <td>
                   <div class="operations show">
-                    <a href="{{ route('course.show', $course) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
+                    <a href="{{ route('course.show', $mycourse) }}"><i class="fa fa-eye" style="font-size:18px;color:#5cb85c"></i></a>
                   </div>
                 </td>
               

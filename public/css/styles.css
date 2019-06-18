@@ -523,3 +523,8 @@ form > a.button2:hover {
 .checked {
   color: orange;
 }
+
+#messages {
+	margin-top: 60px;
+	margin-right:20%;
+}

@@ -46,8 +46,8 @@
                       @endforeach
                     </select>
                   @elseif($selectedclass != null)
-                    <select class="form-control form-control-select mt-3" id="classField" name="class_id" disabled>
-                      <option>{{$selectedclass->name}}</option>
+                    <select class="form-control form-control-select mt-3" id="classField" name="class_id" readonly>
+                      <option value="{{$selectedclass->id}}">{{$selectedclass->name}}</option>
                     </select>
                   @endif
                 </div>

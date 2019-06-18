@@ -35,6 +35,7 @@
                 
                 <th>الاسم الكامل</th>
                 <th>رقم الهاتف</th>
+                <th>تاريخ الإضافة</th>
                 <th>تعديل</th>
                 <th>حذف</th>
               </tr>
@@ -65,7 +66,7 @@
                 <td>{{$student->full_name}}</td>
                 
                 <td>{{$student->phone}}</td>
-                
+                <td>{{$student->created_at}}</td>
                 
                 <td>
                   <div class="operations update">

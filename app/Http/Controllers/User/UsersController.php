@@ -72,7 +72,7 @@ class UsersController extends Controller
             'full_name' => 'required',
             
             'phone' => 'required',
-            'tc' => 'required',
+            'tc' => 'required|max:15|min:15',
             'role' => 'required',
         ]);
 

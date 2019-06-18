@@ -59,6 +59,9 @@
             </thead>
             <tbody>
               @foreach($unitLessons as $lesson)
+
+              @if($lesson->active === 0 && Auth::user()->hasRole(3))      
+              @else
               <tr>
                <td>{{$lesson->title}}</td>
                <td>
@@ -108,6 +111,7 @@
                 </td>
                 @endif
               </tr>
+              @endif
               @endforeach
             </tbody>
           </table>
