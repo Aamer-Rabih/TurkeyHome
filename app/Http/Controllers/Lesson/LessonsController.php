@@ -94,8 +94,10 @@ class LessonsController extends Controller
           {
               $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
           }
-          else {
+          elseif($request->url_src != null) {
             $lesson->src = $request->url_src;
+          }elseif($request->embadedCode_src) {
+            $lesson->src = $request->embadedCode_src;
           }
 
         $lesson->save();
