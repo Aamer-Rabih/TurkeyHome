@@ -4,7 +4,7 @@
       <div class="col-lg-8 col-md-8 col-sm-12 ">
         <div class="justfy-content-center">
           <h5 ><strong>معلومات التواصل</strong></h5>
-          <p>(888) 888-8888<br>email@nuno.com</p>
+          <p style="direction: ltr;">(0090) 0552-2568343<br>TurkeyHome.Rim@gmail.com</p>
           <a href="" target="_blank"><i class="fa fa-facebook-square icon" aria-hidden="true"></i></a>
           <a href="" target="_blank"><i class="fa fa-twitter-square icon" aria-hidden="true"></i></a>
           <a href="" target="_blank"><i class="fa fa-instagram icon" aria-hidden="true"></i></a>

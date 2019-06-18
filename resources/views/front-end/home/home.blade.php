@@ -2,13 +2,16 @@
 
 @section('content')
 
-<!-- ===Image Slider=== -->
+<!-- === Image Slider === -->
 @include('front-end.home.partials.image-slider')
 
-<!-- ===ShowLessons Carousel=== -->
+<!-- === News Bar === -->
+@include('front-end.home.partials.news-bar')
+
+<!-- === ShowLessons Carousel === -->
 @include('front-end.home.partials.showLessons-carousel')
 
-<!-- ===ShowLessons Carousel=== -->
+<!-- === ShowLessons Carousel === -->
 @include('front-end.home.partials.studentThanks-carousel')
 
 @endsection

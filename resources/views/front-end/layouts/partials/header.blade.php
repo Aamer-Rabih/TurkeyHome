@@ -41,7 +41,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('AboutUs') ">عن المدرسة</a>
+            <a class="nav-link" href="{{ route('AboutUs') }}">عن المدرسة</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">تواصل معنا</a>

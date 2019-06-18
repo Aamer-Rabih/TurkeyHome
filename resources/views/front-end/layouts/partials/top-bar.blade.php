@@ -6,11 +6,11 @@
           <div class="contact-info">
             <span>
               <i class="fa fa-phone-square icon" aria-hidden="true"></i>
-              &nbsp;&nbsp;00963943621441
+              &nbsp;&nbsp;009005522568343
             </span>
             <span>
               <i class="fa fa-envelope icon" aria-hidden="true"></i>
-              &nbsp;&nbsp;TurkeyHome@gmail.com
+              &nbsp;&nbsp;TurkeyHome.Rim@gmail.com
             </span>
           </div>
         </section>
