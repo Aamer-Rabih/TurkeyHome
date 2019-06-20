@@ -90,7 +90,7 @@
   </div>
 
 
-  <div id="table" class="row">
+  <!-- <div id="table" class="row">
     <div class="col-lg-6">
       <div class="card table-cards color-grey">
         <div class="card-body">
@@ -126,8 +126,8 @@
                   <label for="attachment">أضف مرفق إلى الإختبار :</label>
                   <select class="form-control form-control-select mt-3" id="attachment" name="attachment_id">
                     <option selected>-- اختر مرفق --</option>
-                    @foreach($attachments as $attachment)
-                    <option value="{{$attachment->id}}">{{$attachment->name}}</option>
+                    @foreach($allAttachments as $aattachment)
+                    <option value="{{$aattachment->id}}">{{$aattachment->name}}</option>
                     @endforeach 
                   </select>
                 </div>
@@ -138,7 +138,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 

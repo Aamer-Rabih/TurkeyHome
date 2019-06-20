@@ -17,6 +17,7 @@
 
   <body>
 
+    @include('admin.inc.messages')
     @include('admin.layouts.partials.header')
 
     @include('admin.layouts.partials.sidebar')

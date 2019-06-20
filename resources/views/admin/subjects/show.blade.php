@@ -120,7 +120,7 @@
                   </div>
                 </td>
                 <td>
-                  <div class="operations delete">
+                <div class="operations delete">
                     <form action="{{ route('unit.destroy',['unit' => $unit->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    

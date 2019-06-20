@@ -20,13 +20,21 @@
           @if(!$class->free)
           <form action="{{ route('class.free', $class) }}" method="POST" id="makeClassFreeForm" style="display:inline; margin-right:10px;">
             {!! csrf_field() !!}
-            <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassFreeForm').submit();"> اجعل الصف مجاني</a>
-            </form>
+            <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassUnfreeForm').submit();"> اجعل الصف غير مجاني</a>
             @else
             <form action="{{ route('class.priced', $class) }}" method="POST" id="makeClassUnfreeForm" style="display:inline; margin-right:10px;">
               {!! csrf_field() !!}
               <a href="#" class="btn btn-success button-margin-header custom-but" onclick="document.getElementById('makeClassUnfreeForm').submit();"> اجعل الصف غير مجاني</a>
           </form>
+          @endif        
+          
+          @if(Auth::user()->hasRole(3))
+            <form action="{{ route('classrequest.store') }}" method="POST" id="makeClassFreeForm" style="display:inline; margin-right:10px;">
+              {!! csrf_field() !!}
+              <input type="hidden" name="class_id" value="{{$class->id}}">
+              <input type="submit" class="btn btn-success button-margin-header custom-but" value="اشترك بهذا الصف">
+            </form>
+            
           @endif
         @endif
       </div>

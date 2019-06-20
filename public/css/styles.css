@@ -533,3 +533,7 @@ form > a.button2:hover {
 .swal2-confirm {
 	margin-right: 20px;
 }
+#messages {
+	margin-top: 60px;
+	margin-right:20%;
+}

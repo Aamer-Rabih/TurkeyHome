@@ -60,12 +60,13 @@
                       <option value="{{$course->id}}">{{$course->title}}</option>
                       @endforeach
                     </select>
-                </div>
-                @elseif($selectedCourse != null)
-                <div class="form-group">
-                    <select class="form-control form-control-select mt-3" id="classField" name="course_id" disabled>
+                  @elseif($selectedCourse != null)
+                  <div class="form-group">
+                    <label for="classField">الدورة الدراسية:</label>
+                    <select class="form-control form-control-select mt-3" id="classField" name="course_id" readonly>
                       <option value="{{$selectedCourse->id}}">{{$selectedCourse->title}}</option>
                     </select>
+                  
                 </div>
                 @endif
 

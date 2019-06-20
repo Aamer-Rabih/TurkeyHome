@@ -85,20 +85,39 @@ class LessonsController extends Controller
         //  $lesson = Lesson::create($attributes);
 
         $lesson = new Lesson();
-        $lesson->title = $request->title;
-        $lesson->type = $request->type;
-        $lesson->active = $request->active;
-        $lesson->intro = $request->intro;
 
+        //handle upload file to lesson or set URL
         if ($request->hasFile('src'))
           {
-              $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
+              $extention = $request->file('src')->getClientOriginalExtension();
+              //dd($extention,$request->type);
+               if($extention === 'jpg'&&$request->type ==='image'|| $extention === 'png' && $request->type ==='image') 
+               {
+                 $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
+               }
+               elseif($extention === 'pdf' && $request->type ==='pdf') 
+               {
+                 $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
+               } 
+               elseif($extention === 'docx' && $request->type ==='word')
+               {
+                 $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
+               } 
+               else
+               {return redirect()->back()->withError('يرجى اختيار الملف من النوع المحدد');}
           }
           elseif($request->url_src != null) {
             $lesson->src = $request->url_src;
           }elseif($request->embadedCode_src) {
             $lesson->src = $request->embadedCode_src;
           }
+
+        $lesson->title = $request->title;
+        $lesson->type = $request->type;
+        $lesson->active = $request->active;
+        $lesson->intro = $request->intro;
+
+        
 
         $lesson->save();
           
@@ -114,9 +133,10 @@ class LessonsController extends Controller
          if($request->course_id != "-- اختر الدورة --" && $request->course_id != null){
             $lesson->courses()->syncWithoutDetaching($request->course_id);
         }
+        if(Auth::user()->hasRole(2)){
         $lesson->teachers()->syncWithoutDetaching(Auth::user()->id);
         //Auth::user()->lessons()->syncWithoutDetaching($lesson->id);
-        
+        }
          //Return redirect 
         return redirect()
         ->route('lesson.show', ['lesson' => $lesson->id])
@@ -184,6 +204,33 @@ class LessonsController extends Controller
             'intro' => 'required'
         ]);
 
+        //handle upload file to lesson or set URL
+        if ($request->hasFile('src'))
+          {
+              $extention = $request->file('src')->getClientOriginalExtension();
+              //dd($extention,$request->type);
+               if($extention === 'jpg'&&$request->type ==='image'|| $extention === 'png' && $request->type ==='image') 
+               {
+                Storage::delete($lesson->src);
+                 $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
+               }
+               elseif($extention === 'pdf' && $request->type ==='pdf') 
+               {
+                Storage::delete($lesson->src);
+                 $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
+               } 
+               elseif($extention === 'docx' && $request->type ==='word')
+               {
+                Storage::delete($lesson->src);
+                 $lesson->src = $request->src->storeAs('public/lessons', time().$request->src->getClientOriginalName());
+               } 
+               else
+               {return redirect()->back()->withError('يرجى اختيار الملف من النوع المحدد');}
+          }
+          else {
+            Storage::delete($lesson->src);
+            $lesson->src = $request->url_src;
+          }
         $lesson->title = $request->title ;
         $lesson->type = $request->type ;
         $lesson->intro =$request->intro;  

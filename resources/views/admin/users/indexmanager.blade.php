@@ -37,6 +37,7 @@
                 
                 <th>الاسم الكامل</th>
                 <th>رقم الهاتف</th>
+                <th>تاريخ الإضافة</th>
                 <th>تعديل</th>
                 <th>حذف</th>
               </tr>
@@ -68,6 +69,7 @@
                 
                 <td>{{$manager->phone}}</td>
                 
+                <td>{{$manager->created_at}}</td>
                 
                 <td>
                   <div class="operations update">

@@ -374,7 +374,7 @@ Route::get('units/create','Unit\UnitsController@chooseClass');
 Route::get('units/create',
 ['uses' => 'Unit\UnitsController@create',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
 ])
     ->name('unit.create');
 
@@ -382,7 +382,7 @@ Route::get('units/create',
 Route::post('units',
 ['uses' => 'Unit\UnitsController@store',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
 ])
 ->name('unit.store');
 
@@ -391,7 +391,7 @@ Route::post('units',
 Route::get('units/{unit}/edit',
 ['uses' => 'Unit\UnitsController@edit',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
 ])
     ->name('unit.edit');
 
@@ -399,7 +399,7 @@ Route::get('units/{unit}/edit',
 Route::put('units/{unit}',
 ['uses' => 'Unit\UnitsController@update',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
 ])
 ->name('unit.update');
 
@@ -407,7 +407,7 @@ Route::put('units/{unit}',
 Route::get('units/{unit}',
 ['uses' => 'Unit\UnitsController@show',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER,\App\Role::STUDENT]
 ])
     ->name('unit.show');
 
@@ -415,7 +415,7 @@ Route::get('units/{unit}',
 Route::post('units/{unit}/activate',
 ['uses' => 'Unit\UnitsController@activate',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
 ])
     ->name('unit.activate');
 
@@ -423,7 +423,7 @@ Route::post('units/{unit}/activate',
 Route::post('units/{unit}/deactivate',
 ['uses' => 'Unit\UnitsController@deactivate',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
 ])
 ->name('unit.deactivate');
 
@@ -1033,63 +1033,115 @@ Route::get('attachments',
 ->name('attachment.index');
 
 //attachment create route
-Route::get('attachments/create','Attachment\AttachmentsController@create')
+Route::get('attachments/create',
+['uses' => 'Attachment\AttachmentsController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
 ->name('attachment.create');
 
 //attachment show route
-Route::get('attachments/{attachment}','Attachment\AttachmentsController@show')
+Route::get('attachments/{attachment}',
+['uses' => 'Attachment\AttachmentsController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('attachment.show');
 
 //store attachment route
-Route::post('attachments','Attachment\AttachmentsController@store')
+Route::post('attachments',
+['uses' => 'Attachment\AttachmentsController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
 ->name('attachment.store');
 
 //Show The Form to Edit a attachment
-Route::get('attachments/{attachment}/edit','Attachment\AttachmentsController@edit')
+Route::get('attachments/{attachment}/edit',
+['uses' => 'Attachment\AttachmentsController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
     ->name('attachment.edit');
 
     //update attachment route
-Route::put('attachments/{attachment}','Attachment\AttachmentsController@update')
+Route::put('attachments/{attachment}',
+['uses' => 'Attachment\AttachmentsController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
 ->name('attachment.update');
 
 //Delete A attachment 
-Route::delete('attachments/{attachment}','Attachment\AttachmentsController@destroy')
+Route::delete('attachments/{attachment}',
+['uses' => 'Attachment\AttachmentsController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2
+]])
     ->name('attachment.destroy');
 
 
      //advices index
-Route::get('advices','Advice\AdvicesController@index')
+Route::get('advices',
+['uses' =>'Advice\AdvicesController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('advice.index');
 
 //advice create route
-Route::get('advices/create','Advice\AdvicesController@create')
+Route::get('advices/create',
+['uses' =>'Advice\AdvicesController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('advice.create');
 
 //advice show route
-Route::get('advices/{advice}','Advice\AdvicesController@show')
+Route::get('advices/{advice}',
+['uses' =>'Advice\AdvicesController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('advice.show');
 
 //store advice route
-Route::post('advices','Advice\AdvicesController@store')
+Route::post('advices',
+['uses' =>'Advice\AdvicesController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('advice.store');
 
 //Show The Form to Edit an advice
-Route::get('advices/{advice}/edit','Advice\AdvicesController@edit')
+Route::get('advices/{advice}/edit',
+['uses' =>'Advice\AdvicesController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('advice.edit');
 
     //update advice route
-Route::put('advices/{advice}','Advice\AdvicesController@update')
+Route::put('advices/{advice}',
+['uses' =>'Advice\AdvicesController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('advice.update');
 
 //Delete An advice 
-Route::delete('advices/{advice}','Advice\AdvicesController@destroy')
+Route::delete('advices/{advice}',
+['uses' =>'Advice\AdvicesController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('advice.destroy');
 
      //Activate A advice 
 Route::post('advices/{advice}/activate',
 ['uses' => 'Advice\AdvicesController@activate',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
 ->name('advice.activate');
 
@@ -1097,7 +1149,7 @@ Route::post('advices/{advice}/activate',
 Route::post('advices/{advice}/deactivate',
 ['uses' => 'Advice\AdvicesController@deactivate',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
 ]])
 ->name('advice.deactivate');
 
@@ -1185,31 +1237,59 @@ Route::post('lessons/{lesson}/addComment',
 
 
      //whatsappLinks index
-Route::get('whatsapplinks','WhatsappLink\WhatsappLinksController@index')
+Route::get('whatsapplinks',
+['uses' => 'WhatsappLink\WhatsappLinksController@index',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('whatsapplink.index');
 
 //whatsappLink create route
-Route::get('whatsapplinks/create','WhatsappLink\WhatsappLinksController@create')
+Route::get('whatsapplinks/create',
+['uses' => 'WhatsappLink\WhatsappLinksController@create',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('whatsapplink.create');
 
 //whatsappLink show route
-Route::get('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksController@show')
+Route::get('whatsapplinks/{whatsappLink}',
+['uses' => 'WhatsappLink\WhatsappLinksController@show',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
+]])
 ->name('whatsapplink.show');
 
 //store whatsappLink route
-Route::post('whatsapplinks','WhatsappLink\WhatsappLinksController@store')
+Route::post('whatsapplinks',
+['uses' => 'WhatsappLink\WhatsappLinksController@store',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('whatsapplink.store');
 
 //Show The Form to Edit an whatsappLink
-Route::get('whatsapplinks/{whatsappLink}/edit','WhatsappLink\WhatsappLinksController@edit')
+Route::get('whatsapplinks/{whatsappLink}/edit',
+['uses' => 'WhatsappLink\WhatsappLinksController@edit',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('whatsapplink.edit');
 
     //update whatsappLink route
-Route::put('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksController@update')
+Route::put('whatsapplinks/{whatsappLink}',
+['uses' => 'WhatsappLink\WhatsappLinksController@update',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
 ->name('whatsapplink.update');
 
 //Delete An whatsappLink 
-Route::delete('whatsapplinks/{whatsappLink}','WhatsappLink\WhatsappLinksController@destroy')
+Route::delete('whatsapplinks/{whatsappLink}',
+['uses' => 'WhatsappLink\WhatsappLinksController@destroy',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
     ->name('whatsapplink.destroy');
 
 //Ajax Dropdown
@@ -1371,7 +1451,7 @@ Route::post('courserequests',
      Route::get('notes',
      ['uses' => 'Note\NotesController@index',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,App\Role::MANAGER
+'roles' => [\App\Role::ADMIN,App\Role::MANAGER,2,3
 ]])
      ->name('notes.index');
      
@@ -1387,7 +1467,7 @@ Route::post('courserequests',
      Route::get('notes/{note}',
      ['uses' => 'Note\NotesController@show',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,2,3
 ]])
      ->name('notes.show');
      

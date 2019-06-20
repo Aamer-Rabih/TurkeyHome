@@ -192,7 +192,7 @@ class UnitsController extends Controller
 
 
         return redirect()
-                ->route('unit.index')
+                ->back()
                 ->with('success','تم حذف الوحدة الدرسية بنجاح');
 
     }
@@ -239,7 +239,8 @@ class UnitsController extends Controller
     public function attachLesson(Request $request,Unit $unit)
     {
         $lesson = Lesson::find($request->lesson);
-        $unit->lessons()->save($lesson,['lesson_order'=>$unit->lessons()->count()+1]);
+        //$unit->lessons()->save($lesson,['lesson_order'=>$unit->lessons()->count()+1]);
+        $unit->lessons()->syncWithoutDetaching($lesson);
         //$order->product()->save($product, ['price' => 12.34]);
 
         //Redirect with status 

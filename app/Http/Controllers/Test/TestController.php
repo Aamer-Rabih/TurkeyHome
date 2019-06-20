@@ -108,9 +108,10 @@ class TestController extends Controller
      */
     public function show(Test $test)
     {
-        $attachments = Attachment::latest()->get();
+        $allAttachments = Attachment::latest()->get();
+        $attachments = $test->attachments;
 
-        return view('admin.tests.show',compact('test', 'attachments'));
+        return view('admin.tests.show',compact('test', 'attachments','allAttachments'));
     }
 
     /**
@@ -224,7 +225,8 @@ class TestController extends Controller
     public function addAttachment(Request $request,Test $test)
       {
         $attachment_id = $request->attachment_id;
-         $test->attachments()->syncWithoutDetaching($attachment_id);
+        $attachment = Attachment::find($attachment_id);
+        $attachment->attachmentable()->syncWithoutDetaching($test);
 
            //Return redirect 
         return redirect()

@@ -26,7 +26,7 @@
                   <textarea class="form-control" id="reason" name="text" rows="3" required placeholder="اكتب سبب الأعفاء"></textarea> 
                 </div>
                 <button type="submit" class="btn btn-success button1">إضافة</button>
-                <a href="{{route('class.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+                <a href="{{URL::previous()}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
               </form>
               
           </div>
