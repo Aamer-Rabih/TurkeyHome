@@ -61,7 +61,7 @@ class LessonsController extends Controller
             'title' => 'required|max:200',
             'type' => 'required',
             'active' => 'required',
-            'src' => 'unique',
+            'src' => '',
             'url_src' => '',
             'intro' => 'required'
         ]);
@@ -86,6 +86,7 @@ class LessonsController extends Controller
 
         $lesson = new Lesson();
 
+        $lesson->type = $request->type;
         //handle upload file to lesson or set URL
         if ($request->hasFile('src'))
           {
@@ -113,7 +114,7 @@ class LessonsController extends Controller
           }
 
         $lesson->title = $request->title;
-        $lesson->type = $request->type;
+        
         $lesson->active = $request->active;
         $lesson->intro = $request->intro;
 
