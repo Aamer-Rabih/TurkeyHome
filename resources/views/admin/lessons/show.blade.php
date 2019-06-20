@@ -47,11 +47,9 @@
             <source src="{{$lesson->src}}" type="video/mp4">
           Your browser does not support the video tag.
           </video> -->
-          <?php 
-            $segments = substr($lesson->src, 8, -1);
-            $segments = 'https:'. $segments;
-          ?>
-          <iframe width="90%" height="420" src="{{$segments}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          
+          {!! $lesson->src !!}
+
         </div>
       </div>
     </div>

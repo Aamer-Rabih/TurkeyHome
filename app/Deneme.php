@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Storage;
+use Cohensive\Embed\Facades\Embed;
+
 class Deneme extends Model
 {
     
@@ -33,6 +36,46 @@ class Deneme extends Model
     public function attachments(){
 
         return $this->morphMany('App\Attachment','attachmentable');
+    }
+
+    public function setSrcAttribute($value){
+        if(($this->attributes['type'] === 'video') || ($this->attributes['type'] === 'url')) {
+          $this->attributes['src'] = $value;
+        }
+        else 
+          $this->attributes['src'] = $this->getStoragePath($value);
+    
+    
+    }
+    
+    
+    public function getStoragePath($url){
+    
+        $segments = explode('/',$url);
+    
+        array_shift($segments);
+    
+        return implode('/',$segments);
+    }
+    
+    public function getSrcAttribute($value){
+    
+      if($this->attributes['type'] === 'video') {
+        $embed = Embed::make($value)->parseUrl();
+        if (!$embed)
+        return '';
+        else {
+          $embed->setAttribute(['width' => 500]);
+          return $embed->getHtml();
+        }
+      }
+      elseif($this->attributes['type'] === 'url') {
+        return $value;
+      }
+      else {
+        return Storage::url($value) ;
+      }
+         
     }
  
 }

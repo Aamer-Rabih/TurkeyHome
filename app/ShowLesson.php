@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Storage;
 use File;
+use Cohensive\Embed\Facades\Embed;
 
 class ShowLesson extends Model
 {
@@ -16,7 +17,7 @@ class ShowLesson extends Model
 
         public function setSrcAttribute($value){
 
-            $this->attributes['src'] = $this->getStoragePath($value);
+            $this->attributes['src'] = $value;
     
     
         }
@@ -33,7 +34,13 @@ class ShowLesson extends Model
     
         public function getSrcAttribute($value){
     
-            return Storage::url($value) ; 
+            $embed = Embed::make($value)->parseUrl();
+            if (!$embed)
+            return '';
+            else {
+            $embed->setAttribute(['width' => 340]);
+            return $embed->getHtml();
+            } 
         }
 
 }

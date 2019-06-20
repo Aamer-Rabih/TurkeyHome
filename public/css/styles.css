@@ -523,3 +523,13 @@ form > a.button2:hover {
 .checked {
   color: orange;
 }
+
+
+.swal2-popup {
+	height: 300px !important;
+	border-radius: 10px !important;
+	background-color: #fffadf !important;
+}
+.swal2-confirm {
+	margin-right: 20px;
+}

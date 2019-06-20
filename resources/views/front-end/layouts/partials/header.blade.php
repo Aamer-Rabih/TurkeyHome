@@ -2,7 +2,7 @@
   <div class="container">
 
     <div class="col-lg-5 col-md-5 col-sm-8">
-      <a class="navbar-brand pull-right" href="#"><img id="img-brand" src="{{asset('imgs/logo1.png')}}" width="100px">
+      <a class="navbar-brand pull-right" href="/"><img id="img-brand" src="{{asset('imgs/logo1.png')}}" width="100px">
         <!--<div id="brand-label">
           <h2><strong><span class="main-red">تركي </span>هوم</strong></h2>
           <h6><span class="main-red" style="padding-left: 15px;">Turkey </span>&nbsp;Home</h6>
@@ -17,7 +17,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="#home">الرئيسية</a>
+            <a class="nav-link" href="/">الرئيسية</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

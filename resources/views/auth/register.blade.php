@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="tc" class="col-md-4 col-form-label text-md-left">{{ __('ال TC') }}</label>
+                            <label for="tc" class="col-md-4 col-form-label text-md-left">{{ __('ال كملك') }}</label>
 
                             <div class="col-md-6">
                                 <input id="tc" type="text" class="form-control{{ $errors->has('tc') ? ' is-invalid' : '' }}" name="tc" value="{{ old('tc') }}" required autocomplete="tc" autofocus>

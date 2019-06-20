@@ -75,7 +75,7 @@
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
                       <button id="{{$class->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                      <a herf="javascript:;" class="" onclick="$('#{{$class->id}}').click();" >
+                      <a herf="javascript:;" class="delete_item"  >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>       

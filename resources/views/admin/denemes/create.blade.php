@@ -75,6 +75,11 @@
                   <input type="url" class="form-control" id="urlField" name="url_src" placeholder="ادخل ال URL"> 
                 </div>
 
+                <div class="form-group" id="deneme_embaded_code" style="display: none;">
+                  <label for="embadedCode"><h5>ادخل رابط الفديو :</h5></label>
+                  <input type="url" class="form-control" id="embadedCode" name="embadedCode_src" placeholder="رابط الفديو"> 
+                </div>
+
                 <div class="radioG">
                   <h5>تفعيل الدينيمي :</h5>
                   <div class="radio">

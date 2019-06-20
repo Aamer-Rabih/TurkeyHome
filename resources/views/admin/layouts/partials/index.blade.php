@@ -24,6 +24,7 @@
             <h2>
               <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> لوحة التحكم</small>
             </h2>
+            <h4><span style="color: #AC282F">{{ Auth::user()->full_name }}</span> ، اهلا بك في لوحة تحكم الحساب</h4>
           </div>
           
         </div>

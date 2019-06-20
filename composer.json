@@ -7,9 +7,20 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        },
+        {
+            "packagist": false
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "aalaap/faker-youtube": "^1.2",
+        "cohensive/embed": "5.5.*",
+        "embed/embed": "^3.3",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0"

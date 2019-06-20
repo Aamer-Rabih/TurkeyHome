@@ -54,7 +54,7 @@
                     <option value="word" {{$deneme->type === 'word' ? "selected" : ""}}>word</option>
                   </select>
                 </div>
-                <div class="form-group"  id="deneme_file" style="display: none;">
+                <div class="form-group"  id="deneme_file" {{ (($deneme->type === 'url') || ($deneme->type === 'video')) ? "hidden" : ""}}>
                   <label for="">ملف الدينيمي :</label>
                   <div class="input-group mt-3">
                     <div class="custom-file">
@@ -65,9 +65,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group" id="deneme_url" style="display: none;">
+                <div class="form-group" id="deneme_url" {{ (($deneme->type === 'image') || ($deneme->type === 'word') || ($deneme->type === 'pdf') || ($deneme->type === 'video')) ? "hidden" : ""}}>
                   <label for="urlField"><h5>ادخل ال URL :</h5></label>
-                  <input type="url" class="form-control" id="urlField" name="url_src" placeholder="ادخل ال URL"> 
+                  <input type="url" class="form-control" id="urlField" name="url_src" value="{{$deneme->src}}" placeholder="ادخل ال URL"> 
+                </div>
+                <div class="form-group" id="deneme_embaded_code" {{ (($deneme->type === 'image') || ($deneme->type === 'word') || ($deneme->type === 'pdf') || ($deneme->type === 'url')) ? "hidden" : ""}}>
+                  <label for="embadedCode"><h5>ادخل رابط الفديو :</h5></label>
+                  <input type="url" class="form-control" id="embadedCode" name="embadedCode_src" value="{{$deneme->src}}" placeholder="رابط الفديو"> 
                 </div>
                 <div class="radioG">
                   <h5>تفعيل الدينيمي :</h5>

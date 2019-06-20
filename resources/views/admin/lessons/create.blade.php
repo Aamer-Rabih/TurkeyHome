@@ -99,8 +99,8 @@
                 </div>
 
                 <div class="form-group" id="embaded_code" style="display: none;">
-                  <label for="embadedCode"><h5>ادخل كود التضمين :</h5></label>
-                  <input type="url" class="form-control" id="embadedCode" name="embadedCode_src" placeholder="ادخل كود التضمين"> 
+                  <label for="embadedCode"><h5>ادخل رابط الفديو :</h5></label>
+                  <input type="url" class="form-control" id="embadedCode" name="embadedCode_src" placeholder="رابط الفديو"> 
                 </div>
 
                 <div class="radioG">

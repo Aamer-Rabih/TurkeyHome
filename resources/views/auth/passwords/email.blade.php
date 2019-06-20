@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <!-- <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -38,7 +38,13 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
+
+                    <div class="form-group row mb-0">
+                            <div class="col-md-6" s>
+                                <h4>الرجاء الاتصال على الرقم التالي :  <strong style="color: black;">009005522568343</strong></h4>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>

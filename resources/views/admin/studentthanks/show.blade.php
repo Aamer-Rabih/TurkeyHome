@@ -38,7 +38,14 @@
                 </small>
               </h2>
             </div>
+          @if(($studentThank->type === 'img') || ($studentThank->type === 'img+text'))
           <img src="{{$studentThank->src}}" alt="Picture" width="80%" height="60%">
+          @elseif($studentThank->type === 'video')
+          <video width="520" height="440" controls>
+            <source src="{{$studentThank->src}}" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          @endif
           <div  class="border-padding">
             <table class="show-table">
               <thead>

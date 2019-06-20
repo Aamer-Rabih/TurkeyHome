@@ -25,6 +25,23 @@
       </div> 
     </div>
   </div>
+
+  <div id="table" class="row">
+    <div class="col-lg-6">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> فيديو الدرس الاستعراضي</small>
+            </h2>
+          </div>
+          
+          {!! $showLesson->src !!}
+
+        </div>
+      </div>
+    </div>
+  </div>
         
   <div id="table" class="row">
     <div class="col-lg-8">

@@ -38,8 +38,12 @@
                   <span style="direction:ltr; display: table-cell;"> {{$deneme->title}}</span>
                 </small>
               </h2>
-            </div>
+          </div>
+          @if($deneme->type === 'image')
           <img src="{{$deneme->src}}" alt="Picture" width="80%" height="60%">
+          @elseif($deneme->type === 'video')
+           {!! $deneme->src !!}
+          @endif
           <div  class="border-padding">
             <table class="show-table">
               <thead>

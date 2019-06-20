@@ -13,7 +13,7 @@
 
                         <input type="hidden" name="token" value="{{ $token }}">
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-left">{{ __('عنوان البريد الإلكتروني') }}</label>
 
                             <div class="col-md-6">
@@ -25,37 +25,31 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-left">{{ __('كلمة المرور') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required autocomplete="new-password">
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                                <h4>الرجاء الاتصال على الرقم التالي  009005522568343</h4>
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-left">{{ __('تأكيد كلمة المرور') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group row mb-0">
+                        <!-- <div class="form-group row mb-0">
                             <div class="col-md-6" style="margin-right: 33.3333333333%;">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>

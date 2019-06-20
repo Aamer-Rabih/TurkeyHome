@@ -82,8 +82,11 @@ class DenemesController extends Controller
             $attributes['src'] = $request->src->store('public/denemes');
 
         }
-        else {
+        elseif($request->url_src != null) {
             $attributes['src'] = $request->url_src;
+        }
+        elseif($request->embadedCode_src != null) {
+            $attributes['src'] = $request->embadedCode_src;
         }
         
 

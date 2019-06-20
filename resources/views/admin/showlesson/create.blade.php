@@ -31,8 +31,8 @@
                   <input type="text" class="form-control" id="showLesson" name="title" required placeholder="اسم الدرس الأستعراضي الجديد"> 
                 </div>
                 <div class="form-group" id="lesson_url">
-                  <label for="urlField"><h5>ادخل ال URL :</h5></label>
-                  <input type="url" class="form-control" id="urlField" name="src" required placeholder="ادخل ال URL"> 
+                  <label for="urlField"><h5>ادخل رابط الفديو :</h5></label>
+                  <input type="url" class="form-control" id="urlField" name="src" required placeholder="رابط الفديو"> 
                 </div>
                 <div class="form-group">
                   <label for="orderField">ترتيب العرض :</label>

@@ -26,6 +26,7 @@
     @include('admin.layouts.partials.footer')
 
     <!-- jQuery (Bootstrap JS plugins depend on it) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="{{asset('js/myBootstrap.js')}}"></script>
     <script src="{{asset('js/script.js')}}"></script>

@@ -60,7 +60,7 @@
                   </select>
                 </div>
                 
-                <div class="form-group" id="lesson_file" >
+                <div class="form-group" id="lesson_file" {{ (($lesson->type === 'url') || ($lesson->type === 'video')) ? "hidden" : ""}}>
                   <label for="">ملف الدرس :</label>
                   <div class="input-group mt-3">
                     <div class="custom-file">
@@ -72,11 +72,16 @@
                   </div>
                 </div>
                 
-                <div class="form-group" id="lesson_url" >
+                <div class="form-group" id="lesson_url" {{ (($lesson->type === 'image') || ($lesson->type === 'word') || ($lesson->type === 'pdf') || ($lesson->type === 'video')) ? "hidden" : ""}}>
                   <label for="urlField"><h5>ادخل ال URL :</h5></label>
                   <input type="url" class="form-control" id="urlField" name="ur_lsrc" value="{{$lesson->src}}" placeholder="ادخل ال URL"> 
                 </div>
-                
+
+                <div class="form-group" id="embaded_code" {{ (($lesson->type === 'image') || ($lesson->type === 'word') || ($lesson->type === 'pdf') || ($lesson->type === 'url')) ? "hidden" : ""}}>
+                  <label for="embadedCode"><h5>ادخل رابط الفديو :</h5></label>
+                  <input type="url" class="form-control" id="embadedCode" name="embadedCode_src" value="{{$lesson->src}}" placeholder="رابط الفديو"> 
+                </div>
+
                 <div class="radioG">
                   <h5>تفعيل الدرس  :</h5>
                   <div class="radio">
