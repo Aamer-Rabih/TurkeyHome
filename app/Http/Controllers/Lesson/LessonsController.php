@@ -61,7 +61,7 @@ class LessonsController extends Controller
             'title' => 'required|max:200',
             'type' => 'required',
             'active' => 'required',
-            'src' => '',
+            'src' => 'unique',
             'url_src' => '',
             'intro' => 'required'
         ]);
