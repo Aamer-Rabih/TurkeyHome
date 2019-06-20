@@ -120,3 +120,57 @@ jQuery(document).ready(function () {
 //        })
 //    });
 // });
+
+
+function sweetAlert (id, Bid) {
+   //SweetAlert delete Script
+   jQuery(document).ready(function () {
+      console.log(id);
+      console.log(Bid);
+      const swalWithBootstrapButtons = Swal.mixin({
+         customClass: {
+         confirmButton: 'btn btn-success',
+         cancelButton: 'btn btn-danger'
+         },
+         buttonsStyling: false,
+      })
+      
+      swalWithBootstrapButtons.fire({
+         title: 'هل أنت متأكد من أنك تريد حذف هذا العنصر ؟',
+         text: "لن تكون قادر على استرجاع العنصر بعد التأكيد !",
+         width: 500,
+         height: 400,
+         type: 'error',
+         showCancelButton: true,
+         confirmButtonText: 'نعم ، احذف العنصر !',
+         cancelButtonText: 'لا ، خروج !',
+         reverseButtons: true
+      }).then((result) => {
+         if (result.value) {
+         swalWithBootstrapButtons.fire({
+            type: 'success',
+            title: 'تم حذف العنصر بنجاح .',
+            showConfirmButton: false,
+            timer: 1500
+         });
+            setTimeout(function() {
+               $('#'+Bid).click();
+            },2000);
+
+
+         } else if (
+         // Read more about handling dismissals
+         result.dismiss === Swal.DismissReason.cancel
+         ) {
+         swalWithBootstrapButtons.fire(
+            'تم الخروج',
+            'الملف في حالة أمنة الآن :)',
+            'error'
+         )
+         }
+      });
+
+
+   });
+}
+
