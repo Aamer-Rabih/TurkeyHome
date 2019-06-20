@@ -144,7 +144,7 @@
                   </select>
                 </div>
                 <button type="submit" class="btn btn-success myhover">إضافة</button>
-                <a href="{{route('unit.index')}}" class="btn btn-default" style="margin-right:5px">إلغاء</a>
+                
               </form>
               
           </div>

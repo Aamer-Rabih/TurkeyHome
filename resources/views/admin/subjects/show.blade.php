@@ -141,6 +141,82 @@
     </div>
   </div>
 
+  <div id="table" class="row">
+    <div class="col-lg-8">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i>مدرسوا المادة</small>
+            </h2>
+          </div>
+          <table class="table table-bordered table-hover table-width">
+            <thead>
+              <tr> 
+                <th>اسم المدرس</th>
+                
+                <th>حذف</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($teachersSubject as $teacherSubject)
+              <tr>
+                <td>{{$teacherSubject->username}}</td>
+                
+                
+                 
+                <td>
+                  <div class="operations delete">
+                    <form action="{{ route('subject.deleteteacher',['subject' => $subject->id, 'teacher_id'=>$teacherSubject->id]) }}" method="POST" id="deleteForm">
+                       {!! csrf_field() !!}
+                         
+                      <button id="{{$subject->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" class="" onclick="$('#{{$subject->id}}').click();" >
+                        <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
+                      </a>
+                    </form>       
+                  </div>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  @if(Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
+  <div id="table2" class="row">
+    <div class="col-lg-10">
+      <div class="card table-cards color-grey">
+        <div class="card-body">
+          <div class="content-header">
+            <h2>
+              <small><i class="fa fa-graduation-cap" aria-hidden="true" style="font-size:24px;"></i> إضافة مدرس لهذه المادة</small>
+            </h2>
+          </div>
+          
+          <form action="{{route('subject.addteacher',$subject)}}" method="POST">
+            {!! csrf_field() !!}
+            <div class="form-group">
+              <label for="addteacher">اختر مدرس لاضافته الى هذه المادة :</label>
+              <select class="form-control form-control-select mt-3" id="addteacher" name="teacher">
+                <option selected>-- اختر مدّرس --</option>
+                @foreach($teachers as $teacher)
+                <option value="{{$teacher->id}}">{{$teacher->username}}</option>
+                @endforeach
+              </select>
+            </div>
+            <input type="submit" class="btn btn-success button1" value="اضافة المدرس">
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
+
 </div>
 
 @endsection

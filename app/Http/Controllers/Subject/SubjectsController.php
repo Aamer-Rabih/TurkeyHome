@@ -6,6 +6,9 @@ use App\Subject;
 use App\ClassRoom ; 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Role;
+use App\User;
+use Auth;
 
 class SubjectsController extends Controller
 {
@@ -33,8 +36,13 @@ class SubjectsController extends Controller
             $subjectsQuery->take(request()->take) ; 
         }
 
-        $subjects = $subjectsQuery->get(); 
-
+        if (Auth::user()->hasAnyRole([0,1]))
+        {
+         $subjects = $subjectsQuery->get(); 
+        }
+        else{
+            $subjects = Auth::user()->subjects;
+        }
         //return view with subjects passed 
 
         return view('admin.subjects.index', compact('subjects'));
@@ -96,10 +104,12 @@ class SubjectsController extends Controller
      */
     public function show(Subject $subject)
     {
+        $teachers = Role::find(2)->users()->get();
         
+        $teachersSubject = Subject::find($subject->id)->teachers()->get();
 
         //Return a view with Subejct Model 
-        return view('admin.subjects.show', compact('subject'));
+        return view('admin.subjects.show', compact('subject','teachersSubject','teachers'));
     }
 
     /**
@@ -200,6 +210,30 @@ class SubjectsController extends Controller
         return back()
                 //->route('subject.show', ['subject' => $subject->id])
                 ->with('success','تم إلغاء تفعيل المادة بنجاح');
+    }
+
+    public function addteacher(Request $request, Subject $subject)
+    {
+        $teacher = User::where('id',$request->teacher)->get();
+        //dd($teacher);
+        $subject->teachers()->syncWithoutDetaching($teacher);
+
+        //Return redirect 
+        return redirect()
+            ->route('subject.show', ['subject' => $subject->id])
+            ->with('success', 'تم اضافة المدرس للمادة بنجاح'); 
+    }
+
+    public function deleteTeacher( Subject $subject ,Request $request )
+    {
+        //$teacher = User::where('id',$request->teacher)->get();
+
+        $request->subject->teachers()->detach($request->teacher_id);
+
+        //Return redirect 
+        return redirect()
+            ->route('subject.show', ['subject' => $subject->id])
+            ->with('success', 'تم فصل المدرس عن المادة بنجاح'); 
     }
 
 }

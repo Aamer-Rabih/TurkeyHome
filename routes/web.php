@@ -264,7 +264,7 @@ Route::post('courses/{course}/deleteteacher',
 Route::get('subjects',
 ['uses' => 'Subject\SubjectsController@index',
 'middleware' => 'roles',
-'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER,\App\Role::TEACHER]
 ])
 ->name('subject.index');
 
@@ -340,6 +340,22 @@ Route::post('subjects/{subject}/deactivate',
 'roles' => [\App\Role::ADMIN,\App\Role::MANAGER]
 ])
 ->name('subject.deactivate');
+
+//update freereason route
+Route::post('subjects/{subject}/addteacher',
+['uses' => 'Subject\SubjectsController@addteacher',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+->name('subject.addteacher');
+
+//update freereason route
+Route::post('subjectes/{subject}/deleteTeacher',
+['uses' => 'Subject\SubjectsController@deleteTeacher',
+'middleware' => 'roles',
+'roles' => [\App\Role::ADMIN,\App\Role::MANAGER
+]])
+->name('subject.deleteteacher');
 
 /**
  * Units endpoints

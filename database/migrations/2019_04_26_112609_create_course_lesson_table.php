@@ -26,11 +26,15 @@ class CreateCourseLessonTable extends Migration
             //Build the Foreign Key constraints
             $table->foreign('course_id')
                 ->references('id')
-                ->on('courses');
+                ->on('courses')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
                 
             $table->foreign('lesson_id')
                 ->references('id')
-                ->on('lessons');
+                ->on('lessons')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
         });
     }
