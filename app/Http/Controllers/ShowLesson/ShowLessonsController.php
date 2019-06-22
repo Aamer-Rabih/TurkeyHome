@@ -174,7 +174,7 @@ class ShowLessonsController extends Controller
         //reorder after delete
         $this->shiftOrdersAfterDelete($oldOrder);
 
-        return view('admin.showlessons.index')
+        return view('admin.showlesson.index')
         ->with('success','تم حذف الدرس الاستعراضي بنجاح');
     }
 

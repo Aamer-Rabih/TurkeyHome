@@ -155,7 +155,7 @@ function sweetAlert (id, Bid) {
          });
             setTimeout(function() {
                $('#'+Bid).click();
-            },2000);
+            },500);
 
 
          } else if (

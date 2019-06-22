@@ -62,8 +62,8 @@
                     <form action="{{ route('studentthank.destroy',['studentThank' => $studentThank->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$studentThank->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                      <a herf="javascript:;" class="" onclick="$('#{{$studentThank->id}}').click();" >
+                      <button id="button{{$studentThank->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" id="a{{$studentThank->id}}" onclick="sweetAlert('a{{$studentThank->id}}', 'button{{$studentThank->id}}')" >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>       

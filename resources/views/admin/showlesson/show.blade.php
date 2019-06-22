@@ -1,7 +1,4 @@
-<?php 
-    $array = explode('/', $showLesson->src);
-    $file_name = $array[2];
-?>
+
 @extends('admin.layouts.master')
 
 @section('content')

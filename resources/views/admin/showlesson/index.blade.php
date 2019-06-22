@@ -62,8 +62,8 @@
                     <form action="{{ route('showlesson.destroy',['showlesson' => $showLesson->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$showLesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                      <a herf="javascript:;" class="" onclick="$('#{{$showLesson->id}}').click();" >
+                      <button id="button{{$showLesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;"  id="a{{$showLesson->id}}" onclick="sweetAlert('a{{$showLesson->id}}', 'button{{$showLesson->id}}')" >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>       

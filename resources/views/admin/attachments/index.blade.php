@@ -68,10 +68,10 @@
                     <form action="{{ route('attachment.destroy',$attachment) }}" method="POST">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$attachment->id}}" class=" btn-xs delete-button" style="display:none;">
+                      <button id="button{{$attachment->id}}" class=" btn-xs delete-button" style="display:none;">
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </button>
-                      <a herf="javascript:;" onclick="$('#{{$attachment->id}}').click();" >
+                      <a herf="javascript:;" id="a{{$attachment->id}}" onclick="sweetAlert('a{{$attachment->id}}', 'button{{$attachment->id}}')" >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>       

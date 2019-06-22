@@ -51,18 +51,18 @@
                 @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
                 <td class="operations">
                   @if($test->active)
-                  <form action="{{ route('test.deactivate', $test) }}" method="POST" id="activateForm">
+                  <form action="{{ route('test.deactivate', $test) }}" method="POST" id="deactivateForm">
                     {!! csrf_field() !!}
-                    <button id="{{$test->id+1}}" class=" btn-xs delete-button" style="display:none;"></button>
-                    <a herf="javascript:;" class="" onclick="$('#{{$test->id+1}}').click();" >
+                    <button id="deactivate" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#deactivate').click();" >
                       <i class="fa fa-check-circle" aria-hidden="true" style="font-size:18px;color:#5cb85c;cursor: pointer;"></i>
                     </a>
                   </form> 
                   @else
                   <form action="{{ route('test.activate', $test) }}" method="POST" id="activateForm">
                     {!! csrf_field() !!}
-                    <button id="{{$test->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                    <a herf="javascript:;" class="" onclick="$('#{{$test->id}}').click();" >
+                    <button id="activate" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#activate').click();" >
                       <i class="fa fa-times-circle" aria-hidden="true" style="font-size:18px;color:#dd4b39;cursor: pointer;"></i>
                     </a>
                   </form>
@@ -87,8 +87,8 @@
                     <form action="{{ route('test.destroy', $test) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$test->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                      <a herf="javascript:;" class="" onclick="$('#{{$test->id}}').click();" >
+                      <button id="button{{$test->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" id="a{{$test->id}}" onclick="sweetAlert('a{{$test->id}}', 'button{{$test->id}}')" >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>

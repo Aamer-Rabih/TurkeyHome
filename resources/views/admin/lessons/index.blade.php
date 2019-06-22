@@ -51,18 +51,18 @@
                 @if (Auth::user()->hasRole(0) || Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
                 <td class="operations">
                   @if($lesson->active)
-                  <form action="{{ route('lesson.deactivate', $lesson) }}" method="POST" id="activateForm">
+                  <form action="{{ route('lesson.deactivate', $lesson) }}" method="POST" id="deactivateForm">
                     {!! csrf_field() !!}
-                    <button id="{{$lesson->id+1}}" class=" btn-xs delete-button" style="display:none;"></button>
-                    <a herf="javascript:;" class="" onclick="$('#{{$lesson->id+1}}').click();" >
+                    <button id="deactivate" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#deactivate').click();" >
                       <i class="fa fa-check-circle" aria-hidden="true" style="font-size:18px;color:#5cb85c;cursor: pointer;"></i>
                     </a>
                   </form> 
                   @else
                   <form action="{{ route('lesson.activate', $lesson) }}" method="POST" id="activateForm">
                     {!! csrf_field() !!}
-                    <button id="{{$lesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                    <a herf="javascript:;" class="" onclick="$('#{{$lesson->id}}').click();" >
+                    <button id="activate" class=" btn-xs delete-button" style="display:none;"></button>
+                    <a herf="javascript:;" class="" onclick="$('#activate').click();" >
                       <i class="fa fa-times-circle" aria-hidden="true" style="font-size:18px;color:#dd4b39;cursor: pointer;"></i>
                     </a>
                   </form>
@@ -85,8 +85,8 @@
                     <form action="{{ route('lesson.destroy', $lesson) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$lesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                      <a herf="javascript:;" class="delete_item">
+                      <button id="button{{$lesson->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" id="a{{$lesson->id}}" onclick="sweetAlert('a{{$lesson->id}}', 'button{{$lesson->id}}')">
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>

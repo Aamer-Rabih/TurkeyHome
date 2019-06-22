@@ -69,7 +69,7 @@
                     </a>
                   </form> 
                   @else
-                  <form action="{{ route('subject.activate', $subject) }}" method="POST" id="activateForm">
+                  <form action="{{ route('subject.activate', $subject) }}" method="POST" id="deactivateForm">
                     {!! csrf_field() !!}
                     <button id="activate" class=" btn-xs delete-button" style="display:none;"></button>
                     <a herf="javascript:;" class="" onclick="$('#activate').click();" >
@@ -102,8 +102,8 @@
                     <form action="{{ route('subject.destroy',['subject' => $subject->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$subject->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                      <a herf="javascript:;" class="" onclick="$('#{{$subject->id}}').click();" >
+                      <button id="button{{$subject->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" id="a{{$subject->id}}" onclick="sweetAlert('a{{$subject->id}}', 'button{{$subject->id}}')" >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>       

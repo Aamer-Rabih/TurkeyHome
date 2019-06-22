@@ -275,6 +275,7 @@ body {
   width: 90% !important;
   margin-left: 5%;
   margin-right: 5%;
+  margin-bottom: 10% !important;
 }
 .showLessonItem {
   background-color: #fffadf;
@@ -293,10 +294,10 @@ body {
   right: -45px;
 }
 .prevArrow2 {
-  left: -20px;
+  left: -30px;
 }
 .nextArrow2 {
-  right: -20px;
+  right: -30px;
 }
 .dots-slick2 {
   color: red;
@@ -323,14 +324,15 @@ body {
   border-radius: 50%;
 }
 .studentThank-section {
-  background-color: #9B171E;
+  background-color: #AC282F;
   color: #fff;
-  padding: 5px 50px;
+  padding: 20px 50px;
 }
 .studentThankItem {
   border: none !important;
   background-color: #9B171E;
   width:80%;
+  padding-bottom: 20px;
 }
 
 
@@ -365,7 +367,7 @@ hr.socket {
   width: 100%
 }
 .justfy-content-center {
-  margin: 0px 25% 0px 0px;
+  margin: 0px auto;
   width: fit-content;
 }
 #bottom-bar {
@@ -383,6 +385,11 @@ hr.socket {
 .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
 .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
   
+}
+div.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 .dropdown-item {
   text-align: right !important;

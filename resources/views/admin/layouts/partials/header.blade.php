@@ -17,6 +17,8 @@
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
       @csrf
     </form>
+    <a class="logout" href="{{ url('/home') }}">لوحة التحكم</a>
+    <a class="logout" href="{{ url('/') }}">الرئيسية</a>
   </nav>
 </header>
 

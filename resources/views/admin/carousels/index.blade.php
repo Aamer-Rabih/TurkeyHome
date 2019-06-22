@@ -58,10 +58,10 @@
                     <form action="{{ route('carousel.destroy',$carousel) }}" method="POST">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$carousel->id}}" class=" btn-xs delete-button" style="display:none;">
+                      <button id="button{{$carousel->id}}" class=" btn-xs delete-button" style="display:none;">
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </button>
-                      <a herf="javascript:;" onclick="$('#{{$carousel->id}}').click();" >
+                      <a herf="javascript:;" id="a{{$carousel->id}}" onclick="sweetAlert('a{{$carousel->id}}', 'button{{$carousel->id}}')" >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>       

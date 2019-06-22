@@ -68,8 +68,8 @@
                     <form action="{{ route('whatsapplink.destroy',['class' => $whatsappLink->id]) }}" method="POST" id="deleteForm">
                       {!! csrf_field() !!}
                       <input type="hidden" name="_method" value="DELETE">    
-                      <button id="{{$whatsappLink->id}}" class=" btn-xs delete-button" style="display:none;"></button>
-                      <a herf="javascript:;" class="" onclick="$('#{{$whatsappLink->id}}').click();" >
+                      <button id="button{{$whatsappLink->id}}" class=" btn-xs delete-button" style="display:none;"></button>
+                      <a herf="javascript:;" id="a{{$whatsappLink->id}}" onclick="sweetAlert('a{{$whatsappLink->id}}', 'button{{$whatsappLink->id}}')" >
                         <i class="fa fa-trash" style="font-size:18px;color:#dd4b39"></i>
                       </a>
                     </form>       
